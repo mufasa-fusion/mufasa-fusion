@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mufasa"
+version = "0.1.0"
+description = "Multi-modal geospatial data fusion framework"
+license = { text = "Apache-2.0" }
+requires-python = ">=3.10"
+dependencies = [
+    "shapely",
+    "numpy",
+    "rasterio",
+    "pyproj",
+    "scipy",
+]
+
+[project.optional-dependencies]
+tracking = [
+    "stonesoup",
+    "river",
+]
+vis = [
+    "matplotlib",
+    "contextily",
+    "geopandas",
+]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "mufasa[tracking,vis]",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.coverage.run]
+source = ["src/mufasa"]
