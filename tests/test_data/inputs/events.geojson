@@ -1,0 +1,20 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [14.1, 47.1]},
+      "properties": {"timestamp": 200.0, "label": "b"}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [14.0, 47.0]},
+      "properties": {"timestamp": 100.0, "label": "a"}
+    },
+    {
+      "type": "Feature",
+      "geometry": {"type": "Point", "coordinates": [14.2, 47.2]},
+      "properties": {"timestamp": 300.0, "label": "c"}
+    }
+  ]
+}

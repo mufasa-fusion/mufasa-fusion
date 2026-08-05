@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+title: "MuFASA: Multimodal Fusion Architecture for Sensor Applications"
+message: "If you use this software, please cite it as below."
+type: software
+license: Apache 2.0
+repository-code: "https://github.com/mufasa-fusion/mufasa-fusion"
+authors:
+  - family-names: Wohlleben
+    given-names: Kilian
+    affiliation: "AIT Austrian Institute of Technology"
+  - family-names: Hubner
+    given-names: Michael
+    affiliation: "AIT Austrian Institute of Technology"
+  - family-names: Nausner
+    given-names: Jan
+    affiliation: "AIT Austrian Institute of Technology"
+  - family-names: Pöschl
+    given-names: Julia
+    affiliation: "AIT Austrian Institute of Technology"
+contact:
+  - email: mufasa-fusion@ait.ac.at
