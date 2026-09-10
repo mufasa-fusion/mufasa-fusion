@@ -1,0 +1,193 @@
+:root, html[data-theme="light"] {
+    --pst-color-primary: #0f6e56;
+    --pst-color-primary-highlight: #085041;
+    --pst-color-link: #0f6e56;
+    --pst-color-link-hover: #085041;
+}
+
+html[data-theme="dark"] {
+    --pst-color-primary: #5dcaa5;
+    --pst-color-primary-highlight: #9fe1cb;
+    --pst-color-link: #5dcaa5;
+    --pst-color-link-hover: #9fe1cb;
+}
+
+.hero {
+    text-align: center;
+    padding: 2.5rem 0 1.5rem;
+}
+
+.hero-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.hero-logo-mufasa {
+    height: 56px;
+    width: auto;
+}
+
+html[data-theme="dark"] .hero-logo-mufasa {
+    content: url("img/mufasa_logo_dark.png");
+}
+
+.hero-logo-divider {
+    width: 1px;
+    height: 40px;
+    background: var(--pst-color-border);
+}
+
+.hero-logo-ait {
+    height: 40px;
+    width: auto;
+    background: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.hero p.subtitle {
+    font-size: 1.15rem;
+    color: var(--pst-color-text-muted);
+    max-width: 640px;
+    margin: 0 auto 1.5rem;
+}
+
+.hero-ctas a.btn {
+    display: inline-block;
+    padding: 0.6rem 1.4rem;
+    border-radius: 6px;
+    margin: 0 0.4rem;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.hero-ctas a.btn-primary {
+    background: var(--pst-color-primary);
+    color: white;
+}
+
+.hero-ctas a.btn-secondary {
+    border: 1px solid var(--pst-color-border);
+    color: var(--pst-color-text-base);
+}
+
+.path-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    margin: 2rem 0 3rem;
+}
+
+.path-card {
+    border: 1px solid var(--pst-color-border);
+    border-radius: 10px;
+    padding: 1.25rem 1.4rem;
+    text-decoration: none !important;
+    color: var(--pst-color-text-base) !important;
+    transition: border-color 0.15s ease;
+}
+
+.path-card:hover {
+    border-color: var(--pst-color-primary);
+}
+
+.path-card h3 {
+    margin-top: 0;
+    font-size: 1.05rem;
+}
+
+.path-card p {
+    font-size: 0.92rem;
+    color: var(--pst-color-text-muted);
+    margin-bottom: 0;
+}
+
+.code-graph {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+    margin: 2rem 0 3rem;
+}
+
+.ide-window {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--pst-color-border);
+    background: #282a36;
+}
+
+.ide-titlebar {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: #21222c;
+}
+
+.ide-dot {
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.ide-dot.red { background: #ff5f56; }
+.ide-dot.yellow { background: #ffbd2e; }
+.ide-dot.green { background: #27c93f; }
+
+.ide-filename {
+    margin-left: 8px;
+    font-family: var(--pst-font-family-monospace, monospace);
+    font-size: 0.78rem;
+    color: #8892a4;
+}
+
+.ide-window div.highlight {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    background: #282a36 !important;
+}
+
+.ide-window pre {
+    margin: 0 !important;
+    border-radius: 0 !important;
+    background: #282a36 !important;
+    font-size: 0.82rem !important;
+}
+
+.ide-window .linenos {
+    color: #6272a4 !important;
+    user-select: none;
+}
+
+.graph-panel {
+    border: 1px solid var(--pst-color-border);
+    border-radius: 10px;
+    padding: 1rem 1rem 0.5rem;
+    background: var(--pst-color-background);
+}
+
+.graph-panel-title {
+    font-family: var(--pst-font-family-monospace, monospace);
+    font-size: 0.78rem;
+    color: var(--pst-color-text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.node-ecosystem-graph a {
+    text-decoration: none;
+}
+
+.node-ecosystem-graph text {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+@media (max-width: 768px) {
+    .path-cards, .code-graph {
+        grid-template-columns: 1fr;
+    }
+}
