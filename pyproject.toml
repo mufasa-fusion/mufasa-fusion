@@ -30,6 +30,8 @@ dev = [
     "pytest",
     "pytest-cov",
     "mufasa[tracking,vis]",
+    "sphinx",
+    "myst-parser",
 ]
 
 [tool.setuptools.packages.find]

@@ -18,7 +18,7 @@ sd_hide_title: true
     executable path to build one.
   </p>
   <div class="hero-ctas">
-    <a class="btn btn-primary" href="getting-started.html">Get started</a>
+    <a class="btn btn-primary" href="getting-started/index.html">Get started</a>
     <a class="btn btn-secondary" href="https://github.com/mufasa-fusion/mufasa-fusion">View on GitHub</a>
   </div>
 </div>
@@ -26,7 +26,7 @@ sd_hide_title: true
 
 ```{raw} html
 <div class="path-cards">
-  <a class="path-card" href="getting-started.html">
+  <a class="path-card" href="getting-started/index.html">
     <h3>Getting started</h3>
     <p>New to MuFASA? Install it and run your first fusion graph in a few minutes.</p>
   </a>
@@ -34,7 +34,7 @@ sd_hide_title: true
     <h3>User guide</h3>
     <p>Ready to build something real? Learn the core concepts and write custom nodes.</p>
   </a>
-  <a class="path-card" href="showcases.html">
+  <a class="path-card" href="showcases/index.html">
     <h3>Showcases</h3>
     <p>Want to see it proven? Real deployments in border, rail, and CBRNE security.</p>
   </a>
@@ -143,32 +143,32 @@ Every node belongs to one of six categories. Click a category to jump straight t
 
 ```{raw} html
 <svg class="node-ecosystem-graph" width="100%" viewBox="0 0 680 232" role="img" aria-label="Browsable map of node categories">
-  <a href="node-catalog.html#mapping">
+  <a href="node-catalog/index.html#mapping">
     <rect x="40" y="40" width="180" height="56" rx="8" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
     <text x="130" y="62" text-anchor="middle" font-size="14" font-weight="500" fill="#04342C">Mapping</text>
     <text x="130" y="80" text-anchor="middle" font-size="11" fill="#0F6E56">POM, HeatMap, StaticMap</text>
   </a>
-  <a href="node-catalog.html#fusion">
+  <a href="node-catalog/index.html#fusion">
     <rect x="250" y="40" width="180" height="56" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
     <text x="340" y="62" text-anchor="middle" font-size="14" font-weight="500" fill="#26215C">Fusion</text>
     <text x="340" y="80" text-anchor="middle" font-size="11" fill="#534AB7">Bayesian, logical and/or</text>
   </a>
-  <a href="node-catalog.html#detection">
+  <a href="node-catalog/index.html#detection">
     <rect x="460" y="40" width="180" height="56" rx="8" fill="#FAECE7" stroke="#993C1D" stroke-width="0.5"/>
     <text x="550" y="62" text-anchor="middle" font-size="14" font-weight="500" fill="#4A1B0C">Detection</text>
     <text x="550" y="80" text-anchor="middle" font-size="11" fill="#993C1D">Threshold, confidence</text>
   </a>
-  <a href="node-catalog.html#tracking">
+  <a href="node-catalog/index.html#tracking">
     <rect x="40" y="136" width="180" height="56" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
     <text x="130" y="158" text-anchor="middle" font-size="14" font-weight="500" fill="#412402">Tracking</text>
     <text x="130" y="176" text-anchor="middle" font-size="11" fill="#854F0B">Kalman, DBSTREAM</text>
   </a>
-  <a href="node-catalog.html#util">
+  <a href="node-catalog/index.html#util">
     <rect x="250" y="136" width="180" height="56" rx="8" fill="#FBEAF0" stroke="#993556" stroke-width="0.5"/>
     <text x="340" y="158" text-anchor="middle" font-size="14" font-weight="500" fill="#4B1528">Util</text>
     <text x="340" y="176" text-anchor="middle" font-size="11" fill="#993556">Observation filter</text>
   </a>
-  <a href="node-catalog.html#io">
+  <a href="node-catalog/index.html#io">
     <rect x="460" y="136" width="180" height="56" rx="8" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
     <text x="550" y="158" text-anchor="middle" font-size="14" font-weight="500" fill="#2C2C2A">I/O</text>
     <text x="550" y="176" text-anchor="middle" font-size="11" fill="#5F5E5A">GeoJSON, GeoTIFF, stream</text>
@@ -180,10 +180,10 @@ Every node belongs to one of six categories. Click a category to jump straight t
 :hidden:
 :maxdepth: 2
 
-getting-started
+getting-started/index
 user-guide/index
-showcases
-node-catalog
+showcases/index
+node-catalog/index
 api-reference
 about
 ```

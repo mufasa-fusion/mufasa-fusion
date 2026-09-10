@@ -12,4 +12,4 @@ pip install mufasa
 
 ## Run your first graph
 
-See the quickstart example on the [homepage](index.md) for a complete, runnable example.
+See the quickstart example on the [homepage](../index.md) for a complete, runnable example.
