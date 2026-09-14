@@ -184,6 +184,6 @@ getting-started/index
 user-guide/index
 showcases/index
 node-catalog/index
-api-reference
+api/index
 about
 ```

@@ -16,12 +16,19 @@ release = '0.1.0'
 
 extensions = [
     'myst_parser',
+    "sphinx.ext.napoleon",
+    "autoapi.extension",
 ]
 
 templates_path = ['_templates']
 exclude_patterns = []
 
-
+autoapi_dirs = ["../../src"]  # Source (code) directories
+autoapi_root = "api"  # Target documentation directory
+autoapi_template_dir = "_templates/autoapi"
+autoapi_python_class_content = "both"  # Append init docs to class docs (since init isn't shown separately)
+# autoapi_add_toctree_entry = False
+autoapi_keep_files = True
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
