@@ -1,5 +1,8 @@
 import os.path
 import sys
+from itertools import zip_longest
+
+from jinja2 import Environment
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "_extensions"))  # Makes custom extensions importable
 
@@ -30,9 +33,17 @@ templates_path = ['_templates']
 exclude_patterns = []
 
 rst_prolog = """\
-.. |map-fold| image:: /images/shapes/map-fold.svg
+.. |loc| image:: /images/shapes/location-marker.svg
+   :alt: location marker
    :class: mufasa-shape-icon
-.. |map-roll| image:: /images/shapes/map-roll.svg
+.. |obs| image:: /images/shapes/observation-marker.svg
+   :alt: target marker
+   :class: mufasa-shape-icon
+.. |map| image:: /images/shapes/map-fold.svg
+   :class: mufasa-shape-icon
+   :alt: foldable map
+.. |bmap| image:: /images/shapes/map-roll.svg
+   :alt: map scroll
    :class: mufasa-shape-icon
 """
 
@@ -51,6 +62,9 @@ autoapi_options = [
     "special-members"
     # "imported-members",
 ]
+
+def autoapi_prepare_jinja_env(env: Environment):
+    env.globals["zip"] = zip_longest
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

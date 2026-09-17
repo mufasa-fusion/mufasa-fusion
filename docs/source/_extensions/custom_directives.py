@@ -48,7 +48,8 @@ class AutoApiJinjaDirective(RstDirective):
             line = line.strip()
             if not line:
                 break
-            objs.append(all_objects[line])
+            if not line.startswith(".. "):
+                objs.append(all_objects[line])
         # Get the template from the remaining content and render it
         return JINJA_ENV.get_template(os.linesep.join(content)).render(objs=objs).split(os.linesep)
 
