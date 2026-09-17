@@ -183,7 +183,7 @@ Every node belongs to one of six categories. Click a category to jump straight t
 getting-started/index
 user-guide/index
 showcases/index
-node-catalog/index
+catalog
 api/index
 about
 ```
