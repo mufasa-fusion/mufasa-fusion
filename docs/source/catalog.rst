@@ -12,12 +12,14 @@ Edge Data Types
    mufasa.map.Map
    mufasa.map.BayesianMap
 
-   .. list-table::
+   .. rst-class:: mufasa-node-catalog twos
 
    {% for obj, icon in zip(objs, ctx) %}
-      * - {{ icon }}
-        - :class:`~{{ obj.id }}`
-        - {{ obj.summary }}
+   - {{ icon }}
+
+     :class:`~{{ obj.id }}`
+
+     {{ obj.summary }}
    {% endfor %}
 
 Processing Nodes
@@ -33,7 +35,6 @@ Processing Nodes
             ["|bmap|", "|bmap|"],
             ["|bmap|", "|bmap|"],
             ["|obs|", "|bmap|"],
-            ["GeoJSON [#GeoJSON]_", "|bmap|"],
             ["|loc|", "|loc|"],
             ["|loc|", "|obs|"],
             ["|obs|", "|obs|"]
@@ -46,7 +47,7 @@ Processing Nodes
    mufasa.nodes.fusion.map_fusion.LogicalOr
    mufasa.nodes.fusion.map_fusion.MapFusion
    mufasa.nodes.mapping.pom.POM
-   mufasa.nodes.mapping.static.StaticMap
+   .. mufasa.nodes.mapping.static.StaticMap
    mufasa.nodes.tracking.dbstream.DBSTREAMClusterer
    mufasa.nodes.tracking.kalman.KalmanTracker
    mufasa.nodes.util.filter.ObservationFilter
@@ -65,7 +66,8 @@ Input Nodes
             ["|map|", "|map|"],
             ["|loc|", "|loc|"],
             ["|obs|", "|obs|"],
-            ["|map|", "|map|"]
+            ["|map|", "|map|"],
+            ["GeoJSON [#GeoJSON]_", "|bmap|"]
          ]
       }
 
@@ -77,6 +79,7 @@ Input Nodes
    mufasa.io.inputs.streaming.LocationStreamingInput
    mufasa.io.inputs.streaming.ObservationStreamingInput
    mufasa.io.inputs.streaming.MapStreamingInput
+   mufasa.nodes.mapping.static.StaticMap
 
 .. [#InNodeCol] Indicates the type of data they consume from external systems.
    Within the Fusion Graph, Input Nodes are sources with no incoming edges.
@@ -94,7 +97,7 @@ Output Nodes
             ["|loc|", "|loc|"],
             ["|map|", "|map|"],
             ["|loc|", "|loc|"],
-            ["|loc|\\ /\\ |map|", "matplotlib [#matplotlib]_"]
+            ["|loc|\\ / |map|", "matplotlib [#matplotlib]_"]
          ]
       }
 

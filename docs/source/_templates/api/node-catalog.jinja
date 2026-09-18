@@ -1,13 +1,9 @@
-.. list-table::
-   :header-rows: 1
+.. rst-class:: mufasa-node-catalog
 
-   * - In {{ ctx.in_header_suffix }}
-     - Out {{ ctx.out_header_suffix }}
-     - Name
-     - Summary
 {% for obj, (input, output) in zip(objs, ctx.node_data, fillvalue=("", "")) %}
-   * - {{ input }}
-     - {{ output }}
-     - :class:`~{{ obj.id }}`
-     - {{ obj.summary }}
+- {{ input }} {{ ctx.in_header_suffix }} → {{ output }} {{ ctx.out_header_suffix }}
+
+  :class:`~{{ obj.id }}`
+
+  {{ obj.summary }}
 {% endfor %}

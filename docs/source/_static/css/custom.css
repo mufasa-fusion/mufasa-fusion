@@ -3,3 +3,48 @@ img.mufasa-shape-icon {
     max-width: unset;
     vertical-align: sub;
 }
+
+/* Override ul lists' left alignment on small screens */
+@media screen {
+    ul {
+        margin-left: 30px;
+    }
+}
+
+ul.mufasa-node-catalog {
+    gap: .5em;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+
+    list-style-type: none;
+    margin-left: 0;
+
+    &.twos {
+        grid-auto-flow: column;
+        grid-template-rows: repeat(2, auto);
+        grid-template-columns: unset;
+    }
+
+    & > li {
+        /* same style as tables in alabaster */
+        padding: 0.25em 0.7em;
+        border: 1px solid #888;
+        -moz-box-shadow: 2px 2px 4px #EEE;
+        -webkit-box-shadow: 2px 2px 4px #EEE;
+        box-shadow: 2px 2px 4px #EEE;
+
+        transition-duration: 800ms;
+    }
+
+    & > li:hover {
+        background-color: #eee;
+    }
+
+    & > li:first-child > :first-child {
+        margin-block-start: 1em;
+    }
+
+    & > li > :first-child {
+        text-align: right;
+    }
+}
