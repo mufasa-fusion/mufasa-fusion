@@ -49,7 +49,7 @@ rst_prolog = """\
 
 autoapi_dirs = ["../../src"]  # Source (code) directories
 autoapi_root = "api"  # Target documentation directory
-autoapi_template_dir = "_templates/autoapi"
+autoapi_template_dir = "_templates/api"
 autoapi_python_class_content = "both"  # Append init docs to class docs (since init isn't shown separately)
 autodoc_typehints = "both"  # In signatures and parameter description
 # autoapi_add_toctree_entry = False

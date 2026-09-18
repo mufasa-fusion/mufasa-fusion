@@ -1,0 +1,13 @@
+.. list-table::
+   :header-rows: 1
+
+   * - In {{ ctx.in_header_suffix }}
+     - Out {{ ctx.out_header_suffix }}
+     - Name
+     - Summary
+{% for obj, (input, output) in zip(objs, ctx.node_data, fillvalue=("", "")) %}
+   * - {{ input }}
+     - {{ output }}
+     - :class:`~{{ obj.id }}`
+     - {{ obj.summary }}
+{% endfor %}

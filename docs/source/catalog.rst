@@ -5,6 +5,7 @@ Edge Data Types
 ---------------
 
 .. autoapi-template::
+   :context: ["|loc|", "|obs|", "|map|", "|bmap|"]
 
    mufasa.location.Location
    mufasa.location.Observation
@@ -13,9 +14,8 @@ Edge Data Types
 
    .. list-table::
 
-   {% set icons = {"Location": "|loc|", "Observation": "|obs|", "Map": "|map|", "BayesianMap": "|bmap|"} %}
-   {% for obj in objs %}
-      * - {{ icons.get(obj.name, "") }}
+   {% for obj, icon in zip(objs, ctx) %}
+      * - {{ icon }}
         - :class:`~{{ obj.id }}`
         - {{ obj.summary }}
    {% endfor %}
@@ -23,10 +23,51 @@ Edge Data Types
 Processing Nodes
 ----------------
 
+.. autoapi-template::
+   :template: node-catalog.jinja
+   :context: {
+         "node_data": [
+            ["|map|", "|loc|\\ /\\ |obs|"],
+            ["|bmap|", "|bmap|"],
+            ["|bmap|", "|bmap|"],
+            ["|bmap|", "|bmap|"],
+            ["|bmap|", "|bmap|"],
+            ["|obs|", "|bmap|"],
+            ["GeoJSON [#GeoJSON]_", "|bmap|"],
+            ["|loc|", "|loc|"],
+            ["|loc|", "|obs|"],
+            ["|obs|", "|obs|"]
+         ]
+      }
+
+   mufasa.nodes.detection.threshold.Threshold
+   mufasa.nodes.fusion.map_fusion.BayesianFusion
+   mufasa.nodes.fusion.map_fusion.LogicalAnd
+   mufasa.nodes.fusion.map_fusion.LogicalOr
+   mufasa.nodes.fusion.map_fusion.MapFusion
+   mufasa.nodes.mapping.pom.POM
+   mufasa.nodes.mapping.static.StaticMap
+   mufasa.nodes.tracking.dbstream.DBSTREAMClusterer
+   mufasa.nodes.tracking.kalman.KalmanTracker
+   mufasa.nodes.util.filter.ObservationFilter
+
 Input Nodes
 -----------
 
 .. autoapi-template::
+   :template: node-catalog.jinja
+   :context: {
+         "in_header_suffix": "[#InNodeCol]_",
+         "node_data": [
+            ["GeoJSON [#GeoJSON]_", "|loc|\\ /\\ |obs|"],
+            ["GeoTIFF [#GeoTIFF]_", "|map|"],
+            ["|loc|\\ /\\ |obs|", "|loc|\\ /\\ |obs|"],
+            ["|map|", "|map|"],
+            ["|loc|", "|loc|"],
+            ["|obs|", "|obs|"],
+            ["|map|", "|map|"]
+         ]
+      }
 
    mufasa.io.inputs.geojson.GeoJsonInput
    mufasa.io.inputs.geotiff.GeoTiffInput
@@ -37,30 +78,6 @@ Input Nodes
    mufasa.io.inputs.streaming.ObservationStreamingInput
    mufasa.io.inputs.streaming.MapStreamingInput
 
-   .. list-table::
-      :header-rows: 1
-
-      * - In [#InNodeCol]_
-        - Out
-        - Stream
-        - Name
-        - Summary
-   {% for obj, (in, out) in zip(objs, [
-      ("GeoJSON [#GeoJSON]_", "|loc|\ /\ |obs|"),
-      ("GeoTIFF [#GeoTIFF]_", "|map|"),
-      ("|loc|\ /\ |obs|", "|loc|\ /\ |obs|"),
-      ("|map|", "|map|"),
-      ("|loc|", "|loc|"),
-      ("|obs|", "|obs|"),
-      ("|map|", "|map|"),
-   ]) %}
-      * - {{ in }}
-        - {{ out }}
-        - {{ "yes" if "StreamingInputNode" in obj.bases else "--" }}
-        - :class:`~{{ obj.id }}`
-        - {{ obj.summary }}
-   {% endfor %}
-
 .. [#InNodeCol] Indicates the type of data they consume from external systems.
    Within the Fusion Graph, Input Nodes are sources with no incoming edges.
 
@@ -68,6 +85,18 @@ Output Nodes
 ------------
 
 .. autoapi-template::
+   :template: node-catalog.jinja
+   :context: {
+         "out_header_suffix": "[#OutNodeCol]_",
+         "node_data": [
+            ["|loc|", "GeoJSON [#GeoJSON]_"],
+            ["|map|", "GeoTIFF [#GeoTIFF]_"],
+            ["|loc|", "|loc|"],
+            ["|map|", "|map|"],
+            ["|loc|", "|loc|"],
+            ["|loc|\\ /\\ |map|", "matplotlib [#matplotlib]_"]
+         ]
+      }
 
    mufasa.io.outputs.geojson.GeoJsonOutput
    mufasa.io.outputs.geotiff.GeoTiffOutput
@@ -75,29 +104,6 @@ Output Nodes
    mufasa.io.outputs.python_object.MapOutput
    mufasa.io.outputs.streaming.StreamingOutputNode
    mufasa.io.outputs.visualization.Visualization
-
-   .. list-table::
-      :header-rows: 1
-
-      * - In
-        - Out [#OutNodeCol]_
-        - Stream
-        - Name
-        - Summary
-   {% for obj, (in, out, stream) in zip(objs, [
-      ("|loc|", "GeoJSON [#GeoJSON]_", False),
-      ("|map|", "GeoTIFF [#GeoTIFF]_", False),
-      ("|loc|", "|loc|", False),
-      ("|map|", "|map|", False),
-      ("|loc|", "|loc|", True),
-      ("|loc|\ /\ |map|", "matplotlib [#matplotlib]_", True),
-   ]) %}
-      * - {{ in }}
-        - {{ out }}
-        - {{ "yes" if stream else "--" }}
-        - :class:`~{{ obj.id }}`
-        - {{ obj.summary }}
-   {% endfor %}
 
 .. [#OutNodeCol] Indicates the type of data they deliver to external systems.
    Within the Fusion Graph, Output Nodes are terminal, so they don't have outgoing edges.
