@@ -33,6 +33,7 @@ dev = [
     "sphinx",
     "myst-parser",
     "sphinx-autoapi",
+    "shibuya",
 ]
 
 [tool.setuptools.packages.find]

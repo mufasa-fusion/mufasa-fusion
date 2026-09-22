@@ -69,8 +69,15 @@ def autoapi_prepare_jinja_env(env: Environment):
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'alabaster'
+html_theme = "shibuya"
 html_static_path = ['_static']
 html_css_files = [
-    "css/custom.css"
+    "css/theme-overwrite.css",
+    "css/custom.css",
 ]
+html_theme_options = {
+    "accent_color": "red",
+    "globaltoc_expand_depth": 1,
+    "light_logo": "_static/img/logo/MuFASA_MuFASA.svg",
+    "dark_logo": "_static/img/logo/MuFASA_MuFASA_weiss.svg",
+}

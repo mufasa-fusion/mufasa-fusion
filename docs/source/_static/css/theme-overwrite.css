@@ -1,0 +1,57 @@
+html[data-accent-color="red"] {
+  /* AIT colors */
+  --ait-red: #79151d;
+  --ait-grey: #7c8388;
+  --ait-torquise: #31b7bc;
+  --ait-violet: #470f51;
+
+  /* Red palette: Generated with https://www.radix-ui.com/colors/custom?accent-light=79151D&gray-light=7C8388 */
+  --accent-1: #fffcfc;
+  --accent-2: #fff7f6;
+  --accent-3: #ffeae8;
+  --accent-4: #ffd9d5;
+  --accent-5: #ffcac5;
+  --accent-6: #ffb9b4;
+  --accent-7: #ffa39f;
+  --accent-8: #f88683;
+  --accent-9: #79151d;
+  --accent-10: #8e2b2e;
+  --accent-11: #b74c4c;
+  --accent-12: #6d0413;
+
+  --accent-a1: #ff000003;
+  --accent-a2: #ff1d0009;
+  --accent-a3: #ff170017;
+  --accent-a4: #ff19002a;
+  --accent-a5: #ff16003a;
+  --accent-a6: #ff12014b;
+  --accent-a7: #ff0b0060;
+  --accent-a8: #f107007c;
+  --accent-a9: #6d0009ea;
+  --accent-a10: #770004d4;
+  --accent-a11: #990000b3;
+  --accent-a12: #6b000ffb;
+
+  /* Usage-specific overwrites */
+  --sy-c-link: var(--ait-red);
+  --sy-c-link-hover: var(--ait-red);
+
+  --sig-name: var(--ait-red);
+  --yue-c-code-text: var(--ait-red);
+  --yue-c-code-background: #EBEEF0;
+  --sig-typehint: var(--ait-torquise);
+
+  --code-block-background: var(--gray-a2);
+  --code-block-caption-background: var(--gray-a3);
+  --code-block-highlight: var(--gray-a3);
+}
+
+.globaltoc a:focus, .localtoc a:focus {
+  /* Mimic hover behaviour */
+  color: var(--sy-c-link-hover);
+}
+
+.yue a.headerlink {
+  /* Fix mispositioning of heading link handle */
+  display: unset;
+}

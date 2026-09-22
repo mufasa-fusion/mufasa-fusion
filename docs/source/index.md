@@ -7,7 +7,7 @@ sd_hide_title: true
 ```{raw} html
 <div class="hero">
   <div class="hero-logos">
-    <img class="hero-logo-mufasa" src="_static/img/mufasa_logo_light.png" alt="MuFASA" />
+    <img class="hero-logo-mufasa" src="_static/img/logo/MuFASA_MuFASA.svg" alt="MuFASA" />
     <span class="hero-logo-divider"></span>
     <img class="hero-logo-ait" src="_static/img/ait_logo.jpg" alt="AIT Austrian Institute of Technology" />
   </div>
