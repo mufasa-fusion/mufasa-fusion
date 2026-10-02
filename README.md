@@ -18,7 +18,7 @@ To install mufasa-fusion, clone this repository and run one of the following com
 
 ```bash
 pip install mufasa                      # core
-pip install "mufasa[tracking]"          # + KalmanTracker, DBSTREAMClusterer
+pip install "mufasa[tracking]"          # + KalmanTracker, DBSTREAMClusterer, SodaCitronClusterer
 pip install "mufasa[vis]"               # + plot_map, animate_maps, plot_locations
 pip install "mufasa[tracking,vis]"      # everything
 ```
@@ -31,7 +31,7 @@ Requires Python ≥ 3.10.
 
 | Concept | Description |
 |---------|-------------|
-| **Location** | A geospatial object: geometry, optional timestamp, and free-form properties. `Observation` extends `Location` with a `confidence` field and is the standard type for sensor detections. |
+| **Location** | A geospatial object: geometry, optional timestamp, and free-form properties. `Observation` extends `Location` with a `confidence` field and is the standard type for sensor detections. `UncertainObservation` further adds a 2×2 position `covariance` (in metres, along the pipeline CRS axes) for uncertainty-aware nodes. |
 | **Map** | A raster grid over a geographic area, backed by a NumPy array with a rasterio affine transform and CRS. |
 | **Node** | A processing unit that accepts Locations and/or Maps, transforms them, and passes results downstream. |
 | **Graph** | A validated DAG of nodes. Checks wiring at construction time and distributes spatial configuration to every node. |
@@ -112,6 +112,7 @@ graph.run()
 |-------|----------------|-------------|
 | `KalmanTracker` | `Location → Observation` | Multi-target Kalman filter (Stone Soup backend); buffers observations into fixed-length windows before each predict–update cycle. |
 | `DBSTREAMClusterer` | `Location → Location` | Online density-based clustering (DBSTREAM via River); emits one `Location` per cluster centroid. |
+| `SodaCitronClusterer` | `UncertainObservation → UncertainObservation` | Static object data association (SODA-CitrON): DBSTREAM extended with confidence-based detection weighting and information-filter state estimation. Emits one `UncertainObservation` per object with fused position, covariance and confidence, a persistent `cluster_id` and the IDs of its associated detections. `SodaCitronClusterer` implements J. Nausner, K. Wohlleben and M. Hubner, *SODA-CitrON: Static Object Data Association by Clustering Multi-Modal Sensor Detections Online*, FUSION 2026 ([arXiv:2602.22243](https://arxiv.org/abs/2602.22243)); please cite the paper if you use it in your research. |
 
 ### Utility — `mufasa.nodes.util`
 

@@ -10,6 +10,7 @@ from mufasa.nodes.detection.threshold import Threshold
 from mufasa.nodes.util.filter import ObservationFilter
 from mufasa.nodes.tracking.kalman import KalmanTracker
 from mufasa.nodes.tracking.dbstream import DBSTREAMClusterer
+from mufasa.nodes.tracking.soda_citron import SodaCitronClusterer
 from mufasa.io.inputs.geojson import GeoJsonInput
 from mufasa.io.inputs.geotiff import GeoTiffInput
 from mufasa.io.outputs.geojson import GeoJsonOutput
@@ -27,6 +28,7 @@ NODE_REGISTRY: dict[str, type] = {
     "ObservationFilter": ObservationFilter,
     "KalmanTracker":      KalmanTracker,
     "DBSTREAMClusterer":  DBSTREAMClusterer,
+    "SodaCitronClusterer": SodaCitronClusterer,
     "GeoJsonInput":      GeoJsonInput,
     "GeoTiffInput":      GeoTiffInput,
     "GeoJsonOutput":     GeoJsonOutput,

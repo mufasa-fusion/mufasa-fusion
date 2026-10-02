@@ -2,8 +2,11 @@
 import pytest
 from shapely.geometry import Point, Polygon
 
+from mufasa import Graph
 from mufasa.location import Observation, Location
 from mufasa.nodes.tracking.dbstream import DBSTREAMClusterer
+from mufasa.io.inputs.python_object import LocationInput
+from mufasa.io.outputs.python_object import LocationOutput
 
 
 # ---------------------------------------------------------------------------
@@ -275,6 +278,21 @@ class TestDBSTREAMClustererReset:
         push(clusterer, (100, 200, 5.0))
         clusterer.reset()
         assert clusterer._timeout_start is None
+
+    def test_graph_rerun_after_reset(self):
+        # Graph.reset() does not call configure() again, so the model
+        # discarded by reset() must be rebuilt on the next flush.
+        inp = LocationInput(
+            [Location(geometry=Point(500050, 5200050), timestamp=float(t)) for t in range(3)]
+        )
+        out = LocationOutput()(DBSTREAMClusterer(clustering_threshold=20.0)(inp))
+        graph = Graph(inputs=[inp], outputs=[out], crs="EPSG:32633")
+        graph.run()
+        first = [(loc.geometry.x, loc.geometry.y) for loc in out.result]
+        graph.reset()
+        graph.run()
+        assert first
+        assert [(loc.geometry.x, loc.geometry.y) for loc in out.result] == first
 
 
 # ---------------------------------------------------------------------------
