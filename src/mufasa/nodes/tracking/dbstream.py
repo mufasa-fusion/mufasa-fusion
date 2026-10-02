@@ -1,5 +1,7 @@
 """Streaming spatial clustering node backed by DBSTREAM (river)."""
 import dataclasses
+import importlib
+from collections.abc import Iterator
 
 from shapely.geometry import Point
 
@@ -11,6 +13,8 @@ class DBSTREAMClusterer(Node):
 
     _input_types = [Location]
     _output_type = Location
+    # Checked by configure(), as {import name: distribution name}.
+    _required_modules = {"river": "river"}
     """Cluster Locations spatially using DBSTREAM from the river library.
 
     Unlike a fresh DBSCAN run per window, the DBSTREAM model persists across
@@ -73,22 +77,16 @@ class DBSTREAMClusterer(Node):
         self._model = None  # river DBSTREAM, lazily initialised and persisted
 
     def configure(self, crs, bbox, resolution) -> None:
-        try:
-            import river  # noqa: F401
-        except ImportError:
-            raise ImportError(
-                "DBSTREAMClusterer requires river. "
-                "Install it with: pip install \"mufasa[tracking]\""
-            )
+        for module, distribution in self._required_modules.items():
+            try:
+                importlib.import_module(module)
+            except ImportError:
+                raise ImportError(
+                    f"{type(self).__name__} requires {distribution}. "
+                    "Install it with: pip install \"mufasa[tracking]\""
+                )
 
-        from river.cluster import DBSTREAM
-        self._model = DBSTREAM(
-            clustering_threshold=self.clustering_threshold,
-            fading_factor=self.fading_factor,
-            cleanup_interval=self.cleanup_interval,
-            intersection_factor=self.intersection_factor,
-            minimum_weight=self.minimum_weight,
-        )
+        self._model = self._build_model()
         super().configure(crs, bbox, resolution)
 
     # ------------------------------------------------------------------
@@ -138,34 +136,54 @@ class DBSTREAMClusterer(Node):
         }
 
     # ------------------------------------------------------------------
+    # Clustering hooks — override in subclasses that swap the model
+    # ------------------------------------------------------------------
+
+    def _build_model(self):
+        """Return a fresh clustering model configured from this node's attributes."""
+        from river.cluster import DBSTREAM
+        return DBSTREAM(
+            clustering_threshold=self.clustering_threshold,
+            fading_factor=self.fading_factor,
+            cleanup_interval=self.cleanup_interval,
+            intersection_factor=self.intersection_factor,
+            minimum_weight=self.minimum_weight,
+        )
+
+    def _learn(self, location: Location) -> None:
+        """Feed one buffered location to the model."""
+        pt = location.geometry.centroid
+        self._model.learn_one({"x": pt.x, "y": pt.y})
+
+    def _cluster_locations(self, timestamp: float) -> Iterator[Location]:
+        """Yield one output location per currently active cluster."""
+        for cluster_id, center in self._model.centers.items():
+            yield Location(
+                geometry=Point(center["x"], center["y"]),
+                timestamp=timestamp,
+                properties={"cluster_id": int(cluster_id)},
+            )
+
+    # ------------------------------------------------------------------
     # Internal clustering logic
     # ------------------------------------------------------------------
 
     def _flush(self) -> None:
         if not self._buffer:
             return
+        if self._model is None:
+            # reset() discards the model; rebuild it lazily so the node can be
+            # re-run without another configure() (Graph.reset() does not call it).
+            self._model = self._build_model()
 
         locations = sorted(self._buffer, key=lambda e: e.timestamp)
         self._buffer.clear()
 
         scan_time = locations[-1].timestamp
 
-        for l in locations:
-            pt = l.geometry.centroid
-            self._model.learn_one({"x": pt.x, "y": pt.y})
+        for location in locations:
+            self._learn(location)
 
-        self._emit_cluster_locations(scan_time)
-
-    def _emit_cluster_locations(self, timestamp: float) -> None:
-        centers = self._model.centers
-        if not centers:
-            return
-
-        for cluster_id, center in centers.items():
-            cluster_location = Location(
-                geometry=Point(center["x"], center["y"]),
-                timestamp=timestamp,
-                properties={"cluster_id": int(cluster_id)},
-            )
+        for cluster_location in self._cluster_locations(scan_time):
             for succ in self._successors:
                 succ.process(cluster_location)

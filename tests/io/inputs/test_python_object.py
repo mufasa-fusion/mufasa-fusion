@@ -3,7 +3,7 @@ from shapely.geometry import Point
 from rasterio.transform import Affine
 from rasterio.crs import CRS
 
-from mufasa import Observation, Location, Map
+from mufasa import Observation, Location, Map, UncertainObservation
 from mufasa.io.inputs.base import InputNode
 from mufasa.io.inputs.python_object import LocationInput, MapInput
 
@@ -43,6 +43,27 @@ class TestLocationInput:
 
     def test_output_type_is_location(self):
         assert LocationInput([make_location()]).output_type is Location
+
+    def test_output_type_is_observation_for_events(self):
+        assert LocationInput([make_event(0.0), make_event(1.0)]).output_type is Observation
+
+    def test_output_type_is_most_specific_common_type(self):
+        items = [
+            UncertainObservation(geometry=Point(0, 0), covariance=[[1, 0], [0, 1]])
+            for _ in range(2)
+        ]
+        assert LocationInput(items).output_type is UncertainObservation
+
+    def test_mixed_subtypes_fall_back_to_common_base(self):
+        items = [
+            UncertainObservation(geometry=Point(0, 0), covariance=[[1, 0], [0, 1]]),
+            make_event(1.0),
+        ]
+        assert LocationInput(items).output_type is Observation
+
+    def test_mixed_with_location_falls_back_to_location(self):
+        items = [make_event(1.0), make_location()]
+        assert LocationInput(items).output_type is Location
 
 
 def make_map(timestamp: float = 0.0):

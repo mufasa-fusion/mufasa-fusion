@@ -1,6 +1,14 @@
-﻿from mufasa.location import Observation, Location
+﻿from mufasa.location import Location
 from mufasa.map import Map
 from mufasa.io.inputs.base import InputNode
+
+
+def _common_location_type(items: list) -> type:
+    """Return the most specific Location subclass shared by all items."""
+    for cls in type(items[0]).__mro__:
+        if issubclass(cls, Location) and all(isinstance(item, cls) for item in items):
+            return cls
+    return Location
 
 
 class LocationInput(InputNode):
@@ -10,15 +18,17 @@ class LocationInput(InputNode):
 
     Accepts any iterable (list, generator, tuple). If the collection
     contains Observations or Locations, they are returned sorted by timestamp.
+
+    output_type is the most specific type shared by all items (e.g.
+    UncertainObservation, Observation or Location), so the data can be wired
+    into nodes with stricter input requirements.
     """
 
     def __init__(self, data) -> None:
         self._data: list[Location] = list(data)
         if not self._data:
             raise ValueError("LocationInput requires a non-empty collection")
-        self._output_type: type = (
-            Observation if all(isinstance(item, Observation) for item in self._data) else Location
-        )
+        self._output_type: type = _common_location_type(self._data)
         super().__init__()
 
     @property
