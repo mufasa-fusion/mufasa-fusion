@@ -1,6 +1,6 @@
 <div align="center">
-  <img src="docs/source/_static/img/logo/MuFASA_MuFASA.svg" alt="MuFASA" height="80" />
-  <img src="docs/source/_static/img/ait_logo.jpg" alt="AIT Austrian Institute of Technology" height="60" />
+  <img src="docs/_static/img/logo/MuFASA_MuFASA.svg" alt="MuFASA" height="80" />
+  <img src="docs/_static/img/ait_logo.jpg" alt="AIT Austrian Institute of Technology" height="60" />
 </div>
 
 # MuFASA — Multimodal Fusion Architecture for Sensor Applications

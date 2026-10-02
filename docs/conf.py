@@ -30,24 +30,26 @@ extensions = [
 ]
 
 templates_path = ['_templates']
-exclude_patterns = []
+exclude_patterns = ["_*"]
+
+myst_enable_extensions = ["colon_fence"]
 
 rst_prolog = """\
-.. |loc| image:: /images/shapes/location-marker.svg
+.. |loc| image:: /_static/img/shapes/location-marker.svg
    :alt: location marker
    :class: mufasa-shape-icon
-.. |obs| image:: /images/shapes/observation-marker.svg
+.. |obs| image:: /_static/img/shapes/observation-marker.svg
    :alt: target marker
    :class: mufasa-shape-icon
-.. |map| image:: /images/shapes/map-fold.svg
-   :class: mufasa-shape-icon
+.. |map| image:: /_static/img/shapes/map-fold.svg
    :alt: foldable map
-.. |bmap| image:: /images/shapes/map-roll.svg
+   :class: mufasa-shape-icon
+.. |bmap| image:: /_static/img/shapes/map-roll.svg
    :alt: map scroll
    :class: mufasa-shape-icon
 """
 
-autoapi_dirs = ["../../src"]  # Source (code) directories
+autoapi_dirs = ["../src"]  # Source (code) directories
 autoapi_root = "api"  # Target documentation directory
 autoapi_template_dir = "_templates/api"
 autoapi_python_class_content = "both"  # Append init docs to class docs (since init isn't shown separately)
@@ -72,12 +74,13 @@ def autoapi_prepare_jinja_env(env: Environment):
 html_theme = "shibuya"
 html_static_path = ['_static']
 html_css_files = [
-    "css/theme-overwrite.css",
-    "css/custom.css",
+    "css/shibuya-overwrite.css",
+    "css/mufasa.css",
 ]
+html_logo = "_static/img/logo/MuFASA_MuFASA.svg"
 html_theme_options = {
     "accent_color": "red",
-    "globaltoc_expand_depth": 1,
-    "light_logo": "_static/img/logo/MuFASA_MuFASA.svg",
+    "light_logo": html_logo,
     "dark_logo": "_static/img/logo/MuFASA_MuFASA_weiss.svg",
+    "globaltoc_expand_depth": 1,
 }

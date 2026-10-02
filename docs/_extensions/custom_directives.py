@@ -1,8 +1,6 @@
 import json
 import os.path
 from abc import ABCMeta, abstractmethod
-from json import JSONDecodeError
-from traceback import print_tb
 from typing import Iterable
 
 from autoapi._mapper import _link_objs

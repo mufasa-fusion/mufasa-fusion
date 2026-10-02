@@ -31,7 +31,7 @@ html[data-theme="dark"] {
 }
 
 html[data-theme="dark"] .hero-logo-mufasa {
-    content: url("img/mufasa_logo_dark.png");
+    content: url("img/logo/MuFASA_MuFASA_weiss.svg");
 }
 
 .hero-logo-divider {
