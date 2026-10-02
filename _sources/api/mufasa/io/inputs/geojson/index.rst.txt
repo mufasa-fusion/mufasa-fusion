@@ -1,0 +1,60 @@
+mufasa.io.inputs.geojson
+========================
+
+.. py:module:: mufasa.io.inputs.geojson
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.inputs.geojson.GeoJsonInput
+
+
+Module Contents
+---------------
+
+.. py:class:: GeoJsonInput(path: str)
+
+   Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
+
+
+   Loads Observations or Locations from a GeoJSON file.
+
+   output_type is Observation if a 'confidence' column is present, otherwise
+   Location. Timestamps are mapped to the timestamp field on either type.
+   Determined at construction time by reading the first feature of the file.
+
+   Geometries are in WGS84 (GeoJSON spec) and are reprojected to the pipeline
+   CRS automatically by the InputNode base class.
+
+   Override decode() in a subclass to produce a richer type for potential nodes
+   that have stricter requirements. Also set _output_type on the subclass so
+   the DAG wiring validation sees the correct type.
+
+
+   .. py:attribute:: path
+
+
+   .. py:property:: output_type
+      :type: type
+
+
+
+   .. py:method:: decode(feature: dict) -> mufasa.location.Location
+
+      Convert a single GeoJSON feature dict to a Location or Observation.
+
+      Returns geometry in WGS84; reprojection to pipeline CRS is handled
+      automatically by the InputNode base class before the item reaches
+      any processing node. Override in a subclass to produce a richer type.
+
+
+
+   .. py:method:: items() -> list[mufasa.location.Location]
+
+
+   .. py:method:: get_config() -> dict
+
+

@@ -1,0 +1,59 @@
+mufasa.io.outputs.geojson
+=========================
+
+.. py:module:: mufasa.io.outputs.geojson
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.outputs.geojson.GeoJsonOutput
+
+
+Module Contents
+---------------
+
+.. py:class:: GeoJsonOutput(path: str)
+
+   Bases: :py:obj:`mufasa.io.outputs.base.OutputNode`
+
+
+   Writes collected Observations or Locations to a GeoJSON file (WGS84).
+
+   All properties from Location.properties are included.  For Observation
+   objects, confidence and timestamp are additionally written as top-level
+   feature properties.
+
+   Override encode() in a subclass to serialise richer types (e.g.
+   UncertainObservation) to custom GeoJSON properties.
+
+
+   .. py:attribute:: path
+
+
+   .. py:method:: configure(crs, bbox, resolution) -> None
+
+
+   .. py:method:: encode(loc: mufasa.location.Location) -> dict
+
+      Convert a Location or Observation to a GeoJSON feature dict.
+
+      Geometry is reprojected to WGS84 (accessible via self._reproject).
+      Override in a subclass to serialise additional typed fields.
+
+
+
+   .. py:method:: process(loc: mufasa.location.Location) -> None
+
+
+   .. py:method:: reset() -> None
+
+
+   .. py:method:: save() -> None
+
+
+   .. py:method:: get_config() -> dict
+
+

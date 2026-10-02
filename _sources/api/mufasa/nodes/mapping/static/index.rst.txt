@@ -1,0 +1,74 @@
+mufasa.nodes.mapping.static
+===========================
+
+.. py:module:: mufasa.nodes.mapping.static
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.nodes.mapping.static.StaticMap
+
+
+Module Contents
+---------------
+
+.. py:class:: StaticMap(source: str, default_prior: float = 0.5)
+
+   Bases: :py:obj:`mufasa.node.Node`
+
+
+   Source node: load a BayesianMap from a GeoJSON file at configure() time.
+
+   Each feature defines a spatial region and its prior probability via a
+   'confidence' property (0–1).  Regions not covered by any feature remain
+   NaN so BayesianFusion (nansum) ignores them, contributing nothing to the
+   fused output for those pixels.
+
+   For overlapping features the lower confidence wins (most conservative
+   prior).
+
+   The node is a source — it has no predecessors — so it must be declared
+   in Graph(inputs=[..., static_map]).  Its map is fully populated after
+   configure() and never changes; process() is a no-op.
+
+
+   .. py:attribute:: source
+
+
+   .. py:attribute:: default_prior
+      :value: 0.5
+
+
+
+   .. py:property:: map
+      :type: mufasa.map.BayesianMap
+
+
+
+   .. py:method:: configure(crs, bbox, resolution) -> None
+
+      Receive spatial configuration from the Graph at construction time.
+
+      Override in nodes that need crs/bbox/resolution to initialise
+      internal state (e.g. POM creates its map here). Default is a no-op.
+
+
+
+   .. py:method:: process() -> None
+
+      Static maps carry no temporal events — intentional no-op.
+
+
+
+   .. py:method:: get_config() -> dict
+
+      Return all constructor arguments as a plain JSON-serializable dict.
+
+      Used by ``Graph.to_config()`` to serialise the pipeline. Every key
+      must be a string; every value must be JSON-serializable.
+
+
+

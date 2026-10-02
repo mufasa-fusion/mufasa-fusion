@@ -1,0 +1,45 @@
+mufasa.io.inputs.python_object
+==============================
+
+.. py:module:: mufasa.io.inputs.python_object
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.inputs.python_object.LocationInput
+   mufasa.io.inputs.python_object.MapInput
+
+
+Module Contents
+---------------
+
+.. py:class:: LocationInput(data)
+
+   Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
+
+
+   .. py:property:: output_type
+      :type: type
+
+
+
+   .. py:method:: items() -> list[mufasa.location.Location]
+
+
+   .. py:method:: get_config() -> dict
+
+
+.. py:class:: MapInput(data)
+
+   Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
+
+
+   .. py:method:: items() -> list[mufasa.map.Map]
+
+
+   .. py:method:: get_config() -> dict
+
+

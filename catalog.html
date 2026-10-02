@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="red" data-content_root="./">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Catalog - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="API Reference" href="api/index.html" /><link rel="prev" title="Showcases" href="showcases/index.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="_static/css/shibuya-overwrite.css?v=690df8d7" />
+    <link rel="stylesheet" type="text/css" href="_static/css/mufasa.css?v=57b3d045" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="Catalog"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="index.html">
+      <img class="light-logo" src="_static/img/logo/MuFASA_MuFASA.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <img class="dark-logo" src="_static/img/logo/MuFASA_MuFASA_weiss.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <strong>mufasa-fusion</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><ul class="current">
+<li class="toctree-l1 _expand"><a class="reference internal" href="getting-started/index.html">Getting started</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="user-guide/index.html">User guide</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="showcases/index.html">Showcases</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/mufasa/index.html">mufasa</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="api/mufasa/graph/index.html">mufasa.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mufasa/io/index.html">mufasa.io</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/mufasa/io/inputs/index.html">mufasa.io.inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/mufasa/io/outputs/index.html">mufasa.io.outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/mufasa/location/index.html">mufasa.location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mufasa/map/index.html">mufasa.map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mufasa/node/index.html">mufasa.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="api/mufasa/nodes/index.html">mufasa.nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/mufasa/nodes/detection/index.html">mufasa.nodes.detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/mufasa/nodes/fusion/index.html">mufasa.nodes.fusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/mufasa/nodes/mapping/index.html">mufasa.nodes.mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/mufasa/nodes/tracking/index.html">mufasa.nodes.tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/mufasa/nodes/util/index.html">mufasa.nodes.util</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/mufasa/registry/index.html">mufasa.registry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="about.html">About</a></li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#edge-data-types">Edge Data Types</a></li>
+<li><a class="reference internal" href="#processing-nodes">Processing Nodes</a></li>
+<li><a class="reference internal" href="#input-nodes">Input Nodes</a></li>
+<li><a class="reference internal" href="#output-nodes">Output Nodes</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">mufasa-fusion</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Catalog</strong>
+        <meta itemprop="position" content="2" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="catalog">
+<h1>Catalog<a class="headerlink" href="#catalog" title="Link to this heading">#</a></h1>
+<section id="edge-data-types">
+<h2>Edge Data Types<a class="headerlink" href="#edge-data-types" title="Link to this heading">#</a></h2>
+<ul class="mufasa-node-catalog twos">
+<li><p><img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/location/index.html#mufasa.location.Location" title="mufasa.location.Location"><code class="xref py py-class docutils literal notranslate"><span class="pre">Location</span></code></a></p>
+</li>
+<li><p><img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/location/index.html#mufasa.location.Observation" title="mufasa.location.Observation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Observation</span></code></a></p>
+</li>
+<li><p><img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/map/index.html#mufasa.map.Map" title="mufasa.map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a></p>
+</li>
+<li><p><img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/map/index.html#mufasa.map.BayesianMap" title="mufasa.map.BayesianMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">BayesianMap</span></code></a></p>
+<p>Map subtype produced by Bayesian nodes (POM, StaticMap).</p>
+</li>
+</ul>
+</section>
+<section id="processing-nodes">
+<h2>Processing Nodes<a class="headerlink" href="#processing-nodes" title="Link to this heading">#</a></h2>
+<ul class="mufasa-node-catalog">
+<li><p><img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" />  → <img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />/<img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/nodes/detection/threshold/index.html#mufasa.nodes.detection.threshold.Threshold" title="mufasa.nodes.detection.threshold.Threshold"><code class="xref py py-class docutils literal notranslate"><span class="pre">Threshold</span></code></a></p>
+<p>Detect connected regions in a Map or BayesianMap.</p>
+</li>
+<li><p><img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" />  → <img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/nodes/fusion/map_fusion/index.html#mufasa.nodes.fusion.map_fusion.BayesianFusion" title="mufasa.nodes.fusion.map_fusion.BayesianFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">BayesianFusion</span></code></a></p>
+<p>Fuse two or more BayesianMaps by summing their log-odds.</p>
+</li>
+<li><p><img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" />  → <img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/nodes/fusion/map_fusion/index.html#mufasa.nodes.fusion.map_fusion.LogicalAnd" title="mufasa.nodes.fusion.map_fusion.LogicalAnd"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogicalAnd</span></code></a></p>
+<p>Logical AND in log-odds space: element-wise minimum across inputs.</p>
+</li>
+<li><p><img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" />  → <img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/nodes/fusion/map_fusion/index.html#mufasa.nodes.fusion.map_fusion.LogicalOr" title="mufasa.nodes.fusion.map_fusion.LogicalOr"><code class="xref py py-class docutils literal notranslate"><span class="pre">LogicalOr</span></code></a></p>
+<p>Logical OR in log-odds space: element-wise maximum across inputs.</p>
+</li>
+<li><p><img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" />  → <img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/nodes/fusion/map_fusion/index.html#mufasa.nodes.fusion.map_fusion.MapFusion" title="mufasa.nodes.fusion.map_fusion.MapFusion"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapFusion</span></code></a></p>
+<p>Base for fusion nodes that combine BayesianMaps element-wise.</p>
+</li>
+<li><p><img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" />  → <img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/nodes/mapping/pom/index.html#mufasa.nodes.mapping.pom.POM" title="mufasa.nodes.mapping.pom.POM"><code class="xref py py-class docutils literal notranslate"><span class="pre">POM</span></code></a></p>
+<p>Probability Occupancy Map: Bayesian log-odds accumulation with exponential decay.</p>
+</li>
+<li><p><img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />  → <img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/nodes/tracking/dbstream/index.html#mufasa.nodes.tracking.dbstream.DBSTREAMClusterer" title="mufasa.nodes.tracking.dbstream.DBSTREAMClusterer"><code class="xref py py-class docutils literal notranslate"><span class="pre">DBSTREAMClusterer</span></code></a></p>
+<p>Base class for all pipeline nodes.</p>
+</li>
+<li><p><img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />  → <img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/nodes/tracking/kalman/index.html#mufasa.nodes.tracking.kalman.KalmanTracker" title="mufasa.nodes.tracking.kalman.KalmanTracker"><code class="xref py py-class docutils literal notranslate"><span class="pre">KalmanTracker</span></code></a></p>
+<p>Base class for all pipeline nodes.</p>
+</li>
+<li><p><img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" />  → <img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/nodes/util/filter/index.html#mufasa.nodes.util.filter.ObservationFilter" title="mufasa.nodes.util.filter.ObservationFilter"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObservationFilter</span></code></a></p>
+<p>Pass-through node that drops Observations not matching the specified criteria.</p>
+</li>
+</ul>
+</section>
+<section id="input-nodes">
+<h2>Input Nodes<a class="headerlink" href="#input-nodes" title="Link to this heading">#</a></h2>
+<ul class="mufasa-node-catalog">
+<li><p>GeoJSON <a class="footnote-reference brackets" href="#geojson" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#innodecol" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> → <img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />/<img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/io/inputs/geojson/index.html#mufasa.io.inputs.geojson.GeoJsonInput" title="mufasa.io.inputs.geojson.GeoJsonInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeoJsonInput</span></code></a></p>
+<p>Loads Observations or Locations from a GeoJSON file.</p>
+</li>
+<li><p>GeoTIFF <a class="footnote-reference brackets" href="#geotiff" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#innodecol" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> → <img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/io/inputs/geotiff/index.html#mufasa.io.inputs.geotiff.GeoTiffInput" title="mufasa.io.inputs.geotiff.GeoTiffInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeoTiffInput</span></code></a></p>
+<p>Loads a single-band GeoTIFF file as a Map.</p>
+</li>
+<li><p><img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />/<img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /> <a class="footnote-reference brackets" href="#innodecol" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> → <img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />/<img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/io/inputs/python_object/index.html#mufasa.io.inputs.python_object.LocationInput" title="mufasa.io.inputs.python_object.LocationInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationInput</span></code></a></p>
+</li>
+<li><p><img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" /> <a class="footnote-reference brackets" href="#innodecol" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> → <img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/io/inputs/python_object/index.html#mufasa.io.inputs.python_object.MapInput" title="mufasa.io.inputs.python_object.MapInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapInput</span></code></a></p>
+</li>
+<li><p><img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" /> <a class="footnote-reference brackets" href="#innodecol" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> → <img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/io/inputs/streaming/index.html#mufasa.io.inputs.streaming.LocationStreamingInput" title="mufasa.io.inputs.streaming.LocationStreamingInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationStreamingInput</span></code></a></p>
+<p>Streaming input for Location objects.</p>
+</li>
+<li><p><img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /> <a class="footnote-reference brackets" href="#innodecol" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> → <img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/io/inputs/streaming/index.html#mufasa.io.inputs.streaming.ObservationStreamingInput" title="mufasa.io.inputs.streaming.ObservationStreamingInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObservationStreamingInput</span></code></a></p>
+<p>Streaming input for Location objects.</p>
+</li>
+<li><p><img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" /> <a class="footnote-reference brackets" href="#innodecol" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> → <img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/io/inputs/streaming/index.html#mufasa.io.inputs.streaming.MapStreamingInput" title="mufasa.io.inputs.streaming.MapStreamingInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapStreamingInput</span></code></a></p>
+<p>Streaming input for Map objects.</p>
+</li>
+<li><p>GeoJSON <a class="footnote-reference brackets" href="#geojson" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#innodecol" id="id11" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> → <img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" /></p>
+<p><a class="reference internal" href="api/mufasa/nodes/mapping/static/index.html#mufasa.nodes.mapping.static.StaticMap" title="mufasa.nodes.mapping.static.StaticMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">StaticMap</span></code></a></p>
+<p>Source node: load a BayesianMap from a GeoJSON file at configure() time.</p>
+</li>
+</ul>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="innodecol" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id2">1</a>,<a role="doc-backlink" href="#id4">2</a>,<a role="doc-backlink" href="#id5">3</a>,<a role="doc-backlink" href="#id6">4</a>,<a role="doc-backlink" href="#id7">5</a>,<a role="doc-backlink" href="#id8">6</a>,<a role="doc-backlink" href="#id9">7</a>,<a role="doc-backlink" href="#id11">8</a>)</span>
+<p>Indicates the type of data they consume from external systems.
+Within the Fusion Graph, Input Nodes are sources with no incoming edges.</p>
+</aside>
+</aside>
+</section>
+<section id="output-nodes">
+<h2>Output Nodes<a class="headerlink" href="#output-nodes" title="Link to this heading">#</a></h2>
+<ul class="mufasa-node-catalog">
+<li><p><img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />  → GeoJSON <a class="footnote-reference brackets" href="#geojson" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#outnodecol" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p><a class="reference internal" href="api/mufasa/io/outputs/geojson/index.html#mufasa.io.outputs.geojson.GeoJsonOutput" title="mufasa.io.outputs.geojson.GeoJsonOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeoJsonOutput</span></code></a></p>
+<p>Writes collected Observations or Locations to a GeoJSON file (WGS84).</p>
+</li>
+<li><p><img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" />  → GeoTIFF <a class="footnote-reference brackets" href="#geotiff" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#outnodecol" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p><a class="reference internal" href="api/mufasa/io/outputs/geotiff/index.html#mufasa.io.outputs.geotiff.GeoTiffOutput" title="mufasa.io.outputs.geotiff.GeoTiffOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeoTiffOutput</span></code></a></p>
+</li>
+<li><p><img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />  → <img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" /> <a class="footnote-reference brackets" href="#outnodecol" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p><a class="reference internal" href="api/mufasa/io/outputs/python_object/index.html#mufasa.io.outputs.python_object.LocationOutput" title="mufasa.io.outputs.python_object.LocationOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationOutput</span></code></a></p>
+</li>
+<li><p><img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" />  → <img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" /> <a class="footnote-reference brackets" href="#outnodecol" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p><a class="reference internal" href="api/mufasa/io/outputs/python_object/index.html#mufasa.io.outputs.python_object.MapOutput" title="mufasa.io.outputs.python_object.MapOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapOutput</span></code></a></p>
+</li>
+<li><p><img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />  → <img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" /> <a class="footnote-reference brackets" href="#outnodecol" id="id18" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p><a class="reference internal" href="api/mufasa/io/outputs/streaming/index.html#mufasa.io.outputs.streaming.StreamingOutputNode" title="mufasa.io.outputs.streaming.StreamingOutputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamingOutputNode</span></code></a></p>
+<p>Output node that delivers each result to a callable.</p>
+</li>
+<li><p><img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />/ <img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" />  → matplotlib <a class="footnote-reference brackets" href="#matplotlib" id="id19" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#outnodecol" id="id20" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
+<p><a class="reference internal" href="api/mufasa/io/outputs/visualization/index.html#mufasa.io.outputs.visualization.Visualization" title="mufasa.io.outputs.visualization.Visualization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Visualization</span></code></a></p>
+<p>Output node that collects Map snapshots and Locations for inspection.</p>
+</li>
+</ul>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="outnodecol" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id13">1</a>,<a role="doc-backlink" href="#id15">2</a>,<a role="doc-backlink" href="#id16">3</a>,<a role="doc-backlink" href="#id17">4</a>,<a role="doc-backlink" href="#id18">5</a>,<a role="doc-backlink" href="#id20">6</a>)</span>
+<p>Indicates the type of data they deliver to external systems.
+Within the Fusion Graph, Output Nodes are terminal, so they don’t have outgoing edges.</p>
+</aside>
+</aside>
+<p class="rubric">References</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="geojson" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id1">1</a>,<a role="doc-backlink" href="#id10">2</a>,<a role="doc-backlink" href="#id12">3</a>)</span>
+<p>GeoJSON, see <a class="reference external" href="https://geojson.org">https://geojson.org</a></p>
+</aside>
+<aside class="footnote brackets" id="geotiff" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id14">2</a>)</span>
+<p>GeoTIFF, see <a class="reference external" href="https://www.ogc.org/standards/geotiff/">https://www.ogc.org/standards/geotiff/</a></p>
+</aside>
+<aside class="footnote brackets" id="matplotlib" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id19">5</a><span class="fn-bracket">]</span></span>
+<p>matplotlib, see <a class="reference external" href="https://matplotlib.org/">https://matplotlib.org/</a></p>
+</aside>
+</aside>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="showcases/index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Showcases</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="api/index.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">API Reference</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Michael Hubner, Kilian Wohlleben, Jan Nausner, Julia Pöschl</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="_static/documentation_options.js?v=01f34227"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/shibuya.js?v=50760d75"></script></body>
+</html>

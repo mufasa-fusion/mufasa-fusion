@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="red" data-content_root="../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>mufasa.map - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="mufasa.node" href="../node/index.html" /><link rel="prev" title="mufasa.location" href="../location/index.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/shibuya-overwrite.css?v=690df8d7" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/mufasa.css?v=57b3d045" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="mufasa.map"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../../index.html">
+      <img class="light-logo" src="../../../_static/img/logo/MuFASA_MuFASA.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../../_static/img/logo/MuFASA_MuFASA_weiss.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <strong>mufasa-fusion</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><ul class="current">
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../getting-started/index.html">Getting started</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../user-guide/index.html">User guide</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../showcases/index.html">Showcases</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../catalog.html">Catalog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">mufasa</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../graph/index.html">mufasa.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../io/index.html">mufasa.io</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../io/inputs/index.html">mufasa.io.inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../io/outputs/index.html">mufasa.io.outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../location/index.html">mufasa.location</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">mufasa.map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../node/index.html">mufasa.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../nodes/index.html">mufasa.nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../nodes/detection/index.html">mufasa.nodes.detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nodes/fusion/index.html">mufasa.nodes.fusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nodes/mapping/index.html">mufasa.nodes.mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nodes/tracking/index.html">mufasa.nodes.tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../nodes/util/index.html">mufasa.nodes.util</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../registry/index.html">mufasa.registry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../about.html">About</a></li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#mufasa.map.BoundingBox"><code class="docutils literal notranslate"><span class="pre">BoundingBox</span></code></a><ul>
+<li><a class="reference internal" href="#mufasa.map.BoundingBox.min_x"><code class="docutils literal notranslate"><span class="pre">BoundingBox.min_x</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.map.BoundingBox.min_y"><code class="docutils literal notranslate"><span class="pre">BoundingBox.min_y</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.map.BoundingBox.max_x"><code class="docutils literal notranslate"><span class="pre">BoundingBox.max_x</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.map.BoundingBox.max_y"><code class="docutils literal notranslate"><span class="pre">BoundingBox.max_y</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mufasa.map.Map"><code class="docutils literal notranslate"><span class="pre">Map</span></code></a><ul>
+<li><a class="reference internal" href="#mufasa.map.Map.data"><code class="docutils literal notranslate"><span class="pre">Map.data</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.map.Map.transform"><code class="docutils literal notranslate"><span class="pre">Map.transform</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.map.Map.crs"><code class="docutils literal notranslate"><span class="pre">Map.crs</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.map.Map.timestamp"><code class="docutils literal notranslate"><span class="pre">Map.timestamp</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.map.Map.from_bounds"><code class="docutils literal notranslate"><span class="pre">Map.from_bounds()</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.map.Map.bbox"><code class="docutils literal notranslate"><span class="pre">Map.bbox</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.map.Map.copy"><code class="docutils literal notranslate"><span class="pre">Map.copy()</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.map.Map.reproject"><code class="docutils literal notranslate"><span class="pre">Map.reproject()</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#mufasa.map.BayesianMap"><code class="docutils literal notranslate"><span class="pre">BayesianMap</span></code></a><ul>
+<li><a class="reference internal" href="#mufasa.map.BayesianMap.probabilities"><code class="docutils literal notranslate"><span class="pre">BayesianMap.probabilities</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../index.html"><span itemprop="name">mufasa-fusion</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">API Reference</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">mufasa</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">mufasa.map</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="module-mufasa.map">
+<span id="mufasa-map"></span><h1>mufasa.map<a class="headerlink" href="#module-mufasa.map" title="Link to this heading">#</a></h1>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mufasa.map.BoundingBox" title="mufasa.map.BoundingBox"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BoundingBox</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#mufasa.map.Map" title="mufasa.map.Map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Map</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mufasa.map.BayesianMap" title="mufasa.map.BayesianMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BayesianMap</span></code></a></p></td>
+<td><p>Map subtype produced by Bayesian nodes (POM, StaticMap).</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mufasa.map.BoundingBox">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.map.</span></span><span class="sig-name descname"><span class="pre">BoundingBox</span></span><a class="headerlink" href="#mufasa.map.BoundingBox" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">NamedTuple</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mufasa.map.BoundingBox.min_x">
+<span class="sig-name descname"><span class="pre">min_x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#mufasa.map.BoundingBox.min_x" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mufasa.map.BoundingBox.min_y">
+<span class="sig-name descname"><span class="pre">min_y</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#mufasa.map.BoundingBox.min_y" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mufasa.map.BoundingBox.max_x">
+<span class="sig-name descname"><span class="pre">max_x</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#mufasa.map.BoundingBox.max_x" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mufasa.map.BoundingBox.max_y">
+<span class="sig-name descname"><span class="pre">max_y</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><a class="headerlink" href="#mufasa.map.BoundingBox.max_y" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mufasa.map.Map">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.map.</span></span><span class="sig-name descname"><span class="pre">Map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rasterio.transform.Affine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CRS</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.map.Map" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>)</p></li>
+<li><p><strong>transform</strong> (<em>rasterio.transform.Affine</em>)</p></li>
+<li><p><strong>crs</strong> (<em>CRS</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>timestamp</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mufasa.map.Map.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#mufasa.map.Map.data" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mufasa.map.Map.transform">
+<span class="sig-name descname"><span class="pre">transform</span></span><a class="headerlink" href="#mufasa.map.Map.transform" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mufasa.map.Map.crs">
+<span class="sig-name descname"><span class="pre">crs</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">None</span></em><a class="headerlink" href="#mufasa.map.Map.crs" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mufasa.map.Map.timestamp">
+<span class="sig-name descname"><span class="pre">timestamp</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.0</span></em><a class="headerlink" href="#mufasa.map.Map.timestamp" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mufasa.map.Map.from_bounds">
+<em class="property"><span class="k"><span class="pre">classmethod</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_bounds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bounds</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mufasa.map.BoundingBox" title="mufasa.map.BoundingBox"><span class="pre">BoundingBox</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">CRS</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mufasa.map.Map" title="mufasa.map.Map"><span class="pre">Map</span></a></span></span><a class="headerlink" href="#mufasa.map.Map.from_bounds" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bounds</strong> (<a class="reference internal" href="#mufasa.map.BoundingBox" title="mufasa.map.BoundingBox"><em>BoundingBox</em></a>)</p></li>
+<li><p><strong>resolution</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>)</p></li>
+<li><p><strong>crs</strong> (<em>str</em><em> | </em><em>CRS</em><em> | </em><em>None</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mufasa.map.Map" title="mufasa.map.Map">Map</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="mufasa.map.Map.bbox">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">bbox</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#mufasa.map.BoundingBox" title="mufasa.map.BoundingBox"><span class="pre">BoundingBox</span></a></em><a class="headerlink" href="#mufasa.map.Map.bbox" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mufasa.map.BoundingBox" title="mufasa.map.BoundingBox">BoundingBox</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mufasa.map.Map.copy">
+<span class="sig-name descname"><span class="pre">copy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mufasa.map.Map" title="mufasa.map.Map"><span class="pre">Map</span></a></span></span><a class="headerlink" href="#mufasa.map.Map.copy" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mufasa.map.Map" title="mufasa.map.Map">Map</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mufasa.map.Map.reproject">
+<span class="sig-name descname"><span class="pre">reproject</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">CRS</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#mufasa.map.BoundingBox" title="mufasa.map.BoundingBox"><span class="pre">BoundingBox</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mufasa.map.Map" title="mufasa.map.Map"><span class="pre">Map</span></a></span></span><a class="headerlink" href="#mufasa.map.Map.reproject" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>crs</strong> (<em>str</em><em> | </em><em>CRS</em>)</p></li>
+<li><p><strong>bbox</strong> (<a class="reference internal" href="#mufasa.map.BoundingBox" title="mufasa.map.BoundingBox"><em>BoundingBox</em></a>)</p></li>
+<li><p><strong>resolution</strong> (<em>tuple</em><em>[</em><em>float</em><em>, </em><em>float</em><em>]</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference internal" href="#mufasa.map.Map" title="mufasa.map.Map">Map</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mufasa.map.BayesianMap">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.map.</span></span><span class="sig-name descname"><span class="pre">BayesianMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rasterio.transform.Affine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CRS</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.map.BayesianMap" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#mufasa.map.Map" title="mufasa.map.Map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Map</span></code></a></p>
+<p>Map subtype produced by Bayesian nodes (POM, StaticMap).</p>
+<p><code class="docutils literal notranslate"><span class="pre">data</span></code> stores values in log-odds space. Use the <code class="docutils literal notranslate"><span class="pre">probabilities</span></code>
+property to obtain the equivalent values in [0, 1]. Fusion nodes
+(BayesianFusion, LogicalAnd/Or) operate directly on <code class="docutils literal notranslate"><span class="pre">data</span></code> to avoid
+repeated logit/expit round-trips.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>numpy.ndarray</em>)</p></li>
+<li><p><strong>transform</strong> (<em>rasterio.transform.Affine</em>)</p></li>
+<li><p><strong>crs</strong> (<em>CRS</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>timestamp</strong> (<em>float</em>)</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py property">
+<dt class="sig sig-object py" id="mufasa.map.BayesianMap.probabilities">
+<em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">probabilities</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">numpy.ndarray</span></em><a class="headerlink" href="#mufasa.map.BayesianMap.probabilities" title="Link to this definition">#</a></dt>
+<dd><p>Return a copy of the map data converted to probabilities in [0, 1].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>numpy.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../location/index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">mufasa.location</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../node/index.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">mufasa.node</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Michael Hubner, Kilian Wohlleben, Jan Nausner, Julia Pöschl</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../_static/shibuya.js?v=50760d75"></script></body>
+</html>

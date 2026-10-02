@@ -1,0 +1,16 @@
+mufasa.io
+=========
+
+.. py:module:: mufasa.io
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /api/mufasa/io/inputs/index
+   /api/mufasa/io/outputs/index
+
+

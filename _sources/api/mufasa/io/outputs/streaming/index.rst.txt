@@ -1,0 +1,41 @@
+mufasa.io.outputs.streaming
+===========================
+
+.. py:module:: mufasa.io.outputs.streaming
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.outputs.streaming.StreamingOutputNode
+
+
+Module Contents
+---------------
+
+.. py:class:: StreamingOutputNode(on_output=None)
+
+   Bases: :py:obj:`mufasa.io.outputs.base.OutputNode`
+
+
+   Output node that delivers each result to a callable.
+
+       out = StreamingOutputNode(my_callback)(prev_node)
+
+   The callback receives one Location (or Observation) per alarm.
+   ``on_output`` can also be reassigned at any time after construction.
+
+
+   .. py:attribute:: on_output
+      :value: None
+
+
+
+   .. py:method:: process(item: mufasa.location.Location) -> None
+
+
+   .. py:method:: get_config() -> dict
+
+

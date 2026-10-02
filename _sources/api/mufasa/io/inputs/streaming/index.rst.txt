@@ -1,0 +1,74 @@
+mufasa.io.inputs.streaming
+==========================
+
+.. py:module:: mufasa.io.inputs.streaming
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.inputs.streaming.StreamingInputNode
+   mufasa.io.inputs.streaming.LocationStreamingInput
+   mufasa.io.inputs.streaming.ObservationStreamingInput
+   mufasa.io.inputs.streaming.MapStreamingInput
+
+
+Module Contents
+---------------
+
+.. py:class:: StreamingInputNode
+
+   Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
+
+
+   Base for push-based streaming inputs.
+
+   External code (MQTT handler, socket listener, etc.) calls ingest() as
+   items arrive. MuFASA is not responsible for connection lifecycle.
+   Use LocationStreamingInput or MapStreamingInput directly.
+
+
+   .. py:method:: items()
+
+
+   .. py:method:: ingest(item) -> None
+
+      Deliver one item into the pipeline.
+
+
+
+   .. py:method:: stop() -> None
+
+      Signal this input to stop yielding from items().
+
+
+
+   .. py:method:: get_config() -> dict
+
+
+.. py:class:: LocationStreamingInput
+
+   Bases: :py:obj:`StreamingInputNode`
+
+
+   Streaming input for Location objects.
+
+
+.. py:class:: ObservationStreamingInput
+
+   Bases: :py:obj:`StreamingInputNode`
+
+
+   Streaming input for Location objects.
+
+
+.. py:class:: MapStreamingInput
+
+   Bases: :py:obj:`StreamingInputNode`
+
+
+   Streaming input for Map objects.
+
+

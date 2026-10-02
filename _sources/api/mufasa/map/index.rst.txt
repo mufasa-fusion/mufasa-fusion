@@ -1,0 +1,94 @@
+mufasa.map
+==========
+
+.. py:module:: mufasa.map
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.map.BoundingBox
+   mufasa.map.Map
+   mufasa.map.BayesianMap
+
+
+Module Contents
+---------------
+
+.. py:class:: BoundingBox
+
+   Bases: :py:obj:`NamedTuple`
+
+
+   .. py:attribute:: min_x
+      :type:  float
+
+
+   .. py:attribute:: min_y
+      :type:  float
+
+
+   .. py:attribute:: max_x
+      :type:  float
+
+
+   .. py:attribute:: max_y
+      :type:  float
+
+
+.. py:class:: Map(data: numpy.ndarray, transform: rasterio.transform.Affine, crs: CRS | None = None, *, timestamp: float = 0.0)
+
+   .. py:attribute:: data
+
+
+   .. py:attribute:: transform
+
+
+   .. py:attribute:: crs
+      :value: None
+
+
+
+   .. py:attribute:: timestamp
+      :value: 0.0
+
+
+
+   .. py:method:: from_bounds(bounds: BoundingBox, resolution: tuple[float, float], crs: str | CRS | None = None) -> Map
+      :classmethod:
+
+
+
+   .. py:property:: bbox
+      :type: BoundingBox
+
+
+
+   .. py:method:: copy() -> Map
+
+
+   .. py:method:: reproject(crs: str | CRS, bbox: BoundingBox, resolution: tuple[float, float]) -> Map
+
+
+.. py:class:: BayesianMap(data: numpy.ndarray, transform: rasterio.transform.Affine, crs: CRS | None = None, *, timestamp: float = 0.0)
+
+   Bases: :py:obj:`Map`
+
+
+   Map subtype produced by Bayesian nodes (POM, StaticMap).
+
+   ``data`` stores values in log-odds space. Use the ``probabilities``
+   property to obtain the equivalent values in [0, 1]. Fusion nodes
+   (BayesianFusion, LogicalAnd/Or) operate directly on ``data`` to avoid
+   repeated logit/expit round-trips.
+
+
+   .. py:property:: probabilities
+      :type: numpy.ndarray
+
+
+      Return a copy of the map data converted to probabilities in [0, 1].
+
+

@@ -1,0 +1,46 @@
+mufasa.nodes.mapping.pom
+========================
+
+.. py:module:: mufasa.nodes.mapping.pom
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.nodes.mapping.pom.POM
+
+
+Module Contents
+---------------
+
+.. py:class:: POM(decay_s: float, prior: float = 0.5)
+
+   Bases: :py:obj:`mufasa.nodes.mapping.heat.HeatMap`
+
+
+   Probability Occupancy Map: Bayesian log-odds accumulation with exponential decay.
+
+   Internal state and ``BayesianMap.data`` are both in log-odds space.
+   Use ``map.probabilities`` to obtain values in [0, 1]. Produces
+   ``BayesianMap`` so that fusion nodes can enforce compatible wiring.
+
+   :param decay_s: Exponential decay time constant in seconds.
+   :type decay_s: float
+   :param prior: Sensor baseline confidence.  Observations with ``confidence == prior``
+                 are neutral (zero log-odds contribution).  Above ``prior`` increases
+                 the map; below decreases it.  The map itself always starts at
+                 probability 0.5 (unknown) — use a ``StaticMap`` + ``BayesianFusion``
+                 to set a spatial prior on occupancy.
+   :type prior: float
+
+
+   .. py:attribute:: prior
+      :value: 0.5
+
+
+
+   .. py:method:: get_config() -> dict
+
+

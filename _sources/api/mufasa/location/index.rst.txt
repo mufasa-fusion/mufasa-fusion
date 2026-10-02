@@ -1,0 +1,56 @@
+mufasa.location
+===============
+
+.. py:module:: mufasa.location
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.location.Location
+   mufasa.location.Observation
+
+
+Module Contents
+---------------
+
+.. py:class:: Location
+
+   .. py:attribute:: geometry
+      :type:  shapely.geometry.base.BaseGeometry
+
+
+   .. py:attribute:: timestamp
+      :type:  float
+      :value: 0.0
+
+
+
+   .. py:attribute:: properties
+      :type:  dict
+
+
+   .. py:property:: effective_geometry
+      :type: shapely.geometry.base.BaseGeometry | None
+
+
+      Geometry expanded by radius/width properties, or raw geometry if not applicable.
+
+      Use this instead of ``geometry`` whenever spatial footprint matters —
+      e.g. rasterization, intersection checks — so that sensor uncertainty
+      expressed through Observation properties is automatically respected.
+
+
+.. py:class:: Observation
+
+   Bases: :py:obj:`Location`
+
+
+   .. py:attribute:: confidence
+      :type:  float
+      :value: 0.5
+
+
+

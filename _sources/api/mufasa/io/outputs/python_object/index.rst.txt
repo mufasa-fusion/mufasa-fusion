@@ -1,0 +1,67 @@
+mufasa.io.outputs.python_object
+===============================
+
+.. py:module:: mufasa.io.outputs.python_object
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.outputs.python_object.LocationOutput
+   mufasa.io.outputs.python_object.MapOutput
+
+
+Module Contents
+---------------
+
+.. py:class:: LocationOutput
+
+   Bases: :py:obj:`mufasa.io.outputs.base.OutputNode`
+
+
+   .. py:property:: result
+      :type: list[mufasa.location.Location]
+
+
+
+   .. py:method:: process(loc: mufasa.location.Location) -> None
+
+
+   .. py:method:: reset() -> None
+
+
+   .. py:method:: save() -> None
+
+
+   .. py:method:: get_config() -> dict
+
+
+.. py:class:: MapOutput(snapshot_interval_s: float = 5.0)
+
+   Bases: :py:obj:`mufasa.io.outputs.base.OutputNode`
+
+
+   .. py:attribute:: snapshot_interval_s
+      :value: 5.0
+
+
+
+   .. py:property:: result
+      :type: list[mufasa.map.Map]
+
+
+
+   .. py:method:: process() -> None
+
+
+   .. py:method:: reset() -> None
+
+
+   .. py:method:: save() -> None
+
+
+   .. py:method:: get_config() -> dict
+
+

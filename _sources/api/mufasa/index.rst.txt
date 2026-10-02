@@ -1,0 +1,21 @@
+mufasa
+======
+
+.. py:module:: mufasa
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /api/mufasa/graph/index
+   /api/mufasa/io/index
+   /api/mufasa/location/index
+   /api/mufasa/map/index
+   /api/mufasa/node/index
+   /api/mufasa/nodes/index
+   /api/mufasa/registry/index
+
+

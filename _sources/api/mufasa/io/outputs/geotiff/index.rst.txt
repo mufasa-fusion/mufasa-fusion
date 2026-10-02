@@ -1,0 +1,37 @@
+mufasa.io.outputs.geotiff
+=========================
+
+.. py:module:: mufasa.io.outputs.geotiff
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.outputs.geotiff.GeoTiffOutput
+
+
+Module Contents
+---------------
+
+.. py:class:: GeoTiffOutput(path: str)
+
+   Bases: :py:obj:`mufasa.io.outputs.base.OutputNode`
+
+
+   .. py:attribute:: path
+
+
+   .. py:method:: process() -> None
+
+
+   .. py:method:: reset() -> None
+
+
+   .. py:method:: save() -> None
+
+
+   .. py:method:: get_config() -> dict
+
+

@@ -1,0 +1,80 @@
+mufasa.io.outputs.visualization
+===============================
+
+.. py:module:: mufasa.io.outputs.visualization
+
+.. autoapi-nested-parse::
+
+   Visualization output node with integrated rendering helpers.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.outputs.visualization.Visualization
+
+
+Module Contents
+---------------
+
+.. py:class:: Visualization(snapshot_interval_s: float = 5.0)
+
+   Bases: :py:obj:`mufasa.io.outputs.base.OutputNode`
+
+
+   Output node that collects Map snapshots and Locations for inspection.
+
+   Wire any number of Map or Location predecessors; access each by index or
+   name after the run::
+
+       viz = Visualization(snapshot_interval_s=5)(pom_a, pom_b, threshold)
+       viz.show(0)                        # pom_a — latest snapshot
+       viz.show("threshold", end=100.0)   # threshold locations up to t=100
+       viz.animate(1, speed=2.0)          # pom_b at 2× real-time
+
+   ``snapshot_interval_s`` throttles how often Map state is captured.
+   Locations are always stored without throttling.
+
+   Both ``show()`` and ``animate()`` default to ``basemap=True`` and
+   ``latlon_labels=True`` and fix the axis extent to the pipeline bounding
+   box.  Pass ``basemap=False`` to suppress tile fetching (e.g. in tests).
+
+
+   .. py:attribute:: snapshot_interval_s
+      :value: 5.0
+
+
+
+   .. py:method:: __call__(*inputs) -> Visualization
+
+
+   .. py:method:: configure(crs, bbox, resolution) -> None
+
+
+   .. py:method:: process() -> None
+
+
+   .. py:method:: reset() -> None
+
+
+   .. py:method:: show(index: int | str, *, start: float | None = None, end: float | None = None, reduction: str = 'last', basemap: bool = True, latlon_labels: bool = True, **kwargs) -> None
+
+      Render the state of a predecessor, optionally filtered to a time window.
+
+
+
+   .. py:method:: animate(index: int | str, *, start: float | None = None, end: float | None = None, speed: float = 1.0, basemap: bool = True, latlon_labels: bool = True, **kwargs)
+
+      Animate snapshots or locations for a predecessor.
+
+      Returns (fig, anim) — keep a reference to anim to prevent garbage
+      collection.  ``speed`` scales playback: 1.0 = real-time, 2.0 = 2× faster.
+
+
+
+   .. py:method:: get_config() -> dict
+
+

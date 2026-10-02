@@ -1,0 +1,38 @@
+mufasa.io.inputs.geotiff
+========================
+
+.. py:module:: mufasa.io.inputs.geotiff
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.inputs.geotiff.GeoTiffInput
+
+
+Module Contents
+---------------
+
+.. py:class:: GeoTiffInput(path: str)
+
+   Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
+
+
+   Loads a single-band GeoTIFF file as a Map.
+
+   The raster is returned in its native CRS. Reprojection and resampling to
+   the pipeline's CRS, bounding box, and resolution is handled automatically
+   by the InputNode base class.
+
+
+   .. py:attribute:: path
+
+
+   .. py:method:: items() -> list[mufasa.map.Map]
+
+
+   .. py:method:: get_config() -> dict
+
+

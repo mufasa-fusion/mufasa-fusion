@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="red" data-content_root="../../../../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>mufasa.io.outputs.visualization - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../../../../../about.html" /><link rel="index" title="Index" href="../../../../../genindex.html" /><link rel="search" title="Search" href="../../../../../search.html" /><link rel="next" title="mufasa.location" href="../../../location/index.html" /><link rel="prev" title="mufasa.io.outputs.streaming" href="../streaming/index.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../../../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/shibuya-overwrite.css?v=690df8d7" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/mufasa.css?v=57b3d045" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="mufasa.io.outputs.visualization"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../../../../index.html">
+      <img class="light-logo" src="../../../../../_static/img/logo/MuFASA_MuFASA.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../../../../_static/img/logo/MuFASA_MuFASA_weiss.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <strong>mufasa-fusion</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><ul class="current">
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../getting-started/index.html">Getting started</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../user-guide/index.html">User guide</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../showcases/index.html">Showcases</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../catalog.html">Catalog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">mufasa</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../../../graph/index.html">mufasa.graph</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="../../index.html">mufasa.io</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../../inputs/index.html">mufasa.io.inputs</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="../index.html">mufasa.io.outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../location/index.html">mufasa.location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../map/index.html">mufasa.map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../node/index.html">mufasa.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../nodes/index.html">mufasa.nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../nodes/detection/index.html">mufasa.nodes.detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../nodes/fusion/index.html">mufasa.nodes.fusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../nodes/mapping/index.html">mufasa.nodes.mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../nodes/tracking/index.html">mufasa.nodes.tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../nodes/util/index.html">mufasa.nodes.util</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../registry/index.html">mufasa.registry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../about.html">About</a></li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#classes">Classes</a></li>
+<li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization"><code class="docutils literal notranslate"><span class="pre">Visualization</span></code></a><ul>
+<li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization.snapshot_interval_s"><code class="docutils literal notranslate"><span class="pre">Visualization.snapshot_interval_s</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization.__call__"><code class="docutils literal notranslate"><span class="pre">Visualization.__call__()</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization.configure"><code class="docutils literal notranslate"><span class="pre">Visualization.configure()</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization.process"><code class="docutils literal notranslate"><span class="pre">Visualization.process()</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization.reset"><code class="docutils literal notranslate"><span class="pre">Visualization.reset()</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization.show"><code class="docutils literal notranslate"><span class="pre">Visualization.show()</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization.animate"><code class="docutils literal notranslate"><span class="pre">Visualization.animate()</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization.get_config"><code class="docutils literal notranslate"><span class="pre">Visualization.get_config()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../../../index.html"><span itemprop="name">mufasa-fusion</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../../index.html"><span itemprop="name">API Reference</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../../index.html"><span itemprop="name">mufasa</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">mufasa.io</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="4" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">mufasa.io.outputs</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="5" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">mufasa.io.outputs.visualization</strong>
+        <meta itemprop="position" content="6" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="module-mufasa.io.outputs.visualization">
+<span id="mufasa-io-outputs-visualization"></span><h1>mufasa.io.outputs.visualization<a class="headerlink" href="#module-mufasa.io.outputs.visualization" title="Link to this heading">#</a></h1>
+<p>Visualization output node with integrated rendering helpers.</p>
+<section id="classes">
+<h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization" title="mufasa.io.outputs.visualization.Visualization"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Visualization</span></code></a></p></td>
+<td><p>Output node that collects Map snapshots and Locations for inspection.</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">#</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.io.outputs.visualization.</span></span><span class="sig-name descname"><span class="pre">Visualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snapshot_interval_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization" title="Link to this definition">#</a></dt>
+<dd><p>Bases: <a class="reference internal" href="../base/index.html#mufasa.io.outputs.base.OutputNode" title="mufasa.io.outputs.base.OutputNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mufasa.io.outputs.base.OutputNode</span></code></a></p>
+<p>Output node that collects Map snapshots and Locations for inspection.</p>
+<p>Wire any number of Map or Location predecessors; access each by index or
+name after the run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">viz</span> <span class="o">=</span> <span class="n">Visualization</span><span class="p">(</span><span class="n">snapshot_interval_s</span><span class="o">=</span><span class="mi">5</span><span class="p">)(</span><span class="n">pom_a</span><span class="p">,</span> <span class="n">pom_b</span><span class="p">,</span> <span class="n">threshold</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">viz</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>                        <span class="c1"># pom_a — latest snapshot</span>
+</span><span data-line="3"><span class="n">viz</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="s2">&quot;threshold&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="mf">100.0</span><span class="p">)</span>   <span class="c1"># threshold locations up to t=100</span>
+</span><span data-line="4"><span class="n">viz</span><span class="o">.</span><span class="n">animate</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">speed</span><span class="o">=</span><span class="mf">2.0</span><span class="p">)</span>          <span class="c1"># pom_b at 2× real-time</span>
+</span></pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">snapshot_interval_s</span></code> throttles how often Map state is captured.
+Locations are always stored without throttling.</p>
+<p>Both <code class="docutils literal notranslate"><span class="pre">show()</span></code> and <code class="docutils literal notranslate"><span class="pre">animate()</span></code> default to <code class="docutils literal notranslate"><span class="pre">basemap=True</span></code> and
+<code class="docutils literal notranslate"><span class="pre">latlon_labels=True</span></code> and fix the axis extent to the pipeline bounding
+box.  Pass <code class="docutils literal notranslate"><span class="pre">basemap=False</span></code> to suppress tile fetching (e.g. in tests).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>snapshot_interval_s</strong> (<em>float</em>)</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization.snapshot_interval_s">
+<span class="sig-name descname"><span class="pre">snapshot_interval_s</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">5.0</span></em><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.snapshot_interval_s" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization.__call__">
+<span class="sig-name descname"><span class="pre">__call__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">inputs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization" title="mufasa.io.outputs.visualization.Visualization"><span class="pre">Visualization</span></a></span></span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.__call__" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization" title="mufasa.io.outputs.visualization.Visualization">Visualization</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization.configure">
+<span class="sig-name descname"><span class="pre">configure</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">crs</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.configure" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.process" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization.reset">
+<span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.reset" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization.show">
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'last'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basemap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latlon_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.show" title="Link to this definition">#</a></dt>
+<dd><p>Render the state of a predecessor, optionally filtered to a time window.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>int</em><em> | </em><em>str</em>)</p></li>
+<li><p><strong>start</strong> (<em>float</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>end</strong> (<em>float</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>reduction</strong> (<em>str</em>)</p></li>
+<li><p><strong>basemap</strong> (<em>bool</em>)</p></li>
+<li><p><strong>latlon_labels</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization.animate">
+<span class="sig-name descname"><span class="pre">animate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basemap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latlon_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.animate" title="Link to this definition">#</a></dt>
+<dd><p>Animate snapshots or locations for a predecessor.</p>
+<p>Returns (fig, anim) — keep a reference to anim to prevent garbage
+collection.  <code class="docutils literal notranslate"><span class="pre">speed</span></code> scales playback: 1.0 = real-time, 2.0 = 2× faster.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>index</strong> (<em>int</em><em> | </em><em>str</em>)</p></li>
+<li><p><strong>start</strong> (<em>float</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>end</strong> (<em>float</em><em> | </em><em>None</em>)</p></li>
+<li><p><strong>speed</strong> (<em>float</em>)</p></li>
+<li><p><strong>basemap</strong> (<em>bool</em>)</p></li>
+<li><p><strong>latlon_labels</strong> (<em>bool</em>)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization.get_config">
+<span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.get_config" title="Link to this definition">#</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../streaming/index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">mufasa.io.outputs.streaming</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../../../location/index.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">mufasa.location</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Michael Hubner, Kilian Wohlleben, Jan Nausner, Julia Pöschl</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../../../../../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../../../../_static/shibuya.js?v=50760d75"></script></body>
+</html>

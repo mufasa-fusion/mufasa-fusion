@@ -1,0 +1,28 @@
+mufasa.registry
+===============
+
+.. py:module:: mufasa.registry
+
+.. autoapi-nested-parse::
+
+   Node registry: maps type-name strings to their classes.
+
+   Used by Graph.from_config() to reconstruct nodes from a serialized config.
+   Register new node types here to make them deserializable.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   mufasa.registry.NODE_REGISTRY
+
+
+Module Contents
+---------------
+
+.. py:data:: NODE_REGISTRY
+   :type:  dict[str, type]
+

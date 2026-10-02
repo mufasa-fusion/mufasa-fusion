@@ -1,0 +1,54 @@
+mufasa.io.inputs.base
+=====================
+
+.. py:module:: mufasa.io.inputs.base
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.inputs.base.InputNode
+
+
+Module Contents
+---------------
+
+.. py:class:: InputNode
+
+   Bases: :py:obj:`mufasa.node.Node`
+
+
+   Base for all pipeline input nodes. Has no predecessor inputs.
+
+
+   .. py:method:: configure(crs, bbox, resolution) -> None
+
+      Receive spatial configuration from the Graph at construction time.
+
+      Override in nodes that need crs/bbox/resolution to initialise
+      internal state (e.g. POM creates its map here). Default is a no-op.
+
+
+
+   .. py:method:: items()
+      :abstractmethod:
+
+
+      Return items from this input in temporal order.
+
+      File-based nodes return a sorted list. Streaming nodes return a
+      blocking generator that yields as items arrive via ingest().
+
+
+
+   .. py:method:: run() -> None
+
+
+   .. py:method:: process(*args, **kwargs) -> None
+
+      Input nodes do not receive process() calls from the framework.
+
+
+

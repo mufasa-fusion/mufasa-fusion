@@ -1,0 +1,132 @@
+mufasa.nodes.detection.threshold
+================================
+
+.. py:module:: mufasa.nodes.detection.threshold
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.nodes.detection.threshold.Threshold
+
+
+Module Contents
+---------------
+
+.. py:class:: Threshold(threshold: float, alarm_timeout_s: float = 0.0, dilation_px: int = 0, simplify_m: float = 0.0)
+
+   Bases: :py:obj:`mufasa.node.Node`
+
+
+   Detect connected regions in a Map or BayesianMap.
+
+   Output type and accepted input type are resolved at wiring time from the
+   predecessor's output type:
+
+   - **BayesianMap predecessor** → accepts ``BayesianMap``, emits
+     ``Observation`` (threshold compared against ``map.probabilities``;
+     confidence = mean probability across the region).
+     Threshold must be in (0, 1).
+   - **Plain Map predecessor** → accepts ``Map``, emits ``Location``
+     (threshold compared against raw ``map.data``; mean value stored in
+     ``properties["mean_value"]``).
+
+   :param threshold: Detection threshold.  For BayesianMap input must be in (0, 1).
+   :type threshold: float
+   :param alarm_timeout_s: Minimum seconds between alarm bursts.  0 = alarm on every call
+                           (no accumulation, default).
+   :type alarm_timeout_s: float
+   :param dilation_px: Morphological dilation radius in pixels applied before connected-
+                       component labelling.  0 = no dilation.
+   :type dilation_px: int
+   :param simplify_m: Shapely simplification tolerance in CRS units (metres for UTM).
+                      0 = no simplification.
+   :type simplify_m: float
+
+
+   .. py:attribute:: threshold
+
+
+   .. py:attribute:: alarm_timeout_s
+      :value: 0.0
+
+
+
+   .. py:attribute:: dilation_px
+      :value: 0
+
+
+
+   .. py:attribute:: simplify_m
+      :value: 0.0
+
+
+
+   .. py:property:: output_type
+      :type: type | None
+
+
+      Type this node emits. Derived from ``_output_type``.
+
+
+   .. py:property:: input_types
+      :type: frozenset
+
+
+      Types this node accepts as input. Derived from ``_input_types``.
+
+
+   .. py:method:: __call__(*inputs: mufasa.node.Node) -> mufasa.node.Node
+
+
+   .. py:method:: reset() -> None
+
+      Clear all runtime state, returning the node to its post-init condition.
+
+      Called by the framework between pipeline runs so the same node
+      instance can process a fresh dataset without being reconstructed.
+      Override in nodes that hold mutable state (buffers, accumulators,
+      fitted models). The default is a no-op — stateless nodes need not
+      override this.
+
+
+
+   .. py:method:: process() -> list
+
+      Process incoming data and forward results to successors.
+
+      Override with the signature appropriate for this node's role:
+
+      **Observation-consuming nodes** receive one observation per call::
+
+          def process(self, obs: Observation) -> None:
+              result = ...                    # compute result
+              for succ in self._successors:
+                  succ.process(result)        # push to downstream nodes
+
+      **Map-consuming nodes** are called with no arguments and read
+      their input from the predecessor via its ``.map`` attribute::
+
+          def process(self) -> None:
+              m = self._predecessors[0].map   # read upstream map
+              ...                             # update self.map in place
+              self._trigger_successors()      # notify downstream nodes
+
+      **Sink nodes** collect data without emitting anything further::
+
+          def process(self, obs: Observation) -> None:
+              self._collected.append(obs)
+
+
+
+   .. py:method:: get_config() -> dict
+
+      Return all constructor arguments as a plain JSON-serializable dict.
+
+      Used by ``Graph.to_config()`` to serialise the pipeline. Every key
+      must be a string; every value must be JSON-serializable.
+
+
+

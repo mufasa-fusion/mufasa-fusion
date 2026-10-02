@@ -1,0 +1,103 @@
+mufasa.graph
+============
+
+.. py:module:: mufasa.graph
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.graph.Graph
+
+
+Module Contents
+---------------
+
+.. py:class:: Graph(inputs: list[mufasa.Node], outputs: list[mufasa.Node], *, crs: str | None = None, bbox: mufasa.BoundingBox | None = None, resolution: tuple[float, float] | None = None)
+
+   .. py:attribute:: inputs
+
+
+   .. py:attribute:: outputs
+
+
+   .. py:attribute:: crs
+      :value: None
+
+
+
+   .. py:attribute:: bbox_wgs84
+      :value: None
+
+
+
+   .. py:attribute:: bbox
+
+
+   .. py:attribute:: resolution
+      :value: None
+
+
+
+   .. py:method:: run() -> None
+
+
+   .. py:method:: stop() -> None
+
+      Signal all streaming inputs to stop.
+
+
+
+   .. py:method:: reset() -> None
+
+      Reset all nodes to their initial state.
+
+      Call between runs to prevent state from one run affecting the next.
+
+
+
+   .. py:method:: to_config() -> dict
+
+      Return the full pipeline as a plain serializable dict.
+
+
+
+   .. py:method:: from_config(config: dict) -> Graph
+      :classmethod:
+
+
+      Reconstruct a Graph from a config dict produced by to_config().
+
+
+
+   .. py:method:: save(path: str) -> None
+
+      Serialize the pipeline to a JSON file.
+
+
+
+   .. py:method:: load(path: str) -> Graph
+      :classmethod:
+
+
+      Load and reconstruct a Graph from a JSON file.
+
+
+
+   .. py:method:: summary() -> None
+
+      Print a human-readable description of the pipeline's nodes and connections.
+
+
+
+   .. py:method:: plot_graph()
+
+      Render the pipeline DAG as a matplotlib figure.
+
+      Returns the Figure so the caller can display, save, or embed it.
+      Input nodes are green, output nodes are red, processing nodes are blue.
+
+
+
