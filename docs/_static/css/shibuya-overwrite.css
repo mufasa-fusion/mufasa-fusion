@@ -55,3 +55,13 @@ html[data-accent-color="red"] {
   /* Fix mispositioning of heading link handle */
   display: unset;
 }
+
+figcaption:hover a.headerlink {
+  /* Fix show header link indicator of figures */
+  visibility: visible;
+}
+
+.yue .align-center {
+  /* Fix alignment container */
+  max-width: fit-content;
+}

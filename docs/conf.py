@@ -27,6 +27,8 @@ extensions = [
     "sphinx.ext.napoleon",
     "autoapi.extension",
     "custom_directives",
+    "sphinx.ext.graphviz",
+    "inline_graphviz",
 ]
 
 templates_path = ['_templates']
@@ -67,6 +69,8 @@ autoapi_options = [
 
 def autoapi_prepare_jinja_env(env: Environment):
     env.globals["zip"] = zip_longest
+
+graphviz_output_format = "svg"
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

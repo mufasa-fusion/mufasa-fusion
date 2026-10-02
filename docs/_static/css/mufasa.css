@@ -1,3 +1,9 @@
+:root.dark .mf-light-only,
+:root.light .mf-dark-only,
+.mf-hidden-title > :first-child {
+    display: none;
+}
+
 img.mufasa-shape-icon {
     height: 1em;
     max-width: unset;
@@ -47,4 +53,25 @@ ul.mufasa-node-catalog {
     & > li > :first-child {
         text-align: right;
     }
+}
+
+.mf-fusion-graph {
+    & > polygon {
+        /* background polygon */
+        fill: transparent;
+    }
+
+    text, .edge polygon {
+        fill: light-dark(black, white);
+    }
+
+    .node polygon, .edge polygon, .edge path {
+        stroke: light-dark(black, white);
+    }
+}
+
+.mf-side-by-side {
+    display: flex;
+    align-items: center;
+    gap: .8em;
 }
