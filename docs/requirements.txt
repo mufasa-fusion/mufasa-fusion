@@ -1,0 +1,5 @@
+# Required for building the docs with Sphinx
+sphinx
+myst-parser
+sphinx-autoapi
+shibuya
