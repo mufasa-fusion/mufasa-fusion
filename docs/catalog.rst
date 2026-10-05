@@ -1,5 +1,5 @@
-Catalog
-=======
+Node Catalog
+============
 
 Edge Data Types
 ---------------

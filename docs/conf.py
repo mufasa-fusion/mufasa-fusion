@@ -34,7 +34,10 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = ["_*"]
 
-myst_enable_extensions = ["colon_fence"]
+myst_enable_extensions = [
+    "colon_fence",
+    "deflist",
+]
 
 rst_prolog = """\
 .. |loc| image:: /_static/img/shapes/location-marker.svg

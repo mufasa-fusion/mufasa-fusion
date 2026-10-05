@@ -15,6 +15,7 @@
 
 A framework for rapid prototyping of geospatial sensor fusion pipelines.
 
+(quickstart)=
 ## Installation
 
 MuFASA is a Python package and easily installed from its [GitHub repository][mufasa-repo] with pip:
@@ -117,7 +118,6 @@ static -> fused -> alarms -> out
 :hidden:
 :maxdepth: 2
 
-getting-started/index
 user-guide/index
 showcases/index
 catalog
