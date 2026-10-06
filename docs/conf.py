@@ -36,6 +36,7 @@ exclude_patterns = ["_*"]
 
 myst_enable_extensions = [
     "colon_fence",
+    "attrs_inline",
     "deflist",
 ]
 

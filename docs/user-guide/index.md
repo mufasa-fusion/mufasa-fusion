@@ -14,3 +14,14 @@ simulation
 streaming
 extending
 ```
+
+:::{admonition} TODO
+
+- visualisation
+- registry and exports/imports of Fusion Graphs
+- (Geo)pandas (and other external systems)
+
+Idea: "Feature" centric guides (instead of "Tutorial")?
+
+→ features/"what MuFASA offers" section on the main page!
+:::

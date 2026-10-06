@@ -1,8 +1,10 @@
 Node Catalog
 ============
 
-Edge Data Types
----------------
+.. _data-models-catalog:
+
+Flow Data Models
+----------------
 
 .. autoapi-template::
    :context: ["|loc|", "|obs|", "|map|", "|bmap|"]

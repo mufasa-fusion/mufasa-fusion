@@ -4,7 +4,12 @@
     display: none;
 }
 
-img.mufasa-shape-icon {
+.mf-idiom {
+    /* For inline text phrase with attached symbol */
+    display: inline-block;
+}
+
+img.mufasa-shape-icon, .mf-idiom img {
     height: 1em;
     max-width: unset;
     vertical-align: sub;

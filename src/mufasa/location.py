@@ -1,4 +1,6 @@
-﻿from dataclasses import dataclass, field
+﻿"""Dataclasses for spatially discrete detections, i.e. at a single point."""
+
+from dataclasses import dataclass, field
 
 from shapely.geometry import LineString, MultiLineString, MultiPoint, Point
 from shapely.geometry.base import BaseGeometry
@@ -6,6 +8,8 @@ from shapely.geometry.base import BaseGeometry
 
 @dataclass
 class Location:
+    """Spatially discrete detection, represented by a :attr:`geometry`, that occurred at some :attr:`timestamp`."""
+
     geometry:   BaseGeometry
     timestamp:  float = 0.0
     properties: dict = field(default_factory=dict)
@@ -45,4 +49,6 @@ class Location:
 
 @dataclass
 class Observation(Location):
+    """Probabilistic spatially discrete detection, adding a :attr:`confidence` estimate."""
+
     confidence: float = 0.5
