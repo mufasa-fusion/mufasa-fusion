@@ -9,8 +9,8 @@
     <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
     <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/shibuya-overwrite.css?v=690df8d7" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/mufasa.css?v=57b3d045" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/shibuya-overwrite.css?v=dc3b9c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/mufasa.css?v=975bf83d" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,11 +33,18 @@
       <strong>mufasa-fusion</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"></nav>
+      <nav class="sy-head-links"><ul><li class="link"><a href="../../getting-started/index.html">Getting started</a></li><li class="link"><a href="../../user-guide/index.html">User guide</a></li><li class="link"><a href="../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../catalog.html">Catalog</a></li><li class="link"><a href="../index.html">API</a></li><li class="link"><a href="../../about.html">About</a></li></ul></nav>
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
-</form><div class="sy-head-socials"></div></div>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">0.1.0</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="https://mufasa-fusion.github.io/mufasa-fusion/">0.1.0</a></li></ul></div>
+  </div><div class="sy-head-socials"></div></div>
     </div>
     <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
 data-aria-auto="Switch to light color mode"
@@ -60,7 +67,10 @@ data-aria-dark="Switch to auto color mode">
       <div class="sy-scrollbar p-6">
         <div class="globaltoc" data-expand-depth="1"><ul class="current">
 <li class="toctree-l1 _expand"><a class="reference internal" href="../../getting-started/index.html">Getting started</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../user-guide/index.html">User guide</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../user-guide/index.html">User guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../user-guide/design-principles.html">Design principles</a></li>
+</ul>
+</li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../../showcases/index.html">Showcases</a></li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../../catalog.html">Catalog</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">

@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" data-accent-color="red" data-content_root="./">
+<html lang="en" data-accent-color="red" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Getting started" href="getting-started/index.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Design principles - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Showcases" href="../showcases/index.html" /><link rel="prev" title="User guide" href="index.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
-  </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e1a1ceaf" />
-    <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=2ceb65ce" />
-    <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
-    <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="_static/css/shibuya-overwrite.css?v=dc3b9c11" />
-    <link rel="stylesheet" type="text/css" href="_static/css/mufasa.css?v=975bf83d" />
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=dc3b9c11" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=975bf83d" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,27 +21,20 @@
 }
 </style>
     
-
-<style>
-  .sy-content { max-width: 72rem; }
-</style>
-
-
-  
-  <meta property="og:type" content="website"/><meta property="og:title" content="MuFASA"/>
+  <meta property="og:type" content="website"/><meta property="og:title" content="Design principles"/>
     <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
   <div class="sy-head-blur"></div>
   <div class="sy-head-inner sy-container mx-auto">
-    <a class="sy-head-brand" href="#">
-      <img class="light-logo" src="_static/img/logo/MuFASA_MuFASA.svg" alt="mufasa-fusion" height="28" loading="lazy" />
-      <img class="dark-logo" src="_static/img/logo/MuFASA_MuFASA_weiss.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+    <a class="sy-head-brand" href="../index.html">
+      <img class="light-logo" src="../_static/img/logo/MuFASA_MuFASA.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <img class="dark-logo" src="../_static/img/logo/MuFASA_MuFASA_weiss.svg" alt="mufasa-fusion" height="28" loading="lazy" />
       <strong>mufasa-fusion</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"><ul><li class="link"><a href="getting-started/index.html">Getting started</a></li><li class="link"><a href="user-guide/index.html">User guide</a></li><li class="link"><a href="showcases/index.html">Showcases</a></li><li class="link"><a href="catalog.html">Catalog</a></li><li class="link"><a href="api/index.html">API</a></li><li class="link"><a href="about.html">About</a></li></ul></nav>
-      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
+      <nav class="sy-head-links"><ul><li class="link"><a href="../getting-started/index.html">Getting started</a></li><li class="link"><a href="index.html">User guide</a></li><li class="link"><a href="../showcases/index.html">Showcases</a></li><li class="link"><a href="../catalog.html">Catalog</a></li><li class="link"><a href="../api/index.html">API</a></li><li class="link"><a href="../about.html">About</a></li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
 </form><div class="nav-versions">
@@ -67,20 +60,145 @@ data-aria-dark="Switch to auto color mode">
       </button>
     </div>
   </div>
-</div><div class="sy-container mx-auto body">
-    <main class="sy-content mx-auto pt-12 px-6 xl:px-12 break-words">
-      <article class="yue" role="main">
-        <section class="mf-hidden-title" id="mufasa">
-<h1>MuFASA<a class="headerlink" href="#mufasa" title="Link to this heading">#</a></h1>
-<p class="mf-light-only"><img alt="MuFASA - Multimodal Fusion Architecture for Sensor Applications" src="_images/MuFASA_MuFASA_Zusatz.svg" /></p>
-<p class="mf-dark-only"><img alt="MuFASA - Multimodal Fusion Architecture for Sensor Applications" src="_images/MuFASA_MuFASA_Zusatz_weiss.svg" /></p>
-<p>A framework for rapid prototyping of geospatial sensor fusion systems. MuFASA turns the design of a multimodal fusion system into an explicit, executable graph.</p>
-<section id="the-fusion-graph">
-<h2>The Fusion Graph<a class="headerlink" href="#the-fusion-graph" title="Link to this heading">#</a></h2>
-<p>MuFASA interprets a fusion system as a Fusion Graph: a directed acyclic graph that starts at Input nodes
-and ends at Output nodes. You compose it functionally by calling each node on its inputs, and nodes connect
-wherever their data types match. Learn more about the concept in the <a class="reference internal" href="user-guide/index.html"><span class="doc">User guide</span></a>.</p>
-<div class="mf-side-by-side docutils container">
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><ul class="current">
+<li class="toctree-l1 _expand"><a class="reference internal" href="../getting-started/index.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User guide</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Design principles</a></li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../showcases/index.html">Showcases</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../catalog.html">Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/mufasa/index.html">mufasa</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/graph/index.html">mufasa.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/io/index.html">mufasa.io</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/io/inputs/index.html">mufasa.io.inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/io/outputs/index.html">mufasa.io.outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/location/index.html">mufasa.location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/map/index.html">mufasa.map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/node/index.html">mufasa.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/nodes/index.html">mufasa.nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/detection/index.html">mufasa.nodes.detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/fusion/index.html">mufasa.nodes.fusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/mapping/index.html">mufasa.nodes.mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/tracking/index.html">mufasa.nodes.tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/util/index.html">mufasa.nodes.util</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/registry/index.html">mufasa.registry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#where-mufasa-sits">Where MuFASA sits</a></li>
+<li><a class="reference internal" href="#the-principles-in-an-example">The principles in an example</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">mufasa-fusion</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">User guide</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Design principles</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="design-principles">
+<h1>Design principles<a class="headerlink" href="#design-principles" title="Link to this heading">#</a></h1>
+<p>MuFASA is built on three principles. The colors on this page mark where each one shows up,
+in the architecture and in a complete example.</p>
+<div class="mf-principles-legend docutils container">
+<div class="mf-legend-io docutils container">
+<p><strong>Detection level</strong></p>
+<p>MuFASA works on detections, not raw signals. Only the Input and Output nodes deal with files
+and formats. Everything in between works on Locations and Maps.</p>
+</div>
+<div class="mf-legend-proc docutils container">
+<p><strong>Explicit architecture</strong></p>
+<p>A fusion system is a graph of nodes that connect wherever their data types match.
+The wiring is the code, and every stage stays inspectable.</p>
+</div>
+<div class="mf-legend-graph docutils container">
+<p><strong>Rapid prototyping</strong></p>
+<p>A complete graph takes about ten lines of Python, with every parameter in plain sight.
+The same graph runs on recorded data and, with streaming inputs, on live data.</p>
+</div>
+</div>
+<section id="where-mufasa-sits">
+<h2>Where MuFASA sits<a class="headerlink" href="#where-mufasa-sits" title="Link to this heading">#</a></h2>
+<p>A Fusion Graph sits between your perception and your decision support. Its Input and Output nodes
+form the boundary to the outside world, and its Processing nodes hold the fusion logic.</p>
+<div class="mf-stack docutils container">
+<div class="mf-stack-outer docutils container">
+<p><strong>Sensors &amp; perception</strong></p>
+<p>Cameras, radar, …</p>
+</div>
+<div class="mf-stack-graph docutils container">
+<div class="mf-stack-io docutils container">
+<p><strong>Input nodes</strong></p>
+<p>Translate detections</p>
+</div>
+<div class="mf-stack-proc docutils container">
+<p><strong>Processing nodes</strong></p>
+<p>Fuse and detect</p>
+</div>
+<div class="mf-stack-io docutils container">
+<p><strong>Output nodes</strong></p>
+<p>Translate results</p>
+</div>
+</div>
+<div class="mf-stack-outer docutils container">
+<p><strong>Decision support</strong></p>
+<p>Alarms, operators</p>
+</div>
+</div>
+</section>
+<section id="the-principles-in-an-example">
+<h2>The principles in an example<a class="headerlink" href="#the-principles-in-an-example" title="Link to this heading">#</a></h2>
+<p>This graph fuses two sensors with a static prior and turns the result into alarms.</p>
+<div class="mf-side-by-side mf-annotated docutils container">
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">A simple Fusion Graph in Python code</span><a class="headerlink" href="#id1" title="Link to this code">#</a></div>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
@@ -112,17 +230,17 @@ wherever their data types match. Learn more about the concept in the <a class="r
 <div class="graphviz"><svg width="357pt" height="379pt"
  viewBox="0.00 0.00 357.00 379.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph mf&#45;fusion&#45;graph" transform="scale(1 1) rotate(0) translate(4 375)">
-<title>fusion_graph</title>
+<title>design_principles_graph</title>
 <polygon fill="white" stroke="transparent" points="-4,4 -4,-375 353,-375 353,4 -4,4"/>
 <!-- track_a -->
-<g id="node1" class="node">
+<g id="node1" class="node mf&#45;io">
 <title>track_a</title>
 <text text-anchor="start" x="19.5" y="-355.4" font-family="Arial" font-weight="bold" font-size="12.00">GeoJsonInput</text>
 <text text-anchor="start" x="7.5" y="-331.4" font-family="Arial" font-size="12.00">&quot;sensor_a.geojson&quot;</text>
 <polygon fill="none" stroke="black" points="0,-321 0,-371 129,-371 129,-321 0,-321"/>
 </g>
 <!-- pom_a -->
-<g id="node4" class="node">
+<g id="node4" class="node mf&#45;proc">
 <title>pom_a</title>
 <text text-anchor="start" x="49" y="-269.4" font-family="Arial" font-weight="bold" font-size="12.00">POM</text>
 <text text-anchor="start" x="28.5" y="-245.4" font-family="Arial" font-size="12.00">decay_s = 5</text>
@@ -135,14 +253,14 @@ wherever their data types match. Learn more about the concept in the <a class="r
 <polygon fill="black" stroke="black" points="68,-295.24 64.5,-285.24 61,-295.24 68,-295.24"/>
 </g>
 <!-- track_b -->
-<g id="node2" class="node">
+<g id="node2" class="node mf&#45;io">
 <title>track_b</title>
 <text text-anchor="start" x="239.5" y="-355.4" font-family="Arial" font-weight="bold" font-size="12.00">GeoJsonInput</text>
 <text text-anchor="start" x="227.5" y="-331.4" font-family="Arial" font-size="12.00">&quot;sensor_b.geojson&quot;</text>
 <polygon fill="none" stroke="black" points="220,-321 220,-371 349,-371 349,-321 220,-321"/>
 </g>
 <!-- pom_b -->
-<g id="node5" class="node">
+<g id="node5" class="node mf&#45;proc">
 <title>pom_b</title>
 <text text-anchor="start" x="269" y="-269.4" font-family="Arial" font-weight="bold" font-size="12.00">POM</text>
 <text text-anchor="start" x="248.5" y="-245.4" font-family="Arial" font-size="12.00">decay_s = 1</text>
@@ -155,14 +273,14 @@ wherever their data types match. Learn more about the concept in the <a class="r
 <polygon fill="black" stroke="black" points="288,-295.24 284.5,-285.24 281,-295.24 288,-295.24"/>
 </g>
 <!-- static -->
-<g id="node3" class="node">
+<g id="node3" class="node mf&#45;io">
 <title>static</title>
 <text text-anchor="start" x="140" y="-269.4" font-family="Arial" font-weight="bold" font-size="12.00">StaticMap</text>
 <text text-anchor="start" x="126.5" y="-245.4" font-family="Arial" font-size="12.00">&quot;priors.geojson&quot;</text>
 <polygon fill="none" stroke="black" points="119.5,-235 119.5,-285 229.5,-285 229.5,-235 119.5,-235"/>
 </g>
 <!-- fused -->
-<g id="node6" class="node">
+<g id="node6" class="node mf&#45;proc">
 <title>fused</title>
 <text text-anchor="start" x="122.5" y="-182.9" font-family="Arial" font-weight="bold" font-size="12.00">BayesianFusion</text>
 <polygon fill="none" stroke="black" points="115.5,-172 115.5,-199 233.5,-199 233.5,-172 115.5,-172"/>
@@ -186,7 +304,7 @@ wherever their data types match. Learn more about the concept in the <a class="r
 <polygon fill="black" stroke="black" points="203.97,-201.73 193.7,-199.15 200.12,-207.58 203.97,-201.73"/>
 </g>
 <!-- alarms -->
-<g id="node7" class="node">
+<g id="node7" class="node mf&#45;proc">
 <title>alarms</title>
 <text text-anchor="start" x="141" y="-120.4" font-family="Arial" font-weight="bold" font-size="12.00">Threshold</text>
 <text text-anchor="start" x="128.5" y="-96.4" font-family="Arial" font-size="12.00">threshold = 0.7</text>
@@ -199,7 +317,7 @@ wherever their data types match. Learn more about the concept in the <a class="r
 <polygon fill="black" stroke="black" points="178,-146.2 174.5,-136.2 171,-146.2 178,-146.2"/>
 </g>
 <!-- out -->
-<g id="node8" class="node">
+<g id="node8" class="node mf&#45;io">
 <title>out</title>
 <text text-anchor="start" x="123.5" y="-34.4" font-family="Arial" font-weight="bold" font-size="12.00">GeoJsonOutput</text>
 <text text-anchor="start" x="124" y="-10.4" font-family="Arial" font-size="12.00">&quot;alarms.geojson&quot;</text>
@@ -214,61 +332,37 @@ wherever their data types match. Learn more about the concept in the <a class="r
 </g>
 </svg>
 <figcaption>
-<p><span class="caption-text">An example Fusion Graph visualized</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
+<p><span class="caption-text">The same Fusion Graph, colored by role</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
 </figcaption>
 </figure>
 </div>
 </section>
-<section id="find-your-way-through-the-docs">
-<h2>Find your way through the docs<a class="headerlink" href="#find-your-way-through-the-docs" title="Link to this heading">#</a></h2>
-<div class="mf-doc-paths docutils container">
-<div class="docutils container">
-<p><strong>New to MuFASA</strong></p>
-<p><a class="reference internal" href="getting-started/index.html"><span class="doc">Getting started</span></a> walks you through installing MuFASA and running your first Fusion Graph.
-The <a class="reference internal" href="user-guide/index.html"><span class="doc">User guide</span></a> explains the core concepts: Locations, Maps, Nodes and Graphs.</p>
-</div>
-<div class="docutils container">
-<p><strong>Evaluating for your domain</strong></p>
-<p>The <a class="reference internal" href="showcases/index.html"><span class="doc">Showcases</span></a> show MuFASA in controlled real-world environments.
-The <a class="reference internal" href="catalog.html"><span class="doc">Catalog</span></a> lists the nodes and data types you can build with.</p>
-</div>
-<div class="docutils container">
-<p><strong>Building your system</strong></p>
-<p>The <a class="reference internal" href="user-guide/index.html"><span class="doc">User guide</span></a> covers custom nodes and live deployment.
-The <a class="reference internal" href="api/index.html"><span class="doc">API Reference</span></a> documents every class and parameter.</p>
-</div>
-</div>
-</section>
-<section id="is-mufasa-right-for-you">
-<h2>Is MuFASA right for you?<a class="headerlink" href="#is-mufasa-right-for-you" title="Link to this heading">#</a></h2>
-<div class="mf-fit-check docutils container">
-<div class="mf-fit-yes docutils container">
-<p><strong>A good fit if you</strong></p>
-<ul class="simple">
-<li><p>want to buidl a fusion system and already have detections (positions or georeferenced maps)</p></li>
-<li><p>want to quickly compare different fusion system configurations</p></li>
-<li><p>want to trasition from recored data to live data</p></li>
-<li><p>want to have fun analyzing your data :)</p></li>
-</ul>
-</div>
-</div>
-<div class="toctree-wrapper compound">
-</div>
-</section>
 </section>
 
-      </article>
-      
-<button class="back-to-top" type="button">
+        </article><button class="back-to-top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
     <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
   </svg>
   <span>Back to top</span>
-</button>
-
-
-    </main>
-  </div><footer class="sy-foot">
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">User guide</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../showcases/index.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Showcases</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
   <div class="sy-foot-inner sy-container mx-auto">
     <div class="sy-foot-reserved md:flex justify-between items-center">
       <div class="sy-foot-copyright"><p>2026, Michael Hubner, Kilian Wohlleben, Jan Nausner, Julia Pöschl</p>
@@ -285,8 +379,8 @@ The <a class="reference internal" href="api/index.html"><span class="doc">API Re
     </div>
   </div>
 </footer>
-      <script src="_static/documentation_options.js?v=01f34227"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/shibuya.js?v=50760d75"></script></body>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script></body>
 </html>
