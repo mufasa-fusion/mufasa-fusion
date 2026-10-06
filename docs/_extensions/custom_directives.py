@@ -55,12 +55,12 @@ class AutoApiJinjaDirective(RstDirective):
                 if not line or line.isspace():
                     break
                 object_names.append(line)
-            template = "text:" + os.linesep.join(content)
+            template = "text:" + "\n".join(content)
         # Collect objects from autoapi by name
         all_objects = self.state.document.settings.env.autoapi_all_objects  # from autoapi
         objs = [all_objects[name.strip()] for name in object_names if not name.startswith(".. ")]
         # Get the template and render it
-        return JINJA_ENV.get_template(template).render(objs=objs, ctx=self.options.get("context")).split(os.linesep)
+        return JINJA_ENV.get_template(template).render(objs=objs, ctx=self.options.get("context")).splitlines()
 
 
 JINJA_ENV: Environment

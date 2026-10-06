@@ -10,20 +10,12 @@ img.mufasa-shape-icon {
     vertical-align: sub;
 }
 
-/* Override ul lists' left alignment on small screens */
-@media screen {
-    ul {
-        margin-left: 30px;
-    }
-}
-
 ul.mufasa-node-catalog {
     gap: .5em;
     display: grid;
     grid-template-columns: repeat(3, auto);
 
     list-style-type: none;
-    margin-left: 0;
 
     &.twos {
         grid-auto-flow: column;
@@ -70,8 +62,201 @@ ul.mufasa-node-catalog {
     }
 }
 
+.mf-fit-check, .mf-doc-paths {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+    gap: 1em;
+
+    & > div {
+        padding: 0.25em 1em;
+        border: 1px solid var(--gray-a6, #888);
+        border-radius: 6px;
+    }
+}
+
+.mf-fit-check ul {
+    padding-left: 1.5em;
+}
+
+.mf-fit-check > .mf-fit-yes {
+    border-left: 4px solid var(--ait-torquise);
+    background-color: color-mix(in srgb, var(--ait-torquise) 8%, transparent);
+
+    & strong { color: var(--ait-torquise-text); }
+    & li::marker {
+        content: "✓  ";
+        color: var(--ait-torquise-text);
+    }
+}
+
+/* Docs paths: one AIT color per card */
+.mf-doc-paths > div {
+    --mf-card-color: var(--ait-red);
+    border-top: 4px solid var(--mf-card-color);
+    transition: background-color 300ms;
+
+    & strong { color: var(--mf-card-color); }
+    &:hover { background-color: color-mix(in srgb, var(--mf-card-color) 6%, transparent); }
+
+    &:nth-child(2) { --mf-card-color: var(--ait-torquise-text); }
+    &:nth-child(3) { --mf-card-color: var(--ait-violet); }
+}
+
 .mf-side-by-side {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: .8em;
+
+    /* Code takes all width the graph doesn't need, and wraps below it on narrow screens */
+    & > .literal-block-wrapper {
+        flex: 1 1 24em;
+        min-width: 0;
+    }
+
+    & > figure {
+        flex: 0 0 auto;
+    }
 }
+
+/* ---- Design principles page (user-guide/design-principles.md) ---- */
+
+/* One color per role, shared by the diagram, the code example and the legend */
+:root {
+    --mf-c-io: var(--ait-torquise-text);
+    --mf-c-proc: var(--ait-red);
+    --mf-c-graph: var(--ait-violet);
+}
+
+/* Where MuFASA sits: sensors -> [Fusion Graph: in -> processing -> out] -> decision support */
+.mf-stack {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    font-size: 0.9em;
+    text-align: center;
+
+    & p { margin: 0.3em 0; }
+}
+
+.mf-stack-outer {
+    flex: 1 1 0;
+    padding: 0.25em 0.75em;
+    border: 1px dashed var(--ait-grey);
+    border-radius: 6px;
+    color: var(--gray-11);
+}
+
+.mf-stack-graph {
+    position: relative;
+    flex: 3 1 0;
+    display: flex;
+    align-items: stretch;
+    gap: 1.5em;
+    padding: 1.5em 1em 1em;
+    border: 2px solid var(--mf-c-graph);
+    border-radius: 10px;
+
+    &::before {
+        content: "Fusion Graph";
+        position: absolute;
+        top: -0.75em;
+        left: 1em;
+        padding: 0 0.4em;
+        background-color: var(--sy-c-background, white);
+        color: var(--mf-c-graph);
+        font-weight: 600;
+    }
+
+    & > div {
+        flex: 1 1 0;
+        padding: 0.25em 0.75em;
+        border-radius: 6px;
+        border: 2px solid var(--mf-c-role);
+        background-color: color-mix(in srgb, var(--mf-c-role) 7%, transparent);
+
+        & strong { color: var(--mf-c-role); }
+    }
+}
+
+.mf-stack-io { --mf-c-role: var(--mf-c-io); }
+.mf-stack-proc { --mf-c-role: var(--mf-c-proc); }
+
+/* Arrows between neighbouring boxes */
+.mf-stack > div, .mf-stack-graph > div {
+    position: relative;
+}
+
+.mf-stack > div:not(:last-child)::after,
+.mf-stack-graph > div:not(:last-child)::after {
+    content: "→";
+    font-size: 1.6em;
+    line-height: 1;
+    position: absolute;
+    right: -0.95em;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ait-grey);
+}
+
+@media (max-width: 767px) {
+    .mf-stack, .mf-stack-graph { flex-direction: column; }
+
+    .mf-stack > div:not(:last-child)::after,
+    .mf-stack-graph > div:not(:last-child)::after {
+        content: "↓";
+        right: 50%;
+        top: auto;
+        bottom: -1.4em;
+        transform: translateX(50%);
+    }
+}
+
+/* Example code: tint lines by role. Line numbers refer to the code block in user-guide/design-principles.md */
+.mf-annotated .highlight [data-line] {
+    display: block;
+    margin: 0 -1em;
+    padding: 0 1em;
+}
+
+.mf-annotated .highlight :is([data-line="6"], [data-line="7"], [data-line="8"], [data-line="9"],
+                             [data-line="17"], [data-line="18"]) {
+    --mf-c-role: var(--mf-c-io);
+}
+
+.mf-annotated .highlight :is([data-line="11"], [data-line="12"], [data-line="13"], [data-line="14"],
+                             [data-line="15"]) {
+    --mf-c-role: var(--mf-c-proc);
+}
+
+.mf-annotated .highlight :is([data-line="20"], [data-line="21"], [data-line="22"]) {
+    --mf-c-role: var(--mf-c-graph);
+}
+
+.mf-annotated .highlight [data-line] {
+    background-color: color-mix(in srgb, var(--mf-c-role, transparent) 8%, transparent);
+    box-shadow: inset 3px 0 var(--mf-c-role, transparent);
+}
+
+/* Example graph: node outlines by role */
+.mf-fusion-graph .node.mf-io polygon { stroke: var(--mf-c-io); stroke-width: 2; }
+.mf-fusion-graph .node.mf-proc polygon { stroke: var(--mf-c-proc); stroke-width: 2; }
+
+/* Legend below the example */
+.mf-principles-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+    gap: 1em;
+
+    & > div {
+        padding: 0.25em 1em;
+        border-left: 4px solid var(--mf-c-role);
+
+        & strong { color: var(--mf-c-role); }
+        & p { margin: 0.4em 0; }
+    }
+}
+
+.mf-legend-io { --mf-c-role: var(--mf-c-io); }
+.mf-legend-proc { --mf-c-role: var(--mf-c-proc); }
+.mf-legend-graph { --mf-c-role: var(--mf-c-graph); }

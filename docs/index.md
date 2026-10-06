@@ -1,3 +1,8 @@
+---
+layout: simple
+content_max_width: 72rem
+---
+
 :::{rst-class} mf-hidden-title
 :::
 
@@ -13,24 +18,13 @@
 
 ![MuFASA - Multimodal Fusion Architecture for Sensor Applications](_static/img/logo/MuFASA_MuFASA_Zusatz_weiss.svg)
 
-A framework for rapid prototyping of geospatial sensor fusion pipelines.
+A framework for rapid prototyping of geospatial sensor fusion systems. MuFASA turns the design of a multimodal fusion system into an explicit, executable graph.
 
-## Installation
+## The Fusion Graph
 
-MuFASA is a Python package and easily installed from its [GitHub repository][mufasa-repo] with pip:
-
-```bash
-pip install "mufasa[vis] @ https://github.com/mufasa-fusion/mufasa-fusion"
-```
-
-It is licensed under [Apache 2.0][mufasa-license].
-
-[mufasa-repo]: https://github.com/mufasa-fusion/mufasa-fusion
-[mufasa-license]: https://github.com/mufasa-fusion/mufasa-fusion/blob/main/LICENSE
-
-## Usage
-
-Build a Fusion Graph in a few lines of Python code.
+MuFASA interprets a fusion system as a Fusion Graph: a directed acyclic graph that starts at Input nodes
+and ends at Output nodes. You compose it functionally by calling each node on its inputs, and nodes connect
+wherever their data types match. Learn more about the concept in the {doc}`user-guide/index`.
 
 ::::{container} mf-side-by-side
 
@@ -40,25 +34,24 @@ Build a Fusion Graph in a few lines of Python code.
 from mufasa import Graph
 from mufasa.io.inputs import GeoJsonInput
 from mufasa.io.outputs import GeoJsonOutput
-from mufasa.nodes import StaticMap, POM, \
-    BayesianFusion, Threshold
+from mufasa.nodes import StaticMap, POM, BayesianFusion, Threshold
 
+# Input nodes
 track_a = GeoJsonInput("sensor_a.geojson")
 track_b = GeoJsonInput("sensor_b.geojson")
 static = StaticMap("priors.geojson")
 
+# Processing nodes
 pom_a = POM(decay_s=5)(track_a)
 pom_b = POM(decay_s=1)(track_b)
-fused = BayesianFusion()(
-    pom_a, pom_b, static
-)
+fused = BayesianFusion()(pom_a, pom_b, static)
 alarms = Threshold(threshold=0.7)(fused)
-out = GeoJsonOutput()(alarms)
 
-graph = Graph(
-    inputs=[track_a, track_b],
-    outputs=[out],
-)
+# Output nodes
+out = GeoJsonOutput("alarms.geojson")(alarms)
+
+# Fusion Graph
+graph = Graph(inputs=[track_a, track_b], outputs=[out])
 graph.run()
 ```
 
@@ -66,51 +59,96 @@ graph.run()
 :caption: An example Fusion Graph visualized
 :align: center
 
-graph [class="mf-fusion-graph"]
-node [shape=plain]
+graph [class="mf-fusion-graph", nodesep=0.15]
+node [shape=plain, fontname="Arial", fontsize=12]
 
-track_a [class="geojson-to-obs", label=<<table cellborder="0">
+track_a [label=<<table cellborder="0" cellpadding="4">
     <tr><td><b>GeoJsonInput</b></td></tr>
     <tr><td>"sensor_a.geojson"</td></tr>
 </table>>]
 
-track_b [label=<<table cellborder="0">
+track_b [label=<<table cellborder="0" cellpadding="4">
     <tr><td><b>GeoJsonInput</b></td></tr>
     <tr><td>"sensor_b.geojson"</td></tr>
 </table>>]
 
-pom_a [label=<<table cellborder="0">
-    <tr><td><b>POM</b></td></tr>
-    <tr><td>decay_s = 5</td></tr>
-</table>>]
-
-pom_b [label=<<table cellborder="0">
-    <tr><td><b>POM</b></td></tr>
-    <tr><td>decay_s = 1</td></tr>
-</table>>]
-
-static [label=<<table cellborder="0">
+static [label=<<table cellborder="0" cellpadding="4">
     <tr><td><b>StaticMap</b></td></tr>
     <tr><td>"priors.geojson"</td></tr>
 </table>>]
 
-fused [label=<<table cellborder="0">
+pom_a [label=<<table cellborder="0" cellpadding="4">
+    <tr><td><b>POM</b></td></tr>
+    <tr><td>decay_s = 5</td></tr>
+</table>>]
+
+pom_b [label=<<table cellborder="0" cellpadding="4">
+    <tr><td><b>POM</b></td></tr>
+    <tr><td>decay_s = 1</td></tr>
+</table>>]
+
+fused [label=<<table cellborder="0" cellpadding="4">
     <tr><td><b>BayesianFusion</b></td></tr>
 </table>>]
 
-alarms [label=<<table cellborder="0">
+alarms [label=<<table cellborder="0" cellpadding="4">
     <tr><td><b>Threshold</b></td></tr>
     <tr><td>threshold = 0.7</td></tr>
 </table>>]
 
-out [label=<<table cellborder="0">
+out [label=<<table cellborder="0" cellpadding="4">
     <tr><td><b>GeoJsonOutput</b></td></tr>
+    <tr><td>"alarms.geojson"</td></tr>
 </table>>]
 
 track_a -> pom_a -> fused
 track_b -> pom_b -> fused
 static -> fused -> alarms -> out
 ```
+
+::::
+
+## Find your way through the docs
+
+::::{container} mf-doc-paths
+
+:::{container}
+**New to MuFASA**
+
+{doc}`getting-started/index` walks you through installing MuFASA and running your first Fusion Graph.
+The {doc}`user-guide/index` explains the core concepts: Locations, Maps, Nodes and Graphs.
+:::
+
+:::{container}
+**Evaluating for your domain**
+
+The {doc}`showcases/index` show MuFASA in controlled real-world environments.
+The {doc}`catalog` lists the nodes and data types you can build with.
+:::
+
+:::{container}
+**Building your system**
+
+The {doc}`user-guide/index` covers custom nodes and live deployment.
+The {doc}`api/index` documents every class and parameter.
+:::
+
+::::
+
+
+## Is MuFASA right for you?
+
+::::{container} mf-fit-check
+
+:::{container} mf-fit-yes
+**A good fit if you**
+
+- want to buidl a fusion system and already have detections (positions or georeferenced maps)
+- want to quickly compare different fusion system configurations
+- want to trasition from recored data to live data 
+- want to have fun analyzing your data :)
+:::
+
 ::::
 
 ```{toctree}

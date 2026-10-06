@@ -1,5 +1,6 @@
 """Tweaks graphviz rendering so that SVG output is inlined in HTML (instead of using <object>)"""
 
+from pathlib import PurePosixPath
 from typing import Any
 
 from docutils import nodes
@@ -33,7 +34,9 @@ def render_dot_html_inline_svg(
             # Modify the body to contain the SVG content rather than an <object> referencing the SVG
             has_align_div = "align" in node
             svg_body_index = -3 - has_align_div  # Index from body end at which the added content starts
-            svg_path = self.builder.outdir / self.body[svg_body_index].split("\"")[1]
+            # The referenced path is relative to the page, so resolve it by file name in the image directory
+            svg_name = PurePosixPath(self.body[svg_body_index].split("\"")[1]).name
+            svg_path = self.builder.outdir / self.builder.imagedir / svg_name
 
             del self.body[svg_body_index:]
 
