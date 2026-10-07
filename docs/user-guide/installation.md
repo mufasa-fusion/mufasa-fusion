@@ -3,7 +3,7 @@
 Install MuFASA and its dependencies via pip:
 
 ```bash
-pip install "mufasa @ https://github.com/mufasa-fusion/mufasa-fusion"
+pip install "mufasa @ git+https://github.com/mufasa-fusion/mufasa-fusion"
 ```
 
 ## Optional dependencies
@@ -11,7 +11,7 @@ pip install "mufasa @ https://github.com/mufasa-fusion/mufasa-fusion"
 Install extra dependencies as follows, where `extra` is a comma-separated list chosen from below.
 
 ```bash
-pip install "mufasa[extra] @ https://github.com/mufasa-fusion/mufasa-fusion"
+pip install "mufasa[extra] @ git+https://github.com/mufasa-fusion/mufasa-fusion"
 ```
 
 Available extras and what they enable:

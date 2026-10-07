@@ -1,5 +1,2 @@
-# Required for building the docs with Sphinx
-sphinx
-sphinx-autoapi
-shibuya
-myst-nb
+# Required for building the docs with GitHub Actions
+.[vis,tracking,docs]
