@@ -29,9 +29,7 @@ graph.run()
 ## Data Flow
 
 All information flowing within a Fusion Graph is of one of two fundamental data types,
-[![location marker](../_static/img/shapes/location-marker.svg) {class}`~mufasa.location.Location`]{.mf-idiom}
-and [![foldable map](../_static/img/shapes/map-fold.svg) {class}`~mufasa.map.Map`]{.mf-idiom},
-or any more specific one derived from them.
+{class}`~mufasa.location.Location` and {class}`~mufasa.map.Map`, or any more specific one derived from them.
 Every edge adheres to a single data type that is determined by the nodes it connects.
 Every node specifies the set of types it accepts and the single one it produces.
 Only compatible nodes might be wired together.

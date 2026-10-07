@@ -4,15 +4,44 @@
     display: none;
 }
 
-.mf-idiom {
-    /* For inline text phrase with attached symbol */
-    display: inline-block;
-}
-
-img.mufasa-shape-icon, .mf-idiom img {
+img.mufasa-shape-icon {
     height: 1em;
     max-width: unset;
     vertical-align: sub;
+}
+
+a[title="mufasa.location.Location"], a[title="mufasa.location.Observation"],
+a[title="mufasa.map.Map"], a[title="mufasa.map.BayesianMap"] {
+    & {
+        /* Prevents separating symbol from text */
+        display: inline-block;
+    }
+
+    &::before {
+        content: "";
+        display: inline-block;
+        vertical-align: sub;
+        height: 1em;
+        width: 1em;
+        margin-inline-end: .3em;
+        background-size: contain;
+    }
+}
+
+a[title="mufasa.location.Location"]::before {
+    background-image: url("../img/shapes/location-marker.svg");
+}
+
+a[title="mufasa.location.Observation"]::before {
+    background-image: url("../img/shapes/observation-marker.svg");
+}
+
+a[title="mufasa.map.Map"]::before {
+    background-image: url("../img/shapes/map-fold.svg");
+}
+
+a[title="mufasa.map.BayesianMap"]::before {
+    background-image: url("../img/shapes/map-roll.svg");
 }
 
 /* Override ul lists' left alignment on small screens */
