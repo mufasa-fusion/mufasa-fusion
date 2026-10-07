@@ -35,6 +35,12 @@ Module Contents
 
    .. py:method:: configure(crs, bbox, resolution) -> None
 
+      Receive spatial configuration from the Graph at construction time.
+
+      Override in nodes that need crs/bbox/resolution to initialise
+      internal state (e.g. POM creates its map here). Default is a no-op.
+
+
 
    .. py:method:: encode(loc: mufasa.location.Location) -> dict
 
@@ -47,13 +53,60 @@ Module Contents
 
    .. py:method:: process(loc: mufasa.location.Location) -> None
 
+      Process incoming data and forward results to successors.
+
+      Override with the signature appropriate for this node's role:
+
+      **Observation-consuming nodes** receive one observation per call::
+
+          def process(self, obs: Observation) -> None:
+              result = ...                    # compute result
+              for succ in self._successors:
+                  succ.process(result)        # push to downstream nodes
+
+      **Map-consuming nodes** are called with no arguments and read
+      their input from the predecessor via its ``.map`` attribute::
+
+          def process(self) -> None:
+              m = self._predecessors[0].map   # read upstream map
+              ...                             # update self.map in place
+              self._trigger_successors()      # notify downstream nodes
+
+      **Sink nodes** collect data without emitting anything further::
+
+          def process(self, obs: Observation) -> None:
+              self._collected.append(obs)
+
+
 
    .. py:method:: reset() -> None
+
+      Clear all runtime state, returning the node to its post-init condition.
+
+      Called by the framework between pipeline runs so the same node
+      instance can process a fresh dataset without being reconstructed.
+      Override in nodes that hold mutable state (buffers, accumulators,
+      fitted models). The default is a no-op — stateless nodes need not
+      override this.
+
 
 
    .. py:method:: save() -> None
 
+      Persist any buffered output to its destination.
+
+      No-op by default.  Subclasses that buffer results (GeoJsonOutput,
+      GeoTiffOutput, etc.) override this to flush to disk.  Called by
+      Graph.run() after all inputs have been processed.
+
+
 
    .. py:method:: get_config() -> dict
+
+      Return all constructor arguments as a plain JSON-serializable dict.
+
+      Used by ``Graph.to_config()`` to serialise the pipeline. Every key
+      must be a string; every value must be JSON-serializable.
+
 
 

@@ -43,4 +43,10 @@ Module Contents
 
    .. py:method:: get_config() -> dict
 
+      Return all constructor arguments as a plain JSON-serializable dict.
+
+      Used by ``Graph.to_config()`` to serialise the pipeline. Every key
+      must be a string; every value must be JSON-serializable.
+
+
 

@@ -210,7 +210,10 @@ Use LocationStreamingInput or MapStreamingInput directly.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.inputs.streaming.StreamingInputNode.items">
 <span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.io.inputs.streaming.StreamingInputNode.items" title="Link to this definition">#</a></dt>
-<dd></dd></dl>
+<dd><p>Return items from this input in temporal order.</p>
+<p>File-based nodes return a sorted list. Streaming nodes return a
+blocking generator that yields as items arrive via ingest().</p>
+</dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.inputs.streaming.StreamingInputNode.ingest">
@@ -237,7 +240,10 @@ Use LocationStreamingInput or MapStreamingInput directly.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.inputs.streaming.StreamingInputNode.get_config">
 <span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#mufasa.io.inputs.streaming.StreamingInputNode.get_config" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return all constructor arguments as a plain JSON-serializable dict.</p>
+<p>Used by <code class="docutils literal notranslate"><span class="pre">Graph.to_config()</span></code> to serialise the pipeline. Every key
+must be a string; every value must be JSON-serializable.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>

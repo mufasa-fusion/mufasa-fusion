@@ -21,15 +21,32 @@ Module Contents
    Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
 
 
+   Base for all pipeline input nodes. Has no predecessor inputs.
+
+
    .. py:property:: output_type
       :type: type
 
 
+      Type this node emits. Derived from ``_output_type``.
+
 
    .. py:method:: items() -> list[mufasa.location.Location]
 
+      Return items from this input in temporal order.
+
+      File-based nodes return a sorted list. Streaming nodes return a
+      blocking generator that yields as items arrive via ingest().
+
+
 
    .. py:method:: get_config() -> dict
+
+      Return all constructor arguments as a plain JSON-serializable dict.
+
+      Used by ``Graph.to_config()`` to serialise the pipeline. Every key
+      must be a string; every value must be JSON-serializable.
+
 
 
 .. py:class:: MapInput(data)
@@ -37,9 +54,24 @@ Module Contents
    Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
 
 
+   Base for all pipeline input nodes. Has no predecessor inputs.
+
+
    .. py:method:: items() -> list[mufasa.map.Map]
+
+      Return items from this input in temporal order.
+
+      File-based nodes return a sorted list. Streaming nodes return a
+      blocking generator that yields as items arrive via ingest().
+
 
 
    .. py:method:: get_config() -> dict
+
+      Return all constructor arguments as a plain JSON-serializable dict.
+
+      Used by ``Graph.to_config()`` to serialise the pipeline. Every key
+      must be a string; every value must be JSON-serializable.
+
 
 

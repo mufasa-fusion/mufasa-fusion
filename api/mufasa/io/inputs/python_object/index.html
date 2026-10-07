@@ -183,10 +183,10 @@ data-aria-dark="Switch to auto color mode">
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mufasa.io.inputs.python_object.LocationInput" title="mufasa.io.inputs.python_object.LocationInput"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LocationInput</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Base for all pipeline input nodes. Has no predecessor inputs.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#mufasa.io.inputs.python_object.MapInput" title="mufasa.io.inputs.python_object.MapInput"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MapInput</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Base for all pipeline input nodes. Has no predecessor inputs.</p></td>
 </tr>
 </tbody>
 </table>
@@ -198,10 +198,12 @@ data-aria-dark="Switch to auto color mode">
 <dt class="sig sig-object py" id="mufasa.io.inputs.python_object.LocationInput">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.io.inputs.python_object.</span></span><span class="sig-name descname"><span class="pre">LocationInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.io.inputs.python_object.LocationInput" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/index.html#mufasa.io.inputs.base.InputNode" title="mufasa.io.inputs.base.InputNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mufasa.io.inputs.base.InputNode</span></code></a></p>
+<p>Base for all pipeline input nodes. Has no predecessor inputs.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="mufasa.io.inputs.python_object.LocationInput.output_type">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">output_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">type</span></em><a class="headerlink" href="#mufasa.io.inputs.python_object.LocationInput.output_type" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Type this node emits. Derived from <code class="docutils literal notranslate"><span class="pre">_output_type</span></code>.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>type</p>
 </dd>
@@ -211,7 +213,10 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.inputs.python_object.LocationInput.items">
 <span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../location/index.html#mufasa.location.Location" title="mufasa.location.Location"><span class="pre">mufasa.location.Location</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mufasa.io.inputs.python_object.LocationInput.items" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return items from this input in temporal order.</p>
+<p>File-based nodes return a sorted list. Streaming nodes return a
+blocking generator that yields as items arrive via ingest().</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="../../../location/index.html#mufasa.location.Location" title="mufasa.location.Location">mufasa.location.Location</a>]</p>
 </dd>
@@ -221,7 +226,10 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.inputs.python_object.LocationInput.get_config">
 <span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#mufasa.io.inputs.python_object.LocationInput.get_config" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return all constructor arguments as a plain JSON-serializable dict.</p>
+<p>Used by <code class="docutils literal notranslate"><span class="pre">Graph.to_config()</span></code> to serialise the pipeline. Every key
+must be a string; every value must be JSON-serializable.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>
@@ -234,10 +242,14 @@ data-aria-dark="Switch to auto color mode">
 <dt class="sig sig-object py" id="mufasa.io.inputs.python_object.MapInput">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.io.inputs.python_object.</span></span><span class="sig-name descname"><span class="pre">MapInput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.io.inputs.python_object.MapInput" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/index.html#mufasa.io.inputs.base.InputNode" title="mufasa.io.inputs.base.InputNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mufasa.io.inputs.base.InputNode</span></code></a></p>
+<p>Base for all pipeline input nodes. Has no predecessor inputs.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.inputs.python_object.MapInput.items">
 <span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../map/index.html#mufasa.map.Map" title="mufasa.map.Map"><span class="pre">mufasa.map.Map</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mufasa.io.inputs.python_object.MapInput.items" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return items from this input in temporal order.</p>
+<p>File-based nodes return a sorted list. Streaming nodes return a
+blocking generator that yields as items arrive via ingest().</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="../../../map/index.html#mufasa.map.Map" title="mufasa.map.Map">mufasa.map.Map</a>]</p>
 </dd>
@@ -247,7 +259,10 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.inputs.python_object.MapInput.get_config">
 <span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#mufasa.io.inputs.python_object.MapInput.get_config" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return all constructor arguments as a plain JSON-serializable dict.</p>
+<p>Used by <code class="docutils literal notranslate"><span class="pre">Graph.to_config()</span></code> to serialise the pipeline. Every key
+must be a string; every value must be JSON-serializable.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>

@@ -207,7 +207,10 @@ by the InputNode base class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.inputs.geotiff.GeoTiffInput.items">
 <span class="sig-name descname"><span class="pre">items</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../map/index.html#mufasa.map.Map" title="mufasa.map.Map"><span class="pre">mufasa.map.Map</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#mufasa.io.inputs.geotiff.GeoTiffInput.items" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return items from this input in temporal order.</p>
+<p>File-based nodes return a sorted list. Streaming nodes return a
+blocking generator that yields as items arrive via ingest().</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list[<a class="reference internal" href="../../../map/index.html#mufasa.map.Map" title="mufasa.map.Map">mufasa.map.Map</a>]</p>
 </dd>
@@ -217,7 +220,10 @@ by the InputNode base class.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.inputs.geotiff.GeoTiffInput.get_config">
 <span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#mufasa.io.inputs.geotiff.GeoTiffInput.get_config" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return all constructor arguments as a plain JSON-serializable dict.</p>
+<p>Used by <code class="docutils literal notranslate"><span class="pre">Graph.to_config()</span></code> to serialise the pipeline. Every key
+must be a string; every value must be JSON-serializable.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>

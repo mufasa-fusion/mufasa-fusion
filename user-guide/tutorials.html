@@ -176,36 +176,18 @@ with a <a class="reference internal" href="../api/mufasa/io/inputs/geojson/index
 </span></pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gt">---------------------------------------------------------------------------</span>
-</span><span data-line="2"><span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-</span><span data-line="3"><span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
-</span><span data-line="4"><span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.inputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeoJsonInput</span>
-</span><span data-line="5"><span class="g g-Whitespace">      </span><span class="mi">2</span> 
-</span><span data-line="6"><span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">src_a</span> <span class="o">=</span> <span class="n">GeoJsonInput</span><span class="p">(</span><span class="s2">&quot;sensor_a.geojson&quot;</span><span class="p">)</span>
-</span><span data-line="7">
-</span><span data-line="8"><span class="n">File</span> <span class="o">/</span><span class="n">github</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">user</span><span class="o">-</span><span class="n">guide</span><span class="o">/../../</span><span class="n">src</span><span class="o">/</span><span class="n">mufasa</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
-</span><span data-line="9"><span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.location</span><span class="w"> </span><span class="kn">import</span> <span class="n">Location</span><span class="p">,</span> <span class="n">Observation</span>
-</span><span data-line="10"><span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.map</span><span class="w"> </span><span class="kn">import</span> <span class="n">Map</span><span class="p">,</span> <span class="n">BayesianMap</span><span class="p">,</span> <span class="n">BoundingBox</span>
-</span><span data-line="11"><span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.node</span><span class="w"> </span><span class="kn">import</span> <span class="n">Node</span>
-</span><span data-line="12">
-</span><span data-line="13"><span class="n">File</span> <span class="o">/</span><span class="n">github</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">user</span><span class="o">-</span><span class="n">guide</span><span class="o">/../../</span><span class="n">src</span><span class="o">/</span><span class="n">mufasa</span><span class="o">/</span><span class="n">location</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">5</span>
-</span><span data-line="14"><span class="g g-Whitespace">      </span><span class="mi">1</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Dataclasses for spatially discrete detections, i.e. at a single point.&quot;&quot;&quot;</span>
-</span><span data-line="15"><span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
-</span><span data-line="16"><span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">LineString</span><span class="p">,</span> <span class="n">MultiLineString</span><span class="p">,</span> <span class="n">MultiPoint</span><span class="p">,</span> <span class="n">Point</span>
-</span><span data-line="17"><span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseGeometry</span>
-</span><span data-line="18"><span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="nd">@dataclass</span>
-</span><span data-line="19"><span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="k">class</span><span class="w"> </span><span class="nc">Location</span><span class="p">:</span>
-</span><span data-line="20">
-</span><span data-line="21"><span class="ne">ModuleNotFoundError</span>: No module named &#39;shapely&#39;
-</span></pre></div>
-</div>
-</div>
 </div>
 <p>You can inspect the data loaded into MuFASA’s internal representation:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">src_a</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Location(geometry=&lt;POINT (48.268 16.427)&gt;, timestamp=0.0, properties={}),
+</span><span data-line="2"> Location(geometry=&lt;POINT (48.269 16.427)&gt;, timestamp=0.0, properties={&#39;headquarters&#39;: True}),
+</span><span data-line="3"> Observation(geometry=&lt;POINT (48.27 16.427)&gt;, timestamp=0.0, properties={}, confidence=0.78)]
 </span></pre></div>
 </div>
 </div>
@@ -238,6 +220,12 @@ It simply collects its inputs into a Python list.</p>
 </span></pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">/tmp/ipykernel_40/4019207610.py:3: UserWarning: No CRS specified. Ensure all input data is already in a Cartesian coordinate system with units of metres (e.g. a UTM projection). Using geographic coordinates (WGS84 degrees) will produce incorrect distances and unexpected behaviour.
+</span><span data-line="2">  graph = Graph(inputs=[src_a], outputs=[out])
+</span></pre></div>
+</div>
+</div>
 </div>
 <p>Now, everything is set up to run our sensor fusion:</p>
 <div class="cell docutils container">
@@ -251,6 +239,13 @@ It simply collects its inputs into a Python list.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">out</span><span class="o">.</span><span class="n">result</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Location(geometry=&lt;POINT (48.268 16.427)&gt;, timestamp=0.0, properties={}),
+</span><span data-line="2"> Location(geometry=&lt;POINT (48.269 16.427)&gt;, timestamp=0.0, properties={&#39;headquarters&#39;: True}),
+</span><span data-line="3"> Observation(geometry=&lt;POINT (48.27 16.427)&gt;, timestamp=0.0, properties={}, confidence=0.78)]
 </span></pre></div>
 </div>
 </div>
@@ -331,6 +326,9 @@ The CRS is optional, but it will enhance the visualization with map tiles.</p>
 </span></pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/a4bd3ea4ffd14847ebfabe507748ef2ec6ec4f7892be56dd801f1106a4b99a5e.png" src="../_images/a4bd3ea4ffd14847ebfabe507748ef2ec6ec4f7892be56dd801f1106a4b99a5e.png" />
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -345,6 +343,9 @@ The CRS is optional, but it will enhance the visualization with map tiles.</p>
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">vis_out</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 </span></pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/26b396463ec47ac13c65d4f07dd5379cd17adbd97c500efa3b248e9b442d1803.png" src="../_images/26b396463ec47ac13c65d4f07dd5379cd17adbd97c500efa3b248e9b442d1803.png" />
 </div>
 </div>
 <p>There’s also an <a class="reference internal" href="../api/mufasa/io/outputs/visualization/index.html#mufasa.io.outputs.visualization.Visualization.animate" title="mufasa.io.outputs.visualization.Visualization.animate"><code class="xref py py-func docutils literal notranslate"><span class="pre">animate()</span></code></a> method

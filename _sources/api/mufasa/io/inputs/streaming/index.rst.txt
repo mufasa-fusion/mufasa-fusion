@@ -32,6 +32,12 @@ Module Contents
 
    .. py:method:: items()
 
+      Return items from this input in temporal order.
+
+      File-based nodes return a sorted list. Streaming nodes return a
+      blocking generator that yields as items arrive via ingest().
+
+
 
    .. py:method:: ingest(item) -> None
 
@@ -46,6 +52,12 @@ Module Contents
 
 
    .. py:method:: get_config() -> dict
+
+      Return all constructor arguments as a plain JSON-serializable dict.
+
+      Used by ``Graph.to_config()`` to serialise the pipeline. Every key
+      must be a string; every value must be JSON-serializable.
+
 
 
 .. py:class:: LocationStreamingInput

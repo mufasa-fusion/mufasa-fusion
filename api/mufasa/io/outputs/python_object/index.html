@@ -192,7 +192,7 @@ data-aria-dark="Switch to auto color mode">
 <td><p>Collects Observations or Locations in a list.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#mufasa.io.outputs.python_object.MapOutput" title="mufasa.io.outputs.python_object.MapOutput"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MapOutput</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Base for all pipeline output nodes. Has no output type.</p></td>
 </tr>
 </tbody>
 </table>
@@ -219,7 +219,29 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.outputs.python_object.LocationOutput.process">
 <span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">loc</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="../../../location/index.html#mufasa.location.Location" title="mufasa.location.Location"><span class="pre">mufasa.location.Location</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.python_object.LocationOutput.process" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Process incoming data and forward results to successors.</p>
+<p>Override with the signature appropriate for this node’s role:</p>
+<p><strong>Observation-consuming nodes</strong> receive one observation per call:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">:</span> <span class="n">Observation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="2">    <span class="n">result</span> <span class="o">=</span> <span class="o">...</span>                    <span class="c1"># compute result</span>
+</span><span data-line="3">    <span class="k">for</span> <span class="n">succ</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_successors</span><span class="p">:</span>
+</span><span data-line="4">        <span class="n">succ</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>        <span class="c1"># push to downstream nodes</span>
+</span></pre></div>
+</div>
+<p><strong>Map-consuming nodes</strong> are called with no arguments and read
+their input from the predecessor via its <code class="docutils literal notranslate"><span class="pre">.map</span></code> attribute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="2">    <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_predecessors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">map</span>   <span class="c1"># read upstream map</span>
+</span><span data-line="3">    <span class="o">...</span>                             <span class="c1"># update self.map in place</span>
+</span><span data-line="4">    <span class="bp">self</span><span class="o">.</span><span class="n">_trigger_successors</span><span class="p">()</span>      <span class="c1"># notify downstream nodes</span>
+</span></pre></div>
+</div>
+<p><strong>Sink nodes</strong> collect data without emitting anything further:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">:</span> <span class="n">Observation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="2">    <span class="bp">self</span><span class="o">.</span><span class="n">_collected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>loc</strong> (<a class="reference internal" href="../../../location/index.html#mufasa.location.Location" title="mufasa.location.Location"><em>mufasa.location.Location</em></a>)</p>
 </dd>
@@ -232,7 +254,13 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.outputs.python_object.LocationOutput.reset">
 <span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.python_object.LocationOutput.reset" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Clear all runtime state, returning the node to its post-init condition.</p>
+<p>Called by the framework between pipeline runs so the same node
+instance can process a fresh dataset without being reconstructed.
+Override in nodes that hold mutable state (buffers, accumulators,
+fitted models). The default is a no-op — stateless nodes need not
+override this.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
 </dd>
@@ -242,7 +270,11 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.outputs.python_object.LocationOutput.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.python_object.LocationOutput.save" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Persist any buffered output to its destination.</p>
+<p>No-op by default.  Subclasses that buffer results (GeoJsonOutput,
+GeoTiffOutput, etc.) override this to flush to disk.  Called by
+Graph.run() after all inputs have been processed.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
 </dd>
@@ -252,7 +284,10 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.outputs.python_object.LocationOutput.get_config">
 <span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#mufasa.io.outputs.python_object.LocationOutput.get_config" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return all constructor arguments as a plain JSON-serializable dict.</p>
+<p>Used by <code class="docutils literal notranslate"><span class="pre">Graph.to_config()</span></code> to serialise the pipeline. Every key
+must be a string; every value must be JSON-serializable.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>
@@ -265,6 +300,7 @@ data-aria-dark="Switch to auto color mode">
 <dt class="sig sig-object py" id="mufasa.io.outputs.python_object.MapOutput">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.io.outputs.python_object.</span></span><span class="sig-name descname"><span class="pre">MapOutput</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snapshot_interval_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.io.outputs.python_object.MapOutput" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/index.html#mufasa.io.outputs.base.OutputNode" title="mufasa.io.outputs.base.OutputNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mufasa.io.outputs.base.OutputNode</span></code></a></p>
+<p>Base for all pipeline output nodes. Has no output type.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>snapshot_interval_s</strong> (<em>float</em>)</p>
@@ -288,7 +324,29 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.outputs.python_object.MapOutput.process">
 <span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.python_object.MapOutput.process" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Process incoming data and forward results to successors.</p>
+<p>Override with the signature appropriate for this node’s role:</p>
+<p><strong>Observation-consuming nodes</strong> receive one observation per call:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">:</span> <span class="n">Observation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="2">    <span class="n">result</span> <span class="o">=</span> <span class="o">...</span>                    <span class="c1"># compute result</span>
+</span><span data-line="3">    <span class="k">for</span> <span class="n">succ</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_successors</span><span class="p">:</span>
+</span><span data-line="4">        <span class="n">succ</span><span class="o">.</span><span class="n">process</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>        <span class="c1"># push to downstream nodes</span>
+</span></pre></div>
+</div>
+<p><strong>Map-consuming nodes</strong> are called with no arguments and read
+their input from the predecessor via its <code class="docutils literal notranslate"><span class="pre">.map</span></code> attribute:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="2">    <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_predecessors</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">map</span>   <span class="c1"># read upstream map</span>
+</span><span data-line="3">    <span class="o">...</span>                             <span class="c1"># update self.map in place</span>
+</span><span data-line="4">    <span class="bp">self</span><span class="o">.</span><span class="n">_trigger_successors</span><span class="p">()</span>      <span class="c1"># notify downstream nodes</span>
+</span></pre></div>
+</div>
+<p><strong>Sink nodes</strong> collect data without emitting anything further:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obs</span><span class="p">:</span> <span class="n">Observation</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="2">    <span class="bp">self</span><span class="o">.</span><span class="n">_collected</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">obs</span><span class="p">)</span>
+</span></pre></div>
+</div>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
 </dd>
@@ -298,7 +356,13 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.outputs.python_object.MapOutput.reset">
 <span class="sig-name descname"><span class="pre">reset</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.python_object.MapOutput.reset" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Clear all runtime state, returning the node to its post-init condition.</p>
+<p>Called by the framework between pipeline runs so the same node
+instance can process a fresh dataset without being reconstructed.
+Override in nodes that hold mutable state (buffers, accumulators,
+fitted models). The default is a no-op — stateless nodes need not
+override this.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
 </dd>
@@ -308,7 +372,11 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.outputs.python_object.MapOutput.save">
 <span class="sig-name descname"><span class="pre">save</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.python_object.MapOutput.save" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Persist any buffered output to its destination.</p>
+<p>No-op by default.  Subclasses that buffer results (GeoJsonOutput,
+GeoTiffOutput, etc.) override this to flush to disk.  Called by
+Graph.run() after all inputs have been processed.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>None</p>
 </dd>
@@ -318,7 +386,10 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.outputs.python_object.MapOutput.get_config">
 <span class="sig-name descname"><span class="pre">get_config</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dict</span></span></span><a class="headerlink" href="#mufasa.io.outputs.python_object.MapOutput.get_config" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Return all constructor arguments as a plain JSON-serializable dict.</p>
+<p>Used by <code class="docutils literal notranslate"><span class="pre">Graph.to_config()</span></code> to serialise the pipeline. Every key
+must be a string; every value must be JSON-serializable.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Return type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>dict</p>
 </dd>
