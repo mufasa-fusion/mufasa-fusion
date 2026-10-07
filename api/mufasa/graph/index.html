@@ -8,9 +8,10 @@
   </script><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=2ceb65ce" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/css/shibuya-overwrite.css?v=dc3b9c11" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/css/mufasa.css?v=975bf83d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/shibuya-overwrite.css?v=ae101861" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/mufasa.css?v=eaa6afad" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,7 +34,7 @@
       <strong>mufasa-fusion</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"><ul><li class="link"><a href="../../../getting-started/index.html">Getting started</a></li><li class="link"><a href="../../../user-guide/index.html">User guide</a></li><li class="link"><a href="../../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../../catalog.html">Catalog</a></li><li class="link"><a href="../../index.html">API</a></li><li class="link"><a href="../../../about.html">About</a></li></ul></nav>
+      <nav class="sy-head-links"><ul><li class="link"><a href="../../../getting-started.html">Getting started</a></li><li class="link"><a href="../../../user-guide/index.html">User guide</a></li><li class="link"><a href="../../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../../catalog.html">Catalog</a></li><li class="link"><a href="../../index.html">API</a></li><li class="link"><a href="../../../about.html">About</a></li></ul></nav>
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
@@ -66,13 +67,17 @@ data-aria-dark="Switch to auto color mode">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
         <div class="globaltoc" data-expand-depth="1"><ul class="current">
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../getting-started/index.html">Getting started</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../user-guide/index.html">User guide</a><ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../user-guide/index.html">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../user-guide/design-principles.html">Design principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/concepts.html">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/extending.html">Extending MuFASA</a></li>
 </ul>
 </li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../../../showcases/index.html">Showcases</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../catalog.html">Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../catalog.html">Node Catalog</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html">mufasa</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">mufasa.graph</a></li>
@@ -177,7 +182,7 @@ data-aria-dark="Switch to auto color mode">
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mufasa.graph.Graph" title="mufasa.graph.Graph"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Graph</span></code></a></p></td>
-<td><p></p></td>
+<td><p>The Fusion Graph, binding all nodes reachable from its <code class="xref py py-attr docutils literal notranslate"><span class="pre">inputs</span></code> to <code class="xref py py-attr docutils literal notranslate"><span class="pre">outputs</span></code> together.</p></td>
 </tr>
 </tbody>
 </table>
@@ -188,7 +193,11 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py class">
 <dt class="sig sig-object py" id="mufasa.graph.Graph">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.graph.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">inputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">mufasa.Node</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outputs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">mufasa.Node</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bbox</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">mufasa.BoundingBox</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">resolution</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.graph.Graph" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>The Fusion Graph, binding all nodes reachable from its <a class="reference internal" href="#mufasa.graph.Graph.inputs" title="mufasa.graph.Graph.inputs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">inputs</span></code></a> to <a class="reference internal" href="#mufasa.graph.Graph.outputs" title="mufasa.graph.Graph.outputs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">outputs</span></code></a> together.</p>
+<p>It is responsible for type compatibility checking and orchestrates the execution of the fusion system
+via its <a class="reference internal" href="#mufasa.graph.Graph.run" title="mufasa.graph.Graph.run"><code class="xref py py-func docutils literal notranslate"><span class="pre">run()</span></code></a> method. It also distributes global configuration – <a class="reference internal" href="#mufasa.graph.Graph.crs" title="mufasa.graph.Graph.crs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">crs</span></code></a>,
+<a class="reference internal" href="#mufasa.graph.Graph.bbox" title="mufasa.graph.Graph.bbox"><code class="xref py py-attr docutils literal notranslate"><span class="pre">bounding</span> <span class="pre">box</span></code></a> and map raster <a class="reference internal" href="#mufasa.graph.Graph.resolution" title="mufasa.graph.Graph.resolution"><code class="xref py py-attr docutils literal notranslate"><span class="pre">resolution</span></code></a> – to every node.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>inputs</strong> (<em>list</em><em>[</em><em>mufasa.Node</em><em>]</em>)</p></li>

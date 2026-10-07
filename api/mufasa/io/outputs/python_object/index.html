@@ -8,9 +8,10 @@
   </script><link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/shibuya.css?v=2ceb65ce" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../../../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/shibuya-overwrite.css?v=dc3b9c11" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/mufasa.css?v=975bf83d" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/shibuya-overwrite.css?v=ae101861" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/mufasa.css?v=eaa6afad" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,7 +34,7 @@
       <strong>mufasa-fusion</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"><ul><li class="link"><a href="../../../../../getting-started/index.html">Getting started</a></li><li class="link"><a href="../../../../../user-guide/index.html">User guide</a></li><li class="link"><a href="../../../../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../../../../catalog.html">Catalog</a></li><li class="link"><a href="../../../../index.html">API</a></li><li class="link"><a href="../../../../../about.html">About</a></li></ul></nav>
+      <nav class="sy-head-links"><ul><li class="link"><a href="../../../../../getting-started.html">Getting started</a></li><li class="link"><a href="../../../../../user-guide/index.html">User guide</a></li><li class="link"><a href="../../../../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../../../../catalog.html">Catalog</a></li><li class="link"><a href="../../../../index.html">API</a></li><li class="link"><a href="../../../../../about.html">About</a></li></ul></nav>
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../../../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
@@ -66,13 +67,17 @@ data-aria-dark="Switch to auto color mode">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
         <div class="globaltoc" data-expand-depth="1"><ul class="current">
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../getting-started/index.html">Getting started</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../user-guide/index.html">User guide</a><ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../user-guide/index.html">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../../../user-guide/design-principles.html">Design principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../user-guide/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../user-guide/concepts.html">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../user-guide/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../user-guide/extending.html">Extending MuFASA</a></li>
 </ul>
 </li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../showcases/index.html">Showcases</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../catalog.html">Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../catalog.html">Node Catalog</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">mufasa</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../../../graph/index.html">mufasa.graph</a></li>
@@ -184,7 +189,7 @@ data-aria-dark="Switch to auto color mode">
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mufasa.io.outputs.python_object.LocationOutput" title="mufasa.io.outputs.python_object.LocationOutput"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LocationOutput</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Collects Observations or Locations in a list.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#mufasa.io.outputs.python_object.MapOutput" title="mufasa.io.outputs.python_object.MapOutput"><code class="xref py py-obj docutils literal notranslate"><span class="pre">MapOutput</span></code></a></p></td>
 <td><p></p></td>
@@ -199,6 +204,8 @@ data-aria-dark="Switch to auto color mode">
 <dt class="sig sig-object py" id="mufasa.io.outputs.python_object.LocationOutput">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.io.outputs.python_object.</span></span><span class="sig-name descname"><span class="pre">LocationOutput</span></span><a class="headerlink" href="#mufasa.io.outputs.python_object.LocationOutput" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../base/index.html#mufasa.io.outputs.base.OutputNode" title="mufasa.io.outputs.base.OutputNode"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mufasa.io.outputs.base.OutputNode</span></code></a></p>
+<p>Collects Observations or Locations in a list.</p>
+<p>Results are accessible via the .result property after the pipeline runs.</p>
 <dl class="py property">
 <dt class="sig sig-object py" id="mufasa.io.outputs.python_object.LocationOutput.result">
 <em class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">result</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="../../../location/index.html#mufasa.location.Location" title="mufasa.location.Location"><span class="pre">mufasa.location.Location</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mufasa.io.outputs.python_object.LocationOutput.result" title="Link to this definition">#</a></dt>

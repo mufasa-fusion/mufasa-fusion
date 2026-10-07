@@ -9,7 +9,7 @@ in the architecture and in a complete example.
 **Detection level**
 
 MuFASA works on detections, not raw signals. Only the Input and Output nodes deal with files
-and formats. Everything in between works on Locations and Maps.
+and formats. Everything in between works on {class}`~mufasa.location.Location`s and {class}`~mufasa.map.Map`s.
 :::
 
 :::{container} mf-legend-proc

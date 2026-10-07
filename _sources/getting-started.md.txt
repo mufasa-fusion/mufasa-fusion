@@ -19,4 +19,4 @@ It is licensed under [Apache 2.0][mufasa-license].
 
 ## Run your first graph
 
-See the quickstart example on the [homepage](../index.md) for a complete, runnable example.
+See the quickstart example on the {ref}`main page <quickstart>` for a complete, runnable example.

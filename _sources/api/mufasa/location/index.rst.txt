@@ -3,6 +3,11 @@ mufasa.location
 
 .. py:module:: mufasa.location
 
+.. autoapi-nested-parse::
+
+   Dataclasses for spatially discrete detections, i.e. at a single point.
+
+
 
 Classes
 -------
@@ -17,6 +22,9 @@ Module Contents
 ---------------
 
 .. py:class:: Location
+
+   Spatially discrete detection, represented by a :attr:`geometry`, that occurred at some :attr:`timestamp`.
+
 
    .. py:attribute:: geometry
       :type:  shapely.geometry.base.BaseGeometry
@@ -46,6 +54,9 @@ Module Contents
 .. py:class:: Observation
 
    Bases: :py:obj:`Location`
+
+
+   Probabilistic spatially discrete detection, adding a :attr:`confidence` estimate.
 
 
    .. py:attribute:: confidence

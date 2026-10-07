@@ -21,6 +21,11 @@ Module Contents
    Bases: :py:obj:`mufasa.io.outputs.base.OutputNode`
 
 
+   Collects Observations or Locations in a list.
+
+   Results are accessible via the .result property after the pipeline runs.
+
+
    .. py:property:: result
       :type: list[mufasa.location.Location]
 

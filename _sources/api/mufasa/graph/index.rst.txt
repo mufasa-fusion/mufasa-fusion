@@ -17,6 +17,13 @@ Module Contents
 
 .. py:class:: Graph(inputs: list[mufasa.Node], outputs: list[mufasa.Node], *, crs: str | None = None, bbox: mufasa.BoundingBox | None = None, resolution: tuple[float, float] | None = None)
 
+   The Fusion Graph, binding all nodes reachable from its :attr:`inputs` to :attr:`outputs` together.
+
+   It is responsible for type compatibility checking and orchestrates the execution of the fusion system
+   via its :func:`run` method. It also distributes global configuration – :attr:`crs`,
+   :attr:`bounding box <bbox>` and map raster :attr:`resolution` – to every node.
+
+
    .. py:attribute:: inputs
 
 

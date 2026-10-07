@@ -8,9 +8,10 @@
   </script><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=2ceb65ce" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/css/shibuya-overwrite.css?v=dc3b9c11" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/css/mufasa.css?v=975bf83d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/shibuya-overwrite.css?v=ae101861" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/mufasa.css?v=eaa6afad" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,7 +34,7 @@
       <strong>mufasa-fusion</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"><ul><li class="link"><a href="../../../getting-started/index.html">Getting started</a></li><li class="link"><a href="../../../user-guide/index.html">User guide</a></li><li class="link"><a href="../../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../../catalog.html">Catalog</a></li><li class="link"><a href="../../index.html">API</a></li><li class="link"><a href="../../../about.html">About</a></li></ul></nav>
+      <nav class="sy-head-links"><ul><li class="link"><a href="../../../getting-started.html">Getting started</a></li><li class="link"><a href="../../../user-guide/index.html">User guide</a></li><li class="link"><a href="../../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../../catalog.html">Catalog</a></li><li class="link"><a href="../../index.html">API</a></li><li class="link"><a href="../../../about.html">About</a></li></ul></nav>
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
@@ -66,13 +67,17 @@ data-aria-dark="Switch to auto color mode">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
         <div class="globaltoc" data-expand-depth="1"><ul class="current">
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../getting-started/index.html">Getting started</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../user-guide/index.html">User guide</a><ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../user-guide/index.html">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../user-guide/design-principles.html">Design principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/concepts.html">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/extending.html">Extending MuFASA</a></li>
 </ul>
 </li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../../../showcases/index.html">Showcases</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../catalog.html">Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../catalog.html">Node Catalog</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html">mufasa</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../graph/index.html">mufasa.graph</a></li>
@@ -175,6 +180,7 @@ data-aria-dark="Switch to auto color mode">
   <article class="yue" role="main">
           <section id="module-mufasa.map">
 <span id="mufasa-map"></span><h1>mufasa.map<a class="headerlink" href="#module-mufasa.map" title="Link to this heading">#</a></h1>
+<p>Data types for spatially distributed detections, i.e. over an area.</p>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
 <div class="table-wrapper autosummary longtable docutils container">
@@ -184,10 +190,10 @@ data-aria-dark="Switch to auto color mode">
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#mufasa.map.Map" title="mufasa.map.Map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Map</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Spatially distributed detection, rasterized to a geo-referenced <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code> array, at some <code class="xref py py-attr docutils literal notranslate"><span class="pre">timestamp</span></code>.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mufasa.map.BayesianMap" title="mufasa.map.BayesianMap"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BayesianMap</span></code></a></p></td>
-<td><p>Map subtype produced by Bayesian nodes (POM, StaticMap).</p></td>
+<td><p>Map subtype that stores <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code> in log-odds space.</p></td>
 </tr>
 </tbody>
 </table>
@@ -224,7 +230,9 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py class">
 <dt class="sig sig-object py" id="mufasa.map.Map">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.map.</span></span><span class="sig-name descname"><span class="pre">Map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rasterio.transform.Affine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CRS</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.map.Map" title="Link to this definition">#</a></dt>
-<dd><dl class="field-list simple">
+<dd><p>Spatially distributed detection, rasterized to a geo-referenced <a class="reference internal" href="#mufasa.map.Map.data" title="mufasa.map.Map.data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code></a> array, at some <a class="reference internal" href="#mufasa.map.Map.timestamp" title="mufasa.map.Map.timestamp"><code class="xref py py-attr docutils literal notranslate"><span class="pre">timestamp</span></code></a>.
+Geo-referencing via an affine <code class="xref py py-attr docutils literal notranslate"><span class="pre">transformation</span></code> and a <a class="reference internal" href="#mufasa.map.Map.crs" title="mufasa.map.Map.crs"><code class="xref py py-attr docutils literal notranslate"><span class="pre">crs</span></code></a>.</p>
+<dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data</strong> (<em>numpy.ndarray</em>)</p></li>
@@ -314,11 +322,8 @@ data-aria-dark="Switch to auto color mode">
 <dt class="sig sig-object py" id="mufasa.map.BayesianMap">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.map.</span></span><span class="sig-name descname"><span class="pre">BayesianMap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">transform</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">rasterio.transform.Affine</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">crs</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">CRS</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">timestamp</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.map.BayesianMap" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#mufasa.map.Map" title="mufasa.map.Map"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Map</span></code></a></p>
-<p>Map subtype produced by Bayesian nodes (POM, StaticMap).</p>
-<p><code class="docutils literal notranslate"><span class="pre">data</span></code> stores values in log-odds space. Use the <code class="docutils literal notranslate"><span class="pre">probabilities</span></code>
-property to obtain the equivalent values in [0, 1]. Fusion nodes
-(BayesianFusion, LogicalAnd/Or) operate directly on <code class="docutils literal notranslate"><span class="pre">data</span></code> to avoid
-repeated logit/expit round-trips.</p>
+<p>Map subtype that stores <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code> in log-odds space.</p>
+<p>Used by <a class="reference internal" href="../nodes/fusion/map_fusion/index.html#module-mufasa.nodes.fusion.map_fusion" title="mufasa.nodes.fusion.map_fusion"><code class="xref py py-mod docutils literal notranslate"><span class="pre">Bayesian</span> <span class="pre">fusion</span> <span class="pre">nodes</span></code></a> to avoid repeated logit/expit round-trips.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

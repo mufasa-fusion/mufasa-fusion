@@ -2,15 +2,16 @@
 <html lang="en" data-accent-color="red" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Getting started - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="User guide" href="../user-guide/index.html" /><link rel="prev" title="MuFASA" href="../index.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Installation - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Concepts" href="concepts.html" /><link rel="prev" title="Design principles" href="design-principles.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=dc3b9c11" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=975bf83d" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=ae101861" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=eaa6afad" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -21,7 +22,7 @@
 }
 </style>
     
-  <meta property="og:type" content="website"/><meta property="og:title" content="Getting started"/>
+  <meta property="og:type" content="website"/><meta property="og:title" content="Installation"/>
     <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -33,7 +34,7 @@
       <strong>mufasa-fusion</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"><ul><li class="link"><a href="#">Getting started</a></li><li class="link"><a href="../user-guide/index.html">User guide</a></li><li class="link"><a href="../showcases/index.html">Showcases</a></li><li class="link"><a href="../catalog.html">Catalog</a></li><li class="link"><a href="../api/index.html">API</a></li><li class="link"><a href="../about.html">About</a></li></ul></nav>
+      <nav class="sy-head-links"><ul><li class="link"><a href="../getting-started.html">Getting started</a></li><li class="link"><a href="index.html">User guide</a></li><li class="link"><a href="../showcases/index.html">Showcases</a></li><li class="link"><a href="../catalog.html">Catalog</a></li><li class="link"><a href="../api/index.html">API</a></li><li class="link"><a href="../about.html">About</a></li></ul></nav>
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
@@ -66,13 +67,17 @@ data-aria-dark="Switch to auto color mode">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
         <div class="globaltoc" data-expand-depth="1"><ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Getting started</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../user-guide/index.html">User guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="../user-guide/design-principles.html">Design principles</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="design-principles.html">Design principles</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending.html">Extending MuFASA</a></li>
 </ul>
 </li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../showcases/index.html">Showcases</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../catalog.html">Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../catalog.html">Node Catalog</a></li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../api/index.html">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api/mufasa/index.html">mufasa</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../api/mufasa/graph/index.html">mufasa.graph</a></li>
@@ -109,8 +114,7 @@ data-aria-dark="Switch to auto color mode">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
-<li><a class="reference internal" href="#installation">Installation</a></li>
-<li><a class="reference internal" href="#run-your-first-graph">Run your first graph</a></li>
+<li><a class="reference internal" href="#optional-dependencies">Optional dependencies</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -128,8 +132,12 @@ data-aria-dark="Switch to auto color mode">
         <span>/</span>
         <meta itemprop="position" content="1" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">Getting started</strong>
+        <a itemprop="item" href="index.html"><span itemprop="name">User Guide</span></a>
+        <span>/</span>
         <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Installation</strong>
+        <meta itemprop="position" content="3" />
       </li></ol>
     <div class="xl:hidden ml-1">
       <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
@@ -141,23 +149,28 @@ data-aria-dark="Switch to auto color mode">
 </div><div class="flex flex-col break-words justify-between">
       <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
   <article class="yue" role="main">
-          <section id="getting-started">
-<h1>Getting started<a class="headerlink" href="#getting-started" title="Link to this heading">#</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Placeholder page. Full install instructions and the first-run walkthrough go here.</p>
-</div>
-<section id="installation">
-<h2>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h2>
-<p>MuFASA is a Python package and easily installed from its <a class="reference external" href="https://github.com/mufasa-fusion/mufasa-fusion">GitHub repository</a> with pip:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;mufasa[vis] @ git+https://github.com/mufasa-fusion/mufasa-fusion&quot;</span>
+          <section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h1>
+<p>Install MuFASA and its dependencies via pip:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;mufasa @ https://github.com/mufasa-fusion/mufasa-fusion&quot;</span>
 </span></pre></div>
 </div>
-<p>It is licensed under <a class="reference external" href="https://github.com/mufasa-fusion/mufasa-fusion/blob/main/LICENSE">Apache 2.0</a>.</p>
-</section>
-<section id="run-your-first-graph">
-<h2>Run your first graph<a class="headerlink" href="#run-your-first-graph" title="Link to this heading">#</a></h2>
-<p>See the quickstart example on the <a class="reference internal" href="../index.html"><span class="std std-doc">homepage</span></a> for a complete, runnable example.</p>
+<section id="optional-dependencies">
+<h2>Optional dependencies<a class="headerlink" href="#optional-dependencies" title="Link to this heading">#</a></h2>
+<p>Install extra dependencies as follows, where <code class="docutils literal notranslate"><span class="pre">extra</span></code> is a comma-separated list chosen from below.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;mufasa[extra] @ https://github.com/mufasa-fusion/mufasa-fusion&quot;</span>
+</span></pre></div>
+</div>
+<p>Available extras and what they enable:</p>
+<dl class="simple myst">
+<dt><code class="docutils literal notranslate"><span class="pre">vis</span></code></dt><dd><p>Visual introspection tools, such as <a class="reference internal" href="../api/mufasa/graph/index.html#mufasa.graph.Graph.plot_graph" title="mufasa.graph.Graph.plot_graph"><code class="xref py py-func docutils literal notranslate"><span class="pre">plot_graph()</span></code></a>
+and <a class="reference internal" href="../api/mufasa/io/outputs/visualization/index.html#mufasa.io.outputs.visualization.Visualization" title="mufasa.io.outputs.visualization.Visualization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Visualization</span></code></a></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">tracking</span></code></dt><dd><p>Tracking nodes in <a class="reference internal" href="../api/mufasa/nodes/tracking/index.html#module-mufasa.nodes.tracking" title="mufasa.nodes.tracking"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mufasa.nodes.tracking</span></code></a></p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dev</span></code></dt><dd><p>Development dependencies, including those to build these docs</p>
+</dd>
+</dl>
 </section>
 </section>
 
@@ -167,16 +180,16 @@ data-aria-dark="Switch to auto color mode">
   </svg>
   <span>Back to top</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="../index.html">
+    <a href="design-principles.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>Previous</span><div class="title">Home</div></div>
+        <span>Previous</span><div class="title">Design principles</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="../user-guide/index.html">
+    <a href="concepts.html">
       <div class="page-info">
         <span>Next</span>
-        <div class="title">User guide</div>
+        <div class="title">Concepts</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>

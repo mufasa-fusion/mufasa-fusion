@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="red" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tutorials - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Extending MuFASA" href="extending.html" /><link rel="prev" title="Concepts" href="concepts.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=ae101861" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=eaa6afad" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="Tutorials"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      <img class="light-logo" src="../_static/img/logo/MuFASA_MuFASA.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <img class="dark-logo" src="../_static/img/logo/MuFASA_MuFASA_weiss.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <strong>mufasa-fusion</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"><ul><li class="link"><a href="../getting-started.html">Getting started</a></li><li class="link"><a href="index.html">User guide</a></li><li class="link"><a href="../showcases/index.html">Showcases</a></li><li class="link"><a href="../catalog.html">Catalog</a></li><li class="link"><a href="../api/index.html">API</a></li><li class="link"><a href="../about.html">About</a></li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">0.1.0</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="https://mufasa-fusion.github.io/mufasa-fusion/">0.1.0</a></li></ul></div>
+  </div><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><ul class="current">
+<li class="toctree-l1 _expand"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="design-principles.html">Design principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending.html">Extending MuFASA</a></li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../showcases/index.html">Showcases</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../catalog.html">Node Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/mufasa/index.html">mufasa</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/graph/index.html">mufasa.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/io/index.html">mufasa.io</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/io/inputs/index.html">mufasa.io.inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/io/outputs/index.html">mufasa.io.outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/location/index.html">mufasa.location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/map/index.html">mufasa.map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/node/index.html">mufasa.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/nodes/index.html">mufasa.nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/detection/index.html">mufasa.nodes.detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/fusion/index.html">mufasa.nodes.fusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/mapping/index.html">mufasa.nodes.mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/tracking/index.html">mufasa.nodes.tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/util/index.html">mufasa.nodes.util</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/registry/index.html">mufasa.registry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#minimal-example">Minimal Example</a><ul>
+<li><a class="reference internal" href="#load-input">Load Input</a></li>
+<li><a class="reference internal" href="#define-output">Define Output</a></li>
+<li><a class="reference internal" href="#execute-fusion">Execute Fusion</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#visualization">Visualization</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">mufasa-fusion</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">User Guide</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Tutorials</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="tutorials">
+<h1>Tutorials<a class="headerlink" href="#tutorials" title="Link to this heading">#</a></h1>
+<section id="minimal-example">
+<h2>Minimal Example<a class="headerlink" href="#minimal-example" title="Link to this heading">#</a></h2>
+<p>The most basic Fusion Graph possible doesn’t do any processing at all.
+It consists of one input node and one output node only.</p>
+<section id="load-input">
+<h3>Load Input<a class="headerlink" href="#load-input" title="Link to this heading">#</a></h3>
+<p>To get started with sensor fusion, we’ll need sensor data. MuFASA isn’t operating on raw sensor values though,
+rather it consumes already processed detection. It ships with a variety of input nodes to load detections
+from standardized formats.</p>
+<p>We start by loading locations from a GeoJSON<a class="footnote-reference brackets" href="#geojson" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> Feature Collection in <a class="reference download internal" download="" href="../_downloads/05e3489674de01e6378cbbaeaeaf8e1d/sensor_a.geojson"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">sensor_a.geojson</span></code></span></a>
+with a <a class="reference internal" href="../api/mufasa/io/inputs/geojson/index.html#mufasa.io.inputs.geojson.GeoJsonInput" title="mufasa.io.inputs.geojson.GeoJsonInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeoJsonInput</span></code></a> node.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.inputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeoJsonInput</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">src_a</span> <span class="o">=</span> <span class="n">GeoJsonInput</span><span class="p">(</span><span class="s2">&quot;sensor_a.geojson&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="gt">---------------------------------------------------------------------------</span>
+</span><span data-line="2"><span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+</span><span data-line="3"><span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+</span><span data-line="4"><span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.inputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeoJsonInput</span>
+</span><span data-line="5"><span class="g g-Whitespace">      </span><span class="mi">2</span> 
+</span><span data-line="6"><span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">src_a</span> <span class="o">=</span> <span class="n">GeoJsonInput</span><span class="p">(</span><span class="s2">&quot;sensor_a.geojson&quot;</span><span class="p">)</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="n">File</span> <span class="o">/</span><span class="n">github</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">user</span><span class="o">-</span><span class="n">guide</span><span class="o">/../../</span><span class="n">src</span><span class="o">/</span><span class="n">mufasa</span><span class="o">/</span><span class="fm">__init__</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">1</span>
+</span><span data-line="9"><span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.location</span><span class="w"> </span><span class="kn">import</span> <span class="n">Location</span><span class="p">,</span> <span class="n">Observation</span>
+</span><span data-line="10"><span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.map</span><span class="w"> </span><span class="kn">import</span> <span class="n">Map</span><span class="p">,</span> <span class="n">BayesianMap</span><span class="p">,</span> <span class="n">BoundingBox</span>
+</span><span data-line="11"><span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.node</span><span class="w"> </span><span class="kn">import</span> <span class="n">Node</span>
+</span><span data-line="12">
+</span><span data-line="13"><span class="n">File</span> <span class="o">/</span><span class="n">github</span><span class="o">/</span><span class="n">workspace</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">user</span><span class="o">-</span><span class="n">guide</span><span class="o">/../../</span><span class="n">src</span><span class="o">/</span><span class="n">mufasa</span><span class="o">/</span><span class="n">location</span><span class="o">.</span><span class="n">py</span><span class="p">:</span><span class="mi">5</span>
+</span><span data-line="14"><span class="g g-Whitespace">      </span><span class="mi">1</span><span class="w"> </span><span class="sd">&quot;&quot;&quot;Dataclasses for spatially discrete detections, i.e. at a single point.&quot;&quot;&quot;</span>
+</span><span data-line="15"><span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+</span><span data-line="16"><span class="ne">----&gt; </span><span class="mi">5</span> <span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">LineString</span><span class="p">,</span> <span class="n">MultiLineString</span><span class="p">,</span> <span class="n">MultiPoint</span><span class="p">,</span> <span class="n">Point</span>
+</span><span data-line="17"><span class="g g-Whitespace">      </span><span class="mi">6</span> <span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry.base</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseGeometry</span>
+</span><span data-line="18"><span class="g g-Whitespace">      </span><span class="mi">9</span> <span class="nd">@dataclass</span>
+</span><span data-line="19"><span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="k">class</span><span class="w"> </span><span class="nc">Location</span><span class="p">:</span>
+</span><span data-line="20">
+</span><span data-line="21"><span class="ne">ModuleNotFoundError</span>: No module named &#39;shapely&#39;
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>You can inspect the data loaded into MuFASA’s internal representation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">src_a</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-output">
+<h3>Define Output<a class="headerlink" href="#define-output" title="Link to this heading">#</a></h3>
+<p>Next, we’ll add an output node to build the simplest Fusion Graph possible.
+We choose a <a class="reference internal" href="../api/mufasa/io/outputs/python_object/index.html#mufasa.io.outputs.python_object.LocationOutput" title="mufasa.io.outputs.python_object.LocationOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationOutput</span></code></a> node here for demonstration purposes.
+It simply collects its inputs into a Python list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.outputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">LocationOutput</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">out</span> <span class="o">=</span> <span class="n">LocationOutput</span><span class="p">()(</span><span class="n">src_a</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>At the same time, we connected <code class="docutils literal notranslate"><span class="pre">src_a</span></code> to feed into our new <code class="docutils literal notranslate"><span class="pre">out</span></code> node by calling it with the respective input node(s).</p>
+</section>
+<section id="execute-fusion">
+<h3>Execute Fusion<a class="headerlink" href="#execute-fusion" title="Link to this heading">#</a></h3>
+<p>Finally, we assemble the Fusion Graph. The <a class="reference internal" href="../api/mufasa/graph/index.html#mufasa.graph.Graph" title="mufasa.graph.Graph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Graph</span></code></a> needs to know the IO boundary nodes.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">src_a</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">out</span><span class="p">])</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>Now, everything is set up to run our sensor fusion:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>Let’s inspect the results via our output node to verify all input data had been passed on.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">out</span><span class="o">.</span><span class="n">result</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">#</a></h2>
+<p>This requires MuFASA to be installed with the <code class="docutils literal notranslate"><span class="pre">vis</span></code> extra dependencies.</p>
+<p>We redefine the <a class="reference internal" href="../api/mufasa/io/inputs/geojson/index.html#mufasa.io.inputs.geojson.GeoJsonInput" title="mufasa.io.inputs.geojson.GeoJsonInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeoJsonInput</span></code></a> node from above
+– the old one is already connected in a Fusion Graph and unfortunately can’t be reused.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">src_a</span> <span class="o">=</span> <span class="n">GeoJsonInput</span><span class="p">(</span><span class="s2">&quot;sensor_a.geojson&quot;</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>This time, we connect it to a <a class="reference internal" href="../api/mufasa/io/outputs/visualization/index.html#mufasa.io.outputs.visualization.Visualization" title="mufasa.io.outputs.visualization.Visualization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Visualization</span></code></a> node.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.outputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Visualization</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">vis_out</span> <span class="o">=</span> <span class="n">Visualization</span><span class="p">()(</span><span class="n">src_a</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>And wrap it in a new Fusion Graph.</p>
+<p>Note that we need to set a <code class="docutils literal notranslate"><span class="pre">bbox</span></code> and <code class="docutils literal notranslate"><span class="pre">resolution</span></code> this time
+– although the graph isn’t processing any <a class="reference internal" href="../api/mufasa/map/index.html#mufasa.map.Map" title="mufasa.map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a>.
+This is due to the fact that the Visualisation node also accepts Maps as input.
+This bounding box will also bound the visualization.
+The CRS is optional, but it will enhance the visualization with map tiles.</p>
+<div class="admonition-todo admonition">
+<p class="admonition-title">TODO</p>
+<p>Shouldn’t the typing mechanism be smart enough to check that no map is produced?</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoundingBox</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">_suggest_utm_crs</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="c1"># Infer bounding box from source locations</span>
+</span><span data-line="5"><span class="n">src_a_geoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">geometry</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">src_a</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+</span><span data-line="6"><span class="n">xs</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">x</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">src_a_geoms</span><span class="p">]</span>
+</span><span data-line="7"><span class="n">ys</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="o">.</span><span class="n">y</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">src_a_geoms</span><span class="p">]</span>
+</span><span data-line="8">
+</span><span data-line="9"><span class="n">min_x</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+</span><span data-line="10"><span class="n">max_x</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">xs</span><span class="p">)</span>
+</span><span data-line="11"><span class="n">min_y</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+</span><span data-line="12"><span class="n">max_y</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">ys</span><span class="p">)</span>
+</span><span data-line="13"><span class="n">x_tol</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_x</span> <span class="o">-</span> <span class="n">min_x</span><span class="p">)</span> <span class="o">*</span> <span class="mf">.1</span>
+</span><span data-line="14"><span class="n">y_tol</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_y</span> <span class="o">-</span> <span class="n">min_y</span><span class="p">)</span> <span class="o">*</span> <span class="mf">.1</span>
+</span><span data-line="15">
+</span><span data-line="16"><span class="n">bbox</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span>
+</span><span data-line="17">    <span class="n">min_x</span> <span class="o">-</span> <span class="n">x_tol</span><span class="p">,</span>
+</span><span data-line="18">    <span class="n">min_y</span> <span class="o">-</span> <span class="n">y_tol</span><span class="p">,</span>
+</span><span data-line="19">    <span class="n">max_x</span> <span class="o">+</span> <span class="n">x_tol</span><span class="p">,</span>
+</span><span data-line="20">    <span class="n">max_y</span> <span class="o">+</span> <span class="n">y_tol</span><span class="p">,</span>
+</span><span data-line="21"><span class="p">)</span>
+</span><span data-line="22">
+</span><span data-line="23"><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span>
+</span><span data-line="24">    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">src_a</span><span class="p">],</span>
+</span><span data-line="25">    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">vis_out</span><span class="p">],</span>
+</span><span data-line="26">    <span class="n">crs</span><span class="o">=</span><span class="n">_suggest_utm_crs</span><span class="p">(</span><span class="n">bbox</span><span class="p">),</span>
+</span><span data-line="27">    <span class="n">bbox</span><span class="o">=</span><span class="n">bbox</span><span class="p">,</span>
+</span><span data-line="28">    <span class="n">resolution</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span><span data-line="29"><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>You can also visually inspect the graph structure.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">graph</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">();</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>And finally, after running the fusion, visualize the latest snapshot of data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">vis_out</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>There’s also an <a class="reference internal" href="../api/mufasa/io/outputs/visualization/index.html#mufasa.io.outputs.visualization.Visualization.animate" title="mufasa.io.outputs.visualization.Visualization.animate"><code class="xref py py-func docutils literal notranslate"><span class="pre">animate()</span></code></a> method
+for data with different time stamps.</p>
+</section>
+</section>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="geojson" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>GeoJSON, see <a class="reference external" href="https://geojson.org">https://geojson.org</a></p>
+</aside>
+</aside>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="concepts.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Concepts</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="extending.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Extending MuFASA</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Michael Hubner, Kilian Wohlleben, Jan Nausner, Julia Pöschl</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script></body>
+</html>

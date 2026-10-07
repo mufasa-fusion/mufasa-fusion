@@ -66,3 +66,10 @@ figcaption:hover a.headerlink {
   /* Fix alignment container */
   max-width: fit-content;
 }
+
+/* Override ul lists' left alignment on small screens */
+@media screen {
+    ul {
+        margin-left: 30px;
+    }
+}

@@ -2,15 +2,16 @@
 <html lang="en" data-accent-color="red" data-content_root="./">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Getting started" href="getting-started/index.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="about.html" /><link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Getting started" href="getting-started.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=2ceb65ce" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="_static/css/shibuya-overwrite.css?v=dc3b9c11" />
-    <link rel="stylesheet" type="text/css" href="_static/css/mufasa.css?v=975bf83d" />
+    <link rel="stylesheet" type="text/css" href="_static/css/shibuya-overwrite.css?v=ae101861" />
+    <link rel="stylesheet" type="text/css" href="_static/css/mufasa.css?v=eaa6afad" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -40,7 +41,7 @@
       <strong>mufasa-fusion</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"><ul><li class="link"><a href="getting-started/index.html">Getting started</a></li><li class="link"><a href="user-guide/index.html">User guide</a></li><li class="link"><a href="showcases/index.html">Showcases</a></li><li class="link"><a href="catalog.html">Catalog</a></li><li class="link"><a href="api/index.html">API</a></li><li class="link"><a href="about.html">About</a></li></ul></nav>
+      <nav class="sy-head-links"><ul><li class="link"><a href="getting-started.html">Getting started</a></li><li class="link"><a href="user-guide/index.html">User guide</a></li><li class="link"><a href="showcases/index.html">Showcases</a></li><li class="link"><a href="catalog.html">Catalog</a></li><li class="link"><a href="api/index.html">API</a></li><li class="link"><a href="about.html">About</a></li></ul></nav>
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
@@ -76,10 +77,10 @@ data-aria-dark="Switch to auto color mode">
 <p class="mf-dark-only"><img alt="MuFASA - Multimodal Fusion Architecture for Sensor Applications" src="_images/MuFASA_MuFASA_Zusatz_weiss.svg" /></p>
 <p>A framework for rapid prototyping of geospatial sensor fusion systems. MuFASA turns the design of a multimodal fusion system into an explicit, executable graph.</p>
 <section id="the-fusion-graph">
-<h2>The Fusion Graph<a class="headerlink" href="#the-fusion-graph" title="Link to this heading">#</a></h2>
+<span id="quickstart"></span><h2>The Fusion Graph<a class="headerlink" href="#the-fusion-graph" title="Link to this heading">#</a></h2>
 <p>MuFASA interprets a fusion system as a Fusion Graph: a directed acyclic graph that starts at Input nodes
 and ends at Output nodes. You compose it functionally by calling each node on its inputs, and nodes connect
-wherever their data types match. Learn more about the concept in the <a class="reference internal" href="user-guide/index.html"><span class="doc">User guide</span></a>.</p>
+wherever their data types match. Learn more about the concept in the <a class="reference internal" href="user-guide/index.html"><span class="doc">User Guide</span></a>.</p>
 <div class="mf-side-by-side docutils container">
 <div class="literal-block-wrapper docutils container" id="id1">
 <div class="code-block-caption"><span class="caption-text">A simple Fusion Graph in Python code</span><a class="headerlink" href="#id1" title="Link to this code">#</a></div>
@@ -224,17 +225,17 @@ wherever their data types match. Learn more about the concept in the <a class="r
 <div class="mf-doc-paths docutils container">
 <div class="docutils container">
 <p><strong>New to MuFASA</strong></p>
-<p><a class="reference internal" href="getting-started/index.html"><span class="doc">Getting started</span></a> walks you through installing MuFASA and running your first Fusion Graph.
-The <a class="reference internal" href="user-guide/index.html"><span class="doc">User guide</span></a> explains the core concepts: Locations, Maps, Nodes and Graphs.</p>
+<p><a class="reference internal" href="getting-started.html"><span class="doc">Getting started</span></a> walks you through installing MuFASA and running your first Fusion Graph.
+The <a class="reference internal" href="user-guide/index.html"><span class="doc">User Guide</span></a> explains the core concepts: Locations, Maps, Nodes and Graphs.</p>
 </div>
 <div class="docutils container">
 <p><strong>Evaluating for your domain</strong></p>
 <p>The <a class="reference internal" href="showcases/index.html"><span class="doc">Showcases</span></a> show MuFASA in controlled real-world environments.
-The <a class="reference internal" href="catalog.html"><span class="doc">Catalog</span></a> lists the nodes and data types you can build with.</p>
+The <a class="reference internal" href="catalog.html"><span class="doc">Node Catalog</span></a> lists the nodes and data types you can build with.</p>
 </div>
 <div class="docutils container">
 <p><strong>Building your system</strong></p>
-<p>The <a class="reference internal" href="user-guide/index.html"><span class="doc">User guide</span></a> covers custom nodes and live deployment.
+<p>The <a class="reference internal" href="user-guide/index.html"><span class="doc">User Guide</span></a> covers custom nodes and live deployment.
 The <a class="reference internal" href="api/index.html"><span class="doc">API Reference</span></a> documents every class and parameter.</p>
 </div>
 </div>

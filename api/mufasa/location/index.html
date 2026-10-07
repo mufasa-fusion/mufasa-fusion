@@ -8,9 +8,10 @@
   </script><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="../../../_static/shibuya.css?v=2ceb65ce" />
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/css/shibuya-overwrite.css?v=dc3b9c11" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/css/mufasa.css?v=975bf83d" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/shibuya-overwrite.css?v=ae101861" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/mufasa.css?v=eaa6afad" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -33,7 +34,7 @@
       <strong>mufasa-fusion</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"><ul><li class="link"><a href="../../../getting-started/index.html">Getting started</a></li><li class="link"><a href="../../../user-guide/index.html">User guide</a></li><li class="link"><a href="../../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../../catalog.html">Catalog</a></li><li class="link"><a href="../../index.html">API</a></li><li class="link"><a href="../../../about.html">About</a></li></ul></nav>
+      <nav class="sy-head-links"><ul><li class="link"><a href="../../../getting-started.html">Getting started</a></li><li class="link"><a href="../../../user-guide/index.html">User guide</a></li><li class="link"><a href="../../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../../catalog.html">Catalog</a></li><li class="link"><a href="../../index.html">API</a></li><li class="link"><a href="../../../about.html">About</a></li></ul></nav>
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
@@ -66,13 +67,17 @@ data-aria-dark="Switch to auto color mode">
     <div class="sy-lside-inner md:sticky">
       <div class="sy-scrollbar p-6">
         <div class="globaltoc" data-expand-depth="1"><ul class="current">
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../getting-started/index.html">Getting started</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../user-guide/index.html">User guide</a><ul>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../user-guide/index.html">User Guide</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../user-guide/design-principles.html">Design principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/concepts.html">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/extending.html">Extending MuFASA</a></li>
 </ul>
 </li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../../../showcases/index.html">Showcases</a></li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../catalog.html">Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../catalog.html">Node Catalog</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html">mufasa</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../graph/index.html">mufasa.graph</a></li>
@@ -164,16 +169,17 @@ data-aria-dark="Switch to auto color mode">
   <article class="yue" role="main">
           <section id="module-mufasa.location">
 <span id="mufasa-location"></span><h1>mufasa.location<a class="headerlink" href="#module-mufasa.location" title="Link to this heading">#</a></h1>
+<p>Dataclasses for spatially discrete detections, i.e. at a single point.</p>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mufasa.location.Location" title="mufasa.location.Location"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Location</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Spatially discrete detection, represented by a <code class="xref py py-attr docutils literal notranslate"><span class="pre">geometry</span></code>, that occurred at some <code class="xref py py-attr docutils literal notranslate"><span class="pre">timestamp</span></code>.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#mufasa.location.Observation" title="mufasa.location.Observation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Observation</span></code></a></p></td>
-<td><p></p></td>
+<td><p>Probabilistic spatially discrete detection, adding a <code class="xref py py-attr docutils literal notranslate"><span class="pre">confidence</span></code> estimate.</p></td>
 </tr>
 </tbody>
 </table>
@@ -184,7 +190,8 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py class">
 <dt class="sig sig-object py" id="mufasa.location.Location">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.location.</span></span><span class="sig-name descname"><span class="pre">Location</span></span><a class="headerlink" href="#mufasa.location.Location" title="Link to this definition">#</a></dt>
-<dd><dl class="py attribute">
+<dd><p>Spatially discrete detection, represented by a <a class="reference internal" href="#mufasa.location.Location.geometry" title="mufasa.location.Location.geometry"><code class="xref py py-attr docutils literal notranslate"><span class="pre">geometry</span></code></a>, that occurred at some <a class="reference internal" href="#mufasa.location.Location.timestamp" title="mufasa.location.Location.timestamp"><code class="xref py py-attr docutils literal notranslate"><span class="pre">timestamp</span></code></a>.</p>
+<dl class="py attribute">
 <dt class="sig sig-object py" id="mufasa.location.Location.geometry">
 <span class="sig-name descname"><span class="pre">geometry</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">shapely.geometry.base.BaseGeometry</span></em><a class="headerlink" href="#mufasa.location.Location.geometry" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
@@ -219,6 +226,7 @@ expressed through Observation properties is automatically respected.</p>
 <dt class="sig sig-object py" id="mufasa.location.Observation">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.location.</span></span><span class="sig-name descname"><span class="pre">Observation</span></span><a class="headerlink" href="#mufasa.location.Observation" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#mufasa.location.Location" title="mufasa.location.Location"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Location</span></code></a></p>
+<p>Probabilistic spatially discrete detection, adding a <a class="reference internal" href="#mufasa.location.Observation.confidence" title="mufasa.location.Observation.confidence"><code class="xref py py-attr docutils literal notranslate"><span class="pre">confidence</span></code></a> estimate.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mufasa.location.Observation.confidence">
 <span class="sig-name descname"><span class="pre">confidence</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">float</span></em><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">0.5</span></em><a class="headerlink" href="#mufasa.location.Observation.confidence" title="Link to this definition">#</a></dt>
