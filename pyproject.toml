@@ -30,10 +30,12 @@ dev = [
     "pytest",
     "pytest-cov",
     "mufasa[tracking,vis]",
+]
+docs = [
     "sphinx",
-    "myst-parser",
     "sphinx-autoapi",
     "shibuya",
+    "myst-nb",
 ]
 
 [tool.setuptools.packages.find]

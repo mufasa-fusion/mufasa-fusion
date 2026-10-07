@@ -23,12 +23,12 @@ release = '0.1.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'myst_parser',
     "sphinx.ext.napoleon",
     "autoapi.extension",
     "custom_directives",
     "sphinx.ext.graphviz",
     "inline_graphviz",
+    "myst_nb",
 ]
 
 templates_path = ['_templates']

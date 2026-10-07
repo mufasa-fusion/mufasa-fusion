@@ -9,10 +9,7 @@ Again a quick start guide as on the home page?
 
 installation
 concepts
-geo-data
-simulation
-streaming
-extending
+tutorials
 ```
 
 :::{admonition} TODO
