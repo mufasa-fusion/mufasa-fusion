@@ -47,21 +47,6 @@ ul.mufasa-node-catalog {
     }
 }
 
-.mf-fusion-graph {
-    & > polygon {
-        /* background polygon */
-        fill: transparent;
-    }
-
-    text, .edge polygon {
-        fill: light-dark(black, white);
-    }
-
-    .node polygon, .edge polygon, .edge path {
-        stroke: light-dark(black, white);
-    }
-}
-
 .mf-fit-check, .mf-doc-paths {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
@@ -108,14 +93,18 @@ ul.mufasa-node-catalog {
     flex-wrap: wrap;
     gap: .8em;
 
-    /* Code takes all width the graph doesn't need, and wraps below it on narrow screens */
+    /* Code keeps its natural width, the graph scales down to fit beside it; on narrow screens it wraps below */
     & > .literal-block-wrapper {
-        flex: 1 1 24em;
+        flex: 0 1 auto;
         min-width: 0;
     }
 
     & > figure {
-        flex: 0 0 auto;
+        flex: 1 1 18rem;
+        min-width: 0;
+        margin: 0;
+
+        & > svg { margin-inline: auto; }
     }
 }
 
@@ -238,9 +227,6 @@ ul.mufasa-node-catalog {
     box-shadow: inset 3px 0 var(--mf-c-role, transparent);
 }
 
-/* Example graph: node outlines by role */
-.mf-fusion-graph .node.mf-io polygon { stroke: var(--mf-c-io); stroke-width: 2; }
-.mf-fusion-graph .node.mf-proc polygon { stroke: var(--mf-c-proc); stroke-width: 2; }
 
 /* Legend below the example */
 .mf-principles-legend {

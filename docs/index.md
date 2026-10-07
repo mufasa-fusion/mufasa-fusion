@@ -26,9 +26,8 @@ MuFASA interprets a fusion system as a Fusion Graph: a directed acyclic graph th
 and ends at Output nodes. You compose it functionally by calling each node on its inputs, and nodes connect
 wherever their data types match. Learn more about the concept in the {doc}`user-guide/index`.
 
-::::{container} mf-side-by-side
-
-```{code-block} python
+```{fusion-graph}
+:show-code:
 :caption: A simple Fusion Graph in Python code
 
 from mufasa import Graph
@@ -54,58 +53,6 @@ out = GeoJsonOutput("alarms.geojson")(alarms)
 graph = Graph(inputs=[track_a, track_b], outputs=[out])
 graph.run()
 ```
-
-```{digraph} fusion_graph
-:caption: An example Fusion Graph visualized
-:align: center
-
-graph [class="mf-fusion-graph", nodesep=0.15]
-node [shape=plain, fontname="Arial", fontsize=12]
-
-track_a [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>GeoJsonInput</b></td></tr>
-    <tr><td>"sensor_a.geojson"</td></tr>
-</table>>]
-
-track_b [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>GeoJsonInput</b></td></tr>
-    <tr><td>"sensor_b.geojson"</td></tr>
-</table>>]
-
-static [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>StaticMap</b></td></tr>
-    <tr><td>"priors.geojson"</td></tr>
-</table>>]
-
-pom_a [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>POM</b></td></tr>
-    <tr><td>decay_s = 5</td></tr>
-</table>>]
-
-pom_b [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>POM</b></td></tr>
-    <tr><td>decay_s = 1</td></tr>
-</table>>]
-
-fused [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>BayesianFusion</b></td></tr>
-</table>>]
-
-alarms [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>Threshold</b></td></tr>
-    <tr><td>threshold = 0.7</td></tr>
-</table>>]
-
-out [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>GeoJsonOutput</b></td></tr>
-    <tr><td>"alarms.geojson"</td></tr>
-</table>>]
-
-track_a -> pom_a -> fused
-track_b -> pom_b -> fused
-static -> fused -> alarms -> out
-```
-::::
 
 ## Find your way through the docs
 

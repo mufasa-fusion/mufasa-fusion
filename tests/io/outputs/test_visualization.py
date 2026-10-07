@@ -137,11 +137,8 @@ class TestVisualizationGraph:
         Graph(inputs=[src], outputs=[viz], **_SPATIAL).summary()
 
     def test_plot_graph_does_not_raise(self):
-        import matplotlib.pyplot as plt
         src, pom, td, viz = self._build()
-        fig = Graph(inputs=[src], outputs=[viz], **_SPATIAL).plot_graph()
-        assert fig is not None
-        plt.close("all")
+        assert Graph(inputs=[src], outputs=[viz], **_SPATIAL).plot_graph() is not None
 
 
 # ---------------------------------------------------------------------------

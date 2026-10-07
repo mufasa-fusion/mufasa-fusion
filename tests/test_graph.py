@@ -631,33 +631,26 @@ class TestSummary:
 # ---------------------------------------------------------------------------
 
 class TestPlotGraph:
-    def test_returns_matplotlib_figure(self, spatial):
-        import matplotlib.figure
+    def test_returns_fusion_graph_svg(self, spatial):
+        from mufasa.graph_svg import FusionGraphSVG
         src, sink = linear_pipeline()
-        fig = Graph(inputs=[src], outputs=[sink], **spatial).plot_graph()
-        assert isinstance(fig, matplotlib.figure.Figure)
-        import matplotlib.pyplot as plt
-        plt.close(fig)
+        result = Graph(inputs=[src], outputs=[sink], **spatial).plot_graph()
+        assert isinstance(result, FusionGraphSVG)
+        assert result._repr_html_().startswith("<svg")
 
-    def test_does_not_raise_for_diamond(self, spatial):
-        import matplotlib.pyplot as plt
+    def test_diamond_has_one_edge_per_connection(self, spatial):
         src    = LocSource()
         proc_a = LocToMap()(src)
         proc_b = LocToMap()(src)
         fused  = MapToMap()(proc_a, proc_b)
         sink   = MapSink()(fused)
-        fig = Graph(inputs=[src], outputs=[sink], **spatial).plot_graph()
-        plt.close(fig)
+        svg = Graph(inputs=[src], outputs=[sink], **spatial).plot_graph().svg
+        assert svg.count('class="mf-edge"') == 5
 
-    def test_figure_has_expected_patch_count(self, spatial):
-        """One patch per node plus legend patches."""
-        import matplotlib.pyplot as plt
+    def test_one_drawn_node_per_graph_node(self, spatial):
         src, sink = linear_pipeline()
-        fig = Graph(inputs=[src], outputs=[sink], **spatial).plot_graph()
-        ax = fig.axes[0]
-        n_nodes = 3  # src, proc, sink
-        assert len(ax.patches) >= n_nodes
-        plt.close(fig)
+        svg = Graph(inputs=[src], outputs=[sink], **spatial).plot_graph().svg
+        assert svg.count('class="mf-node ') == 3  # src, proc, sink
 
 
 # ---------------------------------------------------------------------------
@@ -904,20 +897,13 @@ class TestProxyHandling:
         self._build(spatial)  # would raise if proxy were in _all_nodes()
 
     def test_plot_graph_does_not_raise_with_proxy(self, spatial):
-        import matplotlib.pyplot as plt
         g, *_ = self._build(spatial)
-        fig = g.plot_graph()
-        assert fig is not None
-        plt.close("all")
+        assert g.plot_graph() is not None
 
-    def test_plot_graph_has_one_patch_per_node(self, spatial):
-        """One FancyBboxPatch per real node (4 nodes); legend patches are separate."""
-        import matplotlib.pyplot as plt
+    def test_plot_graph_has_one_node_per_real_node(self, spatial):
         g, *_ = self._build(spatial)
-        fig = g.plot_graph()
-        ax = fig.axes[0]
-        assert len(ax.patches) == 4  # exactly src, to_map, to_loc, viz — no proxy box
-        plt.close("all")
+        svg = g.plot_graph().svg
+        assert svg.count('class="mf-node ') == 4  # exactly src, to_map, to_loc, viz — no proxy node
 
     def test_summary_does_not_raise_with_proxy(self, spatial, capsys):
         g, *_ = self._build(spatial)

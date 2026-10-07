@@ -75,9 +75,9 @@ Alarms, operators
 
 This graph fuses two sensors with a static prior and turns the result into alarms.
 
-::::{container} mf-side-by-side mf-annotated
-
-```{code-block} python
+```{fusion-graph}
+:show-code:
+:class: mf-annotated
 :caption: A simple Fusion Graph in Python code
 
 from mufasa import Graph
@@ -103,56 +103,3 @@ out = GeoJsonOutput("alarms.geojson")(alarms)
 graph = Graph(inputs=[track_a, track_b], outputs=[out])
 graph.run()
 ```
-
-```{digraph} design_principles_graph
-:caption: The same Fusion Graph, colored by role
-:align: center
-
-graph [class="mf-fusion-graph", nodesep=0.15]
-node [shape=plain, fontname="Arial", fontsize=12]
-
-track_a [class="mf-io", label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>GeoJsonInput</b></td></tr>
-    <tr><td>"sensor_a.geojson"</td></tr>
-</table>>]
-
-track_b [class="mf-io", label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>GeoJsonInput</b></td></tr>
-    <tr><td>"sensor_b.geojson"</td></tr>
-</table>>]
-
-static [class="mf-io", label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>StaticMap</b></td></tr>
-    <tr><td>"priors.geojson"</td></tr>
-</table>>]
-
-pom_a [class="mf-proc", label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>POM</b></td></tr>
-    <tr><td>decay_s = 5</td></tr>
-</table>>]
-
-pom_b [class="mf-proc", label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>POM</b></td></tr>
-    <tr><td>decay_s = 1</td></tr>
-</table>>]
-
-fused [class="mf-proc", label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>BayesianFusion</b></td></tr>
-</table>>]
-
-alarms [class="mf-proc", label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>Threshold</b></td></tr>
-    <tr><td>threshold = 0.7</td></tr>
-</table>>]
-
-out [class="mf-io", label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>GeoJsonOutput</b></td></tr>
-    <tr><td>"alarms.geojson"</td></tr>
-</table>>]
-
-track_a -> pom_a -> fused
-track_b -> pom_b -> fused
-static -> fused -> alarms -> out
-```
-
-::::
