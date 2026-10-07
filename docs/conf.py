@@ -32,11 +32,10 @@ extensions = [
 ]
 
 templates_path = ['_templates']
-exclude_patterns = ["_*"]
+exclude_patterns = ["_*", "**/_*"]
 
 myst_enable_extensions = [
     "colon_fence",
-    "attrs_inline",
     "deflist",
 ]
 
@@ -91,4 +90,21 @@ html_theme_options = {
     "light_logo": html_logo,
     "dark_logo": "_static/img/logo/MuFASA_MuFASA_weiss.svg",
     "globaltoc_expand_depth": 1,
+    "nav_links": [
+        {"title": "Getting started", "url": "getting-started"},
+        {"title": "User guide", "url": "user-guide/index"},
+        {"title": "Showcases", "url": "showcases/index"},
+        {"title": "Catalog", "url": "catalog"},
+        {"title": "API", "url": "api/index"},
+        {"title": "About", "url": "about"},
+    ],
+}
+
+# Version dropdown in the header. Placeholder with a single entry until versioned builds are deployed
+# (one folder per release on GitHub Pages, with the list read from a shared versions.json).
+html_context = {
+    "current_version": release,
+    "versions": [
+        (release, "https://mufasa-fusion.github.io/mufasa-fusion/"),
+    ],
 }

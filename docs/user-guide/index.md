@@ -7,9 +7,11 @@ Again a quick start guide as on the home page?
 ```{toctree}
 :caption: Contents
 
+design-principles
 installation
 concepts
 tutorials
+extending
 ```
 
 :::{admonition} TODO

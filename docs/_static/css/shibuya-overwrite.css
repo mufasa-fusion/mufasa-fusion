@@ -4,6 +4,7 @@ html[data-accent-color="red"] {
   --ait-grey: #7c8388;
   --ait-torquise: #31b7bc;
   --ait-violet: #470f51;
+  --ait-torquise-text: #1f7f83;  /* Darker turquoise with readable contrast on white (4.75:1) */
 
   /* Red palette: Generated with https://www.radix-ui.com/colors/custom?accent-light=79151D&gray-light=7C8388 */
   --accent-1: #fffcfc;
@@ -64,4 +65,11 @@ figcaption:hover a.headerlink {
 .yue .align-center {
   /* Fix alignment container */
   max-width: fit-content;
+}
+
+/* Override ul lists' left alignment on small screens */
+@media screen {
+    ul {
+        margin-left: 30px;
+    }
 }
