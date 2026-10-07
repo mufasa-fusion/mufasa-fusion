@@ -105,7 +105,6 @@ track_a -> pom_a -> fused
 track_b -> pom_b -> fused
 static -> fused -> alarms -> out
 ```
-
 ::::
 
 ## Find your way through the docs
@@ -131,22 +130,6 @@ The {doc}`catalog` lists the nodes and data types you can build with.
 
 The {doc}`user-guide/index` covers custom nodes and live deployment.
 The {doc}`api/index` documents every class and parameter.
-:::
-
-::::
-
-
-## Is MuFASA right for you?
-
-::::{container} mf-fit-check
-
-:::{container} mf-fit-yes
-**A good fit if you**
-
-- want to buidl a fusion system and already have detections (positions or georeferenced maps)
-- want to quickly compare different fusion system configurations
-- want to trasition from recored data to live data 
-- want to have fun analyzing your data :)
 :::
 
 ::::
