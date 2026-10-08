@@ -3,6 +3,7 @@ from mufasa.io.outputs.streaming import StreamingOutputNode  # noqa: F401
 from mufasa.io.outputs.geojson import GeoJsonOutput  # noqa: F401
 from mufasa.io.outputs.geotiff import GeoTiffOutput  # noqa: F401
 from mufasa.io.outputs.python_object import LocationOutput, MapOutput  # noqa: F401
+from mufasa.io.outputs.visualization import Visualization  # noqa: F401
 
 __all__ = [
     "OutputNode",
@@ -11,4 +12,5 @@ __all__ = [
     "GeoTiffOutput",
     "LocationOutput",
     "MapOutput",
+    "Visualization",
 ]

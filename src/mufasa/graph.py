@@ -125,6 +125,13 @@ def _node_depths(nodes: list[Node]) -> dict:
 # ---------------------------------------------------------------------------
 
 class Graph:
+    """The Fusion Graph, binding all nodes reachable from its :attr:`inputs` to :attr:`outputs` together.
+
+    It is responsible for type compatibility checking and orchestrates the execution of the fusion system
+    via its :func:`run` method. It also distributes global configuration – :attr:`crs`,
+    :attr:`bounding box <bbox>` and map raster :attr:`resolution` – to every node.
+    """
+
     def __init__(
         self,
         inputs:     list[Node],

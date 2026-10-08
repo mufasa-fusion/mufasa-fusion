@@ -67,6 +67,9 @@ figcaption:hover a.headerlink {
   max-width: fit-content;
 }
 
-.cell_output svg {
-  margin-inline: auto;
+/* Override ul lists' left alignment on small screens */
+@media screen {
+    ul {
+        margin-left: 30px;
+    }
 }

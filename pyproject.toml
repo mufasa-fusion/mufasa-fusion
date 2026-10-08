@@ -30,6 +30,8 @@ dev = [
     "pytest",
     "pytest-cov",
     "mufasa[tracking,vis]",
+]
+docs = [
     "sphinx",
     "sphinx-autoapi",
     "shibuya",

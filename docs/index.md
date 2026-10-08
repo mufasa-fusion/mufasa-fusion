@@ -28,6 +28,7 @@ os.chdir("_data")
 
 A framework for rapid prototyping of geospatial sensor fusion systems. MuFASA turns the design of a multimodal fusion system into an explicit, executable graph.
 
+(quickstart)=
 ## The Fusion Graph
 
 MuFASA interprets a fusion system as a Fusion Graph: a directed acyclic graph that starts at Input nodes
@@ -73,7 +74,7 @@ graph.plot_graph()
 :::{container}
 **New to MuFASA**
 
-{doc}`getting-started/index` walks you through installing MuFASA and running your first Fusion Graph.
+{doc}`getting-started` walks you through installing MuFASA and running your first Fusion Graph.
 The {doc}`user-guide/index` explains the core concepts: Locations, Maps, Nodes and Graphs.
 :::
 
@@ -97,7 +98,7 @@ The {doc}`api/index` documents every class and parameter.
 :hidden:
 :maxdepth: 2
 
-getting-started/index
+getting-started
 user-guide/index
 showcases/index
 catalog

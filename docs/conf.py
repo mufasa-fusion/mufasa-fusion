@@ -26,13 +26,18 @@ extensions = [
     "sphinx.ext.napoleon",
     "autoapi.extension",
     "custom_directives",
+    "sphinx.ext.graphviz",
+    "inline_graphviz",
     "myst_nb",
 ]
 
 templates_path = ['_templates']
 exclude_patterns = ["_*", "**/_*"]
 
-myst_enable_extensions = ["colon_fence"]
+myst_enable_extensions = [
+    "colon_fence",
+    "deflist",
+]
 
 rst_prolog = """\
 .. |loc| image:: /../src/mufasa/graph_svg/icons/location-marker.svg
@@ -86,7 +91,7 @@ html_theme_options = {
     "dark_logo": "_static/img/logo/MuFASA_MuFASA_weiss.svg",
     "globaltoc_expand_depth": 1,
     "nav_links": [
-        {"title": "Getting started", "url": "getting-started/index"},
+        {"title": "Getting started", "url": "getting-started"},
         {"title": "User guide", "url": "user-guide/index"},
         {"title": "Showcases", "url": "showcases/index"},
         {"title": "Catalog", "url": "catalog"},
