@@ -1,5 +1,7 @@
 /* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
 
+symbol [stroke-width] { stroke-width: 5; }
+
 .mf-fg { font-family: inherit; overflow: visible; --mf-ink: #2f3439; }
 .mf-fg text { fill: var(--mf-ink); }
 .mf-fg .mf-node { outline: none; }
