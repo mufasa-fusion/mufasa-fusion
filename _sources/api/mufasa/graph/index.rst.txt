@@ -101,10 +101,13 @@ Module Contents
 
    .. py:method:: plot_graph()
 
-      Render the pipeline DAG as a matplotlib figure.
+      Render the pipeline as an interactive Fusion Graph.
 
-      Returns the Figure so the caller can display, save, or embed it.
-      Input nodes are green, output nodes are red, processing nodes are blue.
+      Ports on each node show the data types it accepts (top) and produces (bottom); hovering a node
+      shows its full name and connections, hovering a port its concrete data type.
+
+      Returns a :class:`~mufasa.graph_svg.FusionGraphSVG`, which displays itself in Jupyter notebooks
+      and can be written to an .svg file with ``save()``.
 
 
 

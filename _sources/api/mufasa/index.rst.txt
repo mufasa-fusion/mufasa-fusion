@@ -11,6 +11,7 @@ Submodules
    :maxdepth: 1
 
    /api/mufasa/graph/index
+   /api/mufasa/graph_svg/index
    /api/mufasa/io/index
    /api/mufasa/location/index
    /api/mufasa/map/index

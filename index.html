@@ -10,8 +10,8 @@
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="_static/css/shibuya-overwrite.css?v=ae101861" />
-    <link rel="stylesheet" type="text/css" href="_static/css/mufasa.css?v=eaa6afad" />
+    <link rel="stylesheet" type="text/css" href="_static/css/shibuya-overwrite.css?v=741ce7fd" />
+    <link rel="stylesheet" type="text/css" href="_static/css/mufasa.css?v=0f94a9c8" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -81,10 +81,9 @@ data-aria-dark="Switch to auto color mode">
 <p>MuFASA interprets a fusion system as a Fusion Graph: a directed acyclic graph that starts at Input nodes
 and ends at Output nodes. You compose it functionally by calling each node on its inputs, and nodes connect
 wherever their data types match. Learn more about the concept in the <a class="reference internal" href="user-guide/index.html"><span class="doc">User Guide</span></a>.</p>
-<div class="mf-side-by-side docutils container">
-<div class="literal-block-wrapper docutils container" id="id1">
-<div class="code-block-caption"><span class="caption-text">A simple Fusion Graph in Python code</span><a class="headerlink" href="#id1" title="Link to this code">#</a></div>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span><span class="p">,</span> <span class="n">BoundingBox</span>
 </span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.inputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeoJsonInput</span>
 </span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.outputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeoJsonOutput</span>
 </span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.nodes</span><span class="w"> </span><span class="kn">import</span> <span class="n">StaticMap</span><span class="p">,</span> <span class="n">POM</span><span class="p">,</span> <span class="n">BayesianFusion</span><span class="p">,</span> <span class="n">Threshold</span>
@@ -104,120 +103,105 @@ wherever their data types match. Learn more about the concept in the <a class="r
 </span><span data-line="18"><span class="n">out</span> <span class="o">=</span> <span class="n">GeoJsonOutput</span><span class="p">(</span><span class="s2">&quot;alarms.geojson&quot;</span><span class="p">)(</span><span class="n">alarms</span><span class="p">)</span>
 </span><span data-line="19">
 </span><span data-line="20"><span class="c1"># Fusion Graph</span>
-</span><span data-line="21"><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">track_a</span><span class="p">,</span> <span class="n">track_b</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">out</span><span class="p">])</span>
-</span><span data-line="22"><span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</span><span data-line="21"><span class="n">bbox</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span><span class="mf">48.268</span><span class="p">,</span> <span class="mf">16.426</span><span class="p">,</span> <span class="mf">48.27</span><span class="p">,</span> <span class="mf">16.4275</span><span class="p">)</span>
+</span><span data-line="22"><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">track_a</span><span class="p">,</span> <span class="n">track_b</span><span class="p">],</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">out</span><span class="p">],</span>
+</span><span data-line="23">              <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:32639&quot;</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="n">bbox</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</span><span data-line="24"><span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
 </span></pre></div>
 </div>
 </div>
-<figure class="align-center" id="id2">
-<div class="graphviz"><svg width="357pt" height="379pt"
- viewBox="0.00 0.00 357.00 379.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph mf&#45;fusion&#45;graph" transform="scale(1 1) rotate(0) translate(4 375)">
-<title>fusion_graph</title>
-<polygon fill="white" stroke="transparent" points="-4,4 -4,-375 353,-375 353,4 -4,4"/>
-<!-- track_a -->
-<g id="node1" class="node">
-<title>track_a</title>
-<text text-anchor="start" x="19.5" y="-355.4" font-family="Arial" font-weight="bold" font-size="12.00">GeoJsonInput</text>
-<text text-anchor="start" x="7.5" y="-331.4" font-family="Arial" font-size="12.00">&quot;sensor_a.geojson&quot;</text>
-<polygon fill="none" stroke="black" points="0,-321 0,-371 129,-371 129,-321 0,-321"/>
-</g>
-<!-- pom_a -->
-<g id="node4" class="node">
-<title>pom_a</title>
-<text text-anchor="start" x="49" y="-269.4" font-family="Arial" font-weight="bold" font-size="12.00">POM</text>
-<text text-anchor="start" x="28.5" y="-245.4" font-family="Arial" font-size="12.00">decay_s = 5</text>
-<polygon fill="none" stroke="black" points="21,-235 21,-285 108,-285 108,-235 21,-235"/>
-</g>
-<!-- track_a&#45;&gt;pom_a -->
-<g id="edge1" class="edge">
-<title>track_a&#45;&gt;pom_a</title>
-<path fill="none" stroke="black" d="M64.5,-320.7C64.5,-312.78 64.5,-303.83 64.5,-295.31"/>
-<polygon fill="black" stroke="black" points="68,-295.24 64.5,-285.24 61,-295.24 68,-295.24"/>
-</g>
-<!-- track_b -->
-<g id="node2" class="node">
-<title>track_b</title>
-<text text-anchor="start" x="239.5" y="-355.4" font-family="Arial" font-weight="bold" font-size="12.00">GeoJsonInput</text>
-<text text-anchor="start" x="227.5" y="-331.4" font-family="Arial" font-size="12.00">&quot;sensor_b.geojson&quot;</text>
-<polygon fill="none" stroke="black" points="220,-321 220,-371 349,-371 349,-321 220,-321"/>
-</g>
-<!-- pom_b -->
-<g id="node5" class="node">
-<title>pom_b</title>
-<text text-anchor="start" x="269" y="-269.4" font-family="Arial" font-weight="bold" font-size="12.00">POM</text>
-<text text-anchor="start" x="248.5" y="-245.4" font-family="Arial" font-size="12.00">decay_s = 1</text>
-<polygon fill="none" stroke="black" points="241,-235 241,-285 328,-285 328,-235 241,-235"/>
-</g>
-<!-- track_b&#45;&gt;pom_b -->
-<g id="edge3" class="edge">
-<title>track_b&#45;&gt;pom_b</title>
-<path fill="none" stroke="black" d="M284.5,-320.7C284.5,-312.78 284.5,-303.83 284.5,-295.31"/>
-<polygon fill="black" stroke="black" points="288,-295.24 284.5,-285.24 281,-295.24 288,-295.24"/>
-</g>
-<!-- static -->
-<g id="node3" class="node">
-<title>static</title>
-<text text-anchor="start" x="140" y="-269.4" font-family="Arial" font-weight="bold" font-size="12.00">StaticMap</text>
-<text text-anchor="start" x="126.5" y="-245.4" font-family="Arial" font-size="12.00">&quot;priors.geojson&quot;</text>
-<polygon fill="none" stroke="black" points="119.5,-235 119.5,-285 229.5,-285 229.5,-235 119.5,-235"/>
-</g>
-<!-- fused -->
-<g id="node6" class="node">
-<title>fused</title>
-<text text-anchor="start" x="122.5" y="-182.9" font-family="Arial" font-weight="bold" font-size="12.00">BayesianFusion</text>
-<polygon fill="none" stroke="black" points="115.5,-172 115.5,-199 233.5,-199 233.5,-172 115.5,-172"/>
-</g>
-<!-- static&#45;&gt;fused -->
-<g id="edge5" class="edge">
-<title>static&#45;&gt;fused</title>
-<path fill="none" stroke="black" d="M174.5,-234.86C174.5,-226.7 174.5,-217.62 174.5,-209.55"/>
-<polygon fill="black" stroke="black" points="178,-209.36 174.5,-199.36 171,-209.36 178,-209.36"/>
-</g>
-<!-- pom_a&#45;&gt;fused -->
-<g id="edge2" class="edge">
-<title>pom_a&#45;&gt;fused</title>
-<path fill="none" stroke="black" d="M101.13,-234.86C116,-225.06 132.89,-213.93 146.71,-204.81"/>
-<polygon fill="black" stroke="black" points="148.88,-207.58 155.3,-199.15 145.03,-201.73 148.88,-207.58"/>
-</g>
-<!-- pom_b&#45;&gt;fused -->
-<g id="edge4" class="edge">
-<title>pom_b&#45;&gt;fused</title>
-<path fill="none" stroke="black" d="M247.87,-234.86C233,-225.06 216.11,-213.93 202.29,-204.81"/>
-<polygon fill="black" stroke="black" points="203.97,-201.73 193.7,-199.15 200.12,-207.58 203.97,-201.73"/>
-</g>
-<!-- alarms -->
-<g id="node7" class="node">
-<title>alarms</title>
-<text text-anchor="start" x="141" y="-120.4" font-family="Arial" font-weight="bold" font-size="12.00">Threshold</text>
-<text text-anchor="start" x="128.5" y="-96.4" font-family="Arial" font-size="12.00">threshold = 0.7</text>
-<polygon fill="none" stroke="black" points="121.5,-86 121.5,-136 227.5,-136 227.5,-86 121.5,-86"/>
-</g>
-<!-- fused&#45;&gt;alarms -->
-<g id="edge6" class="edge">
-<title>fused&#45;&gt;alarms</title>
-<path fill="none" stroke="black" d="M174.5,-171.87C174.5,-164.74 174.5,-155.44 174.5,-146.31"/>
-<polygon fill="black" stroke="black" points="178,-146.2 174.5,-136.2 171,-146.2 178,-146.2"/>
-</g>
-<!-- out -->
-<g id="node8" class="node">
-<title>out</title>
-<text text-anchor="start" x="123.5" y="-34.4" font-family="Arial" font-weight="bold" font-size="12.00">GeoJsonOutput</text>
-<text text-anchor="start" x="124" y="-10.4" font-family="Arial" font-size="12.00">&quot;alarms.geojson&quot;</text>
-<polygon fill="none" stroke="black" points="116,0 116,-50 233,-50 233,0 116,0"/>
-</g>
-<!-- alarms&#45;&gt;out -->
-<g id="edge7" class="edge">
-<title>alarms&#45;&gt;out</title>
-<path fill="none" stroke="black" d="M174.5,-85.7C174.5,-77.78 174.5,-68.83 174.5,-60.31"/>
-<polygon fill="black" stroke="black" points="178,-60.24 174.5,-50.24 171,-60.24 178,-60.24"/>
-</g>
-</g>
-</svg>
-<figcaption>
-<p><span class="caption-text">An example Fusion Graph visualized</span><a class="headerlink" href="#id2" title="Link to this image">#</a></p>
-</figcaption>
-</figure>
+</div>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 587 686" width="587" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg0-location-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="5">
+		<path transform="matrix(.96433 0 0 .96614 1.1414 1.0009)" d="m32 64c-6.5395-11.081-13.123-22.139-19.638-33.233-4.1108-6.9825-2.6306-16.157 2.2912-22.331 4.0946-5.274 10.664-8.4864 17.346-8.4363m0 64c6.5395-11.081 13.123-22.139 19.638-33.233 4.1108-6.9825 2.6306-16.157-2.2912-22.331-4.0946-5.274-10.664-8.4864-17.346-8.4363" stroke-width="5"/>
+		<circle cx="32" cy="22.621" r="10.529" stroke-width="5"/>
+	</g>
+</symbol><symbol id="mfg0-observation-marker" viewBox="0 0 64 64">
+	<circle cx="32" cy="32" r="7" fill="currentColor"/>
+	<circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="5" stroke-width="5"/>
+	<circle cx="32" cy="32" r="15" fill="none" stroke="currentColor" stroke-linecap="round" stroke-miterlimit="5" stroke-width="5"/>
+</symbol><symbol id="mfg0-map-fold" viewBox="0 0 64 64">
+	<path d="m39.726 62.932-0.0703-47.664m-17.662-14.197-0.05273 46.443m-18.845-42.819 0.1686 45.912 18.677-3.0921 17.785 15.418 20.693-3.6234 0.48108-47.469-21.245 3.4282-17.662-14.197z" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-width="5"/>
+</symbol><symbol id="mfg0-map-roll" viewBox="0 0 64 64">
+	<path d="m13.031 52.687c4.1138-1.1139 11.183 0.35295 18.44 5.8256 9.815 7.4018 24.012 4.4215 26.849-0.98951l3.0704-49.213m-58.78-2.7506 2.1132 48.951c0.00943 4.4209 3.8904 4.9581 8.1846 4.8403l-0.1084-48.832c-5.5273-0.044037-10.127-1.6214-10.192-5.0545-0.034512-1.8163 3.539-3.5804 8.8186-4.1751 6.423-0.72352 12.764 0.052522 18.811 5.2637 6.3057 5.4343 13.513 5.9197 21.005 5.2909 4.1941-0.35203 10.008-1.3033 10.147-3.5536 0.14975-2.4298-5.1331-5.326-12.479-3.4929l0.06957 7.0165" fill="none" stroke="currentColor" stroke-miterlimit="5" stroke-width="5"/>
+</symbol><symbol id="mfg0-unknown" viewBox="0 0 64 64">
+	<circle cx="32" cy="32" r="12" fill="currentColor"/>
+</symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsoninput_0" data-to="pom_0"><path d="M180.0 47.0 L180.0 98.0"/><circle cx="180.0" cy="47.0" r="3.5"/><circle cx="180.0" cy="98.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsoninput_1" data-to="pom_1"><path d="M360.0 47.0 L360.0 98.0"/><circle cx="360.0" cy="47.0" r="3.5"/><circle cx="360.0" cy="98.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="staticmap_0" data-to="bayesianfusion_0"><path d="M0.0 192.0 L0.0 207.5 Q0.0 217.5 10.0 217.5 L170.0 217.5 Q180.0 217.5 180.0 227.5 L180.0 243.0"/><circle cx="0.0" cy="192.0" r="3.5"/><circle cx="180.0" cy="243.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="pom_0" data-to="bayesianfusion_0"><path d="M180.0 192.0 L180.0 243.0"/><circle cx="180.0" cy="192.0" r="3.5"/><circle cx="180.0" cy="243.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="pom_1" data-to="bayesianfusion_0"><path d="M360.0 192.0 L360.0 207.5 Q360.0 217.5 350.0 217.5 L190.0 217.5 Q180.0 217.5 180.0 227.5 L180.0 243.0"/><circle cx="360.0" cy="192.0" r="3.5"/><circle cx="180.0" cy="243.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="bayesianfusion_0" data-to="threshold_0"><path d="M180.0 337.0 L180.0 388.0"/><circle cx="180.0" cy="337.0" r="3.5"/><circle cx="180.0" cy="388.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="threshold_0" data-to="geojsonoutput_0"><path d="M180.0 482.0 L180.0 533.0"/><circle cx="180.0" cy="482.0" r="3.5"/><circle cx="180.0" cy="533.0" r="3.5"/></g><g class="mf-node mf-io" data-id="geojsoninput_0" tabindex="0" aria-label="GeoJsonInput"><path d="M146.0 0.0 V-23.6 Q146.0 -30.6 153.0 -30.6 H207.0 Q214.0 -30.6 214.0 -23.6 V0.0 A34 34 0 0 1 146.0 0.0 Z" class="mf-body"/><text x="180.0" y="5.5" text-anchor="middle" class="mf-code">GJI</text><text x="226.0" y="5.0" class="mf-name">GeoJsonInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(180.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="geojsoninput_1" tabindex="0" aria-label="GeoJsonInput"><path d="M326.0 0.0 V-23.6 Q326.0 -30.6 333.0 -30.6 H387.0 Q394.0 -30.6 394.0 -23.6 V0.0 A34 34 0 0 1 326.0 0.0 Z" class="mf-body"/><text x="360.0" y="5.5" text-anchor="middle" class="mf-code">GJI</text><text x="406.0" y="5.0" class="mf-name">GeoJsonInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(360.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="staticmap_0" tabindex="0" aria-label="StaticMap"><path d="M-34.0 145.0 V121.4 Q-34.0 114.4 -27.0 114.4 H27.0 Q34.0 114.4 34.0 121.4 V145.0 A34 34 0 0 1 -34.0 145.0 Z" class="mf-body"/><text x="0.0" y="150.5" text-anchor="middle" class="mf-code">SM</text><text x="46.0" y="150.0" class="mf-name">StaticMap</text><g class="mf-port" style="--mf-fam:#470f51" transform="translate(0.0 179.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="pom_0" tabindex="0" aria-label="POM"><circle cx="180.0" cy="145.0" r="34" class="mf-body"/><text x="180.0" y="150.5" text-anchor="middle" class="mf-code">POM</text><text x="226.0" y="150.0" class="mf-name">POM</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(180.0 111.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(180.0 179.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="pom_1" tabindex="0" aria-label="POM"><circle cx="360.0" cy="145.0" r="34" class="mf-body"/><text x="360.0" y="150.5" text-anchor="middle" class="mf-code">POM</text><text x="406.0" y="150.0" class="mf-name">POM</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(360.0 111.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(360.0 179.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="bayesianfusion_0" tabindex="0" aria-label="BayesianFusion"><circle cx="180.0" cy="290.0" r="34" class="mf-body"/><text x="180.0" y="295.5" text-anchor="middle" class="mf-code">BF</text><text x="226.0" y="295.0" class="mf-name">BayesianFusion</text><g class="mf-port" style="--mf-fam:#470f51" transform="translate(180.0 256.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(180.0 324.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="threshold_0" tabindex="0" aria-label="Threshold"><circle cx="180.0" cy="435.0" r="34" class="mf-body"/><text x="180.0" y="440.5" text-anchor="middle" class="mf-code">TH</text><text x="226.0" y="440.0" class="mf-name">Threshold</text><g class="mf-port" style="--mf-fam:#470f51" transform="translate(180.0 401.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(180.0 469.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="geojsonoutput_0" tabindex="0" aria-label="GeoJsonOutput"><path d="M214.0 580.0 V603.6 Q214.0 610.6 207.0 610.6 H153.0 Q146.0 610.6 146.0 603.6 V580.0 A34 34 0 0 1 214.0 580.0 Z" class="mf-body"/><text x="180.0" y="585.5" text-anchor="middle" class="mf-code">GJO</text><text x="226.0" y="585.0" class="mf-name">GeoJsonOutput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(180.0 546.0)"><title>Location family: Location</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Location</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
+
+.mf-fg { font-family: inherit; overflow: visible; --mf-ink: #2f3439; }
+.mf-fg text { fill: var(--mf-ink); }
+.mf-fg .mf-node { outline: none; }
+
+/* Nodes: Input/Output nodes white with a dark outline, processing nodes grey */
+.mf-fg .mf-body { fill: white; stroke: var(--mf-ink); stroke-width: 2.5; filter: drop-shadow(0 3px 5px rgb(0 0 0 / 0.15)); }
+.mf-fg .mf-proc .mf-body { fill: #e9ecee; stroke: #b9c0c5; stroke-width: 1.5; }
+.mf-fg .mf-code { font-size: 16px; font-weight: 700; }
+
+/* Full name, hidden until the node is hovered or focused, then slides out to the right */
+.mf-fg .mf-name {
+    font-size: 15px; font-weight: 600; opacity: 0; transform: translateX(-24px); pointer-events: none;
+    paint-order: stroke; stroke: white; stroke-width: 5px; stroke-linejoin: round;
+    transition: opacity 200ms ease, transform 250ms ease;
+}
+.mf-fg .mf-node:is(:hover, :focus) .mf-name { opacity: 1; transform: none; }
+
+/* Edges in the color of the data family they carry */
+.mf-fg .mf-edge path { fill: none; stroke: var(--mf-fam); stroke-width: 2.5; }
+.mf-fg .mf-edge circle { fill: var(--mf-fam); }
+
+/* Ports; hovering one slides out a second badge with the concrete data type */
+.mf-fg .mf-port { color: var(--mf-fam); cursor: help; }
+.mf-fg .mf-port-bg { fill: white; stroke: var(--mf-fam); stroke-width: 2; }
+.mf-fg .mf-sub { opacity: 0; transition: transform 250ms ease, opacity 250ms ease; }
+.mf-fg .mf-port:is(:hover, :focus-within) .mf-sub { opacity: 1; transform: translateX(26px); }
+.mf-fg .mf-sub-label {
+    font-size: 11px; font-weight: 600; fill: var(--mf-fam);
+    paint-order: stroke; stroke: white; stroke-width: 4px;
+}
+
+/* Set by graph.js: fade out everything not connected to the hovered node */
+.mf-fg :is(.mf-node, .mf-edge) { transition: opacity 200ms; }
+.mf-fg.is-focused :is(.mf-node, .mf-edge):not(.is-related) { opacity: 0.25; }
+</style><script>// Fusion Graph SVGs (class mf-fg): fade out everything not connected to the hovered or focused node.
+// Safe to load more than once: each graph is set up only once.
+(() => {
+  function setUp(svg) {
+    svg.dataset.mfReady = "true";
+    const edges = [...svg.querySelectorAll(".mf-edge")];
+    const clear = () => {
+      svg.classList.remove("is-focused");
+      svg.querySelectorAll(".is-related").forEach(el => el.classList.remove("is-related"));
+    };
+    svg.querySelectorAll(".mf-node").forEach(node => {
+      const focus = () => {
+        clear();
+        svg.classList.add("is-focused");
+        node.classList.add("is-related");
+        for (const edge of edges) {
+          const { from, to } = edge.dataset;
+          if (from !== node.dataset.id && to !== node.dataset.id) continue;
+          edge.classList.add("is-related");
+          const other = from === node.dataset.id ? to : from;
+          svg.querySelector(`.mf-node[data-id="${other}"]`).classList.add("is-related");
+        }
+      };
+      node.addEventListener("mouseenter", focus);
+      node.addEventListener("focus", focus);
+      node.addEventListener("mouseleave", clear);
+      node.addEventListener("blur", clear);
+    });
+  }
+
+  const setUpAll = () => document.querySelectorAll("svg.mf-fg:not([data-mf-ready])").forEach(setUp);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setUpAll);
+  } else {
+    setUpAll();
+  }
+})();
+</script></svg></div></div>
 </div>
 </section>
 <section id="find-your-way-through-the-docs">
@@ -237,20 +221,6 @@ The <a class="reference internal" href="catalog.html"><span class="doc">Node Cat
 <p><strong>Building your system</strong></p>
 <p>The <a class="reference internal" href="user-guide/index.html"><span class="doc">User Guide</span></a> covers custom nodes and live deployment.
 The <a class="reference internal" href="api/index.html"><span class="doc">API Reference</span></a> documents every class and parameter.</p>
-</div>
-</div>
-</section>
-<section id="is-mufasa-right-for-you">
-<h2>Is MuFASA right for you?<a class="headerlink" href="#is-mufasa-right-for-you" title="Link to this heading">#</a></h2>
-<div class="mf-fit-check docutils container">
-<div class="mf-fit-yes docutils container">
-<p><strong>A good fit if you</strong></p>
-<ul class="simple">
-<li><p>want to buidl a fusion system and already have detections (positions or georeferenced maps)</p></li>
-<li><p>want to quickly compare different fusion system configurations</p></li>
-<li><p>want to trasition from recored data to live data</p></li>
-<li><p>want to have fun analyzing your data :)</p></li>
-</ul>
 </div>
 </div>
 <div class="toctree-wrapper compound">

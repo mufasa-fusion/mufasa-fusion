@@ -1,0 +1,112 @@
+mufasa.graph_svg.spec
+=====================
+
+.. py:module:: mufasa.graph_svg.spec
+
+.. autoapi-nested-parse::
+
+   Graph descriptions: nodes with their data types, and edges. Built from a Graph or from example code.
+
+
+
+Exceptions
+----------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.spec.FusionGraphCodeError
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.spec.NodeSpec
+   mufasa.graph_svg.spec.GraphSpec
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.spec.spec_from_graph
+   mufasa.graph_svg.spec.class_types
+   mufasa.graph_svg.spec.spec_from_code
+
+
+Module Contents
+---------------
+
+.. py:class:: NodeSpec
+
+   .. py:attribute:: id
+      :type:  str
+
+
+   .. py:attribute:: cls
+      :type:  type
+
+
+   .. py:attribute:: input_types
+      :type:  list[type]
+
+
+   .. py:attribute:: output_type
+      :type:  type | None
+
+
+   .. py:property:: is_input
+      :type: bool
+
+
+
+   .. py:property:: is_output
+      :type: bool
+
+
+
+.. py:class:: GraphSpec
+
+   .. py:attribute:: nodes
+      :type:  dict[str, NodeSpec]
+
+
+   .. py:attribute:: edges
+      :type:  list[tuple[str, str]]
+      :value: []
+
+
+
+.. py:exception:: FusionGraphCodeError(message: str, lineno: int | None = None)
+
+   Bases: :py:obj:`ValueError`
+
+
+   Inappropriate argument value (of correct type).
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+.. py:function:: spec_from_graph(graph) -> GraphSpec
+
+   Describe a built Graph, with the data types its nodes resolved at construction and wiring.
+
+
+.. py:function:: class_types(cls: type) -> tuple[list[type], type | None]
+
+   Data types declared by a node class.
+
+   Nodes that resolve their types later (at construction or wiring) declare their broadest valid types on the
+   class, so a graph drawn from code shows what a class accepts and produces in general.
+
+
+.. py:function:: spec_from_code(source: str) -> GraphSpec
+
+   Describe the graph that example code builds, without running it.
+
+   Understands ``from module import NodeClass`` and assignments ``name = NodeClass(...)`` (a source) or
+   ``name = NodeClass(...)(input, ...)``. Everything else, such as ``Graph(...)`` or ``graph.run()``, is ignored.
+
+

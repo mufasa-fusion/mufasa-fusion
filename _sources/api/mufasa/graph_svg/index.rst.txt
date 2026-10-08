@@ -1,0 +1,27 @@
+mufasa.graph_svg
+================
+
+.. py:module:: mufasa.graph_svg
+
+.. autoapi-nested-parse::
+
+   Render Fusion Graphs as interactive SVG, for ``Graph.plot_graph()`` and the docs' ``fusion-graph`` directive.
+
+   A graph is described as a :class:`GraphSpec` (``spec.py``), laid out (``layout.py``) and drawn (``draw.py``).
+   Port colors and icons come from the data type families (``families.py``); styles, hover script and icons are
+   plain files in this package.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /api/mufasa/graph_svg/draw/index
+   /api/mufasa/graph_svg/families/index
+   /api/mufasa/graph_svg/layout/index
+   /api/mufasa/graph_svg/spec/index
+
+

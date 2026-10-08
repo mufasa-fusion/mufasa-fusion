@@ -1,0 +1,71 @@
+mufasa.graph_svg.families
+=========================
+
+.. py:module:: mufasa.graph_svg.families
+
+.. autoapi-nested-parse::
+
+   Data type families: how ports and edges are colored and which icon they show.
+
+   To add a family, add its root data class with a color and an icon file (in ``icons/``) to ``FAMILIES``.
+   Subclasses of the root belong to the family automatically.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.families.FAMILIES
+   mufasa.graph_svg.families.UNKNOWN_FAMILY
+   mufasa.graph_svg.families.TYPE_ICONS
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.families.Family
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.families.family_of
+   mufasa.graph_svg.families.icon_of
+
+
+Module Contents
+---------------
+
+.. py:class:: Family
+
+   .. py:attribute:: root
+      :type:  type
+
+
+   .. py:attribute:: color
+      :type:  str
+
+
+   .. py:attribute:: icon
+      :type:  str
+
+
+.. py:data:: FAMILIES
+
+.. py:data:: UNKNOWN_FAMILY
+
+.. py:data:: TYPE_ICONS
+
+.. py:function:: family_of(data_type: type) -> Family
+
+.. py:function:: icon_of(data_type: type) -> str
+
+   The most specific icon: the type's own, else its closest ancestor's, else its family's.
+
+

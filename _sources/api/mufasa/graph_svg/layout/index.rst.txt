@@ -1,0 +1,59 @@
+mufasa.graph_svg.layout
+=======================
+
+.. py:module:: mufasa.graph_svg.layout
+
+.. autoapi-nested-parse::
+
+   Node positions: layers from top to bottom, ordered to reduce crossings, aligned with their neighbours.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.layout.DX
+   mufasa.graph_svg.layout.DY
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.layout.Layout
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.layout.layout
+
+
+Module Contents
+---------------
+
+.. py:data:: DX
+   :value: 180
+
+
+.. py:data:: DY
+   :value: 145
+
+
+.. py:class:: Layout
+
+   .. py:attribute:: nodes
+      :type:  dict[str, tuple[float, float]]
+
+
+   .. py:attribute:: bends
+      :type:  dict[tuple[str, str], list[tuple[float, float]]]
+
+
+.. py:function:: layout(spec: mufasa.graph_svg.spec.GraphSpec) -> Layout
+

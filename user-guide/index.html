@@ -2,7 +2,7 @@
 <html lang="en" data-accent-color="red" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>User Guide - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Design principles" href="design-principles.html" /><link rel="prev" title="Getting started" href="../getting-started.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>User Guide - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Is MuFASA right for you?" href="is-mufasa-right-for-you.html" /><link rel="prev" title="Getting started" href="../getting-started.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -10,8 +10,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=ae101861" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=eaa6afad" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=741ce7fd" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=0f94a9c8" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -69,6 +69,7 @@ data-aria-dark="Switch to auto color mode">
         <div class="globaltoc" data-expand-depth="1"><ul class="current">
 <li class="toctree-l1 _expand"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="is-mufasa-right-for-you.html">Is MuFASA right for you?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design-principles.html">Design principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts.html">Concepts</a></li>
@@ -81,6 +82,13 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l1 _expand"><a class="reference internal" href="../api/index.html">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api/mufasa/index.html">mufasa</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../api/mufasa/graph/index.html">mufasa.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/graph_svg/index.html">mufasa.graph_svg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/draw/index.html">mufasa.graph_svg.draw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/families/index.html">mufasa.graph_svg.families</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/layout/index.html">mufasa.graph_svg.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/spec/index.html">mufasa.graph_svg.spec</a></li>
+</ul>
+</li>
 <li class="toctree-l3"><a class="reference internal" href="../api/mufasa/io/index.html">mufasa.io</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="../api/mufasa/io/inputs/index.html">mufasa.io.inputs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="../api/mufasa/io/outputs/index.html">mufasa.io.outputs</a></li>
@@ -151,6 +159,7 @@ data-aria-dark="Switch to auto color mode">
 <div class="toctree-wrapper compound">
 <p class="caption" role="heading"><span class="caption-text">Contents</span></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="is-mufasa-right-for-you.html">Is MuFASA right for you?</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design-principles.html">Design principles</a></li>
 <li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
@@ -182,10 +191,10 @@ data-aria-dark="Switch to auto color mode">
         <span>Previous</span><div class="title">Getting started</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="design-principles.html">
+    <a href="is-mufasa-right-for-you.html">
       <div class="page-info">
         <span>Next</span>
-        <div class="title">Design principles</div>
+        <div class="title">Is MuFASA right for you?</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>

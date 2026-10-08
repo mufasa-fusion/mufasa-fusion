@@ -1,0 +1,82 @@
+mufasa.graph_svg.draw
+=====================
+
+.. py:module:: mufasa.graph_svg.draw
+
+.. autoapi-nested-parse::
+
+   Draws a graph description as SVG. Styles (graph.css), hover script (graph.js) and icons (icons/) are files
+   next to this module.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.draw.R
+   mufasa.graph_svg.draw.PORT_R
+   mufasa.graph_svg.draw.ASSETS
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.draw.FusionGraphSVG
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   mufasa.graph_svg.draw.asset
+   mufasa.graph_svg.draw.short_code
+   mufasa.graph_svg.draw.render
+
+
+Module Contents
+---------------
+
+.. py:data:: R
+   :value: 34
+
+
+.. py:data:: PORT_R
+   :value: 13
+
+
+.. py:data:: ASSETS
+
+.. py:function:: asset(name: str) -> str
+
+.. py:function:: short_code(name: str) -> str
+
+   A 2-3 letter code for a class name: ``BayesianFusion`` -> ``BF``, ``POM`` -> ``POM``, ``Threshold`` -> ``TH``.
+
+
+.. py:function:: render(spec: mufasa.graph_svg.spec.GraphSpec, prefix: str | None = None, embed_assets: bool = True) -> str
+
+   Draw a graph description as an SVG string.
+
+   ``prefix`` makes ids unique when several graphs share a page. With ``embed_assets`` the SVG carries its own
+   styles and hover script (e.g. for notebooks); without, the page must load graph.css and graph.js.
+
+
+.. py:class:: FusionGraphSVG(svg: str)
+
+   A rendered Fusion Graph. Displays itself in Jupyter notebooks; ``save()`` writes an .svg file.
+
+
+   .. py:attribute:: svg
+
+
+   .. py:method:: __str__() -> str
+
+
+   .. py:method:: save(path) -> None
+
+

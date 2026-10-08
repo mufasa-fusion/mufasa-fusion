@@ -2,7 +2,7 @@
 <html lang="en" data-accent-color="red" data-content_root="../../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>mufasa.io - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="mufasa.io.inputs" href="inputs/index.html" /><link rel="prev" title="mufasa.graph" href="../graph/index.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>mufasa.io - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../../../about.html" /><link rel="index" title="Index" href="../../../genindex.html" /><link rel="search" title="Search" href="../../../search.html" /><link rel="next" title="mufasa.io.inputs" href="inputs/index.html" /><link rel="prev" title="mufasa.graph_svg.spec" href="../graph_svg/spec/index.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=e1a1ceaf" />
@@ -10,8 +10,8 @@
     <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/css/shibuya-overwrite.css?v=ae101861" />
-    <link rel="stylesheet" type="text/css" href="../../../_static/css/mufasa.css?v=eaa6afad" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/shibuya-overwrite.css?v=741ce7fd" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/css/mufasa.css?v=0f94a9c8" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -69,6 +69,7 @@ data-aria-dark="Switch to auto color mode">
         <div class="globaltoc" data-expand-depth="1"><ul class="current">
 <li class="toctree-l1 _expand"><a class="reference internal" href="../../../getting-started.html">Getting started</a></li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../../../user-guide/index.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../user-guide/is-mufasa-right-for-you.html">Is MuFASA right for you?</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../user-guide/design-principles.html">Design principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../user-guide/installation.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../user-guide/concepts.html">Concepts</a></li>
@@ -81,6 +82,13 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../index.html">mufasa</a><ul class="current">
 <li class="toctree-l3"><a class="reference internal" href="../graph/index.html">mufasa.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../graph_svg/index.html">mufasa.graph_svg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../graph_svg/draw/index.html">mufasa.graph_svg.draw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../graph_svg/families/index.html">mufasa.graph_svg.families</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../graph_svg/layout/index.html">mufasa.graph_svg.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../graph_svg/spec/index.html">mufasa.graph_svg.spec</a></li>
+</ul>
+</li>
 <li class="toctree-l3 current"><a class="current reference internal" href="#">mufasa.io</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="inputs/index.html">mufasa.io.inputs</a></li>
 <li class="toctree-l4"><a class="reference internal" href="outputs/index.html">mufasa.io.outputs</a></li>
@@ -172,10 +180,10 @@ data-aria-dark="Switch to auto color mode">
   </svg>
   <span>Back to top</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="../graph/index.html">
+    <a href="../graph_svg/spec/index.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>Previous</span><div class="title">mufasa.graph</div></div>
+        <span>Previous</span><div class="title">mufasa.graph_svg.spec</div></div>
     </a>
   </div><div class="navigation-next">
     <a href="inputs/index.html">
