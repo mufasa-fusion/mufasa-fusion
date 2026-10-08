@@ -43,6 +43,7 @@ class GeoJsonInput(InputNode):
     """
 
     _input_types = []
+    _output_type = Location  # broadest valid default; resolved from the file at construction
 
     def __init__(self, path: str) -> None:
         self._output_type: type = Observation if _has_confidence(path) else Location

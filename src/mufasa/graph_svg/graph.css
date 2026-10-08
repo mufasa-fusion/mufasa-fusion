@@ -1,0 +1,36 @@
+/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
+
+.mf-fg { font-family: inherit; overflow: visible; --mf-ink: #2f3439; }
+.mf-fg text { fill: var(--mf-ink); }
+.mf-fg .mf-node { outline: none; }
+
+/* Nodes: Input/Output nodes white with a dark outline, processing nodes grey */
+.mf-fg .mf-body { fill: white; stroke: var(--mf-ink); stroke-width: 2.5; filter: drop-shadow(0 3px 5px rgb(0 0 0 / 0.15)); }
+.mf-fg .mf-proc .mf-body { fill: #e9ecee; stroke: #b9c0c5; stroke-width: 1.5; }
+.mf-fg .mf-code { font-size: 16px; font-weight: 700; }
+
+/* Full name, hidden until the node is hovered or focused, then slides out to the right */
+.mf-fg .mf-name {
+    font-size: 15px; font-weight: 600; opacity: 0; transform: translateX(-24px); pointer-events: none;
+    paint-order: stroke; stroke: white; stroke-width: 5px; stroke-linejoin: round;
+    transition: opacity 200ms ease, transform 250ms ease;
+}
+.mf-fg .mf-node:is(:hover, :focus) .mf-name { opacity: 1; transform: none; }
+
+/* Edges in the color of the data family they carry */
+.mf-fg .mf-edge path { fill: none; stroke: var(--mf-fam); stroke-width: 2.5; }
+.mf-fg .mf-edge circle { fill: var(--mf-fam); }
+
+/* Ports; hovering one slides out a second badge with the concrete data type */
+.mf-fg .mf-port { color: var(--mf-fam); cursor: help; }
+.mf-fg .mf-port-bg { fill: white; stroke: var(--mf-fam); stroke-width: 2; }
+.mf-fg .mf-sub { opacity: 0; transition: transform 250ms ease, opacity 250ms ease; }
+.mf-fg .mf-port:is(:hover, :focus-within) .mf-sub { opacity: 1; transform: translateX(26px); }
+.mf-fg .mf-sub-label {
+    font-size: 11px; font-weight: 600; fill: var(--mf-fam);
+    paint-order: stroke; stroke: white; stroke-width: 4px;
+}
+
+/* Set by graph.js: fade out everything not connected to the hovered node */
+.mf-fg :is(.mf-node, .mf-edge) { transition: opacity 200ms; }
+.mf-fg.is-focused :is(.mf-node, .mf-edge):not(.is-related) { opacity: 0.25; }
