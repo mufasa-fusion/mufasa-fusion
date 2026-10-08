@@ -18,8 +18,8 @@ class Family:
 
 
 FAMILIES = [
-    Family(Location, "#1f9fa4", "location-marker"),
-    Family(Map, "#a3303a", "map-fold"),
+    Family(Location, "#31b7bc", "location-marker"),
+    Family(Map, "#470f51", "map-fold"),
 ]
 
 UNKNOWN_FAMILY = Family(object, "#8a9196", "unknown")
