@@ -23,17 +23,14 @@ release = '0.1.0'
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
 extensions = [
-    'myst_parser',
     "sphinx.ext.napoleon",
     "autoapi.extension",
     "custom_directives",
-    "sphinx.ext.graphviz",
-    "inline_graphviz",
-    "fusion_graph",  # Needs MuFASA installed, see the extension's docstring
+    "myst_nb",
 ]
 
 templates_path = ['_templates']
-exclude_patterns = ["_*"]
+exclude_patterns = ["_*", "**/_*"]
 
 myst_enable_extensions = ["colon_fence"]
 

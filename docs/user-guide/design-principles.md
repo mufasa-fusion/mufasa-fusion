@@ -1,3 +1,13 @@
+---
+file_format: mystnb
+---
+
+```{code-cell}
+:tags: [remove-cell]
+import os.path
+os.chdir(os.path.join("..", "_data"))
+```
+
 # Design principles
 
 MuFASA is built on three principles. The colors on this page mark where each one shows up,
@@ -75,12 +85,10 @@ Alarms, operators
 
 This graph fuses two sensors with a static prior and turns the result into alarms.
 
-```{fusion-graph}
-:show-code:
+```{code-cell}
 :class: mf-annotated
-:caption: A simple Fusion Graph in Python code
 
-from mufasa import Graph
+from mufasa import Graph, BoundingBox
 from mufasa.io.inputs import GeoJsonInput
 from mufasa.io.outputs import GeoJsonOutput
 from mufasa.nodes import StaticMap, POM, BayesianFusion, Threshold
@@ -100,6 +108,13 @@ alarms = Threshold(threshold=0.7)(fused)
 out = GeoJsonOutput("alarms.geojson")(alarms)
 
 # Fusion Graph
-graph = Graph(inputs=[track_a, track_b], outputs=[out])
+bbox = BoundingBox(48.268, 16.426, 48.27, 16.4275)
+graph = Graph(inputs=[track_a, track_b], outputs=[out],
+              crs="EPSG:32639", bbox=bbox, resolution=(10, 10))
 graph.run()
+```
+
+```{code-cell}
+:tags: [remove-input]
+graph.plot_graph()
 ```

@@ -1,7 +1,15 @@
 ---
+file_format: mystnb
 layout: simple
 content_max_width: 72rem
 ---
+
+```{code-cell}
+:tags: [remove-cell]
+# To give fusion graphs access to the hidden data folder
+import os
+os.chdir("_data")
+```
 
 :::{rst-class} mf-hidden-title
 :::
@@ -26,11 +34,8 @@ MuFASA interprets a fusion system as a Fusion Graph: a directed acyclic graph th
 and ends at Output nodes. You compose it functionally by calling each node on its inputs, and nodes connect
 wherever their data types match. Learn more about the concept in the {doc}`user-guide/index`.
 
-```{fusion-graph}
-:show-code:
-:caption: A simple Fusion Graph in Python code
-
-from mufasa import Graph
+```{code-cell}
+from mufasa import Graph, BoundingBox
 from mufasa.io.inputs import GeoJsonInput
 from mufasa.io.outputs import GeoJsonOutput
 from mufasa.nodes import StaticMap, POM, BayesianFusion, Threshold
@@ -50,8 +55,15 @@ alarms = Threshold(threshold=0.7)(fused)
 out = GeoJsonOutput("alarms.geojson")(alarms)
 
 # Fusion Graph
-graph = Graph(inputs=[track_a, track_b], outputs=[out])
+bbox = BoundingBox(48.268, 16.426, 48.27, 16.4275)
+graph = Graph(inputs=[track_a, track_b], outputs=[out],
+              crs="EPSG:32639", bbox=bbox, resolution=(10, 10))
 graph.run()
+```
+
+```{code-cell}
+:tags: [remove-input]
+graph.plot_graph()
 ```
 
 ## Find your way through the docs

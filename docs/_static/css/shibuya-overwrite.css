@@ -66,3 +66,7 @@ figcaption:hover a.headerlink {
   /* Fix alignment container */
   max-width: fit-content;
 }
+
+.cell_output svg {
+  margin-inline: auto;
+}
