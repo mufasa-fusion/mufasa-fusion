@@ -302,3 +302,50 @@ ul.mufasa-node-catalog {
 .mf-legend-io { --mf-c-role: var(--mf-c-io); }
 .mf-legend-proc { --mf-c-role: var(--mf-c-proc); }
 .mf-legend-graph { --mf-c-role: var(--mf-c-graph); }
+
+/* ---- Showcases ---- */
+
+.mf-showcase-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15em, 1fr));
+    gap: 1em;
+
+    & > div {
+        padding: 0.25em 1em 0.75em;
+        border: 1px solid var(--gray-a6, #888);
+        border-top: 4px solid var(--ait-grey);
+        border-radius: 6px;
+
+        & p { margin: 0.5em 0; }
+        & > p:first-child { font-size: 1.1em; }
+    }
+}
+
+/* Status badge: field-tested (turquoise) or in simulation (grey) */
+.mf-status {
+    display: inline-block;
+    padding: 0.1em 0.6em;
+    border-radius: 1em;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: white;
+    background-color: var(--ait-grey);
+
+    &.mf-status-tested { background-color: var(--ait-torquise-text); }
+}
+
+/* Key characteristics of a showcase, in small muted text */
+.mf-chips {
+    font-size: 0.85em;
+    color: var(--gray-11);
+}
+
+/* Use-case tag: outlined pill, so it reads as a label rather than a status */
+.mf-tag {
+    display: inline-block;
+    padding: 0.05em 0.6em;
+    border: 1px solid var(--ait-grey);
+    border-radius: 1em;
+    font-size: 0.85em;
+    color: var(--gray-12);
+}
