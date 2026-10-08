@@ -27,6 +27,7 @@ extensions = [
     "autoapi.extension",
     "custom_directives",
     "myst_nb",
+    "sphinx_copybutton",
 ]
 
 templates_path = ['_templates']

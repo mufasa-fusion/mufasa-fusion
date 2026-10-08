@@ -36,6 +36,7 @@ docs = [
     "sphinx-autoapi",
     "shibuya",
     "myst-nb",
+    "sphinx-copybutton",
 ]
 
 [tool.setuptools.packages.find]
