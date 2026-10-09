@@ -1,3 +1,69 @@
+---
+file_format: mystnb
+---
+
+```{code-cell}
+:tags: [remove-cell]
+
+from mufasa import Graph, BoundingBox, Location, Observation, BayesianMap
+from mufasa.graph import _suggest_utm_crs
+from mufasa.io.inputs import InputNode
+from mufasa.io.outputs import OutputNode
+from mufasa.node import Node
+
+class InputNode(InputNode):
+    _output_type = Observation
+
+    def items(self):
+        return ()
+
+    def get_config(self) -> dict:
+        return {}
+
+class ProcessingNode(Node):
+    _input_types = {Location}
+    _output_type = BayesianMap
+
+    def process(self, *args, **kwargs) -> None:
+        pass
+
+    def get_config(self) -> dict:
+        return {}
+
+class OutputNode(OutputNode):
+    _input_types = {Observation, BayesianMap}
+    
+    def process(self, *args, **kwargs) -> None:
+        pass
+
+    def get_config(self) -> dict:
+        return {}
+
+inp = InputNode()
+bbox = BoundingBox(0, 1, 0, 1)
+graph = Graph(
+    [inp],
+    [OutputNode()(ProcessingNode()(inp))],
+    crs=_suggest_utm_crs(bbox),
+    bbox=bbox,
+    resolution=(1, 1)
+)
+
+graph.plot_graph().save("concepts-example-graph.svg")
+```
+
+::::{figure} concepts-example-graph.svg
+---
+align: center
+figclass: mf-float
+alt: |
+    Fusion Graph consisting of an input node producing Observations
+    and feeding them into a processing node that accepts any Locations and produces BayesianMaps
+    that are fed into the BayesianMap input of an output node that additionally accepts Locations.
+---
+Concepts in a Fusion Graph
+::::
+
 # Concepts
 
 MuFASA represents each sensor fusion system as a directed, acyclic graph -- the Fusion Graph.

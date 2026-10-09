@@ -71,6 +71,8 @@ instance/
 # Sphinx documentation
 docs/_build/
 docs/api/
+docs/_data/alarms.geojson
+docs/user-guide/concepts-example-graph.svg
 
 # PyBuilder
 .pybuilder/

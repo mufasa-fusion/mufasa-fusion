@@ -89,6 +89,16 @@ ul.mufasa-node-catalog {
     }
 }
 
+.yue .mf-float {
+    float: right;
+    margin-top: 0;
+    margin-left: 2em;
+}
+
+.yue .mf-float ~ section, .yue .mf-float ~ section section {
+    clear: none;
+}
+
 .mf-fit-check, .mf-doc-paths {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
