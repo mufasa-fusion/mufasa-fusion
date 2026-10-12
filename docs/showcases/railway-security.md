@@ -2,6 +2,13 @@
 file_format: mystnb
 ---
 
+```{code-cell}
+:tags: [remove-cell]
+# Give the code access to the hidden data folder
+import os
+os.chdir(os.path.join("..", "_data", "showcases", "railway"))
+```
+
 # Railway security
 
 <span class="mf-status mf-status-tested">Field-tested</span>
@@ -50,13 +57,13 @@ the three maps are fused, and a threshold turns the fused map into alarms.
 ```{code-cell}
 from mufasa import BoundingBox, Graph
 from mufasa.io.inputs import GeoJsonInput
-from mufasa.io.outputs import Visualization
+from mufasa.io.outputs import GeoJsonOutput
 from mufasa.nodes import POM, BayesianFusion, Threshold
 
 # Input nodes: one per sensor
-thermal = GeoJsonInput("railway/thermal.geojson")
-radar = GeoJsonInput("railway/radar.geojson")
-acoustic = GeoJsonInput("railway/acoustic.geojson")
+thermal = GeoJsonInput("thermal.geojson")
+radar = GeoJsonInput("radar.geojson")
+acoustic = GeoJsonInput("acoustic.geojson")
 
 # Processing nodes: each sensor with its own decay and baseline confidence
 fused = BayesianFusion()(
@@ -66,46 +73,57 @@ fused = BayesianFusion()(
 )
 alarms = Threshold(threshold=0.88)(fused)
 
-# Output node: keeps the sensor detections, the fused map and the alarms for plotting
-vis = Visualization(snapshot_interval_s=1)(thermal, radar, acoustic, fused, alarms)
+# Output node: collects the alarms
+out = GeoJsonOutput("output.geojson")(alarms)
 
 graph = Graph(
     inputs=[thermal, radar, acoustic],
-    outputs=[vis],
+    outputs=[out],
     crs="EPSG:32633",
     bbox=BoundingBox(16.838758, 48.252595, 16.840809, 48.252971),
     resolution=(0.5, 0.5),
 )
 ```
 
-## Try it
-
-We can't publish the trial data, so here is a synthetic replica of one of its scenarios: a group of two
-committing graffiti. They walk along the tracks, chatting and rattling their spray cans, cross the tracks,
-and split up: one sprays a parked wagon while the other keeps watch, until both flee. The site is a fictitious
-one along an open line, with the layout of the trial. The detections are invented but behave like the trial's
-sensors: the thermal cameras see the two people all the time, the radar only while they walk towards or away from
-it, and the acoustic sensors only report the direction of speech, rattling and spraying. Download the files into
-a folder `railway` to run the code above yourself:
-{download}`thermal.geojson <railway/thermal.geojson>`,
-{download}`radar.geojson <railway/radar.geojson>`,
-{download}`acoustic.geojson <railway/acoustic.geojson>`.
-
 ```{code-cell}
-graph.run()
+:tags: [remove-input]
+graph.plot_graph()
 ```
 
-A moment during the spraying: the lookout stands on the left, the sprayer at the wagon on the right.
-The thermal cameras see both of them, the radar sees neither, as both stand still, and the acoustic sensor hears
-spraying in the direction of the wagon. Only where the camera and the microphones agree, at the sprayer, does the
-fused probability exceed the threshold and raise an alarm. Camera alone (the lookout) or microphones alone (the rest
-of the sound's direction) stay below it.
+## Try it
+
+Unfortunately, we can't publish the trial data. However, we can showcase it with synthetic data of a representative
+scenario: a group of two persons committing graffiti. In this scenario, both persons walk along the tracks, chatting
+and rattling their spray cans, and cross the tracks. After some time, they split up: one sprays a parked wagon while
+the other keeps watch, until both flee.
+The site is a fictitious one along an open line, with the layout of the trial. The detections are invented but behave like the trial's
+sensors. The thermal cameras see the two people all the time, the radar only while they walk towards or away from
+it, and the acoustic sensors only report the direction of speech, rattling and spraying. You can download the files to run
+the code above yourself:
+{download}`thermal.geojson <../_data/showcases/railway/thermal.geojson>`,
+{download}`radar.geojson <../_data/showcases/railway/radar.geojson>`,
+{download}`acoustic.geojson <../_data/showcases/railway/acoustic.geojson>`.
+
+The following figure shows one moment of the scenario. During the spraying, the lookout stands on the left and the
+sprayer at the wagon on the right. The thermal cameras see both of them, the radar sees neither, as both stand still,
+and the acoustic sensor hears spraying in the direction of the wagon. Only where the camera and the microphones agree,
+at the sprayer, does the fused probability exceed the threshold and raise an alarm in this particular configuration.
+
+This example demonstrates the built-in visualization nodes, which should help you develop an understanding of what is
+happening within the Fusion Graph. Additionally, it demonstrates that changing a graph is simple: define a new node,
+add it to the graph, and re-run it.
 
 ```{code-cell}
 :tags: [hide-input]
 
 import matplotlib.pyplot as plt
 from matplotlib.patches import Patch
+from mufasa.io.outputs import Visualization
+
+# Attach a Visualization node to the graph above, then run it
+vis = Visualization(snapshot_interval_s=1)(thermal, radar, acoustic, fused, alarms)
+graph = Graph(inputs=graph.inputs, outputs=[out, vis], crs=graph.crs, bbox=graph.bbox_wgs84, resolution=graph.resolution)
+graph.run()
 
 moment = dict(start=86, end=89, basemap="satellite")
 fig, (sensors, result) = plt.subplots(2, 1, figsize=(12, 8))
