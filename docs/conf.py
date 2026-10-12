@@ -33,6 +33,9 @@ extensions = [
 templates_path = ['_templates']
 exclude_patterns = ["_*", "**/_*"]
 
+nb_execution_mode = "cache"
+nb_execution_cache_path = "_notebooks"
+
 myst_enable_extensions = [
     "colon_fence",
     "deflist",
