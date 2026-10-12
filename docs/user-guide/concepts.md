@@ -2,8 +2,21 @@
 file_format: mystnb
 ---
 
+:::{rst-class} mf-float
+:::
+
 ```{code-cell}
-:tags: [remove-cell]
+---
+tags: [remove-input]
+mystnb:
+    figure:
+        align: center
+        caption: Concepts in a Fusion Graph
+        alt: |
+            Fusion Graph consisting of an input node producing Observations
+            and feeding them into a processing node that accepts any Locations and produces BayesianMaps
+            that are fed into the BayesianMap input of an output node that additionally accepts Locations.
+---
 
 from mufasa import Graph, BoundingBox, Location, Observation, BayesianMap
 from mufasa.graph import _suggest_utm_crs
@@ -49,20 +62,9 @@ graph = Graph(
     resolution=(1, 1)
 )
 
-graph.plot_graph().save("concepts-example-graph.svg")
+graph.plot_graph()
 ```
 
-::::{figure} concepts-example-graph.svg
----
-align: center
-figclass: mf-float
-alt: |
-    Fusion Graph consisting of an input node producing Observations
-    and feeding them into a processing node that accepts any Locations and produces BayesianMaps
-    that are fed into the BayesianMap input of an output node that additionally accepts Locations.
----
-Concepts in a Fusion Graph
-::::
 
 # Concepts
 

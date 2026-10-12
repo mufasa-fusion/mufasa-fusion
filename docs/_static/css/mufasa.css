@@ -89,10 +89,14 @@ ul.mufasa-node-catalog {
     }
 }
 
-.yue .mf-float {
+:root .yue .mf-float {
     float: right;
-    margin-top: 0;
-    margin-left: 2em;
+    margin: 0 0 1em 2em;
+
+    & :only-child {
+        margin: 0;
+        padding: 0;
+    }
 }
 
 .yue .mf-float ~ section, .yue .mf-float ~ section section {
