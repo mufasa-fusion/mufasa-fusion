@@ -13,6 +13,7 @@ installation
 concepts
 tutorials
 extending
+streaming
 ```
 
 :::{admonition} TODO
