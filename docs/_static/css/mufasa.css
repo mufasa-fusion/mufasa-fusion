@@ -84,7 +84,7 @@ ul.mufasa-node-catalog {
         margin-block-start: 1em;
     }
 
-    & > li > :first-child {
+    &:not(.twos) > li > :first-child {
         text-align: right;
     }
 }

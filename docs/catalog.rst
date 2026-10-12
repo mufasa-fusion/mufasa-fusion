@@ -7,8 +7,6 @@ Flow Data Models
 ----------------
 
 .. autoapi-template::
-   :context: ["|loc|", "|obs|", "|map|", "|bmap|"]
-
    mufasa.location.Location
    mufasa.location.Observation
    mufasa.map.Map
@@ -16,10 +14,8 @@ Flow Data Models
 
    .. rst-class:: mufasa-node-catalog twos
 
-   {% for obj, icon in zip(objs, ctx) %}
-   - {{ icon }}
-
-     :class:`~{{ obj.id }}`
+   {% for obj in objs %}
+   - :class:`~{{ obj.id }}`
 
      {{ obj.summary }}
    {% endfor %}
