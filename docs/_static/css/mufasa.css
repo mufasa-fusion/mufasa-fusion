@@ -29,19 +29,19 @@ a[title="mufasa.map.Map"], a[title="mufasa.map.BayesianMap"] {
 }
 
 a[title="mufasa.location.Location"]::before {
-    background-image: url("../img/shapes/location-marker.svg");
+    background-image: url("../../_images/location-marker.svg");
 }
 
 a[title="mufasa.location.Observation"]::before {
-    background-image: url("../img/shapes/observation-marker.svg");
+    background-image: url("../../_images/observation-marker.svg");
 }
 
 a[title="mufasa.map.Map"]::before {
-    background-image: url("../img/shapes/map-fold.svg");
+    background-image: url("../../_images/map-fold.svg");
 }
 
 a[title="mufasa.map.BayesianMap"]::before {
-    background-image: url("../img/shapes/map-roll.svg");
+    background-image: url("../../_images/map-roll.svg");
 }
 
 /* Override ul lists' left alignment on small screens */
@@ -86,21 +86,6 @@ ul.mufasa-node-catalog {
 
     & > li > :first-child {
         text-align: right;
-    }
-}
-
-.mf-fusion-graph {
-    & > polygon {
-        /* background polygon */
-        fill: transparent;
-    }
-
-    text, .edge polygon {
-        fill: light-dark(black, white);
-    }
-
-    .node polygon, .edge polygon, .edge path {
-        stroke: light-dark(black, white);
     }
 }
 
@@ -150,14 +135,18 @@ ul.mufasa-node-catalog {
     flex-wrap: wrap;
     gap: .8em;
 
-    /* Code takes all width the graph doesn't need, and wraps below it on narrow screens */
+    /* Code keeps its natural width, the graph scales down to fit beside it; on narrow screens it wraps below */
     & > .literal-block-wrapper {
-        flex: 1 1 24em;
+        flex: 0 1 auto;
         min-width: 0;
     }
 
     & > figure {
-        flex: 0 0 auto;
+        flex: 1 1 18rem;
+        min-width: 0;
+        margin: 0;
+
+        & > svg { margin-inline: auto; }
     }
 }
 
@@ -280,9 +269,6 @@ ul.mufasa-node-catalog {
     box-shadow: inset 3px 0 var(--mf-c-role, transparent);
 }
 
-/* Example graph: node outlines by role */
-.mf-fusion-graph .node.mf-io polygon { stroke: var(--mf-c-io); stroke-width: 2; }
-.mf-fusion-graph .node.mf-proc polygon { stroke: var(--mf-c-proc); stroke-width: 2; }
 
 /* Legend below the example */
 .mf-principles-legend {

@@ -1,7 +1,15 @@
 ---
+file_format: mystnb
 layout: simple
 content_max_width: 72rem
 ---
+
+```{code-cell}
+:tags: [remove-cell]
+# To give fusion graphs access to the hidden data folder
+import os
+os.chdir("_data")
+```
 
 :::{rst-class} mf-hidden-title
 :::
@@ -27,12 +35,8 @@ MuFASA interprets a fusion system as a Fusion Graph: a directed acyclic graph th
 and ends at Output nodes. You compose it functionally by calling each node on its inputs, and nodes connect
 wherever their data types match. Learn more about the concept in the {doc}`user-guide/index`.
 
-::::{container} mf-side-by-side
-
-```{code-block} python
-:caption: A simple Fusion Graph in Python code
-
-from mufasa import Graph
+```{code-cell}
+from mufasa import Graph, BoundingBox
 from mufasa.io.inputs import GeoJsonInput
 from mufasa.io.outputs import GeoJsonOutput
 from mufasa.nodes import StaticMap, POM, BayesianFusion, Threshold
@@ -52,62 +56,16 @@ alarms = Threshold(threshold=0.7)(fused)
 out = GeoJsonOutput("alarms.geojson")(alarms)
 
 # Fusion Graph
-graph = Graph(inputs=[track_a, track_b], outputs=[out])
+bbox = BoundingBox(48.268, 16.426, 48.27, 16.4275)
+graph = Graph(inputs=[track_a, track_b], outputs=[out],
+              crs="EPSG:32639", bbox=bbox, resolution=(10, 10))
 graph.run()
 ```
 
-```{digraph} fusion_graph
-:caption: An example Fusion Graph visualized
-:align: center
-
-graph [class="mf-fusion-graph", nodesep=0.15]
-node [shape=plain, fontname="Arial", fontsize=12]
-
-track_a [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>GeoJsonInput</b></td></tr>
-    <tr><td>"sensor_a.geojson"</td></tr>
-</table>>]
-
-track_b [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>GeoJsonInput</b></td></tr>
-    <tr><td>"sensor_b.geojson"</td></tr>
-</table>>]
-
-static [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>StaticMap</b></td></tr>
-    <tr><td>"priors.geojson"</td></tr>
-</table>>]
-
-pom_a [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>POM</b></td></tr>
-    <tr><td>decay_s = 5</td></tr>
-</table>>]
-
-pom_b [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>POM</b></td></tr>
-    <tr><td>decay_s = 1</td></tr>
-</table>>]
-
-fused [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>BayesianFusion</b></td></tr>
-</table>>]
-
-alarms [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>Threshold</b></td></tr>
-    <tr><td>threshold = 0.7</td></tr>
-</table>>]
-
-out [label=<<table cellborder="0" cellpadding="4">
-    <tr><td><b>GeoJsonOutput</b></td></tr>
-    <tr><td>"alarms.geojson"</td></tr>
-</table>>]
-
-track_a -> pom_a -> fused
-track_b -> pom_b -> fused
-static -> fused -> alarms -> out
+```{code-cell}
+:tags: [remove-input]
+graph.plot_graph()
 ```
-
-::::
 
 ## Find your way through the docs
 
@@ -132,22 +90,6 @@ The {doc}`catalog` lists the nodes and data types you can build with.
 
 The {doc}`user-guide/index` covers custom nodes and live deployment.
 The {doc}`api/index` documents every class and parameter.
-:::
-
-::::
-
-
-## Is MuFASA right for you?
-
-::::{container} mf-fit-check
-
-:::{container} mf-fit-yes
-**A good fit if you**
-
-- want to buidl a fusion system and already have detections (positions or georeferenced maps)
-- want to quickly compare different fusion system configurations
-- want to trasition from recored data to live data 
-- want to have fun analyzing your data :)
 :::
 
 ::::

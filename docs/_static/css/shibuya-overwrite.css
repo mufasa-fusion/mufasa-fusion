@@ -73,3 +73,7 @@ figcaption:hover a.headerlink {
         margin-left: 30px;
     }
 }
+
+.cell_output svg {
+  margin-inline: auto;
+}

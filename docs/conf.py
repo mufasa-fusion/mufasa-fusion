@@ -26,8 +26,6 @@ extensions = [
     "sphinx.ext.napoleon",
     "autoapi.extension",
     "custom_directives",
-    "sphinx.ext.graphviz",
-    "inline_graphviz",
     "myst_nb",
 ]
 
@@ -40,16 +38,16 @@ myst_enable_extensions = [
 ]
 
 rst_prolog = """\
-.. |loc| image:: /_static/img/shapes/location-marker.svg
+.. |loc| image:: /../src/mufasa/graph_svg/icons/location-marker.svg
    :alt: location marker
    :class: mufasa-shape-icon
-.. |obs| image:: /_static/img/shapes/observation-marker.svg
+.. |obs| image:: /../src/mufasa/graph_svg/icons/observation-marker.svg
    :alt: target marker
    :class: mufasa-shape-icon
-.. |map| image:: /_static/img/shapes/map-fold.svg
+.. |map| image:: /../src/mufasa/graph_svg/icons/map-fold.svg
    :alt: foldable map
    :class: mufasa-shape-icon
-.. |bmap| image:: /_static/img/shapes/map-roll.svg
+.. |bmap| image:: /../src/mufasa/graph_svg/icons/map-roll.svg
    :alt: map scroll
    :class: mufasa-shape-icon
 """

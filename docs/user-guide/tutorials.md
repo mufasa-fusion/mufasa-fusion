@@ -140,7 +140,7 @@ graph = Graph(
 You can also visually inspect the graph structure.
 
 ```{code-cell}
-graph.plot_graph();
+graph.plot_graph()
 ```
 
 ```{code-cell}
