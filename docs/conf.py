@@ -24,6 +24,7 @@ release = '0.1.0'
 
 extensions = [
     "sphinx.ext.napoleon",
+    "sphinx.ext.todo",
     "autoapi.extension",
     "custom_directives",
     "myst_nb",
@@ -74,8 +75,6 @@ autoapi_options = [
 
 def autoapi_prepare_jinja_env(env: Environment):
     env.globals["zip"] = zip_longest
-
-graphviz_output_format = "svg"
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

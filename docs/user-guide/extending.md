@@ -7,7 +7,7 @@ Extending MuFASA allows you to
 
 Both is achieved by implementing your own subclass of {class}`~mufasa.node.Node` and optionally also a data type.
 
-:::{admonition} TODO
+:::{todo}
 Guides for various extension scenarios
 
 - Input

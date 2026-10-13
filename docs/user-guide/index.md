@@ -1,6 +1,6 @@
 # User Guide
 
-:::{admonition} TODO
+:::{todo}
 Again a quick start guide as on the home page?
 :::
 
@@ -16,7 +16,7 @@ extending
 streaming
 ```
 
-:::{admonition} TODO
+:::{todo}
 
 - visualisation
 - registry and exports/imports of Fusion Graphs

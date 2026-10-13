@@ -116,7 +116,7 @@ This is due to the fact that the Visualisation node also accepts Maps as input.
 This bounding box will also bound the visualization.
 The CRS is optional, but it will enhance the visualization with map tiles.
 
-:::{admonition} TODO
+:::{todo}
 Shouldn't the typing mechanism be smart enough to check that no map is produced?
 :::
 
@@ -170,7 +170,7 @@ vis_out.show(0)
 There's also an {func}`~mufasa.io.outputs.visualization.Visualization.animate` method
 for data with different timestamps.
 
-:::{admonition} TODO
+:::{todo}
 Fix the map tiles issue!
 :::
 

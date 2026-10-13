@@ -2,7 +2,7 @@
 file_format: mystnb
 ---
 
-# Streaming + Extension
+# Streaming Input Extension
 
 ## Simulating a Live Sensor
 
@@ -12,7 +12,7 @@ one per line with a random 1 to 2 seconds delay in between.
 Its main components are:
 
 - a `BaseRequestHandler` implementation `FeatureSendingRequestHandler` that sends GeoJSON Features
-- a context manager `sensor_server` that starts the TCP server on a separate thread and shuts it down on exit
+- a context manager `server_thread` that starts the TCP server on a separate thread and shuts it down on exit
 - a generator function `sock_recv_lines` yielding lines of text received from a client socket
 
 The TCP code is largely based on Python's official `socketserver` examples[^socketserver_examples].
@@ -46,7 +46,7 @@ class FeatureSendingRequestHandler(socketserver.BaseRequestHandler):
             time.sleep(1 + random.random())
 
 
-# sensor_server
+# server_thread
 
 import contextlib
 import threading
@@ -55,7 +55,7 @@ import threading
 socketserver.ThreadingTCPServer.allow_reuse_address = True
 
 @contextlib.contextmanager
-def sensor_server(address: tuple[str, int], handler: socketserver.BaseRequestHandler):
+def server_thread(address: tuple[str, int], handler: socketserver.BaseRequestHandler):
     """Starts a sensor server on a separate thread on enter and shuts it down on exit"""
     with socketserver.ThreadingTCPServer(address, handler) as server:
         server_thread = threading.Thread(target=server.serve_forever)
@@ -84,7 +84,7 @@ Here is how you would use these snippets outside MuFASA:
 ```{code-cell}
 ADDRESS = "localhost", 8000
 
-with sensor_server(ADDRESS, FeatureSendingRequestHandler):
+with server_thread(ADDRESS, FeatureSendingRequestHandler):
     for line in sock_recv_lines(ADDRESS):
             print(f"[client] received data:", line)
 ```
@@ -94,7 +94,7 @@ with sensor_server(ADDRESS, FeatureSendingRequestHandler):
 To connect that sensor to a fusion system, we extend MUFASA with a custom
 {class}`~mufasa.io.inputs.streaming.StreamingInputNode` subclass.
 
-:::{admonition} TODO
+:::{todo}
 - Explain what `_output_type`, `items()`, and `get_config()` do
 - The registry!
 :::
@@ -138,7 +138,7 @@ class SocketObservationInput(StreamingInputNode):
         }
 ```
 
-:::{admonition} TODO
+:::{todo}
 This ignores `StreamingInputNode`s `_queue`, `ingest()` function and `items()` implementation completely!
 But I can't imagine how to use them. Where would the main loop, that receives data and calls `ingest()` with it, live?
 :::
@@ -150,14 +150,14 @@ from mufasa.io.outputs import LocationOutput
 inp = SocketObservationInput(ADDRESS)
 out = LocationOutput()(inp)
 
-with sensor_server(ADDRESS, FeatureSendingRequestHandler):
+with server_thread(ADDRESS, FeatureSendingRequestHandler):
     graph = Graph([inp], [out])
     graph.run()
 ```
 
 It takes a while until {func}`~mufasa.graph.Graph.run` finishes because the data arrives with a few seconds delay.
 
-:::{admonition} TODO
+:::{todo}
 The `Graph` constructor already needs the server running! Why?
 
 It's `_configure_run()` calls the nodes `items()` (and that is the one connecting). It is called at the end of __init__ and not at the beginning of `run()` -- is this really necessary?
