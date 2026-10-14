@@ -27,6 +27,12 @@ a[title="mufasa.map.Map"], a[title="mufasa.map.BayesianMap"] {
         background-size: contain;
     }
 }
+span.sig-return-typehint {
+    a[title="mufasa.location.Location"], a[title="mufasa.location.Observation"],
+    a[title="mufasa.map.Map"], a[title="mufasa.map.BayesianMap"] {
+        display: inline;
+    }
+}
 
 a[title="mufasa.location.Location"]::before {
     background-image: url("../../_images/location-marker.svg");

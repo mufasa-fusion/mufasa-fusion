@@ -253,6 +253,7 @@ src_a_total_df.plot("headquarters", markersize=100*src_a_total_df["confidence"],
 src_a_total_df.boxplot(column="confidence", by="headquarters");
 ```
 
+(dict-config)=
 ## JSON Serialization
 
 You might have noticed {func}`Node.get_config() <mufasa.node.Node.get_config>`.

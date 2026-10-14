@@ -2,7 +2,23 @@
 file_format: mystnb
 ---
 
-# Streaming Input Extension
+# Input Extensions
+
+This guide shows how to connect Fusion Graphs to not (yet) built-in external data sources.
+It focuses on streaming inputs since they are the more involved ones.
+In the end, it highlights how to simplify this for recorded input nodes.
+
+:::{admonition} You don't need an extension!
+:class: hint
+Implementing a new node might just be overkill in some situations.
+The same goals might be achieved by some boilerplate preparation code. These info boxes point you in that directions.
+
+Implementing a dedicated node has some advantages, too:
+
+- It gives you a coherent unit of code that you can share with others, for example by contributing it back to MuFASA.
+- It allows you to serialize and re-import your Fusion Graph (see {ref}`dict-config`).
+- It makes your extensions explicit in the Fusion Graph and visible at a glance.
+:::
 
 ## Simulating a Live Sensor
 
@@ -134,11 +150,13 @@ class GeoJsonObservationStreamingInput(StreamingInputNode):  #1
 The key points are:
 
 [{sup}`#1`](#basic-node)
-: Derives from {class}`~mufasa.io.inputs.streaming.StreamingInputNode` to signal to the {class}`~mufasa.graph.Graph`
-  that it is doing blocking calls to wait for new messages.
+: Derives from {class}`~mufasa.io.inputs.streaming.StreamingInputNode`.  
+  This signal to the {class}`~mufasa.graph.Graph` that it is doing blocking calls to wait for new messages.
 
 [{sup}`#2`](#basic-node)
-: Specifies its `_output_type` as {class}`~mufasa.location.Observation`.
+: Specifies its `_output_type` as {class}`~mufasa.location.Observation`.  
+  Equivalently, we could have subclassed {class}`~mufasa.io.inputs.streaming.ObservationStreamingInput`
+  instead as this is the only line it adds.
 
 [{sup}`#3`](#basic-node)
 : Provides a conversion from raw messages to a MuFASA data type.  
@@ -153,7 +171,7 @@ For that, you usually leverage a client library specific to your data transport
 -- and they come in two fashions: as {ref}`push <push-client>` or {ref}`pull <pull-client>` architectures.
 
 (pull-client)=
-## Integrating Pull Clients
+## Pull Client Integration
 
 Pull clients provide either a function that blocks to wait for a single message
 or a generator function that does so repeatedly, yielding the messages.
@@ -243,7 +261,7 @@ out_pull.result
 ```
 
 (push-client)=
-## Integrating Push Clients
+## Push Client Integration
 
 Push clients have their own blocking loops that push each message received to a user-supplied callback function.
 
@@ -325,6 +343,27 @@ with (
 
 out_push.result
 ```
+
+:::{admonition} You don't need an extension!
+:class: hint
+Use a plain {class}`~mufasa.io.inputs.streaming.ObservationStreamingInput` node (or similar as appropriate to your use case).
+Write a new callback function that you pass to your client library. Integrate your conversion logic there
+and make it call {func}`~mufasa.io.inputs.streaming.StreamingInputNode.ingest` of your plain node instance.
+:::
+
+## Non-streaming Inputs
+
+To implement a dedicated input node for recorded data, for example to read data from a database or proprietary format,
+do as in {ref}`common-basics` and {ref}`pull-client` with these two exceptions:
+
+- Subclass {class}`~mufasa.io.inputs.base.InputNode` (and not {class}`~mufasa.io.inputs.streaming.StreamingInputNode`, too).
+- Overwrite {func}`~mufasa.io.inputs.streaming.StreamingInputNode.items()` to return a collection of MuFASA objects.
+
+:::{admonition} You don't need an extension!
+:class: hint
+Just read and convert the data beforehand and pass it in via a
+{class}`~mufasa.io.inputs.python_object.LocationInput` or {class}`~mufasa.io.inputs.python_object.MapInput` node.
+:::
 
 [^socketserver_examples]: Python Standard Library, `socketserver` module's examples,
 <https://docs.python.org/3/library/socketserver.html#examples>
