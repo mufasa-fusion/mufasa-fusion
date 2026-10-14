@@ -1,9 +1,4 @@
-﻿"""Node registry: maps type-name strings to their classes.
-
-Used by Graph.from_config() to reconstruct nodes from a serialized config.
-Register new node types here to make them deserializable.
-"""
-from mufasa.nodes.mapping.pom import POM
+﻿from mufasa.nodes.mapping.pom import POM
 from mufasa.nodes.mapping.static import StaticMap
 from mufasa.nodes.fusion.map_fusion import BayesianFusion, LogicalAnd, LogicalOr
 from mufasa.nodes.detection.threshold import Threshold
@@ -35,3 +30,8 @@ NODE_REGISTRY: dict[str, type] = {
     "MapOutput":         MapOutput,
     "Visualization":     Visualization,
 }
+"""Maps node type names to their classes.
+
+Used by :func:`Graph.from_config() <mufasa.graph.Graph.from_config>` to reconstruct nodes from a serialized config.
+Register new node types here to make them deserializable.
+"""

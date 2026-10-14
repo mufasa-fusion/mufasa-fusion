@@ -354,7 +354,7 @@ class Graph:
     # ------------------------------------------------------------------
 
     def to_config(self) -> dict:
-        """Return the full pipeline as a plain serializable dict."""
+        """Return the full pipeline as a JSON-serializable dict."""
         serialized = []
         for node in self.nodes:
             node_cfg: dict = {"type": type(node).__name__, "name": node.name}
@@ -377,7 +377,7 @@ class Graph:
 
     @classmethod
     def from_config(cls, config: dict) -> "Graph":
-        """Reconstruct a Graph from a config dict produced by to_config()."""
+        """Reconstruct a Graph from a config dict produced by :func:`to_config`."""
         from mufasa.registry import NODE_REGISTRY
 
         spatial    = config.get("spatial", {})

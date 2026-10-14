@@ -174,7 +174,7 @@ for data with different timestamps.
 Fix the map tiles issue!
 :::
 
-## GeoPandas integration
+## GeoPandas Integration
 
 MuFASA integrates nicely with Pandas[^Pandas] and GeoPandas[^GeoPandas].
 In fact, GeoPandas is used in the Visualization node behind the scenes.
@@ -251,6 +251,38 @@ src_a_total_df.plot("headquarters", markersize=100*src_a_total_df["confidence"],
 
 ```{code-cell}
 src_a_total_df.boxplot(column="confidence", by="headquarters");
+```
+
+## JSON Serialization
+
+You might have noticed {func}`Node.get_config() <mufasa.node.Node.get_config>`.
+It simply returns a node's parametrization to a JSON-serializable dict.
+
+```{code-cell}
+src_a.get_config()
+```
+
+There's also {func}`Graph.to_config() <mufasa.graph.Graph.to_config>` to export an entire Fusion Graph.
+
+```{code-cell}
+conf = graph.to_config()
+conf
+```
+
+Reconstruct it later with {func}`Graph.from_config() <mufasa.graph.Graph.from_config>`.
+
+```{code-cell}
+new_graph = Graph.from_config(conf)
+new_graph.plot_graph()
+```
+
+For loading to work, every node used needs to be registered with the {attr}`~mufasa.registry.NODE_REGISTRY`.
+Keep that (and overwriting {func}`mufasa.node.Node.get_config`) in mind when extending MuFASA with new nodes!
+
+```{code-cell}
+from mufasa.registry import NODE_REGISTRY
+
+NODE_REGISTRY
 ```
 
 [^GeoJSON]: GeoJSON, see <https://geojson.org>
