@@ -37,6 +37,8 @@ docs = [
     "shibuya",
     "myst-nb",
     "sphinx-copybutton",
+    # For examples
+    "paho-mqtt",
 ]
 
 [tool.setuptools.packages.find]

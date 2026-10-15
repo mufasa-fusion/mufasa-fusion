@@ -2,16 +2,17 @@
 file_format: mystnb
 ---
 
-# Input Extensions
+# Custom Data Sources
 
-This guide shows how to connect Fusion Graphs to not (yet) built-in external data sources.
-It focuses on streaming inputs since they are the more involved ones.
-In the end, it highlights how to simplify this for recorded input nodes.
+This guide shows how to connect Fusion Graphs to not (yet) built-in data sources.
+It focuses on integrating external systems that stream live data and implementing new input nodes.
+Moreover, it covers extending MuFASA for recorded data and demonstrates common usage patterns around inputs.
 
-:::{admonition} You don't need an extension!
+:::{admonition} You don't need a new node!
 :class: hint
 Implementing a new node might just be overkill in some situations.
-The same goals might be achieved by some boilerplate preparation code. These info boxes point you in that directions.
+The same goals might be achieved by some boilerplate preparation code.
+In the spirit of rapid prototyping, these boxes highlight how to use your custom data with existing core inputs.
 
 Implementing a dedicated node has some advantages, too:
 
@@ -22,20 +23,8 @@ Implementing a dedicated node has some advantages, too:
 
 ## Simulating a Live Sensor
 
-We simulate a live sensor by a TCP server that sends detections as GeoJSON Features over each connection,
-one per line with a random few seconds delay in between. For convenience,
-we use a context manager for starting and stopping the server that you wrap your fusion code with like so:
-
-```python
-with server_thread(ADDRESS, FeatureSendingRequestHandler):
-    graph.run()
-```
-
-:::{important}
-In a real-world scenario, you don't need something equivalent! You certainly have an externally managed sensor.
-Within the fusion code, you'd take it for granted that the system is up and running.
-:::
-
+Throughout this guide, we simulate a live sensor by a TCP server that sends detections
+as GeoJSON Features over each connection, one per line with a random few seconds delay in between.
 The demo server and client code is largely based on Python's official `socketserver` examples[^socketserver_examples].
 
 ```{code-cell}
@@ -64,7 +53,7 @@ class FeatureSendingRequestHandler(socketserver.BaseRequestHandler):
     def handle(self):
         for feature in features_bin:
             self.request.sendall(feature)
-            time.sleep(1 + random.random())
+            time.sleep(.1 + .1 * random.random())
 
 
 # server_thread
@@ -99,13 +88,70 @@ def server_thread(address: tuple[str, int], handler: socketserver.BaseRequestHan
             server.shutdown()
 ```
 
+:::{note}
+For this tutorial, we use a context manager for starting and stopping the server
+that you wrap your fusion code with like so:
+
+```python
+with server_thread(ADDRESS, FeatureSendingRequestHandler):  # Demo only!
+    graph.run()
+```
+
+In a real-world scenario, you don't need something equivalent! You certainly have an externally managed sensor.
+Within the fusion code, you'd take it for granted that the system is up and running.
+:::
+
 (common-basics)=
 ## Integration Basics
 
-To use that sensor in fusion systems, we extend MUFASA with a custom {class}`~mufasa.io.inputs.base.InputNode` subclass.
+To use that demo sensor in fusion systems, we extend MUFASA with a custom {class}`~mufasa.io.inputs.base.InputNode` subclass.
 They are responsible for connecting to the data streams of external systems and for converting them to
 MuFASA's own data models. And since it is a live sensor -- and we want continuous updates to our outputs[^no_stream_out]
 -- we implement a streaming one derived from {class}`~mufasa.io.inputs.streaming.StreamingInputNode`.
+
+Here's a quick checklist that applies to every input node:
+
+:::{list-table}
+:header-rows: 1
+- * &#9745;
+  * Ref
+  * Requirement
+  * Notes
+- * &#9745;
+  * #1
+  * Derives from {class}`~mufasa.io.inputs.base.InputNode`.
+  * Extending {class}`~mufasa.io.inputs.streaming.StreamingInputNode` signals to the {class}`~mufasa.graph.Graph`
+    that the node will do blocking calls to wait for new messages.
+- * &#9745;
+  * #2
+  * Specifies its {attr}`~mufasa.node.Node._output_type`.
+  * In this example, we equivalently could have subclassed {class}`~mufasa.io.inputs.streaming.ObservationStreamingInput`
+    to inherit producing {class}`~mufasa.location.Observation`.
+- * &#9745;
+  * #3
+  * Converts to its output type.
+  * We provide a helper function in this example that we will use later in concrete subclasses.
+- * &#9744;
+  * #4a
+  * Yields its data from {class}`~mufasa.io.inputs.base.InputNode.items()`.
+  * This will depend on the type of input node and be implemented in subclasses in the following sections.
+- * &#9744;
+  * #4b
+  * Or {func}`~mufasa.io.inputs.streaming.StreamingInputNode.ingest`s data items.
+  * For {class}`~mufasa.io.inputs.streaming.StreamingInputNode`s only!
+- * &#9745;
+  * #5a
+  * Exports it's parameters in {func}`~mufasa.node.Node.get_config()`.
+  * 
+- * &#9744;
+  * #5b
+  * Registers with the {attr}`~mufasa.registry.NODE_REGISTRY` for imports.
+  * Needs to be done for each concrete subclass separately.
+:::
+
+Checked items are covered by `GeoJsonObservationStreamingInput` implemented below
+that serves as a base in the following concrete sections.
+The `#N` references annotate respective lines in code samples and their explanations.
 
 (basic-node)=
 ```{code-cell}
@@ -120,58 +166,38 @@ class GeoJsonObservationStreamingInput(StreamingInputNode):  #1
 
     def __init__(
             self,
+            address: tuple[str, int],
             ts_col: str = "timestamp",
             conf_col: str = "confidence",
             props_default: dict[str, "Any"] | None = None,
     ):
         super().__init__()
+        self.address = address
         self.ts_col = ts_col
         self.conf_col = conf_col
         self.props_default = props_default if props_default is not None else {}
 
-    def feature_to_observation(self, feature_str: str) -> Observation:  #3
+    def feature_to_observation(self, raw: str | bytes) -> Observation:  #3
         """Converts a GeoJSON Feature to a MuFASA Observation"""
-        feature = json.loads(feature_str)
+        feature = json.loads(raw)
         geom = shape(feature["geometry"])
         props = self.props_default | feature.get("properties", {})
-        # Utilize arrival timestamp for demo purposes!
-        ts = props.pop(self.ts_col, time.monotonic() - _start_time)
+        # Utilize upscaled arrival timestamp for demo purposes!
+        ts = props.pop(self.ts_col, 10 * (time.monotonic() - _start_time))
         conf = props.pop(self.conf_col, Observation.confidence)
         return Observation(geom, ts, props, conf)
 
-    def get_config(self) -> dict:  #4
+    def get_config(self) -> dict:  #5a
         return {
+            "address": self.address,
             "ts_col": self.ts_col,
             "conf_col": self.conf_col,
             "props_default": self.props_default
         }
 ```
 
-The key points are:
-
-[{sup}`#1`](#basic-node)
-: Derives from {class}`~mufasa.io.inputs.streaming.StreamingInputNode`.  
-  This signal to the {class}`~mufasa.graph.Graph` that it is doing blocking calls to wait for new messages.
-
-[{sup}`#2`](#basic-node)
-: Specifies its `_output_type` as {class}`~mufasa.location.Observation`.  
-  Equivalently, we could have subclassed {class}`~mufasa.io.inputs.streaming.ObservationStreamingInput`
-  instead as this is the only line it adds.
-
-[{sup}`#3`](#basic-node)
-: Provides a conversion from raw messages to a MuFASA data type.  
-  We will use it later in the push/pull subclasses.
-
-[{sup}`#4`](#basic-node)
-: Defines its config in `get_config()` to support exporting fusion architectures.  
-  Later, we will register concrete subclasses to the {attr}`~mufasa.registry.NODE_REGISTRY` for imports.
-
-Another key point is still missing: the connection to the sensor.
-For that, you usually leverage a client library specific to your data transport
--- and they come in two fashions: as {ref}`push <push-client>` or {ref}`pull <pull-client>` architectures.
-
 (pull-client)=
-## Pull Client Integration
+## For Pull Clients
 
 Pull clients provide either a function that blocks to wait for a single message
 or a generator function that does so repeatedly, yielding the messages.
@@ -206,28 +232,21 @@ with server_thread(ADDRESS, FeatureSendingRequestHandler):
             print(f"[client] received data:", line)
 ```
 
-To integrate it, we overwrite {func}`~mufasa.io.inputs.streaming.StreamingInputNode.items()`[{sup}`#1`](#pull-node)
-so that it yields the messages from the generator after conversion.
-We derive the input node from the one developed in {ref}`common-basics`[{sup}`#2`](#pull-node)
-to inherit conversion and config logic and also register the node for imports[{sup}`#3`](#pull-node).
+To integrate it, we overwrite {func}`~mufasa.io.inputs.streaming.StreamingInputNode.items()`[{sup}`#4a`](#pull-node)
+so that it yields the messages from the generator after conversion[{sup}`#3`](#pull-node).
+We derive the node from the one developed in {ref}`common-basics`[{sup}`#1`](#pull-node) to inherit
+output type, conversion and config logic and also register the node for later imports[{sup}`#5b`](#pull-node).
 
 (pull-node)=
 ```{code-cell}
 from mufasa.registry import NODE_REGISTRY
 
-class GeoJsonObservationPullInput(GeoJsonObservationStreamingInput):  #2
-    def __init__(self, address: tuple[str, int], **kwargs):
-        super().__init__(**kwargs)
-        self.address = address
-
-    def items(self):  #1
+class GeoJsonObservationPullInput(GeoJsonObservationStreamingInput):  #1
+    def items(self):  #4a
         for line in sock_recv_lines(self.address):
-            yield self.feature_to_observation(line)
+            yield self.feature_to_observation(line)  #3
 
-    def get_config(self) -> dict:
-        return {"address": self.address, **super().get_config()}
-
-NODE_REGISTRY[GeoJsonObservationPullInput.__name__] = GeoJsonObservationPullInput  #3
+NODE_REGISTRY[GeoJsonObservationPullInput.__name__] = GeoJsonObservationPullInput  #5b
 ```
 
 Usage:
@@ -238,32 +257,36 @@ from mufasa.io.outputs import LocationOutput
 
 pull_a = GeoJsonObservationPullInput(ADDRESS, props_default={"track": "A"})
 pull_b = GeoJsonObservationPullInput(ADDRESS, props_default={"track": "B"})
-out_pull = LocationOutput()(pull_a, pull_b)
+pull_out = LocationOutput()(pull_a, pull_b)
+pull_graph = Graph([pull_a, pull_b], [pull_out])
 
-with server_thread(ADDRESS, FeatureSendingRequestHandler):  # Demo only!
-    graph = Graph([pull_a, pull_b], [out_pull])
-    graph.run()
+pull_graph.plot_graph()
 ```
 
-:::{todo}
-The `Graph` constructor already needs the server running! Why?
+```{code-cell}
+with server_thread(ADDRESS, FeatureSendingRequestHandler):  # Demo only!
+    pull_graph.run()
 
-It's `_configure_run()` calls the nodes `items()` (and that is the one connecting).
-It is called at the end of __init__ and not at the beginning of `run()` -- is this really necessary?
+pull_out.result
+```
+
+## For Recorded Sources
+
+Implementing a dedicated input node for recorded data is similar to one {ref}`pull-client` with these two exceptions:
+
+- Subclass an {class}`~mufasa.io.inputs.base.InputNode` (that is not a {class}`~mufasa.io.inputs.streaming.StreamingInputNode`, too).
+- Overwrite {func}`~mufasa.io.inputs.streaming.StreamingInputNode.items()` to return a collection of (or yield) your data at once.
+
+:::{admonition} You don't need a new node!
+:class: hint
+Just read and convert the data beforehand and pass it in via a
+{class}`~mufasa.io.inputs.python_object.LocationInput` or {class}`~mufasa.io.inputs.python_object.MapInput` node.
 :::
 
-```{code-cell}
-graph.plot_graph()
-```
-
-```{code-cell}
-out_pull.result
-```
-
 (push-client)=
-## Push Client Integration
+## For Push Clients
 
-Push clients have their own blocking loops that push each message received to a user-supplied callback function.
+Push clients have their own blocking event loops that push each message received to a user-supplied callback function.
 
 ```{code-cell}
 ---
@@ -296,75 +319,202 @@ with server_thread(ADDRESS, FeatureSendingRequestHandler):
     sock_recv_loop(ADDRESS, cb, "END")
 ```
 
-To integrate them, we run the loop on a background thread[{sup}`#1`](#push-usage) and use
-{func}`~mufasa.io.inputs.streaming.StreamingInputNode.ingest` in the callback function[{sup}`#2`](#push-node)
-to forward the data to MuFASA. This implementation uses a dedicated end message to trigger
-{func}`~mufasa.io.inputs.streaming.StreamingInputNode.stop`[{sup}`#4`](#push-node) what indicates the data stream's end.
-We derive the input node from the one developed in {ref}`common-basics`[{sup}`#3`](#push-node)
-to inherit conversion and config logic and also register the node for imports[{sup}`#5`](#push-node).
+To integrate them, we overwrite {func}`~mufasa.io.inputs.streaming.StreamingInputNode.items()`[{sup}`#4a`](#push-usage)
+to run the loop on a background thread[{sup}`#A`](#push-usage).
+Yield from its superclass implementation[{sup}`#B`](#push-usage) to forward ingested data!
+The callback function uses {func}`~mufasa.io.inputs.streaming.StreamingInputNode.ingest`[{sup}`#4b`](#push-node)
+to pass the converted data on (Internally, there's a queue connecting those two). This example uses a dedicated end message to
+{func}`~mufasa.io.inputs.streaming.StreamingInputNode.stop`[{sup}`#C`](#push-node) what indicates the data stream's end.
+You have to have some end condition or else `graph.run()` will go forever -- even though sensor data streams are typically endless.
+Finally, we derive this node from the one developed in {ref}`common-basics`[{sup}`#1`](#push-node) to inherit
+output type, conversion and config logic and also register the node for imports[{sup}`#5b`](#push-node).
 
 (push-node)=
 ```{code-cell}
-class GeoJsonObservationPushInput(GeoJsonObservationStreamingInput):  #3
+class GeoJsonObservationPushInput(GeoJsonObservationStreamingInput):  #1
     END_MSG = "END"
 
-    def ingest_feature_str(self, feature_str: str) -> None:
-        if feature_str == self.END_MSG:
-            self.stop()  #4
+    def items(self):  #4a
+        with on_bg_thread(sock_recv_loop, self.address, self.ingest_message, self.END_MSG):  #A
+            yield from super().items() #B
+
+    def ingest_message(self, msg: str) -> None:
+        if msg == self.END_MSG:  #C
+            self.stop()
         else:
-            self.ingest(self.feature_to_observation(feature_str))  #2
+            self.ingest(self.feature_to_observation(msg))  #3 #4b
 
-    def ingest_feature_bin(self, feature_bin: str) -> None:
-        self.ingest_feature_str(feature_bin.decode())
-
-NODE_REGISTRY[GeoJsonObservationPushInput.__name__] = GeoJsonObservationPushInput
+NODE_REGISTRY[GeoJsonObservationPushInput.__name__] = GeoJsonObservationPushInput  #5b
 ```
 
 Usage:
 
 ```{code-cell}
-push_a = GeoJsonObservationPushInput(props_default={"track": "A"})
-push_b = GeoJsonObservationPushInput(props_default={"track": "B"})
-out_push = LocationOutput()(push_a, push_b)
-graph = Graph([push_a, push_b], [out_push])
+push_a = GeoJsonObservationPushInput(ADDRESS, props_default={"track": "A"})
+push_b = GeoJsonObservationPushInput(ADDRESS, props_default={"track": "B"})
+push_out = LocationOutput()(push_a, push_b)
+push_graph = Graph([push_a, push_b], [push_out])
 
-graph.plot_graph()
+push_graph.plot_graph()
 ```
 
 (push-usage)=
 ```{code-cell}
-with (
-    server_thread(ADDRESS, FeatureSendingRequestHandler),  # Demo only!
-    # Start reception loops outside MuFASA and pass callbacks that ingest()  #1
-    on_bg_thread(sock_recv_loop, ADDRESS, push_a.ingest_feature_str, push_a.END_MSG),
-    on_bg_thread(sock_recv_loop, ADDRESS, push_b.ingest_feature_str, push_b.END_MSG),
-):
-    graph.run()
+with server_thread(ADDRESS, FeatureSendingRequestHandler):  # Demo only!
+    push_graph.run()
 
-out_push.result
+push_out.result
 ```
 
-:::{admonition} You don't need an extension!
+:::{admonition} You don't need a new node!
 :class: hint
 Use a plain {class}`~mufasa.io.inputs.streaming.ObservationStreamingInput` node (or similar as appropriate to your use case).
 Write a new callback function that you pass to your client library. Integrate your conversion logic there
 and make it call {func}`~mufasa.io.inputs.streaming.StreamingInputNode.ingest` of your plain node instance.
 :::
 
-## Non-streaming Inputs
+(push-alt)=
+```{code-cell}
+---
+tags: [hide-cell]
+mystnb:
+    code_prompt_show: Alternative core node + boilerplate code
+    code_prompt_hide: Alternative core node + boilerplate code
+---
+from mufasa.io.inputs import ObservationStreamingInput
+from functools import partial
 
-To implement a dedicated input node for recorded data, for example to read data from a database or proprietary format,
-do as in {ref}`common-basics` and {ref}`pull-client` with these two exceptions:
+alt_a = ObservationStreamingInput()
+alt_b = ObservationStreamingInput()
+alt_out = LocationOutput()(alt_a, alt_b)
+alt_graph = Graph([alt_a, alt_b], [alt_out])
 
-- Subclass {class}`~mufasa.io.inputs.base.InputNode` (and not {class}`~mufasa.io.inputs.streaming.StreamingInputNode`, too).
-- Overwrite {func}`~mufasa.io.inputs.streaming.StreamingInputNode.items()` to return a collection of MuFASA objects.
+def push_cb(node: ObservationStreamingInput, props_default: dict, msg: str):
+    if msg == "END":
+        node.stop()
+    else:
+        # Conversion logic and inges() inside callback
+        feature = json.loads(msg)
+        geom = shape(feature["geometry"])
+        props = props_default | feature.get("properties", {})
+        # Utilize upscaled arrival timestamp for demo purposes!
+        ts = props.pop("timestamp", 10 * (time.monotonic() - _start_time))
+        conf = props.pop("confidence", Observation.confidence)
+        node.ingest(Observation(geom, ts, props, conf))
 
-:::{admonition} You don't need an extension!
-:class: hint
-Just read and convert the data beforehand and pass it in via a
-{class}`~mufasa.io.inputs.python_object.LocationInput` or {class}`~mufasa.io.inputs.python_object.MapInput` node.
-:::
+with (
+    server_thread(ADDRESS, FeatureSendingRequestHandler),  # Demo only!
+    # Start reception loops outside MuFASA and pass callbacks that ingest()
+    on_bg_thread(sock_recv_loop, ADDRESS, partial(push_cb, alt_a, {"track": "A"}), "END"),
+    on_bg_thread(sock_recv_loop, ADDRESS, partial(push_cb, alt_b, {"track": "B"}), "END"),
+):
+    alt_graph.run()
+
+alt_out.result
+```
+
+## Example: MQTT
+
+Next, we replace the TCP transport with MQTT[^MQTT] for a more realistic scenario.
+We will use the Paho[^paho_mqtt] MQTT client library, so install it with:
+
+```bash
+pip install paho-mqtt
+```
+
+And we need a MQTT broker running in the background, for example:
+
+```bash
+docker run -p 1883:1883 eclipse-mosquitto
+```
+
+We will still use a simple script to simulate a sensor publishing detections, again as GeoJSON Feature lines.
+
+```{code-cell}
+---
+tags: [hide-cell]
+mystnb:
+    code_prompt_show: Publisher simulating a sensor
+    code_prompt_hide: Publisher simulating a sensor
+---
+from paho.mqtt import client as mqtt
+
+HOST = "localhost"
+PORT = 1883
+TOPIC = "mufasa/sensor/a"
+
+def mqtt_pub(host: str, port: int, topic: str, end_msg: bytes):
+    """Publishes GeoJSON Features over MQTT"""
+    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+    client.loop_start()
+    try:
+        client.connect(host, port)
+        time.sleep(2)
+        try:
+            for feature in features_bin:
+                client.publish(TOPIC, feature)
+                time.sleep(.1 + .1 * random.random())
+            client.publish(topic, end_msg)
+        finally:
+            client.disconnect()
+    finally:
+        client.loop_stop()
+```
+
+Since Paho offers a push client, the input node is similar to the one defined in {ref}`push-client`.
+The most notable difference is that we need to disconnect the client after receiving the end
+message[{sup}`#D`](#mqtt-node) or else it will stay subscribed to the topic forever.
+
+(mqtt-node)=
+```{code-cell}
+from paho.mqtt import subscribe
+
+class GeoJsonObservationPahoInput(GeoJsonObservationStreamingInput):  #1
+    END_MSG = b"END"
+
+    def __init__(self, address: tuple[str, int], topic: str, **kwargs):
+        super().__init__(address, **kwargs)
+        self.topic = topic
+
+    def get_config(self):  #5a
+        return {"topic": self.topic, **super().get_config()}
+
+    def items(self):  #4a
+        with on_bg_thread(subscribe.callback, self.paho_ingest_message, self.topic, 0, None, *self.address):  #A
+            yield from super().items()  #B
+
+    def paho_ingest_message(self, client: mqtt.Client, userdata, message: bytes) -> None:
+        msg = message.payload
+        if msg == self.END_MSG:  #C
+            self.stop()
+            # Disconnect the client so that the subscriber thread finishes
+            client.disconnect()  #D
+        else:
+            self.ingest(self.feature_to_observation(msg))  #3 #4b
+
+NODE_REGISTRY[GeoJsonObservationPahoInput.__name__] = GeoJsonObservationPahoInput  #5b
+```
+
+Usage:
+
+```{code-cell}
+mqtt_a = GeoJsonObservationPahoInput((HOST, PORT), TOPIC, props_default={"track": "A"})
+mqtt_b = GeoJsonObservationPahoInput((HOST, PORT), TOPIC, props_default={"track": "B"})
+mqtt_out = LocationOutput()(mqtt_a, mqtt_b)
+mqtt_graph = Graph([mqtt_a, mqtt_b], [mqtt_out])
+
+mqtt_graph.plot_graph()
+```
+
+```{code-cell}
+with on_bg_thread(mqtt_pub, HOST, PORT, TOPIC, GeoJsonObservationPushInput.END_MSG):  # Demo only!
+    mqtt_graph.run()
+
+mqtt_out.result
+```
 
 [^socketserver_examples]: Python Standard Library, `socketserver` module's examples,
 <https://docs.python.org/3/library/socketserver.html#examples>
 [^no_stream_out]: Assuming we would use streaming-capable output nodes, too -- What we don't do in this demo.
+[^MQTT]: MQTT, <https://mqtt.org/>
+[^paho_mqtt]: Eclipse Paho MQTT Python Client, <https://eclipse.dev/paho/files/paho.mqtt.python/html/index.html>

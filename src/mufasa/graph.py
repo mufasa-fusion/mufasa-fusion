@@ -286,8 +286,6 @@ class Graph:
                 )
 
     def _configure_run(self) -> None:
-        import queue as _queue_mod
-        import threading
         from mufasa.io.inputs.streaming import StreamingInputNode
 
         file_inputs   = [n for n in self.inputs if not isinstance(n, StreamingInputNode)]
@@ -304,21 +302,26 @@ class Graph:
         if file_inputs:
             pairs = [(item, inp) for inp in file_inputs for item in inp.items()]
             self._file_items = sorted(pairs, key=lambda x: x[0].timestamp)
-        else:
-            _STOP = object()
-            self._queue: _queue_mod.SimpleQueue = _queue_mod.SimpleQueue()
-            self._stop_sentinel = _STOP
-            self._n_stops = len(stream_inputs)
-            def _worker(inp):
-                for item in inp.items():
-                    self._queue.put((item, inp))
-                self._queue.put((_STOP, None))
-            for inp in stream_inputs:
-                threading.Thread(target=_worker, args=(inp,), daemon=True).start()
+
+    def _configure_streaming_run(self):
+        import queue as _queue_mod
+        import threading
+
+        _STOP = object()
+        self._queue: _queue_mod.SimpleQueue = _queue_mod.SimpleQueue()
+        self._stop_sentinel = _STOP
+        self._n_stops = len(self._stream_inputs)
+        def _worker(inp):
+            for item in inp.items():
+                self._queue.put((item, inp))
+            self._queue.put((_STOP, None))
+        for inp in self._stream_inputs:
+            threading.Thread(target=_worker, args=(inp,), daemon=True).start()
 
     def run(self) -> None:
         try:
             if self._stream_inputs:
+                self._configure_streaming_run()
                 running = self._n_stops
                 while running:
                     item, inp = self._queue.get()
@@ -347,7 +350,6 @@ class Graph:
         """
         for node in self.nodes:
             node.reset()
-        self._configure_run()
 
     # ------------------------------------------------------------------
     # Serialization
