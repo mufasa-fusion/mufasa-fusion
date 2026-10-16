@@ -84,10 +84,6 @@ ul.mufasa-node-catalog {
         background-color: #eee;
     }
 
-    & > li:first-child > :first-child {
-        margin-block-start: 1em;
-    }
-
     &:not(.twos) > li > :first-child {
         text-align: right;
     }
@@ -151,20 +147,16 @@ ul.mufasa-node-catalog {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: .8em;
 
-    /* Code keeps its natural width, the graph scales down to fit beside it; on narrow screens it wraps below */
-    & > .literal-block-wrapper {
-        flex: 0 1 auto;
-        min-width: 0;
+    > * { flex: auto; /* Stretch to fit */ }
+
+    &.cell { gap: 1em; }
+    > *, > .cell_output > * {
+        margin-block: 0;
+        padding-block: 0;
     }
-
-    & > figure {
-        flex: 1 1 18rem;
-        min-width: 0;
-        margin: 0;
-
-        & > svg { margin-inline: auto; }
+    > .cell_output {
+        padding-left: 0;
     }
 }
 

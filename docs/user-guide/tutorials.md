@@ -1,16 +1,8 @@
 ---
 file_format: mystnb
 ---
+
 # Tutorials
-
-```{code-cell}
-:tags: [remove-cell]
-
-import sys
-import os
-
-sys.path.append(os.path.join("..", "..", "src"))
-```
 
 (minimal-example)=
 ## Minimal Example

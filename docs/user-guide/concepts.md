@@ -65,7 +65,6 @@ graph = Graph(
 graph.plot_graph()
 ```
 
-
 # Concepts
 
 MuFASA represents each sensor fusion system as a directed, acyclic graph -- the Fusion Graph.

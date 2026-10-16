@@ -25,3 +25,10 @@ Available extras and what they enable:
 
 `dev`
 : Development dependencies, including those to build these docs
+
+## License
+
+The software is licensed under [Apache 2.0][mufasa-license].
+
+[mufasa-repo]: https://github.com/mufasa-fusion/mufasa-fusion
+[mufasa-license]: https://github.com/mufasa-fusion/mufasa-fusion/blob/main/LICENSE
