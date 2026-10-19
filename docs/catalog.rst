@@ -20,6 +20,8 @@ Flow Data Models
      {{ obj.summary }}
    {% endfor %}
 
+.. _processing-nodes-catalog:
+
 Processing Nodes
 ----------------
 
@@ -49,6 +51,8 @@ Processing Nodes
    mufasa.nodes.tracking.dbstream.DBSTREAMClusterer
    mufasa.nodes.tracking.kalman.KalmanTracker
    mufasa.nodes.util.filter.ObservationFilter
+
+.. _in-catalog:
 
 Input Nodes
 -----------
@@ -81,6 +85,8 @@ Input Nodes
 
 .. [#InNodeCol] Indicates the type of data they consume from external systems.
    Within the Fusion Graph, Input Nodes are sources with no incoming edges.
+
+.. _out-catalog:
 
 Output Nodes
 ------------

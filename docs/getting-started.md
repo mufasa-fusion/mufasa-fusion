@@ -25,18 +25,23 @@ It will also briefly introduce you to the core building blocks by an example.
 
 ### Load Input
 
-For example, use a {class}`~mufasa.io.inputs.geojson.GeoJsonInput` node
-to load data from [`mappings.geojson`](/_data/mappings.geojson).
+To get started with sensor fusion, we need sensor data. MuFASA isn't operating on raw sensor values though,
+rather it consumes already pre-processed detections. It ships with {ref}`a variety of input nodes <in-catalog>`
+to load them from standardized formats into {ref}`its own representation <data-models-catalog>`.
+
+For example, use a {class}`~mufasa.io.inputs.geojson.GeoJsonInput` node to load {class}`~mufasa.location.Location`
+data from a GeoJSON[^GeoJSON] Feature Collection in [`sensor_areas.geojson`](/_data/sensor_areas.geojson).
 
 ```{code-cell}
 from mufasa.io.inputs import GeoJsonInput
 
-inp = GeoJsonInput("mappings.geojson")
+inp = GeoJsonInput("sensor_areas.geojson")
 ```
 
 ### Compose Nodes
 
-Pick some fusion nodes and compose them to define your desired fusion architecture.
+Pick some {ref}`fusion nodes <processing-nodes-catalog>` and compose them to define your desired fusion architecture.
+
 In this example, we use a Probability Occupancy Map ({class}`~mufasa.nodes.mapping.pom.POM`) node
 that we connect to the input defined above.
 
@@ -58,8 +63,8 @@ vis = Visualization(snapshot_interval_s=0)(pom)
 
 ### Assemble Graph
 
-Finally, assemble the Fusion Graph. The {class}`~mufasa.graph.Graph` needs to know the IO boundary nodes
-as well as the bounding box and map resolution for the POM and the coordinate reference system for calculations.
+Finally, assemble the Fusion Graph. The {class}`~mufasa.graph.Graph` needs to know the IO boundary nodes.
+The bounding box and map resolution define the scope for the POM and the coordinate reference system for calculations.
 
 :::{rst-class} mf-side-by-side
 :::
@@ -109,4 +114,4 @@ vis.show("pom_0")
 :::
 
 [mufasa-repo]: https://github.com/mufasa-fusion/mufasa-fusion
-[mufasa-license]: https://github.com/mufasa-fusion/mufasa-fusion/blob/main/LICENSE
+[^GeoJSON]: GeoJSON, see <https://geojson.org>

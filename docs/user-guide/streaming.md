@@ -2,6 +2,12 @@
 file_format: mystnb
 ---
 
+```{code-cell}
+:tags: [remove-cell]
+import os.path
+os.chdir(os.path.join("..", "_data"))
+```
+
 # Custom Data Sources
 
 This guide shows how to connect Fusion Graphs to not (yet) built-in data sources.
@@ -42,7 +48,7 @@ import time
 
 SEP = b"\r\n"
 
-with open("sensor_a.geojson") as features_file:
+with open("sensor_points.geojson") as features_file:
     features = json.load(features_file)["features"]
 
 features_bin = [json.dumps(f).encode() + SEP for f in features]

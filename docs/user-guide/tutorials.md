@@ -2,105 +2,114 @@
 file_format: mystnb
 ---
 
-# Tutorials
+```{code-cell}
+:tags: [remove-cell]
+import os.path
+os.chdir(os.path.join("..", "_data"))
+```
 
-(minimal-example)=
-## Minimal Example
+# Tips and Tricks
+
+## Data Inspection
 
 The most basic Fusion Graph possible doesn't do any processing at all.
 It consists of one input node and one output node only.
+Here, we will use such a graph to inspect its data flow.
 
-### Load Input
+### Input
 
-To get started with sensor fusion, we'll need sensor data. MuFASA isn't operating on raw sensor values though,
-rather it consumes already processed detections. It ships with a variety of input nodes to load them
-from standardized formats.
-
-We start by loading data from a GeoJSON[^GeoJSON] Feature Collection in [`sensor_a.geojson`](sensor_a.geojson)
-with a {class}`~mufasa.io.inputs.geojson.GeoJsonInput` node.
+With recorded data sources, you can leverage their input nodes
+to inspect the data loaded into MuFASA's internal representation:
 
 ```{code-cell}
 from mufasa.io.inputs import GeoJsonInput
 
-src_a = GeoJsonInput("sensor_a.geojson")
+src = GeoJsonInput("sensor_points.geojson")
+src.items()
 ```
 
-You can inspect the data loaded into MuFASA's internal representation:
+### Infer Bounding Box
+
+This allows you to infer the bounding box from your input data:
 
 ```{code-cell}
-src_a.items()
+from mufasa import BoundingBox
+import numpy as np
+import shapely
+
+src_bounds = np.array([shapely.bounds(i.geometry) for i in src.items()])
+
+min_x = src_bounds[:, 0].min().item()
+min_y = src_bounds[:, 1].min().item()
+max_x = src_bounds[:, 2].max().item()
+max_y = src_bounds[:, 3].max().item()
+x_tol = (max_x - min_x) * .1
+y_tol = (max_y - min_y) * .1
+
+bbox = BoundingBox(
+    min_x - x_tol,
+    min_y - y_tol,
+    max_x + x_tol,
+    max_y + y_tol,
+)
+bbox
 ```
 
-:::{hint}
-Any feature with a `confidence` in its `properties` gets loaded as an {class}`~mufasa.location.Observation`,
-a probabilistic version of {class}`~mufasa.location.Location`.
-:::
+### Output
 
-### Define Output
-
-Next, we'll add an output node to build the simplest Fusion Graph possible.
-We choose a {class}`~mufasa.io.outputs.python_object.LocationOutput` node here for demonstration purposes.
-It simply collects its inputs into a Python list.
+Use a {class}`~mufasa.io.outputs.python_object.LocationOutput` node
+(or its {class}`~mufasa.io.outputs.python_object.MapOutput` equivalent)
+to collect the data output by its predecessors into a Python list.
 
 ```{code-cell}
 from mufasa.io.outputs import LocationOutput
 
-out = LocationOutput()(src_a)
-```
+out = LocationOutput()(src)
 
-At the same time, we connected `src_a` to feed into our new `out` node by calling it with the respective input node(s).
-
-### Execute Fusion
-
-Finally, we assemble the Fusion Graph. The {class}`~mufasa.graph.Graph` needs to know the IO boundary nodes.
-
-```{code-cell}
 from mufasa import Graph
+from mufasa.graph import _suggest_utm_crs
 
-graph = Graph(inputs=[src_a], outputs=[out])
-```
+graph = Graph(
+    inputs=[src],
+    outputs=[out],
+    bbox=bbox,
+    resolution=(1, 1),
+    crs=_suggest_utm_crs(bbox),
+)
 
-You can ignore the warning shown for now since our graph doesn't involve any real processing.
-
-Now, everything is set up to run our sensor fusion:
-
-```{code-cell}
 graph.run()
-```
-
-Let's inspect the results via our output node to verify all input data had been passed on.
-
-```{code-cell}
 out.result
 ```
 
+Here, this verifies that all input data had been passed on.
+
 ## Visualization
 
-Based on the {ref}`minimal-example`, we switch the output to showcase MuFASA's visual inspection capabilities
-and the ease of evolving Fusion Graphs by adapting nodes.
+MuFASA provides two built-in visualizations: one for plotting fusion architectures
+and the other for showing data on a map.
 
 :::{important}
 This requires MuFASA to be installed with `vis` extra dependencies.
 :::
 
-### Define Graph
-
-We redefine the {class}`~mufasa.io.inputs.geojson.GeoJsonInput` node from above
--- the old one is already connected in a Fusion Graph and unfortunately can't be reused.
-
-```{code-cell}
-src_a = GeoJsonInput("sensor_a.geojson")
-```
-
-This time, we connect it to a {class}`~mufasa.io.outputs.visualization.Visualization` node.
+Redefine the {class}`~mufasa.io.inputs.geojson.GeoJsonInput` node from above
+and connect it to a {class}`~mufasa.io.outputs.visualization.Visualization` node.
+The input from the previous section is already connected in a Fusion Graph and unfortunately can't be reused.
 
 ```{code-cell}
 from mufasa.io.outputs import Visualization
 
-vis_out = Visualization()(src_a)
-```
+src = GeoJsonInput("sensor_points.geojson")
+vis = Visualization()(src)
 
-And wrap it in a new Fusion Graph.
+graph = Graph(
+    inputs=[src],
+    outputs=[vis],
+    bbox=bbox,
+    resolution=(1, 1),
+    crs=_suggest_utm_crs(bbox),
+)
+```
 
 Note that we need to set a `bbox` and `resolution` this time
 -- although the graph isn't processing any {class}`~mufasa.map.Map`.
@@ -112,51 +121,18 @@ The CRS is optional, but it will enhance the visualization with map tiles.
 Shouldn't the typing mechanism be smart enough to check that no map is produced?
 :::
 
-```{code-cell}
-from mufasa import BoundingBox
-from mufasa.graph import _suggest_utm_crs
-
-# Infer bounding box from source locations
-src_a_geoms = [i.geometry for i in src_a.items()]
-xs = [i.x for i in src_a_geoms]
-ys = [i.y for i in src_a_geoms]
-
-min_x = min(xs)
-max_x = max(xs)
-min_y = min(ys)
-max_y = max(ys)
-x_tol = (max_x - min_x) * .1
-y_tol = (max_y - min_y) * .1
-
-bbox = BoundingBox(
-    min_x - x_tol,
-    min_y - y_tol,
-    max_x + x_tol,
-    max_y + y_tol,
-)
-
-graph = Graph(
-    inputs=[src_a],
-    outputs=[vis_out],
-    crs=_suggest_utm_crs(bbox),
-    bbox=bbox,
-    resolution=(1, 1),
-)
-```
-
-### Visualize Results
-
-You can now visually inspect the graph structure.
+You can now visually inspect the graph structure:
 
 ```{code-cell}
 graph.plot_graph()
 ```
 
-And finally, after running the fusion, visualize the latest snapshot of data:
+And finally, after running the fusion, {func}`~mufasa.io.outputs.visualization.Visualization.show`
+the latest snapshot of data fed to the visualization node over its first input (thus the index `0`):
 
 ```{code-cell}
 graph.run()
-vis_out.show(0)
+vis.show(0)
 ```
 
 There's also an {func}`~mufasa.io.outputs.visualization.Visualization.animate` method
@@ -192,8 +168,8 @@ Pandas and GeoPandas are capable of loading lists of Python Dataclasses into the
 Thus, they understand MuFASA's {class}`~mufasa.location.Location`s.
 
 ```{code-cell}
-src_a_df = geopandas.GeoDataFrame(src_a.items())
-src_a_df
+src_df = geopandas.GeoDataFrame(src.items())
+src_df
 ```
 
 ```{code-cell}
@@ -207,9 +183,9 @@ You might also want to unwrap the properties into separate columns:
 import numpy as np
 import pandas
 
-src_a_props_df = src_a_df["properties"].apply(pandas.Series)
-src_a_total_df = pandas.concat([src_a_df, src_a_props_df], axis="columns")
-src_a_total_df
+src_props_df = src_df["properties"].apply(pandas.Series)
+src_total_df = pandas.concat([src_df, src_props_df], axis="columns")
+src_total_df
 ```
 
 ### Bounding Boxes
@@ -217,7 +193,7 @@ src_a_total_df
 Tired of defining them manually?
 
 ```{code-cell}
-bounds = src_a_df.bounds
+bounds = src_df.bounds
 bbox = BoundingBox(
     bounds.minx.min().item(),
     bounds.miny.min().item(),
@@ -233,16 +209,16 @@ To get more customization options, you can create plots via GeoPandas manually.
 
 ```{code-cell}
 # Fill missing values so we have something to show
-src_a_total_df.fillna({"confidence": .25, "headquarters": False}, inplace=True)
-src_a_total_df
+src_total_df.fillna({"confidence": .25, "headquarters": False}, inplace=True)
+src_total_df
 ```
 
 ```{code-cell}
-src_a_total_df.plot("headquarters", markersize=100*src_a_total_df["confidence"], legend=True);
+src_total_df.plot("headquarters", markersize=100*src_total_df["confidence"], legend=True);
 ```
 
 ```{code-cell}
-src_a_total_df.boxplot(column="confidence", by="headquarters");
+src_total_df.boxplot(column="confidence", by="headquarters");
 ```
 
 (dict-config)=
@@ -252,7 +228,7 @@ You might have noticed {func}`Node.get_config() <mufasa.node.Node.get_config>`.
 It simply returns a node's parametrization to a JSON-serializable dict.
 
 ```{code-cell}
-src_a.get_config()
+src.get_config()
 ```
 
 There's also {func}`Graph.to_config() <mufasa.graph.Graph.to_config>` to export an entire Fusion Graph.
@@ -278,6 +254,5 @@ from mufasa.registry import NODE_REGISTRY
 NODE_REGISTRY
 ```
 
-[^GeoJSON]: GeoJSON, see <https://geojson.org>
 [^Pandas]: Pandas, see <https://pandas.pydata.org>
 [^GeoPandas]: GeoPandas, see <https://geopandas.org>

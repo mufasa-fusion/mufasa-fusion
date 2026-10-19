@@ -5,7 +5,7 @@
 			"type": "Feature",
 			"geometry": {
 				"type": "Point",
-				"coordinates": [48.268408685767966, 16.426643559839174]
+				"coordinates": [16.426643559839174, 48.268408685767966]
 			},
 			"properties": {}
 		},
@@ -13,7 +13,7 @@
 			"type": "Feature",
 			"geometry": {
 				"type": "Point",
-				"coordinates": [48.26916496293138, 16.426838778147946]
+				"coordinates": [16.426838778147946, 48.26916496293138]
 			},
 			"properties": {
 				"headquarters": true
@@ -23,7 +23,7 @@
 			"type": "Feature",
 			"geometry": {
 				"type": "Point",
-				"coordinates": [48.26961976340052, 16.427123796877638]
+				"coordinates": [16.427123796877638, 48.26961976340052]
 			},
 			"properties": {
 				"confidence": 0.78
