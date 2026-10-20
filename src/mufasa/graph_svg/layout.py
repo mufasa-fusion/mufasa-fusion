@@ -1,5 +1,6 @@
 """Node positions: layers from top to bottom, ordered to reduce crossings, aligned with their neighbours."""
 
+import math
 from dataclasses import dataclass
 from functools import cache
 
@@ -7,6 +8,7 @@ from mufasa.graph_svg.spec import GraphSpec
 
 DX = 180  # Horizontal distance between neighbouring nodes
 DY = 145  # Vertical distance between layers
+TRACK = 12  # Vertical distance between parallel horizontal edge segments in the gap between two layers
 
 
 @dataclass
@@ -14,6 +16,8 @@ class Layout:
     nodes: dict[str, tuple[float, float]]
     # Points that edges skipping layers pass through, one per skipped layer, so they are routed around nodes there
     bends: dict[tuple[str, str], list[tuple[float, float]]]
+    # Height of the horizontal segment in each gap between layers an edge crosses, from top to bottom
+    tracks: dict[tuple[str, str], list[float]]
 
 
 def layout(spec: GraphSpec) -> Layout:
@@ -34,8 +38,61 @@ def layout(spec: GraphSpec) -> Layout:
     _reduce_crossings(layers, preds, succs)
     x = _x_positions(layers, preds, succs, is_helper=lambda n: n not in spec.nodes)
 
-    position = {n: (x[n], depths[n] * DY) for n in depths}
-    return Layout({n: position[n] for n in spec.nodes}, {e: [position[h] for h in hs] for e, hs in helpers.items()})
+    chains = {(a, b): [a, *hs, b] for (a, b), hs in helpers.items()}
+    track_of, counts = _tracks(chains, x, depths)
+
+    # Each gap between layers is as high as its tracks need; tracks are centered in it
+    y = [0.0]
+    for depth in range(len(layers) - 1):
+        y.append(y[-1] + DY + (counts.get(depth, 1) - 1) * TRACK)
+
+    def track_y(depth: int, track: int) -> float:
+        return (y[depth] + y[depth + 1]) / 2 + (track - (counts.get(depth, 1) - 1) / 2) * TRACK
+
+    position = {n: (x[n], y[depths[n]]) for n in depths}
+    return Layout(
+        {n: position[n] for n in spec.nodes},
+        {e: [position[h] for h in hs] for e, hs in helpers.items()},
+        {e: [track_y(depths[u], track_of.get((e, depths[u]), 0)) for u in chain[:-1]] for e, chain in chains.items()},
+    )
+
+
+def _tracks(chains, x, depths) -> tuple[dict, dict[int, int]]:
+    """Give each horizontal edge segment a track in its gap between layers, so that different signals never share
+    one (left-edge algorithm of channel routing).
+
+    Segments of one signal share a track: the fan-out of a source, or else the edges merging into one target.
+    Signals whose spans overlap get different tracks. Returns the track of each (edge, gap) and the number of
+    tracks per gap.
+    """
+    segments = {}  # gap -> [(edge, x top, x bottom)]
+    for edge, chain in chains.items():
+        for u, v in zip(chain, chain[1:]):
+            segments.setdefault(depths[u], []).append((edge, x[u], x[v]))
+
+    track_of, counts = {}, {}
+    for gap, segs in segments.items():
+        fan_out = {}
+        for (a, _), *_ in segs:
+            fan_out[a] = fan_out.get(a, 0) + 1
+        signal = {edge: ("from", edge[0]) if fan_out[edge[0]] > 1 else ("to", edge[1]) for edge, *_ in segs}
+
+        span = {}
+        for edge, top, bottom in segs:
+            if abs(top - bottom) >= 1:  # Edges straight down need no track
+                lo, hi = span.get(signal[edge], (top, top))
+                span[signal[edge]] = min(lo, top, bottom), max(hi, top, bottom)
+
+        track, current = {}, 0
+        while len(track) < len(span):
+            end = -math.inf
+            for s in sorted((s for s in span if s not in track), key=lambda s: span[s]):
+                if span[s][0] > end + 1:  # Signals touching at one point would look connected
+                    track[s], end = current, span[s][1]
+            current += 1
+        counts[gap] = max(current, 1)
+        track_of.update({(edge, gap): track.get(signal[edge], 0) for edge, *_ in segs})
+    return track_of, counts
 
 
 def _neighbours(nodes, edges) -> tuple[dict[str, list[str]], dict[str, list[str]]]:

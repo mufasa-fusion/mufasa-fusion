@@ -131,6 +131,16 @@ class TestLayout:
         assert bend_x != result.nodes["b"][0]
         assert result.bends["a", "b"] == []
 
+    def test_different_signals_get_different_tracks(self):
+        code = ("from mufasa.nodes import StaticMap, LogicalAnd, BayesianFusion\n"
+                "a = StaticMap('a.geojson')\nb = StaticMap('b.geojson')\n"
+                "x = LogicalAnd()(a, b)\ny = LogicalAnd()(a, b)\nz = BayesianFusion()(x, y)")
+        result = layout(spec_from_code(code))
+        # a and b both fan out to x and y: two signals, two tracks
+        assert result.tracks["a", "x"] == result.tracks["a", "y"] != result.tracks["b", "x"] == result.tracks["b", "y"]
+        # x and y merge into z: one signal, one track
+        assert result.tracks["x", "z"] == result.tracks["y", "z"]
+
 
 class TestRender:
     def test_svg_is_self_contained(self):
