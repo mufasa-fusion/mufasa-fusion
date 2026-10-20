@@ -45,7 +45,7 @@ Sensor setup of the trial: thermal cameras (green), acoustic sensors (blue), rad
 ## How MuFASA was used
 
 - **One graph, many experiments.** Temporal decay rates and detection thresholds were varied systematically to
-  characterize the behaviour under day and night conditions: change a parameter, re-run, inspect the output.
+  characterise the behaviour under day and night conditions: change a parameter, re-run, inspect the output.
 - **From recorded to live.** Data was recorded and analysed offline first. The same graph then went live by
   exchanging the file input nodes for streaming input nodes, connected to the sensors via ROS2.
 
@@ -143,9 +143,14 @@ vis.show(4, ax=result, color="red", **moment)
 result.legend(handles=[Patch(color="red", label="alarm")], loc="upper left", fontsize=9)
 
 for ax in (sensors, result):
+    for text in list(ax.texts):
+        text.remove()  # The imagery credit, given once below the figure instead of in every panel
     ax.set(xticks=[], yticks=[], xlabel="", ylabel="")  # Coordinates don't matter here
 fig.tight_layout()
 ```
+
+<small>Satellite imagery: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS
+User Community.</small>
 
 :::{tip}
 Experiment with it: drop a sensor from `BayesianFusion`, or change a decay rate or the threshold,

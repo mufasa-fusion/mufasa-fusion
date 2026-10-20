@@ -6,15 +6,13 @@ modalities they use. Two of them were tested in controlled real-world trials.
 ::::{container} mf-showcase-cards
 
 :::{container}
-**Border security**
+**{doc}`Border security <border-security>`**
 
 <span class="mf-status mf-status-tested">Field-tested</span>
 
 Detect and track vessels, vehicles and people moving between water and land.
 
 <span class="mf-chips">Moving objects · Fixed and mobile sensors · SWIR, RGB, thermal</span>
-
-*Page in preparation*
 :::
 
 :::{container}
@@ -54,7 +52,7 @@ Localize and classify static threats such as landmines and improvised explosive 
 
 ## Which one is closest to your problem?
 
-- Your objects **move** and you combine **fixed and mobile** sensors: **border security**.
+- Your objects **move** and you combine **fixed and mobile** sensors: {doc}`border security <border-security>`.
 - **Fixed** sensors watch a **defined area**, and you need to tune them to changing conditions:
   {doc}`railway security <railway-security>`.
 - Your objects are **static** and your sensors move: **CBRNE threats**.
@@ -71,5 +69,6 @@ available. GeoJSON files go into a {class}`~mufasa.io.inputs.geojson.GeoJsonInpu
 ```{toctree}
 :hidden:
 
+border-security
 railway-security
 ```
