@@ -1,5 +1,6 @@
 ﻿from dataclasses import dataclass, field
 
+import numpy as np
 from shapely.geometry import LineString, MultiLineString, MultiPoint, Point
 from shapely.geometry.base import BaseGeometry
 
@@ -46,3 +47,38 @@ class Location:
 @dataclass
 class Observation(Location):
     confidence: float = 0.5
+
+
+@dataclass(eq=False)
+class UncertainObservation(Observation):
+    """Observation with a Gaussian position uncertainty.
+    
+    ``covariance`` is a symmetric, positive-definite 2×2 matrix in pipeline
+    CRS units squared (m² for UTM), ordered ``[x, y]`` like the geometry
+    coordinates. Input and output nodes reproject only the geometry, so give
+    the covariance in metres even when supplying WGS84 coordinates; for a UTM
+    pipeline this is the east/north covariance a sensor typically reports.
+    """
+
+    covariance: np.ndarray = field(kw_only=True)
+
+    def __post_init__(self) -> None:
+        cov = np.array(self.covariance, dtype=float)
+        if cov.shape != (2, 2):
+            raise ValueError(f"covariance must have shape (2, 2), got {cov.shape}")
+        if not np.all(np.isfinite(cov)):
+            raise ValueError("covariance must contain only finite values")
+        if not np.allclose(cov, cov.T):
+            raise ValueError("covariance must be symmetric")
+        try:
+            np.linalg.cholesky(cov)
+        except np.linalg.LinAlgError:
+            raise ValueError("covariance must be positive definite") from None
+        self.covariance = cov
+
+    def __eq__(self, other) -> bool:
+        # The generated dataclass __eq__ would compare the ndarray with ``==``,
+        # which is ambiguous for arrays and raises instead of returning a bool.
+        if other.__class__ is not self.__class__:
+            return NotImplemented
+        return super().__eq__(other) and np.array_equal(self.covariance, other.covariance)

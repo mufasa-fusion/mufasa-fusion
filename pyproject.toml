@@ -20,6 +20,10 @@ dependencies = [
 tracking = [
     "stonesoup",
     "river",
+    "python-ulid",
+    # python-ulid >= 4 imports typing.override (Python 3.12+) and falls back to
+    # typing_extensions, but only declares it for Python < 3.11.
+    "typing-extensions>=4.4; python_version < '3.12'",
 ]
 vis = [
     "matplotlib",

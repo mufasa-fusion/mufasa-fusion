@@ -1,7 +1,10 @@
-﻿import pytest
+﻿import dataclasses
+
+import numpy as np
+import pytest
 from shapely.geometry import LineString, MultiLineString, MultiPoint, Point, Polygon
 
-from mufasa import Observation, Location
+from mufasa import Observation, Location, UncertainObservation
 
 
 class TestLocation:
@@ -177,3 +180,89 @@ class TestEffectiveGeometry:
         p = Point(0, 0)
         e = Observation(geometry=p, timestamp=1.0, confidence=0.9)
         assert e.effective_geometry is p
+
+
+class TestUncertainObservation:
+    COV = np.array([[4.0, 1.0], [1.0, 2.0]])
+
+    def test_is_an_observation(self, point):
+        e = UncertainObservation(geometry=point, covariance=self.COV)
+        assert isinstance(e, Observation)
+        assert isinstance(e, Location)
+
+    def test_requires_covariance(self, point):
+        with pytest.raises(TypeError):
+            UncertainObservation(geometry=point)
+
+    def test_inherited_defaults(self, point):
+        e = UncertainObservation(geometry=point, covariance=self.COV)
+        assert e.timestamp == 0.0
+        assert e.confidence == 0.5
+        assert e.properties == {}
+
+    def test_inherited_fields_stay_positional(self, point):
+        e = UncertainObservation(point, 1.0, {"sensor": "radar"}, 0.9, covariance=self.COV)
+        assert e.timestamp == 1.0
+        assert e.properties == {"sensor": "radar"}
+        assert e.confidence == 0.9
+
+    def test_covariance_accepts_nested_lists(self, point):
+        e = UncertainObservation(geometry=point, covariance=[[1, 0], [0, 1]])
+        assert isinstance(e.covariance, np.ndarray)
+        assert e.covariance.dtype == float
+
+    def test_covariance_is_copied(self, point):
+        cov = self.COV.copy()
+        e = UncertainObservation(geometry=point, covariance=cov)
+        cov[0, 0] = 99.0
+        assert e.covariance[0, 0] == 4.0
+
+    @pytest.mark.parametrize("cov", [
+        [[1.0, 0.0, 0.0], [0.0, 1.0, 0.0], [0.0, 0.0, 1.0]],
+        [1.0, 1.0],
+    ])
+    def test_wrong_shape_raises(self, point, cov):
+        with pytest.raises(ValueError, match="shape"):
+            UncertainObservation(geometry=point, covariance=cov)
+
+    def test_non_finite_raises(self, point):
+        with pytest.raises(ValueError, match="finite"):
+            UncertainObservation(geometry=point, covariance=[[np.inf, 0.0], [0.0, 1.0]])
+
+    def test_asymmetric_raises(self, point):
+        with pytest.raises(ValueError, match="symmetric"):
+            UncertainObservation(geometry=point, covariance=[[1.0, 0.5], [0.0, 1.0]])
+
+    @pytest.mark.parametrize("cov", [
+        [[1.0, 0.0], [0.0, 0.0]],    # singular
+        [[1.0, 2.0], [2.0, 1.0]],    # indefinite
+        [[-1.0, 0.0], [0.0, -1.0]],  # negative definite
+    ])
+    def test_not_positive_definite_raises(self, point, cov):
+        with pytest.raises(ValueError, match="positive definite"):
+            UncertainObservation(geometry=point, covariance=cov)
+
+    def test_equal_when_all_fields_equal(self, point):
+        a = UncertainObservation(geometry=point, covariance=self.COV)
+        b = UncertainObservation(geometry=point, covariance=self.COV.copy())
+        assert a == b
+
+    def test_not_equal_when_covariance_differs(self, point):
+        a = UncertainObservation(geometry=point, covariance=self.COV)
+        b = UncertainObservation(geometry=point, covariance=2 * self.COV)
+        assert a != b
+
+    def test_not_equal_to_plain_observation(self, point):
+        a = UncertainObservation(geometry=point, covariance=self.COV)
+        assert a != Observation(geometry=point)
+
+    def test_membership_test_does_not_raise(self, point):
+        a = UncertainObservation(geometry=point, covariance=self.COV)
+        b = UncertainObservation(geometry=point, covariance=2 * self.COV)
+        assert a not in [b]
+
+    def test_replace_keeps_covariance(self, point):
+        e = UncertainObservation(geometry=point, covariance=self.COV)
+        moved = dataclasses.replace(e, timestamp=5.0)
+        assert moved.timestamp == 5.0
+        np.testing.assert_array_equal(moved.covariance, self.COV)
