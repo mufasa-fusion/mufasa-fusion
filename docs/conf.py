@@ -37,6 +37,9 @@ myst_enable_extensions = [
     "deflist",
 ]
 
+# Re-execute an executable page only when its code changes (results are cached in _build/.jupyter_cache)
+nb_execution_mode = "cache"
+
 rst_prolog = """\
 .. |loc| image:: /../src/mufasa/graph_svg/icons/location-marker.svg
    :alt: location marker
