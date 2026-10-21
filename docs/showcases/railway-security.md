@@ -83,17 +83,12 @@ graph = Graph(
     bbox=BoundingBox(16.838758, 48.252595, 16.840809, 48.252971),
     resolution=(0.5, 0.5),
 )
-```
-
-```{code-cell}
-:tags: [remove-input]
 graph.plot_graph()
 ```
 
 ## Try it
 
-Unfortunately, we can't publish the trial data. However, we can showcase it with synthetic data of a representative
-scenario: a group of two persons committing graffiti. In this scenario, both persons walk along the tracks, chatting
+To see the graph in action, we generated synthetic data from the knowledge we have developed during the experiment. We select a specific moment of a group of two persons committing graffiti. In this scenario, both persons walk along the tracks, chatting
 and rattling their spray cans, and cross the tracks. After some time, they split up: one sprays a parked wagon while
 the other keeps watch, until both flee.
 The site is a fictitious one along an open line, with the layout of the trial. The detections are invented but behave like the trial's
