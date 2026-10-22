@@ -9,6 +9,14 @@ mufasa.io.outputs.visualization
 
 
 
+Attributes
+----------
+
+.. autoapisummary::
+
+   mufasa.io.outputs.visualization.BASEMAPS
+
+
 Classes
 -------
 
@@ -19,6 +27,8 @@ Classes
 
 Module Contents
 ---------------
+
+.. py:data:: BASEMAPS
 
 .. py:class:: Visualization(snapshot_interval_s: float = 5.0)
 
@@ -40,7 +50,9 @@ Module Contents
 
    Both ``show()`` and ``animate()`` default to ``basemap=True`` and
    ``latlon_labels=True`` and fix the axis extent to the pipeline bounding
-   box.  Pass ``basemap=False`` to suppress tile fetching (e.g. in tests).
+   box.  ``basemap`` also takes a style name from ``BASEMAPS`` (``"streets"``,
+   the default, or ``"satellite"``).  Pass ``basemap=False`` to suppress tile
+   fetching (e.g. in tests).
 
 
    .. py:attribute:: snapshot_interval_s
@@ -100,13 +112,13 @@ Module Contents
 
 
 
-   .. py:method:: show(index: int | str, *, start: float | None = None, end: float | None = None, reduction: str = 'last', basemap: bool = True, latlon_labels: bool = True, **kwargs) -> None
+   .. py:method:: show(index: int | str, *, start: float | None = None, end: float | None = None, reduction: str = 'last', basemap: bool | str = True, latlon_labels: bool = True, **kwargs) -> None
 
       Render the state of a predecessor, optionally filtered to a time window.
 
 
 
-   .. py:method:: animate(index: int | str, *, start: float | None = None, end: float | None = None, speed: float = 1.0, basemap: bool = True, latlon_labels: bool = True, **kwargs)
+   .. py:method:: animate(index: int | str, *, start: float | None = None, end: float | None = None, speed: float = 1.0, basemap: bool | str = True, latlon_labels: bool = True, **kwargs)
 
       Animate snapshots or locations for a predecessor.
 

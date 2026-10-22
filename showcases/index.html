@@ -2,7 +2,7 @@
 <html lang="en" data-accent-color="red" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Showcases - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Node Catalog" href="../catalog.html" /><link rel="prev" title="Extending MuFASA" href="../user-guide/extending.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Showcases - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Maritime border security" href="border-security.html" /><link rel="prev" title="Extending MuFASA" href="../user-guide/extending.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -10,8 +10,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=741ce7fd" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=2a92d708" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=6204571c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=26b5b856" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -77,7 +77,11 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../user-guide/extending.html">Extending MuFASA</a></li>
 </ul>
 </li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Showcases</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Showcases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="border-security.html">Maritime border security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="railway-security.html">Railway security</a></li>
+</ul>
+</li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../catalog.html">Node Catalog</a></li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../api/index.html">API Reference</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="../api/mufasa/index.html">mufasa</a><ul>
@@ -152,11 +156,31 @@ data-aria-dark="Switch to auto color mode">
   <article class="yue" role="main">
           <section id="showcases">
 <h1>Showcases<a class="headerlink" href="#showcases" title="Link to this heading">#</a></h1>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Placeholder page. Narrative case studies: Land &amp; Maritime Border Security,
-Railway Security, and CBRNE Threats, drawn from the white paper and its
-referenced publications.</p>
+<p>MuFASA has been applied across domains that differ in what is detected, where the sensors sit and which
+modalities they use.</p>
+<div class="mf-showcase-cards docutils container">
+<div class="docutils container">
+<p class="rubric" id="maritime-border-security-field-tested"><strong><a class="reference internal" href="border-security.html"><span class="doc">Maritime border security</span></a></strong> <span class="mf-status-tested">Field-tested</span></p>
+<img alt="Shield above a wireframe landscape" src="../_images/card-border.jpg" />
+<p><span class="mf-tag">Irregular migration</span> <span class="mf-tag">Smuggling</span> <span class="mf-tag">Vessel detection</span></p>
+<p>Detect vessels and people approaching the coast, combining coastal cameras with drones.</p>
+<p>Platform: fixed and mobile · Sensors: SWIR and LWIR cameras, drones with EO and IR cameras</p>
+</div>
+<div class="docutils container">
+<p class="rubric" id="railway-security-field-tested"><strong><a class="reference internal" href="railway-security.html"><span class="doc">Railway security</span></a></strong> <span class="mf-status-tested">Field-tested</span></p>
+<img alt="Sensor mast beside a railway line at dusk, detecting people on the tracks" class="mf-card-image-left" src="../_images/card-railway.jpg" />
+<p><span class="mf-tag">Trespassing</span> <span class="mf-tag">Sabotage</span> <span class="mf-tag">Vandalism</span></p>
+<p>Detect trespassing, sabotage and vandalism along railway corridors, by day and at night.</p>
+<p>Platform: fixed · Sensors: thermal cameras, radar, acoustic sensors</p>
+</div>
+<div class="docutils container">
+<p class="rubric" id="cbrne-threats-simulation"><strong>CBRNE threats</strong> <span class="mf-status-simulation">Simulation</span></p>
+<p><span class="mf-tag">Static Objects</span> <span class="mf-tag">Tracking</span></p>
+<p>Localize and classify static threats from sensors on the move. <em>Page in preparation.</em></p>
+<p>Platform: mobile · Sensors: simulated</p>
+</div>
+</div>
+<div class="toctree-wrapper compound">
 </div>
 </section>
 
@@ -172,10 +196,10 @@ referenced publications.</p>
         <span>Previous</span><div class="title">Extending MuFASA</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="../catalog.html">
+    <a href="border-security.html">
       <div class="page-info">
         <span>Next</span>
-        <div class="title">Node Catalog</div>
+        <div class="title">Maritime border security</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>

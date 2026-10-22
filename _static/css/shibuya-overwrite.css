@@ -77,3 +77,5 @@ figcaption:hover a.headerlink {
 .cell_output svg {
   margin-inline: auto;
 }
+
+strong, em { color: inherit; }

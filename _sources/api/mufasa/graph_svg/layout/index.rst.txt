@@ -16,6 +16,7 @@ Attributes
 
    mufasa.graph_svg.layout.DX
    mufasa.graph_svg.layout.DY
+   mufasa.graph_svg.layout.TRACK
 
 
 Classes
@@ -45,6 +46,10 @@ Module Contents
    :value: 145
 
 
+.. py:data:: TRACK
+   :value: 12
+
+
 .. py:class:: Layout
 
    .. py:attribute:: nodes
@@ -53,6 +58,10 @@ Module Contents
 
    .. py:attribute:: bends
       :type:  dict[tuple[str, str], list[tuple[float, float]]]
+
+
+   .. py:attribute:: tracks
+      :type:  dict[tuple[str, str], list[float]]
 
 
 .. py:function:: layout(spec: mufasa.graph_svg.spec.GraphSpec) -> Layout

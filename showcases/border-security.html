@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="red" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Maritime border security - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Railway security" href="railway-security.html" /><link rel="prev" title="Showcases" href="index.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"auto");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=6204571c" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=26b5b856" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="Maritime border security"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      <img class="light-logo" src="../_static/img/logo/MuFASA_MuFASA.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <img class="dark-logo" src="../_static/img/logo/MuFASA_MuFASA_weiss.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <strong>mufasa-fusion</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"><ul><li class="link"><a href="../getting-started.html">Getting started</a></li><li class="link"><a href="../user-guide/index.html">User guide</a></li><li class="link"><a href="index.html">Showcases</a></li><li class="link"><a href="../catalog.html">Catalog</a></li><li class="link"><a href="../api/index.html">API</a></li><li class="link"><a href="../about.html">About</a></li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">0.1.0</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="https://mufasa-fusion.github.io/mufasa-fusion/">0.1.0</a></li></ul></div>
+  </div><div class="sy-head-socials"></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="js-theme theme-switch flex items-center"
+data-aria-auto="Switch to light color mode"
+data-aria-light="Switch to dark color mode"
+data-aria-dark="Switch to auto color mode">
+<i class="i-lucide theme-icon"></i>
+</button><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><ul class="current">
+<li class="toctree-l1 _expand"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../user-guide/index.html">User Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../user-guide/is-mufasa-right-for-you.html">Is MuFASA right for you?</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user-guide/design-principles.html">Design principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user-guide/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user-guide/concepts.html">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user-guide/tutorials.html">Tutorials</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../user-guide/extending.html">Extending MuFASA</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Showcases</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Maritime border security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="railway-security.html">Railway security</a></li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../catalog.html">Node Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/mufasa/index.html">mufasa</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/graph/index.html">mufasa.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/graph_svg/index.html">mufasa.graph_svg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/draw/index.html">mufasa.graph_svg.draw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/families/index.html">mufasa.graph_svg.families</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/layout/index.html">mufasa.graph_svg.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/spec/index.html">mufasa.graph_svg.spec</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/io/index.html">mufasa.io</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/io/inputs/index.html">mufasa.io.inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/io/outputs/index.html">mufasa.io.outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/location/index.html">mufasa.location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/map/index.html">mufasa.map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/node/index.html">mufasa.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/nodes/index.html">mufasa.nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/detection/index.html">mufasa.nodes.detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/fusion/index.html">mufasa.nodes.fusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/mapping/index.html">mufasa.nodes.mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/tracking/index.html">mufasa.nodes.tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/util/index.html">mufasa.nodes.util</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/registry/index.html">mufasa.registry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../about.html">About</a></li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#at-a-glance">At a glance</a></li>
+<li><a class="reference internal" href="#how-mufasa-was-used">How MuFASA was used</a></li>
+<li><a class="reference internal" href="#the-fusion-graph">The Fusion Graph</a></li>
+<li><a class="reference internal" href="#try-it">Try it</a></li>
+<li><a class="reference internal" href="#references">References</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">mufasa-fusion</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">Showcases</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Maritime border security</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="maritime-border-security">
+<h1>Maritime border security<a class="headerlink" href="#maritime-border-security" title="Link to this heading">#</a></h1>
+<p><span class="mf-status-tested">Field-tested</span></p>
+<p><strong>Use cases:</strong> <span class="mf-tag">Irregular migration</span> <span class="mf-tag">Smuggling</span> <span class="mf-tag">Vessel detection</span></p>
+<p>Detection of vessels and people at sea and along the coast, combining coastal cameras with drones.</p>
+<section id="at-a-glance">
+<h2>At a glance<a class="headerlink" href="#at-a-glance" title="Link to this heading">#</a></h2>
+<figure class="align-default" id="border-scenarios">
+<img alt="Sketch of scenarios 1 to 3: small vessels approaching the shore, people landing, and larger vessels along the coast" src="../_images/border-scenario.png" />
+<figcaption>
+<p><span class="caption-text">Scenarios 1 to 3 of the experiment; the numbers give the order of events. Adapted, with permission, from
+K. Wohlleben et al., “Enhancing Maritime Situational Awareness through Multimodal Fusion: Insights from a Real-World
+Experiment,” <em>2025 Sensor Data Fusion: Trends, Solutions, Applications (SDF)</em>, 2025. © 2025 IEEE.</span><a class="headerlink" href="#border-scenarios" title="Link to this image">#</a></p>
+</figcaption>
+</figure>
+<div class="table-wrapper colwidths-given docutils container">
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<tbody>
+<tr class="row-odd"><td><p><strong>Objects of interest</strong></p></td>
+<td><p>Small, medium and large vessels, and people landing on the shore</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Sensors</strong></p></td>
+<td><p>Coastal short-wave and long-wave infrared cameras (SWIR, LWIR) on poles about 6 m high;
+drones with a visible-light camera (UAV-EO) and a thermal camera (UAV-IR)</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>Platform</strong></p></td>
+<td><p>Fixed and mobile: coastal cameras that only change orientation, and drones that move freely</p></td>
+</tr>
+<tr class="row-even"><td><p><strong>Setting</strong></p></td>
+<td><p>Controlled real-world experiment: a live demonstration recorded over two days, six scenarios</p></td>
+</tr>
+<tr class="row-odd"><td><p><strong>How MuFASA was used</strong></p></td>
+<td><p>Exploring fusion graphs on live data, adapting the graph to the environment during operation</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+<section id="how-mufasa-was-used">
+<span id="border-how"></span><h2>How MuFASA was used<a class="headerlink" href="#how-mufasa-was-used" title="Link to this heading">#</a></h2>
+<ul>
+<li><p><strong>Exploring graph variants.</strong> We tried several Fusion Graphs during the experiment: the drones alone, all sensors
+fused, and the cameras confirmed by the drones. Each variant differs from the last in a few lines, because every
+step is an explicit node. The variant the experiment settled on is shown in <a class="reference internal" href="#border-graph">The Fusion Graph</a>, and
+<a class="reference internal" href="#border-try-it">Try it</a> looks inside it.</p></li>
+<li><p><strong>Adapting the graph during operation.</strong> After the sensors were integrated, the graphs ran online. The same graph
+that is developed on recorded data goes live by exchanging the file input nodes for
+<a class="reference internal" href="../catalog.html#catalog-input-nodes"><span class="std std-ref">streaming input nodes</span></a>. In this case, MQTT was used as a messaging broker system. From then on, only the configuration, i.e. the graph, changed. A new graph is in place within seconds, so the system can be adapted to an environment that isn’t known in advance.</p>
+<!-- TODO: link the MQTT streaming example in the user guide once it is merged -->
+</li>
+</ul>
+</section>
+<section id="the-fusion-graph">
+<span id="border-graph"></span><h2>The Fusion Graph<a class="headerlink" href="#the-fusion-graph" title="Link to this heading">#</a></h2>
+<p>In the graph the experiment settled on, each sensor accumulates its detections into a probability map
+(<a class="reference internal" href="../catalog.html#catalog-processing-nodes"><span class="std std-ref">POM</span></a>). A <a class="reference internal" href="../catalog.html#catalog-processing-nodes"><span class="std std-ref">LogicalAnd</span></a>
+combines every coastal camera with every drone, so it only reports where both see something.
+<a class="reference internal" href="../catalog.html#catalog-processing-nodes"><span class="std std-ref">BayesianFusion</span></a> joins the four combinations, and a
+<a class="reference internal" href="../catalog.html#catalog-processing-nodes"><span class="std std-ref">Threshold</span></a> turns the result into alarms, collected by a
+<a class="reference internal" href="../catalog.html#catalog-output-nodes"><span class="std std-ref">LocationOutput</span></a>. In the experiment, this graph had far fewer false
+alarms than the drones alone (Wohlleben et al., SDF 2025).</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoundingBox</span><span class="p">,</span> <span class="n">Graph</span>
+</span><span data-line="2"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.inputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeoJsonInput</span>
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.outputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">LocationOutput</span>
+</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.nodes</span><span class="w"> </span><span class="kn">import</span> <span class="n">POM</span><span class="p">,</span> <span class="n">LogicalAnd</span><span class="p">,</span> <span class="n">BayesianFusion</span><span class="p">,</span> <span class="n">Threshold</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="c1"># Input nodes: coastal cameras and drones</span>
+</span><span data-line="7"><span class="n">swir</span> <span class="o">=</span> <span class="n">GeoJsonInput</span><span class="p">(</span><span class="s2">&quot;swir.geojson&quot;</span><span class="p">)</span>
+</span><span data-line="8"><span class="n">lwir</span> <span class="o">=</span> <span class="n">GeoJsonInput</span><span class="p">(</span><span class="s2">&quot;lwir.geojson&quot;</span><span class="p">)</span>
+</span><span data-line="9"><span class="n">uav_eo</span> <span class="o">=</span> <span class="n">GeoJsonInput</span><span class="p">(</span><span class="s2">&quot;uav_eo.geojson&quot;</span><span class="p">)</span>
+</span><span data-line="10"><span class="n">uav_ir</span> <span class="o">=</span> <span class="n">GeoJsonInput</span><span class="p">(</span><span class="s2">&quot;uav_ir.geojson&quot;</span><span class="p">)</span>
+</span><span data-line="11">
+</span><span data-line="12"><span class="c1"># Processing nodes: one probability map per sensor ...</span>
+</span><span data-line="13"><span class="n">pom_swir</span> <span class="o">=</span> <span class="n">POM</span><span class="p">(</span><span class="n">decay_s</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)(</span><span class="n">swir</span><span class="p">)</span>
+</span><span data-line="14"><span class="n">pom_lwir</span> <span class="o">=</span> <span class="n">POM</span><span class="p">(</span><span class="n">decay_s</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)(</span><span class="n">lwir</span><span class="p">)</span>
+</span><span data-line="15"><span class="n">pom_uav_eo</span> <span class="o">=</span> <span class="n">POM</span><span class="p">(</span><span class="n">decay_s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)(</span><span class="n">uav_eo</span><span class="p">)</span>
+</span><span data-line="16"><span class="n">pom_uav_ir</span> <span class="o">=</span> <span class="n">POM</span><span class="p">(</span><span class="n">decay_s</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">prior</span><span class="o">=</span><span class="mf">0.25</span><span class="p">)(</span><span class="n">uav_ir</span><span class="p">)</span>
+</span><span data-line="17">
+</span><span data-line="18"><span class="c1"># ... every camera confirmed by every drone ...</span>
+</span><span data-line="19"><span class="n">swir_and_eo</span> <span class="o">=</span> <span class="n">LogicalAnd</span><span class="p">()(</span><span class="n">pom_swir</span><span class="p">,</span> <span class="n">pom_uav_eo</span><span class="p">)</span>
+</span><span data-line="20"><span class="n">swir_and_ir</span> <span class="o">=</span> <span class="n">LogicalAnd</span><span class="p">()(</span><span class="n">pom_swir</span><span class="p">,</span> <span class="n">pom_uav_ir</span><span class="p">)</span>
+</span><span data-line="21"><span class="n">lwir_and_eo</span> <span class="o">=</span> <span class="n">LogicalAnd</span><span class="p">()(</span><span class="n">pom_lwir</span><span class="p">,</span> <span class="n">pom_uav_eo</span><span class="p">)</span>
+</span><span data-line="22"><span class="n">lwir_and_ir</span> <span class="o">=</span> <span class="n">LogicalAnd</span><span class="p">()(</span><span class="n">pom_lwir</span><span class="p">,</span> <span class="n">pom_uav_ir</span><span class="p">)</span>
+</span><span data-line="23">
+</span><span data-line="24"><span class="c1"># ... and the four confirmations fused</span>
+</span><span data-line="25"><span class="n">fused</span> <span class="o">=</span> <span class="n">BayesianFusion</span><span class="p">()(</span><span class="n">swir_and_eo</span><span class="p">,</span> <span class="n">swir_and_ir</span><span class="p">,</span> <span class="n">lwir_and_eo</span><span class="p">,</span> <span class="n">lwir_and_ir</span><span class="p">)</span>
+</span><span data-line="26"><span class="n">alarms</span> <span class="o">=</span> <span class="n">Threshold</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">alarm_timeout_s</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">dilation_px</span><span class="o">=</span><span class="mi">1</span><span class="p">)(</span><span class="n">fused</span><span class="p">)</span>
+</span><span data-line="27">
+</span><span data-line="28"><span class="c1"># Output node: collects the alarms</span>
+</span><span data-line="29"><span class="n">out</span> <span class="o">=</span> <span class="n">LocationOutput</span><span class="p">()(</span><span class="n">alarms</span><span class="p">)</span>
+</span><span data-line="30">
+</span><span data-line="31"><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span>
+</span><span data-line="32">    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">swir</span><span class="p">,</span> <span class="n">lwir</span><span class="p">,</span> <span class="n">uav_eo</span><span class="p">,</span> <span class="n">uav_ir</span><span class="p">],</span>
+</span><span data-line="33">    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">out</span><span class="p">],</span>
+</span><span data-line="34">    <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:32633&quot;</span><span class="p">,</span>
+</span><span data-line="35">    <span class="n">bbox</span><span class="o">=</span><span class="n">BoundingBox</span><span class="p">(</span><span class="mf">13.6118</span><span class="p">,</span> <span class="mf">54.4017</span><span class="p">,</span> <span class="mf">13.6222</span><span class="p">,</span> <span class="mf">54.4079</span><span class="p">),</span>
+</span><span data-line="36">    <span class="n">resolution</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span>
+</span><span data-line="37"><span class="p">)</span>
+</span><span data-line="38"><span class="n">graph</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 767 855" width="767" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg0-map-fold" viewBox="0 0 64 64">
+	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg0-location-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
+		<circle cx="32" cy="22" r="9"/>
+	</g>
+</symbol><symbol id="mfg0-observation-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<circle cx="32" cy="32" r="26"/>
+		<circle cx="32" cy="32" r="15"/>
+	</g>
+	<circle cx="32" cy="32" r="6" fill="currentColor"/>
+</symbol><symbol id="mfg0-map-roll" viewBox="0 0 64 64">
+	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg0-unknown" viewBox="0 0 64 64">
+	<circle cx="32" cy="32" r="12" fill="currentColor"/>
+</symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsoninput_0" data-to="pom_0"><path d="M180.0 47.0 L180.0 98.0"/><circle cx="180.0" cy="47.0" r="3.5"/><circle cx="180.0" cy="98.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsoninput_1" data-to="pom_1"><path d="M360.0 47.0 L360.0 98.0"/><circle cx="360.0" cy="47.0" r="3.5"/><circle cx="360.0" cy="98.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsoninput_2" data-to="pom_2"><path d="M0.0 47.0 L0.0 98.0"/><circle cx="0.0" cy="47.0" r="3.5"/><circle cx="0.0" cy="98.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsoninput_3" data-to="pom_3"><path d="M540.0 47.0 L540.0 98.0"/><circle cx="540.0" cy="47.0" r="3.5"/><circle cx="540.0" cy="98.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="pom_0" data-to="logicaland_0"><path d="M180.0 192.0 L180.0 219.5 Q180.0 229.5 170.0 229.5 L16.5 229.5 Q6.5 229.5 6.5 239.5 L6.5 268.7"/><circle cx="180.0" cy="192.0" r="3.5"/><circle cx="6.5" cy="268.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="pom_0" data-to="logicaland_2"><path d="M180.0 192.0 L180.0 219.5 Q180.0 229.5 190.0 229.5 L343.5 229.5 Q353.5 229.5 353.5 239.5 L353.5 268.7"/><circle cx="180.0" cy="192.0" r="3.5"/><circle cx="353.5" cy="268.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="pom_1" data-to="logicaland_1"><path d="M360.0 192.0 L360.0 231.5 Q360.0 241.5 350.0 241.5 L196.5 241.5 Q186.5 241.5 186.5 251.5 L186.5 268.7"/><circle cx="360.0" cy="192.0" r="3.5"/><circle cx="186.5" cy="268.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="pom_1" data-to="logicaland_3"><path d="M360.0 192.0 L360.0 231.5 Q360.0 241.5 370.0 241.5 L523.5 241.5 Q533.5 241.5 533.5 251.5 L533.5 268.7"/><circle cx="360.0" cy="192.0" r="3.5"/><circle cx="533.5" cy="268.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="pom_2" data-to="logicaland_0"><path d="M0.0 192.0 L0.0 267.0"/><circle cx="0.0" cy="192.0" r="3.5"/><circle cx="0.0" cy="267.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="pom_2" data-to="logicaland_1"><path d="M0.0 192.0 L0.0 207.5 Q0.0 217.5 10.0 217.5 L163.5 217.5 Q173.5 217.5 173.5 227.5 L173.5 268.7"/><circle cx="0.0" cy="192.0" r="3.5"/><circle cx="173.5" cy="268.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="pom_3" data-to="logicaland_2"><path d="M540.0 192.0 L540.0 207.5 Q540.0 217.5 530.0 217.5 L376.5 217.5 Q366.5 217.5 366.5 227.5 L366.5 268.7"/><circle cx="540.0" cy="192.0" r="3.5"/><circle cx="366.5" cy="268.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="pom_3" data-to="logicaland_3"><path d="M540.0 192.0 L540.0 267.0"/><circle cx="540.0" cy="192.0" r="3.5"/><circle cx="540.0" cy="267.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="logicaland_0" data-to="bayesianfusion_0"><path d="M0.0 361.0 L0.0 376.5 Q0.0 386.5 10.0 386.5 L253.5 386.5 Q263.5 386.5 263.5 396.5 L263.5 413.7"/><circle cx="0.0" cy="361.0" r="3.5"/><circle cx="263.5" cy="413.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="logicaland_1" data-to="bayesianfusion_0"><path d="M180.0 361.0 L180.0 376.5 Q180.0 386.5 190.0 386.5 L253.5 386.5 Q263.5 386.5 263.5 396.5 L263.5 413.7"/><circle cx="180.0" cy="361.0" r="3.5"/><circle cx="263.5" cy="413.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="logicaland_2" data-to="bayesianfusion_0"><path d="M360.0 361.0 L360.0 376.5 Q360.0 386.5 350.0 386.5 L286.5 386.5 Q276.5 386.5 276.5 396.5 L276.5 413.7"/><circle cx="360.0" cy="361.0" r="3.5"/><circle cx="276.5" cy="413.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="logicaland_3" data-to="bayesianfusion_0"><path d="M540.0 361.0 L540.0 376.5 Q540.0 386.5 530.0 386.5 L286.5 386.5 Q276.5 386.5 276.5 396.5 L276.5 413.7"/><circle cx="540.0" cy="361.0" r="3.5"/><circle cx="276.5" cy="413.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="bayesianfusion_0" data-to="threshold_0"><path d="M270.0 506.0 L270.0 557.0"/><circle cx="270.0" cy="506.0" r="3.5"/><circle cx="270.0" cy="557.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="threshold_0" data-to="locationoutput_0"><path d="M270.0 651.0 L270.0 702.0"/><circle cx="270.0" cy="651.0" r="3.5"/><circle cx="270.0" cy="702.0" r="3.5"/></g><g class="mf-node mf-io" data-id="geojsoninput_0" tabindex="0" aria-label="GeoJsonInput"><path d="M146.0 0.0 V-23.6 Q146.0 -30.6 153.0 -30.6 H207.0 Q214.0 -30.6 214.0 -23.6 V0.0 A34 34 0 0 1 146.0 0.0 Z" class="mf-body"/><text x="180.0" y="5.5" text-anchor="middle" class="mf-code">GJI</text><text x="226.0" y="5.0" class="mf-name">GeoJsonInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(180.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="geojsoninput_1" tabindex="0" aria-label="GeoJsonInput"><path d="M326.0 0.0 V-23.6 Q326.0 -30.6 333.0 -30.6 H387.0 Q394.0 -30.6 394.0 -23.6 V0.0 A34 34 0 0 1 326.0 0.0 Z" class="mf-body"/><text x="360.0" y="5.5" text-anchor="middle" class="mf-code">GJI</text><text x="406.0" y="5.0" class="mf-name">GeoJsonInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(360.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="geojsoninput_2" tabindex="0" aria-label="GeoJsonInput"><path d="M-34.0 0.0 V-23.6 Q-34.0 -30.6 -27.0 -30.6 H27.0 Q34.0 -30.6 34.0 -23.6 V0.0 A34 34 0 0 1 -34.0 0.0 Z" class="mf-body"/><text x="0.0" y="5.5" text-anchor="middle" class="mf-code">GJI</text><text x="46.0" y="5.0" class="mf-name">GeoJsonInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="geojsoninput_3" tabindex="0" aria-label="GeoJsonInput"><path d="M506.0 0.0 V-23.6 Q506.0 -30.6 513.0 -30.6 H567.0 Q574.0 -30.6 574.0 -23.6 V0.0 A34 34 0 0 1 506.0 0.0 Z" class="mf-body"/><text x="540.0" y="5.5" text-anchor="middle" class="mf-code">GJI</text><text x="586.0" y="5.0" class="mf-name">GeoJsonInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(540.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="pom_0" tabindex="0" aria-label="POM"><circle cx="180.0" cy="145.0" r="34" class="mf-body"/><text x="180.0" y="150.5" text-anchor="middle" class="mf-code">POM</text><text x="226.0" y="150.0" class="mf-name">POM</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(180.0 111.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(180.0 179.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="pom_1" tabindex="0" aria-label="POM"><circle cx="360.0" cy="145.0" r="34" class="mf-body"/><text x="360.0" y="150.5" text-anchor="middle" class="mf-code">POM</text><text x="406.0" y="150.0" class="mf-name">POM</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(360.0 111.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(360.0 179.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="pom_2" tabindex="0" aria-label="POM"><circle cx="0.0" cy="145.0" r="34" class="mf-body"/><text x="0.0" y="150.5" text-anchor="middle" class="mf-code">POM</text><text x="46.0" y="150.0" class="mf-name">POM</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 111.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(0.0 179.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="pom_3" tabindex="0" aria-label="POM"><circle cx="540.0" cy="145.0" r="34" class="mf-body"/><text x="540.0" y="150.5" text-anchor="middle" class="mf-code">POM</text><text x="586.0" y="150.0" class="mf-name">POM</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(540.0 111.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(540.0 179.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="logicaland_0" tabindex="0" aria-label="LogicalAnd"><circle cx="0.0" cy="314.0" r="34" class="mf-body"/><text x="0.0" y="319.5" text-anchor="middle" class="mf-code">LA</text><text x="46.0" y="319.0" class="mf-name">LogicalAnd</text><g class="mf-port" style="--mf-fam:#470f51" transform="translate(0.0 280.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(0.0 348.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="logicaland_1" tabindex="0" aria-label="LogicalAnd"><circle cx="180.0" cy="314.0" r="34" class="mf-body"/><text x="180.0" y="319.5" text-anchor="middle" class="mf-code">LA</text><text x="226.0" y="319.0" class="mf-name">LogicalAnd</text><g class="mf-port" style="--mf-fam:#470f51" transform="translate(180.0 280.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(180.0 348.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="logicaland_2" tabindex="0" aria-label="LogicalAnd"><circle cx="360.0" cy="314.0" r="34" class="mf-body"/><text x="360.0" y="319.5" text-anchor="middle" class="mf-code">LA</text><text x="406.0" y="319.0" class="mf-name">LogicalAnd</text><g class="mf-port" style="--mf-fam:#470f51" transform="translate(360.0 280.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(360.0 348.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="logicaland_3" tabindex="0" aria-label="LogicalAnd"><circle cx="540.0" cy="314.0" r="34" class="mf-body"/><text x="540.0" y="319.5" text-anchor="middle" class="mf-code">LA</text><text x="586.0" y="319.0" class="mf-name">LogicalAnd</text><g class="mf-port" style="--mf-fam:#470f51" transform="translate(540.0 280.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(540.0 348.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="bayesianfusion_0" tabindex="0" aria-label="BayesianFusion"><circle cx="270.0" cy="459.0" r="34" class="mf-body"/><text x="270.0" y="464.5" text-anchor="middle" class="mf-code">BF</text><text x="316.0" y="464.0" class="mf-name">BayesianFusion</text><g class="mf-port" style="--mf-fam:#470f51" transform="translate(270.0 425.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(270.0 493.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="threshold_0" tabindex="0" aria-label="Threshold"><circle cx="270.0" cy="604.0" r="34" class="mf-body"/><text x="270.0" y="609.5" text-anchor="middle" class="mf-code">TH</text><text x="316.0" y="609.0" class="mf-name">Threshold</text><g class="mf-port" style="--mf-fam:#470f51" transform="translate(270.0 570.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(270.0 638.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="locationoutput_0" tabindex="0" aria-label="LocationOutput"><path d="M304.0 749.0 V772.6 Q304.0 779.6 297.0 779.6 H243.0 Q236.0 779.6 236.0 772.6 V749.0 A34 34 0 0 1 304.0 749.0 Z" class="mf-body"/><text x="270.0" y="754.5" text-anchor="middle" class="mf-code">LO</text><text x="316.0" y="754.0" class="mf-name">LocationOutput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(270.0 715.0)"><title>Location family: Location</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Location</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
+
+symbol [stroke-width] { stroke-width: 5; }
+
+.mf-fg { font-family: inherit; overflow: visible; --mf-ink: #2f3439; }
+.mf-fg text { fill: var(--mf-ink); }
+.mf-fg .mf-node { outline: none; }
+
+/* Nodes: Input/Output nodes white with a dark outline, processing nodes grey */
+.mf-fg .mf-body { fill: white; stroke: var(--mf-ink); stroke-width: 2.5; filter: drop-shadow(0 3px 5px rgb(0 0 0 / 0.15)); }
+.mf-fg .mf-proc .mf-body { fill: #e9ecee; stroke: #b9c0c5; stroke-width: 1.5; }
+.mf-fg .mf-code { font-size: 16px; font-weight: 700; }
+
+/* Full name, hidden until the node is hovered or focused, then slides out to the right */
+.mf-fg .mf-name {
+    font-size: 15px; font-weight: 600; opacity: 0; transform: translateX(-24px); pointer-events: none;
+    paint-order: stroke; stroke: white; stroke-width: 5px; stroke-linejoin: round;
+    transition: opacity 200ms ease, transform 250ms ease;
+}
+.mf-fg .mf-node:is(:hover, :focus) .mf-name { opacity: 1; transform: none; }
+
+/* Edges in the color of the data family they carry */
+.mf-fg .mf-edge path { fill: none; stroke: var(--mf-fam); stroke-width: 2.5; }
+.mf-fg .mf-edge circle { fill: var(--mf-fam); }
+
+/* Ports; hovering one slides out a second badge with the concrete data type */
+.mf-fg .mf-port { color: var(--mf-fam); cursor: help; }
+.mf-fg .mf-port-bg { fill: white; stroke: var(--mf-fam); stroke-width: 2; }
+.mf-fg .mf-sub { opacity: 0; transition: transform 250ms ease, opacity 250ms ease; }
+.mf-fg .mf-port:is(:hover, :focus-within) .mf-sub { opacity: 1; transform: translateX(26px); }
+.mf-fg .mf-sub-label {
+    font-size: 11px; font-weight: 600; fill: var(--mf-fam);
+    paint-order: stroke; stroke: white; stroke-width: 4px;
+}
+
+/* Set by graph.js: fade out everything not connected to the hovered node */
+.mf-fg :is(.mf-node, .mf-edge) { transition: opacity 200ms; }
+.mf-fg.is-focused :is(.mf-node, .mf-edge):not(.is-related) { opacity: 0.25; }
+</style><script>// Fusion Graph SVGs (class mf-fg): fade out everything not connected to the hovered or focused node.
+// Safe to load more than once: each graph is set up only once.
+(() => {
+  function setUp(svg) {
+    svg.dataset.mfReady = "true";
+    const edges = [...svg.querySelectorAll(".mf-edge")];
+    const clear = () => {
+      svg.classList.remove("is-focused");
+      svg.querySelectorAll(".is-related").forEach(el => el.classList.remove("is-related"));
+    };
+    svg.querySelectorAll(".mf-node").forEach(node => {
+      const focus = () => {
+        clear();
+        svg.classList.add("is-focused");
+        node.classList.add("is-related");
+        for (const edge of edges) {
+          const { from, to } = edge.dataset;
+          if (from !== node.dataset.id && to !== node.dataset.id) continue;
+          edge.classList.add("is-related");
+          const other = from === node.dataset.id ? to : from;
+          svg.querySelector(`.mf-node[data-id="${other}"]`).classList.add("is-related");
+        }
+      };
+      node.addEventListener("mouseenter", focus);
+      node.addEventListener("focus", focus);
+      node.addEventListener("mouseleave", clear);
+      node.addEventListener("blur", clear);
+    });
+  }
+
+  const setUpAll = () => document.querySelectorAll("svg.mf-fg:not([data-mf-ready])").forEach(setUp);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setUpAll);
+  } else {
+    setUpAll();
+  }
+})();
+</script></svg></div></div>
+</div>
+</section>
+<section id="try-it">
+<span id="border-try-it"></span><h2>Try it<a class="headerlink" href="#try-it" title="Link to this heading">#</a></h2>
+<p>To see the graph in action, we generated synthetic data from the knowledge we have developed during the experiment. It replays a single movement of the <a class="reference internal" href="#border-scenarios"><span class="std std-ref">scenarios above</span></a>. A small boat with people aboard approaches the beach, lies off it for about half a minute and heads back out to sea (step 7 of the figure). The site is a fictitious one with the
+layout of the trial. The detections are invented but behave like the trial’s sensors. The cameras report a narrow
+cone in the direction of the boat many times per second, reaching far beyond it. The drones report the boat’s
+position precisely, but only now and then. The SWIR camera also picks up people on the pier, and the UAV-EO a boat lying on the beach. You can download the files to run the code above yourself:
+<a class="reference download internal" download="" href="../_downloads/17b024bd90981931edd31f4487d6db80/swir.geojson"><code class="xref download docutils literal notranslate"><span class="pre">swir.geojson</span></code></a>,
+<a class="reference download internal" download="" href="../_downloads/84d7027c52d22fd1a432d7b1c005a0aa/lwir.geojson"><code class="xref download docutils literal notranslate"><span class="pre">lwir.geojson</span></code></a>,
+<a class="reference download internal" download="" href="../_downloads/3175f51b3e8f46f356bc5560639cfc66/uav_eo.geojson"><code class="xref download docutils literal notranslate"><span class="pre">uav_eo.geojson</span></code></a>,
+<a class="reference download internal" download="" href="../_downloads/ba935734fbddde73259ab1f76e3fa5a6/uav_ir.geojson"><code class="xref download docutils literal notranslate"><span class="pre">uav_ir.geojson</span></code></a>, and the boat’s true path
+<a class="reference download internal" download="" href="../_downloads/67df388579ac4d6c0acee9249c4680f1/ground_truth.geojson"><code class="xref download docutils literal notranslate"><span class="pre">ground_truth.geojson</span></code></a>.</p>
+<p>The following figure looks inside the graph above, through a <a class="reference internal" href="../catalog.html#catalog-output-nodes"><span class="std std-ref">Visualization</span></a> node.
+Each camera’s probability map lights up a whole wedge of the sea, while the drones only mark small spots where they
+saw the boat. The <a class="reference internal" href="../catalog.html#catalog-processing-nodes"><span class="std std-ref">LogicalAnd</span></a> nodes keep only the places where a
+camera and a drone agree, so the fused map and the alarms follow the boat’s path (white line). The triangles mark the
+two camera poles.</p>
+<div class="cell tag_hide-input docutils container">
+<details class="admonition hide above-input">
+<summary aria-label="Toggle hidden content">
+<p class="collapsed admonition-title">Show code cell source</p>
+<p class="expanded admonition-title">Hide code cell source</p>
+</summary>
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gpd</span>
+</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span data-line="3"><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.cm</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScalarMappable</span>
+</span><span data-line="4"><span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.colors</span><span class="w"> </span><span class="kn">import</span> <span class="n">Normalize</span>
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.outputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Visualization</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="c1"># Attach a Visualization node to the graph above, then run it</span>
+</span><span data-line="8"><span class="n">vis</span> <span class="o">=</span> <span class="n">Visualization</span><span class="p">(</span><span class="n">snapshot_interval_s</span><span class="o">=</span><span class="mi">5</span><span class="p">)(</span><span class="n">pom_swir</span><span class="p">,</span> <span class="n">pom_lwir</span><span class="p">,</span> <span class="n">pom_uav_eo</span><span class="p">,</span> <span class="n">pom_uav_ir</span><span class="p">,</span> <span class="n">fused</span><span class="p">,</span> <span class="n">alarms</span><span class="p">)</span>
+</span><span data-line="9"><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">inputs</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">inputs</span><span class="p">,</span> <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">out</span><span class="p">,</span> <span class="n">vis</span><span class="p">],</span> <span class="n">crs</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">crs</span><span class="p">,</span> <span class="n">bbox</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">bbox_wgs84</span><span class="p">,</span> <span class="n">resolution</span><span class="o">=</span><span class="n">graph</span><span class="o">.</span><span class="n">resolution</span><span class="p">)</span>
+</span><span data-line="10"><span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</span><span data-line="11">
+</span><span data-line="12"><span class="c1"># The boat&#39;s true path and the two camera poles, in the graph&#39;s coordinates</span>
+</span><span data-line="13"><span class="n">boat</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;ground_truth.geojson&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</span><span data-line="14"><span class="n">poles</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">GeoSeries</span><span class="o">.</span><span class="n">from_xy</span><span class="p">([</span><span class="mf">13.61373</span><span class="p">,</span> <span class="mf">13.61444</span><span class="p">],</span> <span class="p">[</span><span class="mf">54.40310</span><span class="p">,</span> <span class="mf">54.40285</span><span class="p">],</span> <span class="n">crs</span><span class="o">=</span><span class="s2">&quot;EPSG:4326&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">to_crs</span><span class="p">(</span><span class="n">graph</span><span class="o">.</span><span class="n">crs</span><span class="p">)</span>
+</span><span data-line="15">
+</span><span data-line="16"><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot_mosaic</span><span class="p">(</span>
+</span><span data-line="17">    <span class="p">[[</span><span class="s2">&quot;swir&quot;</span><span class="p">,</span> <span class="s2">&quot;lwir&quot;</span><span class="p">,</span> <span class="s2">&quot;uav_eo&quot;</span><span class="p">,</span> <span class="s2">&quot;uav_ir&quot;</span><span class="p">],</span> <span class="p">[</span><span class="s2">&quot;fused&quot;</span><span class="p">,</span> <span class="s2">&quot;fused&quot;</span><span class="p">,</span> <span class="s2">&quot;alarms&quot;</span><span class="p">,</span> <span class="s2">&quot;alarms&quot;</span><span class="p">]],</span>
+</span><span data-line="18">    <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">9.5</span><span class="p">),</span> <span class="n">height_ratios</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">layout</span><span class="o">=</span><span class="s2">&quot;constrained&quot;</span><span class="p">,</span>
+</span><span data-line="19"><span class="p">)</span>
+</span><span data-line="20"><span class="c1"># Inputs of vis by position: 0-3 the probability maps of SWIR, LWIR, UAV-EO and UAV-IR, 4 fused, 5 alarms</span>
+</span><span data-line="21"><span class="n">maps</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;swir&quot;</span><span class="p">:</span> <span class="s2">&quot;SWIR camera&quot;</span><span class="p">,</span> <span class="s2">&quot;lwir&quot;</span><span class="p">:</span> <span class="s2">&quot;LWIR camera&quot;</span><span class="p">,</span> <span class="s2">&quot;uav_eo&quot;</span><span class="p">:</span> <span class="s2">&quot;UAV-EO&quot;</span><span class="p">,</span> <span class="s2">&quot;uav_ir&quot;</span><span class="p">:</span> <span class="s2">&quot;UAV-IR&quot;</span><span class="p">,</span>
+</span><span data-line="22">        <span class="s2">&quot;fused&quot;</span><span class="p">:</span> <span class="s2">&quot;Fused: cameras confirmed by drones&quot;</span><span class="p">}</span>
+</span><span data-line="23"><span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="p">(</span><span class="n">panel</span><span class="p">,</span> <span class="n">title</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">maps</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+</span><span data-line="24">    <span class="n">vis</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="n">panel</span><span class="p">],</span> <span class="n">reduction</span><span class="o">=</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">colorbar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">basemap</span><span class="o">=</span><span class="s2">&quot;satellite&quot;</span><span class="p">,</span>
+</span><span data-line="25">             <span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">)</span>
+</span><span data-line="26"><span class="n">vis</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axes</span><span class="p">[</span><span class="s2">&quot;alarms&quot;</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">basemap</span><span class="o">=</span><span class="s2">&quot;satellite&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">result</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2"> alarms&quot;</span><span class="p">)</span>
+</span><span data-line="27"><span class="k">for</span> <span class="n">ax</span> <span class="ow">in</span> <span class="n">axes</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+</span><span data-line="28">    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">boat</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">boat</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span><span data-line="29">    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">poles</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">poles</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="s2">&quot;^&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">,</span> <span class="n">markeredgecolor</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</span><span data-line="30">    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">ax</span><span class="o">.</span><span class="n">texts</span><span class="p">):</span>
+</span><span data-line="31">        <span class="n">text</span><span class="o">.</span><span class="n">remove</span><span class="p">()</span>  <span class="c1"># The imagery credit, given once below the figure instead of in every panel</span>
+</span><span data-line="32">    <span class="n">ax</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xticks</span><span class="o">=</span><span class="p">[],</span> <span class="n">yticks</span><span class="o">=</span><span class="p">[],</span> <span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>  <span class="c1"># Coordinates don&#39;t matter here</span>
+</span><span data-line="33"><span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ScalarMappable</span><span class="p">(</span><span class="n">Normalize</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="s2">&quot;viridis&quot;</span><span class="p">),</span> <span class="n">ax</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="n">axes</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">extend</span><span class="o">=</span><span class="s2">&quot;min&quot;</span><span class="p">,</span>
+</span><span data-line="34">             <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Peak probability during the run&quot;</span><span class="p">);</span>
+</span></pre></div>
+</div>
+</div>
+</details>
+<div class="cell_output docutils container">
+<img alt="../_images/b53feba28c115a2416b5097b3f4aaf735d2d3988651cb21d8e859d9d4bb406b6.png" src="../_images/b53feba28c115a2416b5097b3f4aaf735d2d3988651cb21d8e859d9d4bb406b6.png" />
+</div>
+</div>
+<p><small>Satellite imagery: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS
+User Community.</small></p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Experiment with it: fuse the four probability maps directly, <code class="docutils literal notranslate"><span class="pre">BayesianFusion()(pom_swir,</span> <span class="pre">pom_lwir,</span> <span class="pre">pom_uav_eo,</span> <span class="pre">pom_uav_ir)</span></code>, and see how many alarms the cameras raise without confirmation. Or pair only the SWIR camera with the
+drones, or change a prior or the threshold. To follow the boat over time, add a
+<a class="reference internal" href="../catalog.html#catalog-processing-nodes"><span class="std std-ref">KalmanTracker</span></a> after the threshold.</p>
+</div>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<p><strong>Project:</strong> <a class="reference external" href="https://doi.org/10.3030/101073985">EURMARS</a>, funded by the European Union’s Horizon Europe research and
+innovation programme under grant agreement no. 101073985.</p>
+<p><strong>Publications:</strong></p>
+<ul class="simple">
+<li><p>K. Wohlleben, M. Hubner, T. Markchom, J. Boyle, J. Ferryman, S. Veigl, A. Opitz, A. Gkamaris, and R. Bratskas,
+“Enhancing maritime situational awareness through multimodal fusion: Insights from a real-world experiment,”
+<em>IEEE Sensor Data Fusion: Trends, Solutions, Applications (SDF)</em>, 2025.
+<a class="reference external" href="https://doi.org/10.1109/SDF67080.2025.11331253">doi:10.1109/SDF67080.2025.11331253</a></p></li>
+<li><p>T. Markchom, O. Kourounioti, M. Marturini, R. Bratskas, K. Wohlleben, J. Boyle, L. Chen, G. Voskopoulos,
+C. Kontopoulos, S. Veigl, A. Opitz, A. Gkamaris, D. Papachristos, D. Lunic, J. Ferryman, A. Kriechbaum-Zabini,
+and G. Leventakis, “Multialtitude, multimodal maritime surveillance system,” <em>IEEE Sensors Journal</em>, vol. 26,
+pp. 7101–7119, 2026. <a class="reference external" href="https://doi.org/10.1109/JSEN.2025.3649549">doi:10.1109/JSEN.2025.3649549</a></p></li>
+<li><p>L. Patino, M. Hubner, R. King, M. Litzenberger, L. Roupioz, K. Michon, L. Szklarski, J. Pegoraro, N. Stoianov,
+and J. Ferryman, “Fusion of heterogenous sensor data in border surveillance,” <em>Sensors</em>, vol. 22, p. 7351, 2022.
+<a class="reference external" href="https://doi.org/10.3390/s22197351">doi:10.3390/s22197351</a></p></li>
+</ul>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="index.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Showcases</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="railway-security.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Railway security</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Michael Hubner, Kilian Wohlleben, Jan Nausner, Julia Pöschl</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="sy-foot-socials"></div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=01f34227"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script></body>
+</html>

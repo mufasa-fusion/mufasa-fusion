@@ -10,8 +10,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/css/shibuya-overwrite.css?v=741ce7fd" />
-    <link rel="stylesheet" type="text/css" href="../../../../_static/css/mufasa.css?v=2a92d708" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/shibuya-overwrite.css?v=6204571c" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/css/mufasa.css?v=26b5b856" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -77,7 +77,11 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../../../../user-guide/extending.html">Extending MuFASA</a></li>
 </ul>
 </li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../showcases/index.html">Showcases</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../showcases/index.html">Showcases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../showcases/border-security.html">Maritime border security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../showcases/railway-security.html">Railway security</a></li>
+</ul>
+</li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../../../../catalog.html">Node Catalog</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../index.html">mufasa</a><ul class="current">
@@ -128,9 +132,11 @@ data-aria-dark="Switch to auto color mode">
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
 <li><a class="reference internal" href="#mufasa.graph_svg.layout.DX"><code class="docutils literal notranslate"><span class="pre">DX</span></code></a></li>
 <li><a class="reference internal" href="#mufasa.graph_svg.layout.DY"><code class="docutils literal notranslate"><span class="pre">DY</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.graph_svg.layout.TRACK"><code class="docutils literal notranslate"><span class="pre">TRACK</span></code></a></li>
 <li><a class="reference internal" href="#mufasa.graph_svg.layout.Layout"><code class="docutils literal notranslate"><span class="pre">Layout</span></code></a><ul>
 <li><a class="reference internal" href="#mufasa.graph_svg.layout.Layout.nodes"><code class="docutils literal notranslate"><span class="pre">Layout.nodes</span></code></a></li>
 <li><a class="reference internal" href="#mufasa.graph_svg.layout.Layout.bends"><code class="docutils literal notranslate"><span class="pre">Layout.bends</span></code></a></li>
+<li><a class="reference internal" href="#mufasa.graph_svg.layout.Layout.tracks"><code class="docutils literal notranslate"><span class="pre">Layout.tracks</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#mufasa.graph_svg.layout.layout"><code class="docutils literal notranslate"><span class="pre">layout()</span></code></a></li>
@@ -192,6 +198,9 @@ data-aria-dark="Switch to auto color mode">
 <tr class="row-even"><td><p><a class="reference internal" href="#mufasa.graph_svg.layout.DY" title="mufasa.graph_svg.layout.DY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DY</span></code></a></p></td>
 <td><p></p></td>
 </tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mufasa.graph_svg.layout.TRACK" title="mufasa.graph_svg.layout.TRACK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">TRACK</span></code></a></p></td>
+<td><p></p></td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -232,6 +241,11 @@ data-aria-dark="Switch to auto color mode">
 <span class="sig-prename descclassname"><span class="pre">mufasa.graph_svg.layout.</span></span><span class="sig-name descname"><span class="pre">DY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">145</span></em><a class="headerlink" href="#mufasa.graph_svg.layout.DY" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
+<dl class="py data">
+<dt class="sig sig-object py" id="mufasa.graph_svg.layout.TRACK">
+<span class="sig-prename descclassname"><span class="pre">mufasa.graph_svg.layout.</span></span><span class="sig-name descname"><span class="pre">TRACK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></em><a class="headerlink" href="#mufasa.graph_svg.layout.TRACK" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="mufasa.graph_svg.layout.Layout">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.graph_svg.layout.</span></span><span class="sig-name descname"><span class="pre">Layout</span></span><a class="headerlink" href="#mufasa.graph_svg.layout.Layout" title="Link to this definition">#</a></dt>
@@ -243,6 +257,11 @@ data-aria-dark="Switch to auto color mode">
 <dl class="py attribute">
 <dt class="sig sig-object py" id="mufasa.graph_svg.layout.Layout.bends">
 <span class="sig-name descname"><span class="pre">bends</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mufasa.graph_svg.layout.Layout.bends" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="mufasa.graph_svg.layout.Layout.tracks">
+<span class="sig-name descname"><span class="pre">tracks</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">dict</span><span class="p"><span class="pre">[</span></span><span class="pre">tuple</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">str</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#mufasa.graph_svg.layout.Layout.tracks" title="Link to this definition">#</a></dt>
 <dd></dd></dl>
 
 </dd></dl>

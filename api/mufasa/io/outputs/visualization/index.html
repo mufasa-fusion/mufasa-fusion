@@ -10,8 +10,8 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../../../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/shibuya-overwrite.css?v=741ce7fd" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/mufasa.css?v=2a92d708" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/shibuya-overwrite.css?v=6204571c" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/mufasa.css?v=26b5b856" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -77,7 +77,11 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../../../../../user-guide/extending.html">Extending MuFASA</a></li>
 </ul>
 </li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../showcases/index.html">Showcases</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../showcases/index.html">Showcases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../showcases/border-security.html">Maritime border security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../../showcases/railway-security.html">Railway security</a></li>
+</ul>
+</li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../../../../../catalog.html">Node Catalog</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="../../../../index.html">API Reference</a><ul class="current">
 <li class="toctree-l2 current"><a class="reference internal" href="../../../index.html">mufasa</a><ul class="current">
@@ -122,8 +126,10 @@ data-aria-dark="Switch to auto color mode">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#attributes">Attributes</a></li>
 <li><a class="reference internal" href="#classes">Classes</a></li>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#mufasa.io.outputs.visualization.BASEMAPS"><code class="docutils literal notranslate"><span class="pre">BASEMAPS</span></code></a></li>
 <li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization"><code class="docutils literal notranslate"><span class="pre">Visualization</span></code></a><ul>
 <li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization.snapshot_interval_s"><code class="docutils literal notranslate"><span class="pre">Visualization.snapshot_interval_s</span></code></a></li>
 <li><a class="reference internal" href="#mufasa.io.outputs.visualization.Visualization.__call__"><code class="docutils literal notranslate"><span class="pre">Visualization.__call__()</span></code></a></li>
@@ -186,6 +192,18 @@ data-aria-dark="Switch to auto color mode">
           <section id="module-mufasa.io.outputs.visualization">
 <span id="mufasa-io-outputs-visualization"></span><h1>mufasa.io.outputs.visualization<a class="headerlink" href="#module-mufasa.io.outputs.visualization" title="Link to this heading">#</a></h1>
 <p>Visualization output node with integrated rendering helpers.</p>
+<section id="attributes">
+<h2>Attributes<a class="headerlink" href="#attributes" title="Link to this heading">#</a></h2>
+<div class="table-wrapper autosummary longtable docutils container">
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#mufasa.io.outputs.visualization.BASEMAPS" title="mufasa.io.outputs.visualization.BASEMAPS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">BASEMAPS</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
 <section id="classes">
 <h2>Classes<a class="headerlink" href="#classes" title="Link to this heading">#</a></h2>
 <div class="table-wrapper autosummary longtable docutils container">
@@ -200,6 +218,11 @@ data-aria-dark="Switch to auto color mode">
 </section>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">#</a></h2>
+<dl class="py data">
+<dt class="sig sig-object py" id="mufasa.io.outputs.visualization.BASEMAPS">
+<span class="sig-prename descclassname"><span class="pre">mufasa.io.outputs.visualization.</span></span><span class="sig-name descname"><span class="pre">BASEMAPS</span></span><a class="headerlink" href="#mufasa.io.outputs.visualization.BASEMAPS" title="Link to this definition">#</a></dt>
+<dd></dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.io.outputs.visualization.</span></span><span class="sig-name descname"><span class="pre">Visualization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">snapshot_interval_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization" title="Link to this definition">#</a></dt>
@@ -217,7 +240,9 @@ name after the run:</p>
 Locations are always stored without throttling.</p>
 <p>Both <code class="docutils literal notranslate"><span class="pre">show()</span></code> and <code class="docutils literal notranslate"><span class="pre">animate()</span></code> default to <code class="docutils literal notranslate"><span class="pre">basemap=True</span></code> and
 <code class="docutils literal notranslate"><span class="pre">latlon_labels=True</span></code> and fix the axis extent to the pipeline bounding
-box.  Pass <code class="docutils literal notranslate"><span class="pre">basemap=False</span></code> to suppress tile fetching (e.g. in tests).</p>
+box.  <code class="docutils literal notranslate"><span class="pre">basemap</span></code> also takes a style name from <code class="docutils literal notranslate"><span class="pre">BASEMAPS</span></code> (<code class="docutils literal notranslate"><span class="pre">&quot;streets&quot;</span></code>,
+the default, or <code class="docutils literal notranslate"><span class="pre">&quot;satellite&quot;</span></code>).  Pass <code class="docutils literal notranslate"><span class="pre">basemap=False</span></code> to suppress tile
+fetching (e.g. in tests).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>snapshot_interval_s</strong> (<em>float</em>)</p>
@@ -301,7 +326,7 @@ override this.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization.show">
-<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'last'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basemap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latlon_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.show" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">show</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">reduction</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'last'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basemap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latlon_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.show" title="Link to this definition">#</a></dt>
 <dd><p>Render the state of a predecessor, optionally filtered to a time window.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -310,7 +335,7 @@ override this.</p>
 <li><p><strong>start</strong> (<em>float</em><em> | </em><em>None</em>)</p></li>
 <li><p><strong>end</strong> (<em>float</em><em> | </em><em>None</em>)</p></li>
 <li><p><strong>reduction</strong> (<em>str</em>)</p></li>
-<li><p><strong>basemap</strong> (<em>bool</em>)</p></li>
+<li><p><strong>basemap</strong> (<em>bool</em><em> | </em><em>str</em>)</p></li>
 <li><p><strong>latlon_labels</strong> (<em>bool</em>)</p></li>
 </ul>
 </dd>
@@ -322,7 +347,7 @@ override this.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="mufasa.io.outputs.visualization.Visualization.animate">
-<span class="sig-name descname"><span class="pre">animate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basemap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latlon_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.animate" title="Link to this definition">#</a></dt>
+<span class="sig-name descname"><span class="pre">animate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">index</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span></em>, <em class="sig-param"><span class="keyword-only-separator o"><abbr title="Keyword-only parameters separator (PEP 3102)"><span class="pre">*</span></abbr></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">end</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">speed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">basemap</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">latlon_labels</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.io.outputs.visualization.Visualization.animate" title="Link to this definition">#</a></dt>
 <dd><p>Animate snapshots or locations for a predecessor.</p>
 <p>Returns (fig, anim) — keep a reference to anim to prevent garbage
 collection.  <code class="docutils literal notranslate"><span class="pre">speed</span></code> scales playback: 1.0 = real-time, 2.0 = 2× faster.</p>
@@ -333,7 +358,7 @@ collection.  <code class="docutils literal notranslate"><span class="pre">speed<
 <li><p><strong>start</strong> (<em>float</em><em> | </em><em>None</em>)</p></li>
 <li><p><strong>end</strong> (<em>float</em><em> | </em><em>None</em>)</p></li>
 <li><p><strong>speed</strong> (<em>float</em>)</p></li>
-<li><p><strong>basemap</strong> (<em>bool</em>)</p></li>
+<li><p><strong>basemap</strong> (<em>bool</em><em> | </em><em>str</em>)</p></li>
 <li><p><strong>latlon_labels</strong> (<em>bool</em>)</p></li>
 </ul>
 </dd>
