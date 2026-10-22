@@ -11,10 +11,9 @@ os.chdir(os.path.join("..", "_data", "showcases", "railway"))
 
 # Railway security
 
-<span class="mf-status mf-status-tested">Field-tested</span>
+[Field-tested]{.mf-status-tested}
 
-**Use cases:** <span class="mf-tag">Trespassing</span> <span class="mf-tag">Sabotage</span>
-<span class="mf-tag">Vandalism</span>
+**Use cases:** [Trespassing]{.mf-tag} [Sabotage]{.mf-tag} [Vandalism]{.mf-tag}
 
 Detection along railway corridors, by day and at night.
 
@@ -80,7 +79,7 @@ graph = Graph(
     inputs=[thermal, radar, acoustic],
     outputs=[out],
     crs="EPSG:32633",
-    bbox=BoundingBox(16.838758, 48.252595, 16.840809, 48.252971),
+    bbox=BoundingBox(16.83915, 48.252595, 16.840809, 48.252971),
     resolution=(0.5, 0.5),
 )
 graph.plot_graph()

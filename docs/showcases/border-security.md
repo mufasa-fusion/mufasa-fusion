@@ -13,10 +13,9 @@ os.chdir(os.path.join("..", "_data", "showcases", "border"))
 
 # Maritime border security
 
-<span class="mf-status mf-status-tested">Field-tested</span>
+[Field-tested]{.mf-status-tested}
 
-**Use cases:** <span class="mf-tag">Irregular migration</span> <span class="mf-tag">Smuggling</span>
-<span class="mf-tag">Vessel detection</span>
+**Use cases:** [Irregular migration]{.mf-tag} [Smuggling]{.mf-tag} [Vessel detection]{.mf-tag}
 
 Detection of vessels and people at sea and along the coast, combining coastal cameras with drones.
 
@@ -166,7 +165,7 @@ for ax in axes.values():
         text.remove()  # The imagery credit, given once below the figure instead of in every panel
     ax.set(xticks=[], yticks=[], xlabel="", ylabel="")  # Coordinates don't matter here
 fig.colorbar(ScalarMappable(Normalize(0.5, 1), "viridis"), ax=list(axes.values()), shrink=0.5, extend="min",
-             label="Peak probability during the run")
+             label="Peak probability during the run");
 ```
 
 <small>Satellite imagery: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS
