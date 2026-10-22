@@ -9,7 +9,7 @@ from functools import cache
 from importlib.resources import files
 
 from mufasa.graph_svg.families import FAMILIES, TYPE_ICONS, UNKNOWN_FAMILY, Family, family_of, icon_of
-from mufasa.graph_svg.layout import DY, Layout, layout
+from mufasa.graph_svg.layout import Layout, layout
 from mufasa.graph_svg.spec import GraphSpec
 
 R = 34       # Node radius
@@ -90,17 +90,24 @@ def _ports(x: float, y: float, types: list[type], top: bool) -> dict[tuple[Famil
 def _edge(a: str, b: str, spec: GraphSpec, lay: Layout, out_ports, in_ports) -> str:
     """Right-angle route from an output port down to the matching input port, through the bends of skipped layers.
 
-    Between two layers the edge runs vertically, crosses over halfway between them, and continues vertically.
+    Between two layers the edge runs vertically, crosses over on its track in the gap, and continues vertically.
+    Edges arriving from the side enter the port off-centre on that side, so they never overlap an edge leaving the
+    node above, which starts at its centre.
     """
     family = family_of(spec.nodes[a].output_type)
     x1, y1, _ = out_ports[a].get((family, False), next(iter(out_ports[a].values())))
     x2, y2, _ = in_ports[b].get((family, True), next(iter(in_ports[b].values())))
-    y1, y2 = y1 + PORT_R, y2 - PORT_R
+    bends = [bend_x for bend_x, _ in lay.bends[a, b]]
+    arrives_from = bends[-1] if bends else x1
+    side = -math.copysign(PORT_R / 2, x2 - arrives_from) if abs(x2 - arrives_from) >= 1 else 0
+    x2 += side
+    y1, y2 = y1 + PORT_R, y2 - math.sqrt(PORT_R ** 2 - side ** 2)
 
     corners, x = [(x1, y1)], x1
-    for next_x, layer_y in [*lay.bends.get((a, b), []), (x2, lay.nodes[b][1])]:
+    targets = [*bends, x2]
+    for next_x, track_y in zip(targets, lay.tracks[a, b]):
         if abs(next_x - x) >= 1:
-            corners += [(x, layer_y - DY / 2), (next_x, layer_y - DY / 2)]
+            corners += [(x, track_y), (next_x, track_y)]
             x = next_x
     corners.append((x2, y2))
 

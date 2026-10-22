@@ -217,3 +217,11 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Local generators of the synthetic showcase data; the generated data is published, the generators are not
+docs/showcases/_*_scenario.py
+
+# Files written by the executable docs examples during the build
+docs/_data/**/output.geojson
+# Original (non-public) trial data used to derive the synthetic showcase data
+docs/_data/**/_original/

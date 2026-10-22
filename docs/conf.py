@@ -35,7 +35,11 @@ exclude_patterns = ["_*", "**/_*"]
 myst_enable_extensions = [
     "colon_fence",
     "deflist",
+    "attrs_inline",
 ]
+
+# Re-execute an executable page only when its code changes (results are cached in _build/.jupyter_cache)
+nb_execution_mode = "cache"
 
 rst_prolog = """\
 .. |loc| image:: /../src/mufasa/graph_svg/icons/location-marker.svg

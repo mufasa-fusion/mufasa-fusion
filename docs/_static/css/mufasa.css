@@ -288,3 +288,85 @@ ul.mufasa-node-catalog {
 .mf-legend-io { --mf-c-role: var(--mf-c-io); }
 .mf-legend-proc { --mf-c-role: var(--mf-c-proc); }
 .mf-legend-graph { --mf-c-role: var(--mf-c-graph); }
+
+/* ---- Showcases ---- */
+
+/* One card per row: picture on the left, title, tags, one sentence and platform/sensors on the right */
+.mf-showcase-cards > div {
+    margin-block: 1em;
+    display: grid;
+    grid-template-columns: 12em 1fr;
+    column-gap: 1.25em;
+    align-content: start;
+    padding: 0.75em 1em;
+    border: 1px solid var(--gray-a6, #888);
+    border-left: 4px solid var(--ait-grey);
+    border-radius: 6px;
+
+    & > * { grid-column: 2; }
+    & p { margin: 0.25em 0; }
+    & > p:first-of-type { margin-top: 0.25em; font-size: 1.1em; }
+
+    /* The picture fills the height of the text rows, so both edges line up; on narrow screens it moves on top */
+    > img, &:not(:has(> img))::before {
+        grid-column: 1;
+        grid-row: 1 / span 4;
+        align-self: stretch;
+        width: 100%;
+        height: 100%;
+        min-height: 8em;
+        object-fit: cover;
+        border-radius: 4px;
+
+        &.mf-card-image-left { object-position: 15% center; }  /* For pictures whose subject is on the left */
+    }
+
+}
+
+@media (max-width: 40em) {
+    .mf-showcase-cards > div { grid-template-columns: 1fr; }
+    .mf-showcase-cards > div > * { grid-column: 1; }
+}
+
+/* Stand-in until a showcase has its picture */
+.mf-showcase-cards > div:not(:has(> img))::before {
+    content: "Comming Soon";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-3, #eee);
+    border: 1px dashed var(--gray-8, #aaa);
+    color: var(--gray-11, #666);
+    font-size: 0.85em;
+}
+
+/* Status badge: field-tested (turquoise) or in simulation (grey) */
+.mf-status-tested, .mf-status-simulation {
+    display: inline-block;
+    padding: 0.1em 0.6em;
+    border-radius: 1em;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: white;
+
+    &.mf-status-tested { background-color: var(--ait-torquise-text); }
+    &.mf-status-simulation { background-color: var(--ait-grey); }
+}
+
+/* Key characteristics of a showcase, in small muted text */
+.mf-showcase-cards > div > p:last-child {
+    display: inline-block;
+    font-size: 0.85em;
+    line-height: 1.4;
+    color: var(--gray-11);
+}
+
+/* Use-case tag: outlined pill, so it reads as a label rather than a status */
+.mf-tag {
+    display: inline-block;
+    padding: 0.05em 0.6em;
+    border: 1px solid var(--ait-grey);
+    border-radius: 1em;
+    font-size: 0.85em;
+    color: var(--gray-12);
+}
