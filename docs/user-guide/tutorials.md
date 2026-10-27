@@ -24,7 +24,7 @@ to inspect the data loaded into MuFASA's internal representation:
 ```{code-cell}
 from mufasa.io.inputs import GeoJsonInput
 
-src = GeoJsonInput("sensor_points.geojson")
+src = GeoJsonInput("sensor_b.geojson")
 src.items()
 ```
 
@@ -99,7 +99,7 @@ The input from the previous section is already connected in a Fusion Graph and u
 ```{code-cell}
 from mufasa.io.outputs import Visualization
 
-src = GeoJsonInput("sensor_points.geojson")
+src = GeoJsonInput("sensor_b.geojson")
 vis = Visualization()(src)
 
 graph = Graph(

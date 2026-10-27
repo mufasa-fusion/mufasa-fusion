@@ -48,7 +48,7 @@ import time
 
 SEP = b"\r\n"
 
-with open("sensor_points.geojson") as features_file:
+with open("sensor_b.geojson") as features_file:
     features = json.load(features_file)["features"]
 
 features_bin = [json.dumps(f).encode() + SEP for f in features]

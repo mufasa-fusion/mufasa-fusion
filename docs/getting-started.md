@@ -30,12 +30,12 @@ rather it consumes already pre-processed detections. It ships with {ref}`a varie
 to load them from standardized formats into {ref}`its own representation <data-models-catalog>`.
 
 For example, use a {class}`~mufasa.io.inputs.geojson.GeoJsonInput` node to load {class}`~mufasa.location.Location`
-data from a GeoJSON[^GeoJSON] Feature Collection in [`sensor_areas.geojson`](/_data/sensor_areas.geojson).
+data from a GeoJSON[^GeoJSON] Feature Collection in [`sensor_a.geojson`](/_data/sensor_a.geojson).
 
 ```{code-cell}
 from mufasa.io.inputs import GeoJsonInput
 
-inp = GeoJsonInput("sensor_areas.geojson")
+inp = GeoJsonInput("sensor_a.geojson")
 ```
 
 ### Compose Nodes

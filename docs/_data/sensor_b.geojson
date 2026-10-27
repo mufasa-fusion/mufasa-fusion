@@ -1,1 +1,32 @@
-sensor_a.geojson
+{
+	"type": "FeatureCollection",
+	"features": [
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [16.426643559839174, 48.268408685767966]
+			},
+			"properties": {"confidence": 0.9433776719597745}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [16.426838778147946, 48.26916496293138]
+			},
+			"properties": {
+				"confidence": 0.5543464775591364,
+				"headquarters": true
+			}
+		},
+		{
+			"type": "Feature",
+			"geometry": {
+				"type": "Point",
+				"coordinates": [16.427123796877638, 48.26961976340052]
+			},
+			"properties": {"confidence": 0.78962397636303721}
+		}
+	]
+}
