@@ -30,7 +30,7 @@ vis = [
 dev = [
     "pytest",
     "pytest-cov",
-    "mufasa[tracking,vis]",
+    "mufasa-fusion[tracking,vis]",
 ]
 
 [tool.setuptools.packages.find]
