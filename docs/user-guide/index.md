@@ -13,6 +13,7 @@ concepts
 tutorials
 extending
 streaming
+going-live/index
 ```
 
 :::{todo}

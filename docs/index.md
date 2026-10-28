@@ -94,7 +94,7 @@ The {doc}`catalog` lists the nodes and data types you can build with.
 :::{container}
 **Building your system**
 
-The {doc}`user-guide/index` covers custom nodes and live deployment.
+The {doc}`user-guide/index` covers custom nodes. {doc}`user-guide/going-live/index` shows how to run your graph on live data.
 The {doc}`api/index` documents every class and parameter.
 :::
 

@@ -298,3 +298,57 @@ ul.mufasa-node-catalog {
 .mf-legend-io { --mf-c-role: var(--mf-c-io); }
 .mf-legend-proc { --mf-c-role: var(--mf-c-proc); }
 .mf-legend-graph { --mf-c-role: var(--mf-c-graph); }
+
+
+/* ---- Going Live page (going-live/index.md) ---- */
+
+/* Inline SVG figure: themed through the shared role colors */
+.mf-golive {
+    margin: 1.5em 0;
+
+    & svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        font-family: inherit;
+        font-size: 13px;
+    }
+
+    & text { text-anchor: middle; fill: currentColor; }
+    & .mf-gl-title { font-weight: 600; }
+}
+
+/* Frame labels sit on the frame's top border, masked by a background-colored halo */
+.mf-golive .mf-gl-label {
+    text-anchor: start;
+    dominant-baseline: middle;
+    font-weight: 600;
+    paint-order: stroke;
+    stroke: var(--sy-c-background, white);
+    stroke-width: 8px;
+}
+
+.mf-gl-system { fill: none; stroke: var(--ait-grey); stroke-width: 1.5; stroke-dasharray: 6 4; }
+.mf-golive .mf-gl-label-system { fill: var(--gray-11); }
+
+.mf-gl-app { fill: color-mix(in srgb, var(--ait-grey) 6%, transparent); stroke: var(--ait-grey); stroke-width: 1.5; }
+.mf-golive .mf-gl-label-app { fill: var(--gray-11); }
+
+.mf-gl-graph { fill: var(--sy-c-background, white); stroke: var(--mf-c-graph); stroke-width: 2; }
+.mf-golive .mf-gl-label-graph { fill: var(--mf-c-graph); }
+
+.mf-gl-ext { fill: none; stroke: var(--ait-grey); stroke-width: 1; stroke-dasharray: 4 3; }
+.mf-golive .mf-gl-ext-text { fill: var(--gray-11); }
+
+.mf-gl-node { stroke-width: 2; }
+rect.mf-gl-io { stroke: var(--mf-c-io); fill: color-mix(in srgb, var(--mf-c-io) 7%, transparent); }
+rect.mf-gl-proc { stroke: var(--mf-c-proc); fill: color-mix(in srgb, var(--mf-c-proc) 7%, transparent); }
+.mf-golive text.mf-gl-io .mf-gl-title { fill: var(--mf-c-io); }
+.mf-golive text.mf-gl-proc .mf-gl-title { fill: var(--mf-c-proc); }
+
+.mf-gl-edge { fill: none; stroke: var(--ait-grey); stroke-width: 1.5; }
+.mf-gl-arrowhead { fill: var(--ait-grey); }
+
+/* The recording is an alternative source on the same topics */
+.mf-golive .mf-gl-rec { opacity: 0.6; }
+path.mf-gl-rec { stroke-dasharray: 5 4; }
