@@ -7,9 +7,8 @@ Again a quick start guide as on the home page?
 ```{toctree}
 :caption: Contents
 
-is-mufasa-right-for-you
-design-principles
 installation
+design-principles
 concepts
 tutorials
 extending
