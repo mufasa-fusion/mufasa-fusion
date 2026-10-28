@@ -14,13 +14,26 @@ MuFASA is a framework for rapid prototyping of geospatial sensor fusion pipeline
 
 ## Installation
 
-To install mufasa-fusion, clone this repository and run one of the following commands in a shell with your active python environment:
+Run one of the following commands in a shell with your active python environment:
+
+Latest version on GitHub:
 
 ```bash
-pip install mufasa                      # core
-pip install "mufasa[tracking]"          # + KalmanTracker, DBSTREAMClusterer
-pip install "mufasa[vis]"               # + plot_map, animate_maps, plot_locations
-pip install "mufasa[tracking,vis]"      # everything
+pip install "mufasa-fusion @ git+https://github.com/mufasa-fusion/mufasa-fusion"
+```
+
+Latest release on PyPI:
+
+```bash
+pip install "mufasa-fusion"
+```
+
+Extra dependencies: 
+
+```
+mufasa-fusion[tracking]          # + KalmanTracker, DBSTREAMClusterer
+mufasa-fusion[vis]               # + plot_map, animate_maps, plot_locations
+mufasa-fusion[tracking,vis]      # everything
 ```
 
 Requires Python ≥ 3.10.
