@@ -519,8 +519,258 @@ with on_bg_thread(mqtt_pub, HOST, PORT, TOPIC, GeoJsonObservationPushInput.END_M
 mqtt_out.result
 ```
 
+## Example: ROS 2
+
+Robots and autonomous systems commonly exchange sensor data via ROS 2[^ros2] topics.
+Its Python client library rclpy[^rclpy] is a push client, too, but it differs from Paho in one important aspect:
+the ROS *executor* owns the event loop (`rclpy.spin()`) and calls your subscription callbacks.
+And in ROS, everything is a node that is started with `ros2 run`, configured with parameters and wired up in launch files.
+
+So instead of hiding the client inside a MuFASA input node, we turn things around:
+a ROS node hosts the Fusion Graph. This is the {ref}`alternative to a dedicated input node <push-alt>` from above,
+applied to both ends of the graph:
+
+- Subscription callbacks convert messages and {func}`~mufasa.io.inputs.streaming.StreamingInputNode.ingest`
+  them into plain {class}`~mufasa.io.inputs.streaming.ObservationStreamingInput` nodes, one per topic.
+- A {class}`~mufasa.io.outputs.streaming.StreamingOutputNode` publishes each result to an output topic.
+
+:::{note}
+The examples in this section are not executed when building this documentation, because rclpy can't be installed with pip.
+Run them in a ROS 2 environment as described in {ref}`ros-run`.
+:::
+
+To keep the focus on the integration, messages are GeoJSON Features again, sent as `std_msgs/String`.
+Real-world systems use typed messages instead, for example `sensor_msgs/NavSatFix` for positions,
+or custom ones for detections. Their conversion goes in the same places.
+
+The simulated sensor is a minimal ROS node publishing the features to every topic given on the command line:
+
+```python
+# sensor_sim.py
+
+import json
+import random
+import sys
+import time
+
+import rclpy
+from rclpy.node import Node
+from std_msgs.msg import String
+
+END_MSG = "END"
+
+
+def main():
+    """Publishes GeoJSON Features to each topic given on the command line"""
+    rclpy.init()
+    node = Node("sensor_sim")
+    publishers = [node.create_publisher(String, topic, 10) for topic in sys.argv[1:]]
+
+    with open("sensor_b.geojson") as features_file:
+        features = json.load(features_file)["features"]
+
+    # Wait for the fusion node to subscribe, or else the first messages get lost
+    while any(pub.get_subscription_count() == 0 for pub in publishers):
+        time.sleep(.1)
+
+    for feature in features:
+        for pub in publishers:
+            pub.publish(String(data=json.dumps(feature)))
+        time.sleep(.1 + .1 * random.random())
+    for pub in publishers:
+        pub.publish(String(data=END_MSG))
+
+    node.destroy_node()
+    rclpy.shutdown()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+The fusion node creates its publisher first[{sup}`#A`](#ros-node), so it exists before the graph can produce any results.
+Then it builds the graph with one input per topic and subscribes to the topics.
+Since `rclpy.spin()` blocks the main thread, the graph runs on a background thread[{sup}`#B`](#ros-node).
+The subscription callback converts messages[{sup}`#3`](#ros-node) and ingests them[{sup}`#4b`](#ros-node).
+It catches conversion errors, so a single malformed message doesn't take down the whole node[{sup}`#C`](#ros-node).
+The output node's callback converts results back to GeoJSON and publishes them[{sup}`#D`](#ros-node).
+Finally, destroying the ROS node stops the graph and waits for its thread[{sup}`#E`](#ros-node).
+
+:::{note}
+The graph's `crs` parameter sets the coordinate reference system that MuFASA computes in.
+The node uses a UTM zone by default, so distances are in metres.
+Input nodes project incoming WGS84 geometries into it, but output nodes don't project results back.
+That's why `publish_location()` transforms them to WGS84 before converting them to GeoJSON.
+:::
+
+(ros-node)=
+```python
+# fusion_node.py
+
+import json
+import threading
+from functools import partial
+
+from pyproj import Transformer
+import rclpy
+from rclpy.executors import ExternalShutdownException
+from rclpy.node import Node
+from shapely.geometry import mapping, shape
+from shapely.ops import transform
+from std_msgs.msg import String
+
+from mufasa import Graph
+from mufasa.io.inputs import ObservationStreamingInput
+from mufasa.io.outputs import StreamingOutputNode
+from mufasa.location import Location, Observation
+
+END_MSG = "END"
+
+
+class FusionNode(Node):
+    """ROS 2 node hosting a Fusion Graph with one streaming input per topic"""
+
+    def __init__(self):
+        super().__init__("mufasa_fusion")
+        input_topics = self.declare_parameter(
+            "input_topics", ["/mufasa/sensor/a", "/mufasa/sensor/b"]).value
+        output_topic = self.declare_parameter("output_topic", "/mufasa/fused").value
+        crs = self.declare_parameter("crs", "EPSG:32633").value  # UTM zone of the demo data
+
+        self.publisher = self.create_publisher(String, output_topic, 10)  #A
+
+        self.inputs = {topic: ObservationStreamingInput() for topic in input_topics}
+        out = StreamingOutputNode(self.publish_location)(*self.inputs.values())
+        self.graph = Graph(list(self.inputs.values()), [out], crs=crs)
+        # The graph projects WGS84 inputs to its CRS, but GeoJSON outputs need WGS84 again
+        self.to_wgs84 = Transformer.from_crs(crs, "EPSG:4326", always_xy=True).transform
+
+        for topic, node in self.inputs.items():
+            self.create_subscription(String, topic, partial(self.on_message, node, topic), 10)
+
+        self.graph_thread = threading.Thread(target=self.run_graph)  #B
+        self.graph_thread.start()
+
+    def on_message(self, node: ObservationStreamingInput, topic: str, msg: String) -> None:
+        if msg.data == END_MSG:
+            node.stop()
+            return
+        try:  #C
+            feature = json.loads(msg.data)  #3
+            props = {"topic": topic} | feature.get("properties", {})
+            # std_msgs/String has no header, so use the arrival time
+            ts = props.pop("timestamp", self.get_clock().now().nanoseconds / 1e9)
+            conf = props.pop("confidence", Observation.confidence)
+            node.ingest(Observation(shape(feature["geometry"]), ts, props, conf))  #4b
+        except Exception as e:
+            self.get_logger().error(f"Dropping message on {topic}: {e}")
+
+    def publish_location(self, location: Location) -> None:  #D
+        props = {"timestamp": location.timestamp, **location.properties}
+        if isinstance(location, Observation):
+            props["confidence"] = location.confidence
+        geometry = mapping(transform(self.to_wgs84, location.geometry))
+        feature = {"type": "Feature", "geometry": geometry, "properties": props}
+        self.publisher.publish(String(data=json.dumps(feature)))
+
+    def run_graph(self) -> None:
+        self.graph.run()
+        rclpy.try_shutdown()  # Demo only! Stop spinning once all inputs have ended
+
+    def destroy_node(self):  #E
+        self.graph.stop()
+        self.graph_thread.join()
+        return super().destroy_node()
+
+
+def main():
+    rclpy.init()
+    node = None
+    try:
+        node = FusionNode()
+        rclpy.spin(node)
+    except (KeyboardInterrupt, ExternalShutdownException):
+        pass
+    finally:
+        if node is not None:
+            node.destroy_node()
+        rclpy.try_shutdown()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+In this demo, the node shuts itself down once all inputs have received their end message.
+A real fusion node runs until it is stopped with {kbd}`Ctrl+C` or by its launch system.
+Either way, `destroy_node()` stops the graph.
+
+:::{admonition} Quality of Service
+:class: tip
+Publishers and subscribers only connect if their QoS[^ros2_qos] settings are compatible.
+The examples use ROS's default (reliable delivery, a history depth of 10).
+Many sensor drivers publish with *best effort* reliability, though.
+Subscribing to them requires a matching profile, for example
+`QoSProfile(depth=10, reliability=ReliabilityPolicy.BEST_EFFORT)` from `rclpy.qos`.
+:::
+
+(ros-run)=
+### Running the Example
+
+The simplest way to get a ROS 2 environment is the official Docker image.
+Save the two scripts above to a folder together with `sensor_b.geojson` from this documentation's data,
+and start a container from the root of the MuFASA repository with that folder mounted:
+
+```bash
+docker run -it --rm --name ros-mufasa \
+    -v "$PWD":/mufasa:ro -v /path/to/scripts:/work -w /work \
+    ros:humble bash
+```
+
+Inside the container, install MuFASA and start the fusion node:
+
+```bash
+apt-get update && apt-get install -y python3-pip
+# Ubuntu 22.04's pip is too old for MuFASA's pyproject.toml
+pip install --upgrade pip
+cp -r /mufasa /tmp/mufasa && pip install /tmp/mufasa
+source /opt/ros/humble/setup.bash
+python3 fusion_node.py
+```
+
+In a second terminal, watch the fused results:
+
+```bash
+docker exec -it ros-mufasa bash
+source /opt/ros/humble/setup.bash
+ros2 topic echo --full-length /mufasa/fused std_msgs/msg/String
+```
+
+And in a third terminal, start the simulated sensor:
+
+```bash
+docker exec -it ros-mufasa bash
+source /opt/ros/humble/setup.bash
+python3 sensor_sim.py /mufasa/sensor/a /mufasa/sensor/b
+```
+
+The second terminal then shows each feature twice, once per input topic, for example:
+
+```text
+data: '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [16.426643559839174, 48.26840868576795]}, "properties": {"timestamp": 1793183493.4454303, "topic": "/mufasa/sensor/a", "confidence": 0.9433776719597745}}'
+---
+data: '{"type": "Feature", "geometry": {"type": "Point", "coordinates": [16.426643559839174, 48.26840868576795]}, "properties": {"timestamp": 1793183493.4456568, "topic": "/mufasa/sensor/b", "confidence": 0.9433776719597745}}'
+---
+```
+
+To reach nodes on other machines, the usual ROS networking applies:
+all participants need the same `ROS_DOMAIN_ID`, and in Docker you need to use `--network host`.
+
 [^socketserver_examples]: Python Standard Library, `socketserver` module's examples,
 <https://docs.python.org/3/library/socketserver.html#examples>
 [^no_stream_out]: Assuming we would use streaming-capable output nodes, too -- What we don't do in this demo.
 [^MQTT]: MQTT, <https://mqtt.org/>
 [^paho_mqtt]: Eclipse Paho MQTT Python Client, <https://eclipse.dev/paho/files/paho.mqtt.python/html/index.html>
+[^ros2]: ROS 2 Documentation, <https://docs.ros.org/en/humble/>
+[^rclpy]: rclpy, ROS 2's Python client library, <https://docs.ros.org/en/humble/p/rclpy/>
+[^ros2_qos]: ROS 2 Quality of Service settings, <https://docs.ros.org/en/humble/Concepts/Intermediate/About-Quality-of-Service-Settings.html>
