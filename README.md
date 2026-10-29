@@ -1,10 +1,9 @@
 <div align="center">
-  <img src="docs/assets/MuFASA_logo.png" alt="MuFASA" height="80" />
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <img src="docs/assets/ait_logo.jpg" alt="AIT Austrian Institute of Technology" height="60" />
+  <img src="https://raw.githubusercontent.com/mufasa-fusion/mufasa-fusion/refs/heads/dev/docs/assets/MuFASA_logo.png"
+        alt="MuFASA" height="80" />
+  <img src="https://raw.githubusercontent.com/mufasa-fusion/mufasa-fusion/refs/heads/dev/docs/assets/ait_logo.jpg"
+        alt="AIT Austrian Institute of Technology" height="60" />
 </div>
-
-<br>
 
 # MuFASA — Multimodal Fusion Architecture for Sensor Applications
 
@@ -59,7 +58,7 @@ from mufasa.io.inputs.geojson import GeoJsonInput
 from mufasa.io.outputs.python_object import LocationOutput
 from mufasa.nodes.mapping import POM
 from mufasa.nodes.fusion import BayesianFusion
-from mufasa.nodes.detection import ConfidenceThreshold
+from mufasa.nodes.detection import Threshold
 
 # --- Define inputs ---
 track_a = GeoJsonInput(path="sensor_a.geojson")
@@ -69,7 +68,7 @@ track_b = GeoJsonInput(path="sensor_b.geojson")
 pom_a  = POM(decay_s=300)(track_a)
 pom_b  = POM(decay_s=300)(track_b)
 fused  = BayesianFusion()(pom_a, pom_b)
-alarms = ConfidenceThreshold(threshold=0.7)(fused)
+alarms = Threshold(threshold=0.7)(fused)
 out    = LocationOutput()(alarms)
 
 # --- Assemble and run ---

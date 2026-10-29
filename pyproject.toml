@@ -4,10 +4,12 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mufasa-fusion"
-version = "0.1.2"
 description = "Multi-modal geospatial data fusion framework"
+readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
+dynamic = ["version"]
+
 requires-python = ">=3.10"
 dependencies = [
     "shapely",
@@ -32,6 +34,15 @@ dev = [
     "pytest-cov",
     "mufasa-fusion[tracking,vis]",
 ]
+
+[project.urls]
+homepage = "https://mufasa-fusion.org"
+documentation = "https://mufasa-fusion.org"
+source = "https://github.com/mufasa-fusion/mufasa-fusion"
+issues = "https://github.com/mufasa-fusion/mufasa-fusion/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "mufasa.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
