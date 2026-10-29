@@ -15,7 +15,7 @@ mystnb:
         alt: |
             Fusion Graph consisting of an input node producing Observations
             and feeding them into a processing node that accepts any Locations and produces BayesianMaps
-            that are fed into the BayesianMap input of an output node that additionally accepts Locations.
+            that are fed into the respective input of an output node that additionally accepts Locations.
 ---
 
 from mufasa import Graph, BoundingBox, Location, Observation, BayesianMap
@@ -82,29 +82,44 @@ via its {func}`~mufasa.graph.Graph.run` method. It also distributes global confi
 
 ```python
 
-from mufasa.graph import Graph
+from mufasa.graph import Graph, BoundingBox
 
 graph = Graph(
     inputs=[...],
     outputs=[...],
-    crs="",
+    crs="...crs...",
+    bbox=BoundingBox(...),
+    resolution=(5, 5),
 )
 
 graph.run()
 ```
 
-## Data Flow
+## Geo-spacial Detections
 
 All information flowing within a Fusion Graph is of one of two fundamental data types,
 {class}`~mufasa.location.Location` and {class}`~mufasa.map.Map`, or any more specific one derived from them.
-Every edge adheres to a single data type that is determined by the nodes it connects.
-Every node specifies the set of types it accepts and the single one it produces.
-Only compatible nodes might be wired together.
+They all represent geo-referenced detections, optionally with a timestamp and additional metadata.
 
-:::{seealso}
-The {ref}`data-models-catalog` catalog for a complete list of builtin data models
-:::
+Every edge adheres to a single data type that is determined by the nodes it connects.
+Each {class}`~mufasa.node.Node` specifies the set of types it accepts via its {attr}`~mufasa.node.Node._input_types`
+and the single one it produces via its {attr}`~mufasa.node.Node._output_type`.
+Only compatible nodes might be wired together.
 
 ## IO Boundary Layer
 
+Input and output nodes form the boundary of a Fusion Graph and at the same time bridges to external systems. 
+Within a graph, {class}`~mufasa.io.inputs.base.InputNode`s accept no input
+and {class}`~mufasa.io.outputs.base.OutputNode`s produce nothing.
+They do, however, ingest data from and distribute results to external systems.
+Moreover, they are responsible for the conversion from and to other standardized or proprietary data formats.
+
 ## Processing Nodes
+
+Processing nodes define individual processing units and their wiring makes up a fusion architecture.
+Any {class}`~mufasa.node.Node` that has one or more input types and an output type specified
+is considered a processing node.
+
+:::{seealso}
+- {doc}`../catalog` for a list of available data models and nodes to build your own graphs
+:::

@@ -1,17 +1,19 @@
 # Installation
 
-Install MuFASA and its dependencies via pip:
+Install MuFASA and its dependencies via pip from PyPI[^mufasa-pypi]:
 
 ```bash
-pip install "mufasa @ git+https://github.com/mufasa-fusion/mufasa-fusion"
+pip install mufasa-fusion
 ```
 
-## Optional dependencies
+The software is licensed under Apache 2.0[^mufasa-license].
+
+## Optional Dependencies
 
 Install extra dependencies as follows, where `extra` is a comma-separated list chosen from below.
 
 ```bash
-pip install "mufasa[extra] @ git+https://github.com/mufasa-fusion/mufasa-fusion"
+pip install mufasa-fusion[extra]
 ```
 
 Available extras and what they enable:
@@ -26,9 +28,15 @@ Available extras and what they enable:
 `dev`
 : Development dependencies, including those to build these docs
 
-## License
 
-The software is licensed under [Apache 2.0][mufasa-license].
+## Install from Sources
 
-[mufasa-repo]: https://github.com/mufasa-fusion/mufasa-fusion
-[mufasa-license]: https://github.com/mufasa-fusion/mufasa-fusion/blob/main/LICENSE
+Install the latest development version via pip from MuFASA's repository[^mufasa-repo]
+
+```bash
+pip install "mufasa-fusion @ git+https://github.com/mufasa-fusion/mufasa-fusion@dev"
+```
+
+[^mufasa-pypi]: `mufasa-fusion` package on Python Packaging Index, <https://pypi.org/project/mufasa-fusion>
+[^mufasa-repo]: MuFASA's repository on GitHub, <https://github.com/mufasa-fusion/mufasa-fusion>
+[^mufasa-license]: Apache 2.0 license file, <https://github.com/mufasa-fusion/mufasa-fusion/blob/main/LICENSE>
