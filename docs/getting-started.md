@@ -12,10 +12,10 @@ os.chdir("_data")
 
 ## Install MuFASA
 
-MuFASA is a Python package and easily installed from its [GitHub repository][mufasa-repo] with pip:
+MuFASA is a Python package and easily installed from PyPI[^mufasa-pypi] with pip:
 
 ```bash
-pip install "mufasa[vis] @ git+https://github.com/mufasa-fusion/mufasa-fusion"
+pip install mufasa-fusion[vis]
 ```
 
 ## The Fusion Recipe
@@ -109,9 +109,9 @@ vis.show("pom_0")
 
 :::{seealso}
 - {doc}`user-guide/index` for an introduction to the framework and its API
-- {doc}`catalog` for a list of available fusion nodes to build your own graphs
+- {doc}`catalog` for a list of available nodes to build your own graphs
 - {doc}`showcases/index` for realized fusion architectures and use-cases to draw inspiration from
 :::
 
-[mufasa-repo]: https://github.com/mufasa-fusion/mufasa-fusion
+[^mufasa-pypi]: `mufasa-fusion` package on Python Packaging Index, <https://pypi.org/project/mufasa-fusion>
 [^GeoJSON]: GeoJSON, see <https://geojson.org>
