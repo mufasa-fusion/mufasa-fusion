@@ -39,6 +39,7 @@ docs = [
     "sphinx-copybutton",
     # For examples
     "paho-mqtt",
+    "amqtt",
 ]
 
 [tool.setuptools.packages.find]

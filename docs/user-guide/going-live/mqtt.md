@@ -112,9 +112,10 @@ def feat_to_obs(
 
 TODO
 
-## Usage
+## Running the Example
 
-To run this example, start a MQTT broker running in the background, for example:
+To run this example, start a MQTT broker running in the background, for example
+Eclipse Mosquitto via Docker[^mosquitto-docker]:
 
 ```bash
 docker run -p 1883:1883 eclipse-mosquitto
@@ -182,6 +183,35 @@ Finally, start the sensor simulation publishers for both [`sensor_a.geojson`](/_
 and [`sensor_b.geojson`](/_data/sensor_b.geojson) and run the graph.
 
 ```{code-cell}
+:tags: [remove-cell]
+import asyncio
+import logging
+from amqtt.broker import Broker
+
+_RUNNING = True
+_BROKER_READY = threading.Event()
+
+
+async def _run_mqtt_broker() -> None:
+    broker = Broker()
+    await broker.start()
+    print("MQTT broker started")
+    _BROKER_READY.set()
+    try:
+        while _RUNNING:
+            await asyncio.sleep(.5)
+    finally:
+        print("MQTT broker shutdown")
+        await broker.shutdown()
+
+
+logging.basicConfig(level=logging.FATAL)
+_broker_thread = threading.Thread(target=asyncio.run, args=(_run_mqtt_broker(),))
+_broker_thread.start()
+_BROKER_READY.wait()
+```
+
+```{code-cell}
 # Sensor threads for demo only!
 with (
     bg_thread(sim_pub_mqtt, HOST, PORT, "sensor/a", "sensor_a.geojson"),
@@ -192,5 +222,12 @@ with (
 mqtt_out.result
 ```
 
+```{code-cell}
+:tags: [remove-cell]
+_RUNNING = False
+_broker_thread.join()
+```
+
 [^MQTT]: MQTT, <https://mqtt.org/>
 [^paho_mqtt]: Eclipse Paho MQTT Python Client, <https://eclipse.dev/paho/files/paho.mqtt.python/html/index.html>
+[^mosquitto-docker]: Eclipse Mosquitto Docker Image, Docker Hub, <https://hub.docker.com/_/eclipse-mosquitto>
