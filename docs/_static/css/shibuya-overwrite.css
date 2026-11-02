@@ -67,15 +67,41 @@ figcaption:hover a.headerlink {
   max-width: fit-content;
 }
 
-/* Override ul lists' left alignment on small screens */
-@media screen {
-    ul {
-        margin-left: 30px;
-    }
+ul:not(.mufasa-node-catalog) {
+  li:first-child, li:first-child > :first-child {
+    margin-block-start: 0;
+  }
+  li:last-child, li:last-child > :last-child {
+    margin-block-end: 0;
+  }
 }
 
 .cell_output svg {
   margin-inline: auto;
+}
+
+.yue details.admonition {
+  &:not([open]) {
+    padding-bottom: 0;
+
+    > summary { margin-bottom: 0; }
+  }
+
+  > summary {
+    /* mimics p.admonition-title */
+	color: var(--color-4);
+    background-color: var(--color-2);
+    --yue-c-code: var(--color-4);
+    --yue-c-bold: var(--color-4);
+    margin: -.825rem -1rem .825rem -19px;
+    padding: 4px 18px;
+    font-size: .85rem;
+    font-weight: 600;
+    line-height: 1.72;
+  }
+}
+div.cell details.hide summary {
+  margin-bottom: .825rem;
 }
 
 strong, em { color: inherit; }

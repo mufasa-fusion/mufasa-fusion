@@ -24,22 +24,23 @@ release = '0.1.0'
 
 extensions = [
     "sphinx.ext.napoleon",
+    "sphinx.ext.todo",
     "autoapi.extension",
     "custom_directives",
     "myst_nb",
+    "sphinx_copybutton",
 ]
 
 templates_path = ['_templates']
 exclude_patterns = ["_*", "**/_*"]
+
+nb_execution_mode = "cache"
 
 myst_enable_extensions = [
     "colon_fence",
     "deflist",
     "attrs_inline",
 ]
-
-# Re-execute an executable page only when its code changes (results are cached in _build/.jupyter_cache)
-nb_execution_mode = "cache"
 
 rst_prolog = """\
 .. |loc| image:: /../src/mufasa/graph_svg/icons/location-marker.svg
@@ -74,8 +75,6 @@ autoapi_options = [
 
 def autoapi_prepare_jinja_env(env: Environment):
     env.globals["zip"] = zip_longest
-
-graphviz_output_format = "svg"
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

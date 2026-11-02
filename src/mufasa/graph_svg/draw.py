@@ -68,7 +68,7 @@ def render(spec: GraphSpec, prefix: str | None = None, embed_assets: bool = True
 
     symbols = "".join(f'<symbol id="{prefix}-{name}" viewBox="{view_box}">{content}</symbol>'
                       for name, (view_box, content) in _icon_symbols().items())
-    assets = f"<style>{asset('graph.css')}</style><script>{asset('graph.js')}</script>" if embed_assets else ""
+    assets = f"<style>{asset('graph.css')}</style><script><![CDATA[{asset('graph.js')}]]></script>" if embed_assets else ""
     return (f'<svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="{-left} {-pad_y} {width:.0f} {height:.0f}" '
             f'width="{width:.0f}" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph">'
             f'<defs>{symbols}</defs>{"".join(edges)}{"".join(nodes)}{assets}</svg>')

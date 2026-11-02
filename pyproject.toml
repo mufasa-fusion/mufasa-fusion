@@ -36,6 +36,10 @@ docs = [
     "sphinx-autoapi",
     "shibuya",
     "myst-nb",
+    "sphinx-copybutton",
+    # For examples
+    "paho-mqtt",
+    "amqtt",
 ]
 
 [tool.setuptools.packages.find]

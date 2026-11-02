@@ -1,17 +1,7 @@
----
-file_format: mystnb
----
-
-```{code-cell}
-:tags: [remove-cell]
-import os.path
-os.chdir(os.path.join("..", "_data"))
-```
-
 # Design principles
 
-MuFASA is built on three principles. The colors on this page mark where each one shows up,
-in the architecture and in a complete example.
+MuFASA is built on three principles. The colors on this page mark where each one shows up
+in the architecture.
 
 ::::{container} mf-principles-legend
 
@@ -81,40 +71,17 @@ Alarms, operators
 
 :::::
 
-## The principles in an example
+## In short
 
-This graph fuses two sensors with a static prior and turns the result into alarms.
+::::{container} mf-fit-check
 
-```{code-cell}
-:class: mf-annotated
+:::{container} mf-fit-yes
+**MuFASA is the right tool for you if you**
 
-from mufasa import Graph, BoundingBox
-from mufasa.io.inputs import GeoJsonInput
-from mufasa.io.outputs import GeoJsonOutput
-from mufasa.nodes import StaticMap, POM, BayesianFusion, Threshold
+- already have detections (positions or georeferenced maps) and want to build a fusion system on top of them
+- want to quickly compare different fusion configurations
+- want to move from recorded data to live data without rewriting your graph
+- enjoy digging into your data :)
+:::
 
-# Input nodes
-track_a = GeoJsonInput("sensor_a.geojson")
-track_b = GeoJsonInput("sensor_b.geojson")
-static = StaticMap("priors.geojson")
-
-# Processing nodes
-pom_a = POM(decay_s=5)(track_a)
-pom_b = POM(decay_s=1)(track_b)
-fused = BayesianFusion()(pom_a, pom_b, static)
-alarms = Threshold(threshold=0.7)(fused)
-
-# Output nodes
-out = GeoJsonOutput("alarms.geojson")(alarms)
-
-# Fusion Graph
-bbox = BoundingBox(48.268, 16.426, 48.27, 16.4275)
-graph = Graph(inputs=[track_a, track_b], outputs=[out],
-              crs="EPSG:32639", bbox=bbox, resolution=(10, 10))
-graph.run()
-```
-
-```{code-cell}
-:tags: [remove-input]
-graph.plot_graph()
-```
+::::
