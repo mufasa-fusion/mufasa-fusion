@@ -92,6 +92,7 @@ html_theme_options = {
     "light_logo": html_logo,
     "dark_logo": "_static/img/logo/MuFASA_MuFASA_weiss.svg",
     "globaltoc_expand_depth": 1,
+    "github_url": "https://github.com/mufasa-fusion/mufasa-fusion",
     "nav_links": [
         {"title": "Getting started", "url": "getting-started"},
         {"title": "User guide", "url": "user-guide/index"},
