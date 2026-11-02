@@ -370,3 +370,21 @@ ul.mufasa-node-catalog {
     font-size: 0.85em;
     color: var(--gray-12);
 }
+
+/* ---- Footer: AIT logo right of the social icons ---- */
+
+.mf-foot-right {
+    gap: 1.5rem;
+    margin-top: .75rem;
+}
+
+@media (min-width: 768px) {
+    .mf-foot-right {
+        margin-top: 0;
+    }
+}
+
+.mf-foot-logo img {
+    height: 2.5rem;
+    width: auto;
+}

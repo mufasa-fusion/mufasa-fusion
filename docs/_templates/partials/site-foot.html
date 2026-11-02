@@ -1,0 +1,15 @@
+{#- Shibuya's footer with the AIT logo added on the right -#}
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      {% include "components/foot-copyright.html" %}
+      <div class="mf-foot-right flex items-center">
+        {% include "partials/foot-socials.html" %}
+        <a class="mf-foot-logo" href="https://www.ait.ac.at" aria-label="AIT Austrian Institute of Technology">
+          <img class="mf-light-only" src="{{ pathto('_static/img/logo/AIT.svg', 1) }}" alt="AIT Austrian Institute of Technology">
+          <img class="mf-dark-only" src="{{ pathto('_static/img/logo/AIT_weiss.svg', 1) }}" alt="AIT Austrian Institute of Technology">
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
