@@ -5,7 +5,7 @@ file_format: mystnb
 ```{code-cell}
 :tags: [remove-cell]
 import os.path
-os.chdir(os.path.join("..", "_data"))
+os.chdir(os.path.join("..", "..", "_data"))
 ```
 
 # Custom Data Sources

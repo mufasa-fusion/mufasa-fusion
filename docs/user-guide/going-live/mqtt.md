@@ -110,7 +110,10 @@ def feat_to_obs(
 
 ## Publisher for Outputs
 
-TODO
+:::{admonition} Coming Soon
+:class: admonition-todo
+The corresponding `MqttOutput` is currently under active development.
+:::
 
 ## Running the Example
 

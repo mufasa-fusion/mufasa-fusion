@@ -11,8 +11,7 @@ installation
 design-principles
 concepts
 tutorials
-extending
-streaming
+extending/index
 going-live/index
 ```
 
