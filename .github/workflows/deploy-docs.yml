@@ -26,3 +26,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/_build/html
           publish_branch: docs-build
+          cname: mufasa-fusion.org  # Writes CNAME on every deploy; without it the custom domain is lost
