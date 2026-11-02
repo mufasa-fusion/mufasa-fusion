@@ -54,19 +54,19 @@ Experiment," *2025 Sensor Data Fusion: Trends, Solutions, Applications (SDF)*, 2
   step is an explicit node. The variant the experiment settled on is shown in [The Fusion Graph](#border-graph), and
   [Try it](#border-try-it) looks inside it.
 - **Adapting the graph during operation.** After the sensors were integrated, the graphs ran online. The same graph
-  that is developed on recorded data goes live by exchanging the file input nodes for
-  {ref}`streaming input nodes <catalog-input-nodes>`. In this case, MQTT was used as a messaging broker system. From then on, only the configuration, i.e. the graph, changed. A new graph is in place within seconds, so the system can be adapted to an environment that isn't known in advance.
+  that is developed on recorded data goes live by exchanging the file input nodes for {ref}`streaming input nodes <input-nodes-catalog>`.
+  In this case, MQTT was used as a messaging broker system. From then on, only the configuration, i.e. the graph, changed. A new graph is in place within seconds, so the system can be adapted to an environment that isn't known in advance.
   <!-- TODO: link the MQTT streaming example in the user guide once it is merged -->
 
 (border-graph)=
 ## The Fusion Graph
 
 In the graph the experiment settled on, each sensor accumulates its detections into a probability map
-({ref}`POM <catalog-processing-nodes>`). A {ref}`LogicalAnd <catalog-processing-nodes>`
+({class}`~mufasa.nodes.mapping.pom.POM`). A {class}`~mufasa.nodes.fusion.map_fusion.LogicalAnd`
 combines every coastal camera with every drone, so it only reports where both see something.
-{ref}`BayesianFusion <catalog-processing-nodes>` joins the four combinations, and a
-{ref}`Threshold <catalog-processing-nodes>` turns the result into alarms, collected by a
-{ref}`LocationOutput <catalog-output-nodes>`. In the experiment, this graph had far fewer false
+{class}`~mufasa.nodes.fusion.map_fusion.BayesianFusion` joins the four combinations, and a
+{class}`~mufasa.nodes.detection.threshold.Threshold` turns the result into alarms, collected by a
+{class}`~mufasa.io.outputs.python_object.LocationOutput`. In the experiment, this graph had far fewer false
 alarms than the drones alone (Wohlleben et al., SDF 2025).
 
 ```{code-cell}
@@ -123,9 +123,9 @@ position precisely, but only now and then. The SWIR camera also picks up people 
 {download}`uav_ir.geojson <../_data/showcases/border/uav_ir.geojson>`, and the boat's true path
 {download}`ground_truth.geojson <../_data/showcases/border/ground_truth.geojson>`.
 
-The following figure looks inside the graph above, through a {ref}`Visualization <catalog-output-nodes>` node.
+The following figure looks inside the graph above, through a {class}`~mufasa.io.outputs.visualization.Visualization` node.
 Each camera's probability map lights up a whole wedge of the sea, while the drones only mark small spots where they
-saw the boat. The {ref}`LogicalAnd <catalog-processing-nodes>` nodes keep only the places where a
+saw the boat. The {class}`~mufasa.nodes.fusion.map_fusion.LogicalAnd` nodes keep only the places where a
 camera and a drone agree, so the fused map and the alarms follow the boat's path (white line). The triangles mark the
 two camera poles.
 
@@ -175,7 +175,7 @@ User Community.</small>
 Experiment with it: fuse the four probability maps directly, `BayesianFusion()(pom_swir, pom_lwir, pom_uav_eo,
 pom_uav_ir)`, and see how many alarms the cameras raise without confirmation. Or pair only the SWIR camera with the
 drones, or change a prior or the threshold. To follow the boat over time, add a
-{ref}`KalmanTracker <catalog-processing-nodes>` after the threshold.
+{class}`~mufasa.nodes.tracking.kalman.KalmanTracker` after the threshold.
 :::
 
 ## References

@@ -7,8 +7,6 @@ Flow Data Models
 ----------------
 
 .. autoapi-template::
-   :context: ["|loc|", "|obs|", "|map|", "|bmap|"]
-
    mufasa.location.Location
    mufasa.location.Observation
    mufasa.map.Map
@@ -16,15 +14,13 @@ Flow Data Models
 
    .. rst-class:: mufasa-node-catalog twos
 
-   {% for obj, icon in zip(objs, ctx) %}
-   - {{ icon }}
-
-     :class:`~{{ obj.id }}`
+   {% for obj in objs %}
+   - :class:`~{{ obj.id }}`
 
      {{ obj.summary }}
    {% endfor %}
 
-.. _catalog-processing-nodes:
+.. _processing-nodes-catalog:
 
 Processing Nodes
 ----------------
@@ -56,7 +52,7 @@ Processing Nodes
    mufasa.nodes.tracking.kalman.KalmanTracker
    mufasa.nodes.util.filter.ObservationFilter
 
-.. _catalog-input-nodes:
+.. _input-nodes-catalog:
 
 Input Nodes
 -----------
@@ -90,7 +86,7 @@ Input Nodes
 .. [#InNodeCol] Indicates the type of data they consume from external systems.
    Within the Fusion Graph, Input Nodes are sources with no incoming edges.
 
-.. _catalog-output-nodes:
+.. _output-nodes-catalog:
 
 Output Nodes
 ------------

@@ -1,21 +1,21 @@
 # User Guide
 
-:::{admonition} TODO
+:::{todo}
 Again a quick start guide as on the home page?
 :::
 
 ```{toctree}
 :caption: Contents
 
-is-mufasa-right-for-you
-design-principles
 installation
+design-principles
 concepts
 tutorials
-extending
+extending/index
+going-live/index
 ```
 
-:::{admonition} TODO
+:::{todo}
 
 - visualisation
 - registry and exports/imports of Fusion Graphs

@@ -9,9 +9,10 @@
     <link rel="stylesheet" type="text/css" href="_static/shibuya.css?v=2ceb65ce" />
     <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="_static/css/shibuya-overwrite.css?v=6204571c" />
-    <link rel="stylesheet" type="text/css" href="_static/css/mufasa.css?v=452db9ee" />
+    <link rel="stylesheet" type="text/css" href="_static/css/shibuya-overwrite.css?v=16390e6e" />
+    <link rel="stylesheet" type="text/css" href="_static/css/mufasa.css?v=cc9ae112" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -72,12 +73,19 @@ data-aria-dark="Switch to auto color mode">
         <div class="globaltoc" data-expand-depth="1"><ul class="current">
 <li class="toctree-l1 _expand"><a class="reference internal" href="getting-started.html">Getting started</a></li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="user-guide/index.html">User Guide</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="user-guide/is-mufasa-right-for-you.html">Is MuFASA right for you?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user-guide/design-principles.html">Design principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user-guide/installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/design-principles.html">Design principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="user-guide/concepts.html">Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user-guide/tutorials.html">Tutorials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="user-guide/extending.html">Extending MuFASA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/tutorials.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/extending/index.html">Extending MuFASA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user-guide/extending/sources.html">Custom Data Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="user-guide/going-live/index.html">Going Live</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="user-guide/going-live/mqtt.html">MQTT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="user-guide/going-live/ros2.html">ROS 2</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="showcases/index.html">Showcases</a><ul>
@@ -168,26 +176,22 @@ data-aria-dark="Switch to auto color mode">
 <section id="flow-data-models">
 <span id="data-models-catalog"></span><h2>Flow Data Models<a class="headerlink" href="#flow-data-models" title="Link to this heading">#</a></h2>
 <ul class="mufasa-node-catalog twos">
-<li><p><img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" /></p>
-<p><a class="reference internal" href="api/mufasa/location/index.html#mufasa.location.Location" title="mufasa.location.Location"><code class="xref py py-class docutils literal notranslate"><span class="pre">Location</span></code></a></p>
+<li><p><a class="reference internal" href="api/mufasa/location/index.html#mufasa.location.Location" title="mufasa.location.Location"><code class="xref py py-class docutils literal notranslate"><span class="pre">Location</span></code></a></p>
 <p>Spatially discrete detection, represented by a <code class="xref py py-attr docutils literal notranslate"><span class="pre">geometry</span></code>, that occurred at some <code class="xref py py-attr docutils literal notranslate"><span class="pre">timestamp</span></code>.</p>
 </li>
-<li><p><img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /></p>
-<p><a class="reference internal" href="api/mufasa/location/index.html#mufasa.location.Observation" title="mufasa.location.Observation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Observation</span></code></a></p>
+<li><p><a class="reference internal" href="api/mufasa/location/index.html#mufasa.location.Observation" title="mufasa.location.Observation"><code class="xref py py-class docutils literal notranslate"><span class="pre">Observation</span></code></a></p>
 <p>Probabilistic spatially discrete detection, adding a <code class="xref py py-attr docutils literal notranslate"><span class="pre">confidence</span></code> estimate.</p>
 </li>
-<li><p><img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" /></p>
-<p><a class="reference internal" href="api/mufasa/map/index.html#mufasa.map.Map" title="mufasa.map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a></p>
+<li><p><a class="reference internal" href="api/mufasa/map/index.html#mufasa.map.Map" title="mufasa.map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a></p>
 <p>Spatially distributed detection, rasterized to a geo-referenced <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code> array, at some <code class="xref py py-attr docutils literal notranslate"><span class="pre">timestamp</span></code>.</p>
 </li>
-<li><p><img alt="map scroll" class="mufasa-shape-icon" src="_images/map-roll.svg" /></p>
-<p><a class="reference internal" href="api/mufasa/map/index.html#mufasa.map.BayesianMap" title="mufasa.map.BayesianMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">BayesianMap</span></code></a></p>
+<li><p><a class="reference internal" href="api/mufasa/map/index.html#mufasa.map.BayesianMap" title="mufasa.map.BayesianMap"><code class="xref py py-class docutils literal notranslate"><span class="pre">BayesianMap</span></code></a></p>
 <p>Map subtype that stores <code class="xref py py-attr docutils literal notranslate"><span class="pre">data</span></code> in log-odds space.</p>
 </li>
 </ul>
 </section>
 <section id="processing-nodes">
-<span id="catalog-processing-nodes"></span><h2>Processing Nodes<a class="headerlink" href="#processing-nodes" title="Link to this heading">#</a></h2>
+<span id="processing-nodes-catalog"></span><h2>Processing Nodes<a class="headerlink" href="#processing-nodes" title="Link to this heading">#</a></h2>
 <ul class="mufasa-node-catalog">
 <li><p><img alt="foldable map" class="mufasa-shape-icon" src="_images/map-fold.svg" />  → <img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />/<img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /></p>
 <p><a class="reference internal" href="api/mufasa/nodes/detection/threshold/index.html#mufasa.nodes.detection.threshold.Threshold" title="mufasa.nodes.detection.threshold.Threshold"><code class="xref py py-class docutils literal notranslate"><span class="pre">Threshold</span></code></a></p>
@@ -228,7 +232,7 @@ data-aria-dark="Switch to auto color mode">
 </ul>
 </section>
 <section id="input-nodes">
-<span id="catalog-input-nodes"></span><h2>Input Nodes<a class="headerlink" href="#input-nodes" title="Link to this heading">#</a></h2>
+<span id="input-nodes-catalog"></span><h2>Input Nodes<a class="headerlink" href="#input-nodes" title="Link to this heading">#</a></h2>
 <ul class="mufasa-node-catalog">
 <li><p>GeoJSON <a class="footnote-reference brackets" href="#geojson" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#innodecol" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> → <img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />/<img alt="target marker" class="mufasa-shape-icon" src="_images/observation-marker.svg" /></p>
 <p><a class="reference internal" href="api/mufasa/io/inputs/geojson/index.html#mufasa.io.inputs.geojson.GeoJsonInput" title="mufasa.io.inputs.geojson.GeoJsonInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeoJsonInput</span></code></a></p>
@@ -273,7 +277,7 @@ Within the Fusion Graph, Input Nodes are sources with no incoming edges.</p>
 </aside>
 </section>
 <section id="output-nodes">
-<span id="catalog-output-nodes"></span><h2>Output Nodes<a class="headerlink" href="#output-nodes" title="Link to this heading">#</a></h2>
+<span id="output-nodes-catalog"></span><h2>Output Nodes<a class="headerlink" href="#output-nodes" title="Link to this heading">#</a></h2>
 <ul class="mufasa-node-catalog">
 <li><p><img alt="location marker" class="mufasa-shape-icon" src="_images/location-marker.svg" />  → GeoJSON <a class="footnote-reference brackets" href="#geojson" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#outnodecol" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p>
 <p><a class="reference internal" href="api/mufasa/io/outputs/geojson/index.html#mufasa.io.outputs.geojson.GeoJsonOutput" title="mufasa.io.outputs.geojson.GeoJsonOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeoJsonOutput</span></code></a></p>
@@ -380,5 +384,7 @@ Within the Fusion Graph, Output Nodes are terminal, so they don’t have outgoin
       <script src="_static/documentation_options.js?v=01f34227"></script>
       <script src="_static/doctools.js?v=9bcbadda"></script>
       <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=f281be69"></script>
       <script src="_static/shibuya.js?v=50760d75"></script></body>
 </html>

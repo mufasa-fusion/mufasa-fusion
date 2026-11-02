@@ -2,16 +2,17 @@
 <html lang="en" data-accent-color="red" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Installation - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Concepts" href="concepts.html" /><link rel="prev" title="Design principles" href="design-principles.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Installation - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Design principles" href="design-principles.html" /><link rel="prev" title="User Guide" href="index.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
     <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=6204571c" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=452db9ee" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=16390e6e" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=cc9ae112" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -72,12 +73,19 @@ data-aria-dark="Switch to auto color mode">
         <div class="globaltoc" data-expand-depth="1"><ul class="current">
 <li class="toctree-l1 _expand"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
-<li class="toctree-l2"><a class="reference internal" href="is-mufasa-right-for-you.html">Is MuFASA right for you?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="design-principles.html">Design principles</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design-principles.html">Design principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts.html">Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials.html">Tutorials</a></li>
-<li class="toctree-l2"><a class="reference internal" href="extending.html">Extending MuFASA</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutorials.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending/index.html">Extending MuFASA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extending/sources.html">Custom Data Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="going-live/index.html">Going Live</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="going-live/mqtt.html">MQTT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="going-live/ros2.html">ROS 2</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l1 _expand"><a class="reference internal" href="../showcases/index.html">Showcases</a><ul>
@@ -129,7 +137,8 @@ data-aria-dark="Switch to auto color mode">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
-<li><a class="reference internal" href="#optional-dependencies">Optional dependencies</a></li>
+<li><a class="reference internal" href="#optional-dependencies">Optional Dependencies</a></li>
+<li><a class="reference internal" href="#install-from-sources">Install from Sources</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
   </aside>
@@ -166,14 +175,15 @@ data-aria-dark="Switch to auto color mode">
   <article class="yue" role="main">
           <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading">#</a></h1>
-<p>Install MuFASA and its dependencies via pip:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;mufasa @ git+https://github.com/mufasa-fusion/mufasa-fusion&quot;</span>
+<p>Install MuFASA and its dependencies via pip from PyPI<a class="footnote-reference brackets" href="#mufasa-pypi" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span>mufasa-fusion
 </span></pre></div>
 </div>
+<p>The software is licensed under Apache 2.0<a class="footnote-reference brackets" href="#mufasa-license" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.</p>
 <section id="optional-dependencies">
-<h2>Optional dependencies<a class="headerlink" href="#optional-dependencies" title="Link to this heading">#</a></h2>
+<h2>Optional Dependencies<a class="headerlink" href="#optional-dependencies" title="Link to this heading">#</a></h2>
 <p>Install extra dependencies as follows, where <code class="docutils literal notranslate"><span class="pre">extra</span></code> is a comma-separated list chosen from below.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;mufasa[extra] @ git+https://github.com/mufasa-fusion/mufasa-fusion&quot;</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span>mufasa-fusion<span class="o">[</span>extra<span class="o">]</span>
 </span></pre></div>
 </div>
 <p>Available extras and what they enable:</p>
@@ -187,7 +197,29 @@ and <a class="reference internal" href="../api/mufasa/io/outputs/visualization/i
 </dd>
 </dl>
 </section>
+<section id="install-from-sources">
+<h2>Install from Sources<a class="headerlink" href="#install-from-sources" title="Link to this heading">#</a></h2>
+<p>Install the latest development version via pip from MuFASA’s repository<a class="footnote-reference brackets" href="#mufasa-repo" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;mufasa-fusion @ git+https://github.com/mufasa-fusion/mufasa-fusion@dev&quot;</span>
+</span></pre></div>
+</div>
 </section>
+</section>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="mufasa-pypi" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><code class="docutils literal notranslate"><span class="pre">mufasa-fusion</span></code> package on Python Packaging Index, <a class="reference external" href="https://pypi.org/project/mufasa-fusion">https://pypi.org/project/mufasa-fusion</a></p>
+</aside>
+<aside class="footnote brackets" id="mufasa-license" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Apache 2.0 license file, <a class="reference external" href="https://github.com/mufasa-fusion/mufasa-fusion/blob/main/LICENSE">https://github.com/mufasa-fusion/mufasa-fusion/blob/main/LICENSE</a></p>
+</aside>
+<aside class="footnote brackets" id="mufasa-repo" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>MuFASA’s repository on GitHub, <a class="reference external" href="https://github.com/mufasa-fusion/mufasa-fusion">https://github.com/mufasa-fusion/mufasa-fusion</a></p>
+</aside>
+</aside>
 
         </article><button class="back-to-top" type="button">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -195,16 +227,16 @@ and <a class="reference internal" href="../api/mufasa/io/outputs/visualization/i
   </svg>
   <span>Back to top</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="design-principles.html">
+    <a href="index.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>Previous</span><div class="title">Design principles</div></div>
+        <span>Previous</span><div class="title">User Guide</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="concepts.html">
+    <a href="design-principles.html">
       <div class="page-info">
         <span>Next</span>
-        <div class="title">Concepts</div>
+        <div class="title">Design principles</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>
@@ -241,5 +273,7 @@ and <a class="reference internal" href="../api/mufasa/io/outputs/visualization/i
       <script src="../_static/documentation_options.js?v=01f34227"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
       <script src="../_static/shibuya.js?v=50760d75"></script></body>
 </html>
