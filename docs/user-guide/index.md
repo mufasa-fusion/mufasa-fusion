@@ -1,6 +1,6 @@
 # User Guide
 
-This guide explains how to build multi-sensor fusion applications with MuFASA, from installing the package to running a Fusion Graph on live sensor data. If you are new to MuFASA, read them from top to bottom. If you already know the basics, jump straight to the topic you need.
+This guide explains how to build multi-sensor fusion applications with MuFASA, from installing the package to running a Fusion Graph on live sensor data. If you are new to MuFASA, read from top to bottom. If you already know the basics, jump straight to the topic you need.
 
 [Installation](installation.md)
 : Install `mufasa-fusion` from PyPI and add the optional extras you need.
