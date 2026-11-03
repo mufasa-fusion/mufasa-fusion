@@ -109,5 +109,4 @@ user-guide/index
 showcases/index
 catalog
 api/index
-about
 ```

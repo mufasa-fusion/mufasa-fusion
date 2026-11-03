@@ -13,7 +13,7 @@ The software is licensed under Apache 2.0[^mufasa-license].
 Install extra dependencies as follows, where `extra` is a comma-separated list chosen from below.
 
 ```bash
-pip install mufasa-fusion[extra]
+pip install "mufasa-fusion[extra]"
 ```
 
 Available extras and what they enable:

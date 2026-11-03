@@ -2,7 +2,7 @@
 <html lang="en" data-accent-color="red" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Custom Data Sources - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Going Live" href="../going-live/index.html" /><link rel="prev" title="Extending MuFASA" href="index.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Custom Data Sources - mufasa-fusion 0.1.0 documentation</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Going Live" href="../going-live/index.html" /><link rel="prev" title="Extending MuFASA" href="index.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
@@ -35,7 +35,7 @@
       <strong>mufasa-fusion</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"><ul><li class="link"><a href="../../getting-started.html">Getting started</a></li><li class="link"><a href="../index.html">User guide</a></li><li class="link"><a href="../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../catalog.html">Catalog</a></li><li class="link"><a href="../../api/index.html">API</a></li><li class="link"><a href="../../about.html">About</a></li></ul></nav>
+      <nav class="sy-head-links"><ul><li class="link"><a href="../../getting-started.html">Getting started</a></li><li class="link"><a href="../index.html">User guide</a></li><li class="link"><a href="../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../catalog.html">Catalog</a></li><li class="link"><a href="../../api/index.html">API</a></li></ul></nav>
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
@@ -76,7 +76,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../design-principles.html">Design principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../concepts.html">Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tips-and-tricks.html">Tips and Tricks</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Extending MuFASA</a><ul class="current">
 <li class="toctree-l3 current"><a class="current reference internal" href="#">Custom Data Sources</a></li>
 </ul>
@@ -125,7 +125,6 @@ data-aria-dark="Switch to auto color mode">
 </li>
 </ul>
 </li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../about.html">About</a></li>
 </ul>
         </div>
       </div>
@@ -193,7 +192,7 @@ In the spirit of rapid prototyping, these boxes highlight how to use your custom
 <p>Implementing a dedicated node has some advantages, too:</p>
 <ul class="simple">
 <li><p>It gives you a coherent unit of code that you can share with others, for example by contributing it back to MuFASA.</p></li>
-<li><p>It allows you to serialize and re-import your Fusion Graph (see <a class="reference internal" href="../tutorials.html#dict-config"><span class="std std-ref">JSON Serialization</span></a>).</p></li>
+<li><p>It allows you to serialize and re-import your Fusion Graph (see <a class="reference internal" href="../tips-and-tricks.html#dict-config"><span class="std std-ref">JSON Serialization</span></a>).</p></li>
 <li><p>It makes your extensions explicit in the Fusion Graph and visible at a glance.</p></li>
 </ul>
 </div>
@@ -236,7 +235,7 @@ The demo server and client code is largely based on Python’s official <code cl
 </span><span data-line="25"><span class="kn">import</span><span class="w"> </span><span class="nn">contextlib</span>
 </span><span data-line="26"><span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
 </span><span data-line="27">
-</span><span data-line="28"><span class="n">ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="mi">8000</span>
+</span><span data-line="28"><span class="n">ADDRESS</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="mi">8765</span>
 </span><span data-line="29">
 </span><span data-line="30"><span class="c1"># Allow reusing the same port immediately after server shutdown (for repeated calls)</span>
 </span><span data-line="31"><span class="n">socketserver</span><span class="o">.</span><span class="n">ThreadingTCPServer</span><span class="o">.</span><span class="n">allow_reuse_address</span> <span class="o">=</span> <span class="kc">True</span>
@@ -280,7 +279,7 @@ Within the fusion code, you’d take it for granted that the system is up and ru
 </section>
 <section id="integration-basics">
 <span id="common-basics"></span><h2>Integration Basics<a class="headerlink" href="#integration-basics" title="Link to this heading">#</a></h2>
-<p>To use that demo sensor in fusion systems, we extend MUFASA with a custom <a class="reference internal" href="../../api/mufasa/io/inputs/base/index.html#mufasa.io.inputs.base.InputNode" title="mufasa.io.inputs.base.InputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputNode</span></code></a> subclass.
+<p>To use that demo sensor in fusion systems, we extend MuFASA with a custom <a class="reference internal" href="../../api/mufasa/io/inputs/base/index.html#mufasa.io.inputs.base.InputNode" title="mufasa.io.inputs.base.InputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputNode</span></code></a> subclass.
 They are responsible for connecting to the data streams of external systems and for converting them to
 MuFASA’s own data models. And since it is a live sensor – and we want continuous updates to our outputs<a class="footnote-reference brackets" href="#no-stream-out" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>
 – we implement a streaming one derived from <a class="reference internal" href="../../api/mufasa/io/inputs/streaming/index.html#mufasa.io.inputs.streaming.StreamingInputNode" title="mufasa.io.inputs.streaming.StreamingInputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamingInputNode</span></code></a>.</p>
@@ -324,7 +323,7 @@ to inherit producing <a class="reference internal" href="../../api/mufasa/locati
 </tr>
 <tr class="row-odd"><td><p>☑</p></td>
 <td><p>#5a</p></td>
-<td><p>Exports it’s parameters in <a class="reference internal" href="../../api/mufasa/node/index.html#mufasa.node.Node.get_config" title="mufasa.node.Node.get_config"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_config()</span></code></a>.</p></td>
+<td><p>Exports its parameters in <a class="reference internal" href="../../api/mufasa/node/index.html#mufasa.node.Node.get_config" title="mufasa.node.Node.get_config"><code class="xref py py-func docutils literal notranslate"><span class="pre">get_config()</span></code></a>.</p></td>
 <td></td>
 </tr>
 <tr class="row-even"><td><p>☐</p></td>
@@ -472,23 +471,23 @@ output type, conversion and config logic and also register the node for later im
 </span><span data-line="2">  pull_graph = Graph([pull_a, pull_b], [pull_out])
 </span></pre></div>
 </div>
-<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 451 251" width="451" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg0-observation-marker" viewBox="0 0 64 64">
+<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 451 251" width="451" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg0-location-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
+		<circle cx="32" cy="22" r="9"/>
+	</g>
+</symbol><symbol id="mfg0-unknown" viewBox="0 0 64 64">
+	<circle cx="32" cy="32" r="12" fill="currentColor"/>
+</symbol><symbol id="mfg0-map-fold" viewBox="0 0 64 64">
+	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg0-map-roll" viewBox="0 0 64 64">
+	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg0-observation-marker" viewBox="0 0 64 64">
 	<g fill="none" stroke="currentColor" stroke-width="3">
 		<circle cx="32" cy="32" r="26"/>
 		<circle cx="32" cy="32" r="15"/>
 	</g>
 	<circle cx="32" cy="32" r="6" fill="currentColor"/>
-</symbol><symbol id="mfg0-location-marker" viewBox="0 0 64 64">
-	<g fill="none" stroke="currentColor" stroke-width="3">
-		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
-		<circle cx="32" cy="22" r="9"/>
-	</g>
-</symbol><symbol id="mfg0-map-fold" viewBox="0 0 64 64">
-	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg0-map-roll" viewBox="0 0 64 64">
-	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg0-unknown" viewBox="0 0 64 64">
-	<circle cx="32" cy="32" r="12" fill="currentColor"/>
 </symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsonobservationpullinput_0" data-to="locationoutput_0"><path d="M0.0 47.0 L0.0 62.5 Q0.0 72.5 10.0 72.5 L73.5 72.5 Q83.5 72.5 83.5 82.5 L83.5 99.7"/><circle cx="0.0" cy="47.0" r="3.5"/><circle cx="83.5" cy="99.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsonobservationpullinput_1" data-to="locationoutput_0"><path d="M180.0 47.0 L180.0 62.5 Q180.0 72.5 170.0 72.5 L106.5 72.5 Q96.5 72.5 96.5 82.5 L96.5 99.7"/><circle cx="180.0" cy="47.0" r="3.5"/><circle cx="96.5" cy="99.7" r="3.5"/></g><g class="mf-node mf-io" data-id="geojsonobservationpullinput_0" tabindex="0" aria-label="GeoJsonObservationPullInput"><path d="M-34.0 0.0 V-23.6 Q-34.0 -30.6 -27.0 -30.6 H27.0 Q34.0 -30.6 34.0 -23.6 V0.0 A34 34 0 0 1 -34.0 0.0 Z" class="mf-body"/><text x="0.0" y="5.5" text-anchor="middle" class="mf-code">GJO</text><text x="46.0" y="5.0" class="mf-name">GeoJsonObservationPullInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="geojsonobservationpullinput_1" tabindex="0" aria-label="GeoJsonObservationPullInput"><path d="M146.0 0.0 V-23.6 Q146.0 -30.6 153.0 -30.6 H207.0 Q214.0 -30.6 214.0 -23.6 V0.0 A34 34 0 0 1 146.0 0.0 Z" class="mf-body"/><text x="180.0" y="5.5" text-anchor="middle" class="mf-code">GJO</text><text x="226.0" y="5.0" class="mf-name">GeoJsonObservationPullInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(180.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="locationoutput_0" tabindex="0" aria-label="LocationOutput"><path d="M124.0 145.0 V168.6 Q124.0 175.6 117.0 175.6 H63.0 Q56.0 175.6 56.0 168.6 V145.0 A34 34 0 0 1 124.0 145.0 Z" class="mf-body"/><text x="90.0" y="150.5" text-anchor="middle" class="mf-code">LO</text><text x="136.0" y="150.0" class="mf-name">LocationOutput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(90.0 111.0)"><title>Location family: Location</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Location</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
 
 symbol [stroke-width] { stroke-width: 5; }
@@ -576,12 +575,12 @@ symbol [stroke-width] { stroke-width: 5; }
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=5.903722649999992, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
-</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=5.905555260000028, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
-</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=7.3253532599999005, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=7.871272409999932, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=9.246466379999987, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372),
-</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=9.343099929999994, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=5.902595499999848, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
+</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=5.904471769999873, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
+</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=7.102114770000014, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=7.315643130000069, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=8.72130900000002, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372),
+</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=8.822733069999913, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372)]
 </span></pre></div>
 </div>
 </div>
@@ -698,23 +697,23 @@ output type, conversion and config logic and also register the node for imports<
 </span><span data-line="2">  push_graph = Graph([push_a, push_b], [push_out])
 </span></pre></div>
 </div>
-<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 451 251" width="451" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg1-observation-marker" viewBox="0 0 64 64">
+<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 451 251" width="451" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg1-location-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
+		<circle cx="32" cy="22" r="9"/>
+	</g>
+</symbol><symbol id="mfg1-unknown" viewBox="0 0 64 64">
+	<circle cx="32" cy="32" r="12" fill="currentColor"/>
+</symbol><symbol id="mfg1-map-fold" viewBox="0 0 64 64">
+	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg1-map-roll" viewBox="0 0 64 64">
+	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg1-observation-marker" viewBox="0 0 64 64">
 	<g fill="none" stroke="currentColor" stroke-width="3">
 		<circle cx="32" cy="32" r="26"/>
 		<circle cx="32" cy="32" r="15"/>
 	</g>
 	<circle cx="32" cy="32" r="6" fill="currentColor"/>
-</symbol><symbol id="mfg1-location-marker" viewBox="0 0 64 64">
-	<g fill="none" stroke="currentColor" stroke-width="3">
-		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
-		<circle cx="32" cy="22" r="9"/>
-	</g>
-</symbol><symbol id="mfg1-map-fold" viewBox="0 0 64 64">
-	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg1-map-roll" viewBox="0 0 64 64">
-	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg1-unknown" viewBox="0 0 64 64">
-	<circle cx="32" cy="32" r="12" fill="currentColor"/>
 </symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsonobservationpushinput_0" data-to="locationoutput_0"><path d="M0.0 47.0 L0.0 62.5 Q0.0 72.5 10.0 72.5 L73.5 72.5 Q83.5 72.5 83.5 82.5 L83.5 99.7"/><circle cx="0.0" cy="47.0" r="3.5"/><circle cx="83.5" cy="99.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsonobservationpushinput_1" data-to="locationoutput_0"><path d="M180.0 47.0 L180.0 62.5 Q180.0 72.5 170.0 72.5 L106.5 72.5 Q96.5 72.5 96.5 82.5 L96.5 99.7"/><circle cx="180.0" cy="47.0" r="3.5"/><circle cx="96.5" cy="99.7" r="3.5"/></g><g class="mf-node mf-io" data-id="geojsonobservationpushinput_0" tabindex="0" aria-label="GeoJsonObservationPushInput"><path d="M-34.0 0.0 V-23.6 Q-34.0 -30.6 -27.0 -30.6 H27.0 Q34.0 -30.6 34.0 -23.6 V0.0 A34 34 0 0 1 -34.0 0.0 Z" class="mf-body"/><text x="0.0" y="5.5" text-anchor="middle" class="mf-code">GJO</text><text x="46.0" y="5.0" class="mf-name">GeoJsonObservationPushInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="geojsonobservationpushinput_1" tabindex="0" aria-label="GeoJsonObservationPushInput"><path d="M146.0 0.0 V-23.6 Q146.0 -30.6 153.0 -30.6 H207.0 Q214.0 -30.6 214.0 -23.6 V0.0 A34 34 0 0 1 146.0 0.0 Z" class="mf-body"/><text x="180.0" y="5.5" text-anchor="middle" class="mf-code">GJO</text><text x="226.0" y="5.0" class="mf-name">GeoJsonObservationPushInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(180.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="locationoutput_0" tabindex="0" aria-label="LocationOutput"><path d="M124.0 145.0 V168.6 Q124.0 175.6 117.0 175.6 H63.0 Q56.0 175.6 56.0 168.6 V145.0 A34 34 0 0 1 124.0 145.0 Z" class="mf-body"/><text x="90.0" y="150.5" text-anchor="middle" class="mf-code">LO</text><text x="136.0" y="150.0" class="mf-name">LocationOutput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(90.0 111.0)"><title>Location family: Location</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Location</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
 
 symbol [stroke-width] { stroke-width: 5; }
@@ -802,12 +801,12 @@ symbol [stroke-width] { stroke-width: 5; }
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=21.250670980000024, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
-</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=21.252643669999998, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
-</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=22.632399419999985, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=22.701756329999938, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=23.903431029999922, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372),
-</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=24.53129093000001, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=21.261841179999976, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
+</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=21.264229669999963, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
+</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=22.655394159999958, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=22.975348280000105, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=24.20047890999996, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372),
+</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=24.511480019999965, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372)]
 </span></pre></div>
 </div>
 </div>
@@ -837,7 +836,7 @@ and make it call <a class="reference internal" href="../../api/mufasa/io/inputs/
 </span><span data-line="10">    <span class="k">if</span> <span class="n">msg</span> <span class="o">==</span> <span class="s2">&quot;END&quot;</span><span class="p">:</span>
 </span><span data-line="11">        <span class="n">node</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
 </span><span data-line="12">    <span class="k">else</span><span class="p">:</span>
-</span><span data-line="13">        <span class="c1"># Conversion logic and inges() inside callback</span>
+</span><span data-line="13">        <span class="c1"># Conversion logic and ingest() inside callback</span>
 </span><span data-line="14">        <span class="n">feature</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
 </span><span data-line="15">        <span class="n">geom</span> <span class="o">=</span> <span class="n">shape</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">])</span>
 </span><span data-line="16">        <span class="n">props</span> <span class="o">=</span> <span class="n">props_default</span> <span class="o">|</span> <span class="n">feature</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span>
@@ -859,16 +858,16 @@ and make it call <a class="reference internal" href="../../api/mufasa/io/inputs/
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">/tmp/ipykernel_173/26107692.py:7: UserWarning: No CRS specified. Ensure all input data is already in a Cartesian coordinate system with units of metres (e.g. a UTM projection). Using geographic coordinates (WGS84 degrees) will produce incorrect distances and unexpected behaviour.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">/tmp/ipykernel_173/3389171579.py:7: UserWarning: No CRS specified. Ensure all input data is already in a Cartesian coordinate system with units of metres (e.g. a UTM projection). Using geographic coordinates (WGS84 degrees) will produce incorrect distances and unexpected behaviour.
 </span><span data-line="2">  alt_graph = Graph([alt_a, alt_b], [alt_out])
 </span></pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=31.372619750000013, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
-</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=31.375356149999902, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
-</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=32.82148163000002, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=32.83170188, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=34.235044289999905, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372),
-</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=34.686845079999955, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=26.380821600000104, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
+</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=26.383649079999998, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
+</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=28.310465829999885, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=28.35630086000009, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=30.20068938999998, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372),
+</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=30.26288926999996, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372)]
 </span></pre></div>
 </div>
 </div>

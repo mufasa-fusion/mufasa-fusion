@@ -2,7 +2,7 @@
 <html lang="en" data-accent-color="red" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Going Live - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../../about.html" /><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="MQTT" href="mqtt.html" /><link rel="prev" title="Custom Data Sources" href="../extending/sources.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Going Live - mufasa-fusion 0.1.0 documentation</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="MQTT" href="mqtt.html" /><link rel="prev" title="Custom Data Sources" href="../extending/sources.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
@@ -35,7 +35,7 @@
       <strong>mufasa-fusion</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"><ul><li class="link"><a href="../../getting-started.html">Getting started</a></li><li class="link"><a href="../index.html">User guide</a></li><li class="link"><a href="../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../catalog.html">Catalog</a></li><li class="link"><a href="../../api/index.html">API</a></li><li class="link"><a href="../../about.html">About</a></li></ul></nav>
+      <nav class="sy-head-links"><ul><li class="link"><a href="../../getting-started.html">Getting started</a></li><li class="link"><a href="../index.html">User guide</a></li><li class="link"><a href="../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../catalog.html">Catalog</a></li><li class="link"><a href="../../api/index.html">API</a></li></ul></nav>
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
@@ -76,7 +76,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../installation.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../design-principles.html">Design principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../concepts.html">Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="../tutorials.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tips-and-tricks.html">Tips and Tricks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../extending/index.html">Extending MuFASA</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="../extending/sources.html">Custom Data Sources</a></li>
 </ul>
@@ -125,7 +125,6 @@ data-aria-dark="Switch to auto color mode">
 </li>
 </ul>
 </li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../../about.html">About</a></li>
 </ul>
         </div>
       </div>
@@ -242,9 +241,6 @@ so the same graph runs against a recording during prototyping and against a live
 <p class="admonition-title">Note</p>
 <p>Swapping the I/O nodes is all it takes <em>at the implementation level</em>. A live deployment still differs from an offline one. Recorded data is clean and ordered by construction, live data isn’t. MuFASA doesn’t close that gap by architecture alone, but it helps you work through it. The same quick iteration and inspection that help with prototyping help you understand what a live deployment surfaces, and act on it quickly.</p>
 </div>
-<p>The guides below follow two of our <a class="reference internal" href="../../showcases/index.html"><span class="doc">showcases</span></a>.
-The <strong>ROS 2</strong> guide follows <em>Railway Security</em>, where the recorded data was analyzed offline first
-and the same graph then went live on ROS 2. The <strong>MQTT</strong> guide follows <em>Land &amp; Maritime Border Security</em>.</p>
 </section>
 <section id="publish-subscribe-architecture">
 <h2>Publish-subscribe architecture<a class="headerlink" href="#publish-subscribe-architecture" title="Link to this heading">#</a></h2>

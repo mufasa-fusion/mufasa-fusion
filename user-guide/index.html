@@ -2,7 +2,7 @@
 <html lang="en" data-accent-color="red" data-content_root="../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>User Guide - mufasa-fusion 0.1.0 documentation</title><link rel="author" title="About these documents" href="../about.html" /><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Installation" href="installation.html" /><link rel="prev" title="Getting started" href="../getting-started.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>User Guide - mufasa-fusion 0.1.0 documentation</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Installation" href="installation.html" /><link rel="prev" title="Getting started" href="../getting-started.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
@@ -35,7 +35,7 @@
       <strong>mufasa-fusion</strong>
     </a>
     <div class="sy-head-nav" id="head-nav">
-      <nav class="sy-head-links"><ul><li class="link"><a href="../getting-started.html">Getting started</a></li><li class="link"><a href="#">User guide</a></li><li class="link"><a href="../showcases/index.html">Showcases</a></li><li class="link"><a href="../catalog.html">Catalog</a></li><li class="link"><a href="../api/index.html">API</a></li><li class="link"><a href="../about.html">About</a></li></ul></nav>
+      <nav class="sy-head-links"><ul><li class="link"><a href="../getting-started.html">Getting started</a></li><li class="link"><a href="#">User guide</a></li><li class="link"><a href="../showcases/index.html">Showcases</a></li><li class="link"><a href="../catalog.html">Catalog</a></li><li class="link"><a href="../api/index.html">API</a></li></ul></nav>
       <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
   <input type="text" name="q" placeholder="Search" />
   <kbd>/</kbd>
@@ -76,7 +76,7 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="design-principles.html">Design principles</a></li>
 <li class="toctree-l2"><a class="reference internal" href="concepts.html">Concepts</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutorials.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tips-and-tricks.html">Tips and Tricks</a></li>
 <li class="toctree-l2"><a class="reference internal" href="extending/index.html">Extending MuFASA</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="extending/sources.html">Custom Data Sources</a></li>
 </ul>
@@ -125,7 +125,6 @@ data-aria-dark="Switch to auto color mode">
 </li>
 </ul>
 </li>
-<li class="toctree-l1 _expand"><a class="reference internal" href="../about.html">About</a></li>
 </ul>
         </div>
       </div>
@@ -167,23 +166,22 @@ data-aria-dark="Switch to auto color mode">
   <article class="yue" role="main">
           <section id="user-guide">
 <h1>User Guide<a class="headerlink" href="#user-guide" title="Link to this heading">#</a></h1>
+<p>This guide explains how to build multi-sensor fusion applications with MuFASA, from installing the package to running a Fusion Graph on live sensor data. If you are new to MuFASA, read from top to bottom. If you already know the basics, jump straight to the topic you need.</p>
+<dl class="simple myst">
+<dt><a class="reference internal" href="installation.html"><span class="std std-doc">Installation</span></a></dt><dd><p>Install <code class="docutils literal notranslate"><span class="pre">mufasa-fusion</span></code> from PyPI and add the optional extras you need.</p>
+</dd>
+<dt><a class="reference internal" href="design-principles.html"><span class="std std-doc">Design principles</span></a></dt><dd><p>The three ideas behind MuFASA and where it sits between your sensors and your decision support.</p>
+</dd>
+<dt><a class="reference internal" href="concepts.html"><span class="std std-doc">Concepts</span></a></dt><dd><p>The building blocks of a Fusion Graph: detections, maps, input and output nodes and processing nodes.</p>
+</dd>
+<dt><a class="reference internal" href="tips-and-tricks.html"><span class="std std-doc">Tips and Tricks</span></a></dt><dd><p>Practical recipes for inspecting and visualising data, working with GeoPandas and saving graphs as JSON.</p>
+</dd>
+<dt><a class="reference internal" href="extending/index.html"><span class="std std-doc">Extending MuFASA</span></a></dt><dd><p>Write your own nodes to connect new data sources or add your own processing algorithms.</p>
+</dd>
+<dt><a class="reference internal" href="going-live/index.html"><span class="std std-doc">Going Live</span></a></dt><dd><p>Run the same Fusion Graph on live data from MQTT or ROS 2 instead of recordings.</p>
+</dd>
+</dl>
 <div class="toctree-wrapper compound">
-<p class="caption" role="heading"><span class="caption-text">Contents</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="design-principles.html">Design principles</a></li>
-<li class="toctree-l1"><a class="reference internal" href="concepts.html">Concepts</a></li>
-<li class="toctree-l1"><a class="reference internal" href="tutorials.html">Tips and Tricks</a></li>
-<li class="toctree-l1"><a class="reference internal" href="extending/index.html">Extending MuFASA</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="extending/sources.html">Custom Data Sources</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="going-live/index.html">Going Live</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="going-live/mqtt.html">MQTT</a></li>
-<li class="toctree-l2"><a class="reference internal" href="going-live/ros2.html">ROS 2</a></li>
-</ul>
-</li>
-</ul>
 </div>
 </section>
 
