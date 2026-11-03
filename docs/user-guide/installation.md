@@ -26,7 +26,10 @@ Available extras and what they enable:
 : Tracking nodes in {mod}`mufasa.nodes.tracking`
 
 `dev`
-: Development dependencies, including those to build these docs
+: Development dependencies, including those for running the tests
+
+`docs`
+: Dependencies for building this documentation
 
 
 ## Install from Sources

@@ -38,7 +38,7 @@ The graph then doesn't distinguish whether a message comes from a live sensor or
   <text class="mf-gl-node-text mf-gl-io" x="269.5" y="155"><tspan class="mf-gl-title">Input nodes</tspan><tspan x="269.5" dy="19">subscribe</tspan></text>
 
   <rect class="mf-gl-node mf-gl-proc" x="352" y="128" width="101" height="66" rx="6"/>
-  <text class="mf-gl-node-text mf-gl-proc" x="402.5" y="155"><tspan class="mf-gl-title">Processing</tspan><tspan x="402.5" dy="19">unchanged</tspan></text>
+  <text class="mf-gl-node-text mf-gl-proc" x="402.5" y="155"><tspan class="mf-gl-title" dy="9.5">Processing</tspan></text>
 
   <rect class="mf-gl-node mf-gl-io" x="488" y="128" width="95" height="66" rx="6"/>
   <text class="mf-gl-node-text mf-gl-io" x="535.5" y="155"><tspan class="mf-gl-title">Output nodes</tspan><tspan x="535.5" dy="19">publish</tspan></text>
@@ -65,7 +65,7 @@ Two design decisions make the transition from recorded to live data a matter of 
   MuFASA works on the {doc}`detection level <../design-principles>`. Input and Output nodes translate
   external data into {class}`~mufasa.location.Location`s and {class}`~mufasa.map.Map`s and back.
 - **Processing is event-driven.**
-  Every node updates its state as soon as it receives an observation. There's no separate clock driving the graph,
+  Every node updates its state as soon as it receives a detection. There's no separate clock driving the graph,
   so the same graph runs against a recording during prototyping and against a live stream in operation.
 
 :::{note}

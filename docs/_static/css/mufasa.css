@@ -12,10 +12,8 @@ img.mufasa-shape-icon {
 
 a[title="mufasa.location.Location"], a[title="mufasa.location.Observation"],
 a[title="mufasa.map.Map"], a[title="mufasa.map.BayesianMap"] {
-    & {
-        /* Prevents separating symbol from text */
-        display: inline-block;
-    }
+    /* Prevents separating symbol from text */
+    display: inline-block;
 
     &::before {
         content: "";
@@ -27,7 +25,7 @@ a[title="mufasa.map.Map"], a[title="mufasa.map.BayesianMap"] {
         background-size: contain;
     }
 }
-span.sig-return-typehint {
+em.sig-param, span.sig-return-typehint {
     a[title="mufasa.location.Location"], a[title="mufasa.location.Observation"],
     a[title="mufasa.map.Map"], a[title="mufasa.map.BayesianMap"] {
         display: inline;

@@ -2,9 +2,14 @@ import os.path
 import sys
 from itertools import zip_longest
 
+from autoapi import _astroid_utils
 from jinja2 import Environment
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "_extensions"))  # Makes custom extensions importable
+
+# Patch class docstring getter to not inherit docstrings from base classes (for API docs)
+_astroid_utils.get_class_docstring = lambda node: node.doc_node.value if node.doc_node else ""
+
 
 # Configuration file for the Sphinx documentation builder.
 #
