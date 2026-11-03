@@ -72,11 +72,6 @@ Two design decisions make the transition from recorded to live data a matter of 
 Swapping the I/O nodes is all it takes *at the implementation level*. A live deployment still differs from an offline one. Recorded data is clean and ordered by construction, live data isn't. MuFASA doesn't close that gap by architecture alone, but it helps you work through it. The same quick iteration and inspection that help with prototyping help you understand what a live deployment surfaces, and act on it quickly.
 :::
 
-The guides below follow two of our {doc}`showcases <../../showcases/index>`.
-The **ROS 2** guide follows *Railway Security*, where the recorded data was analyzed offline first
-and the same graph then went live on ROS 2. The **MQTT** guide follows *Land & Maritime Border Security*.
-
-
 ## Publish-subscribe architecture
 
 Embedding MuFASA in a messaging system follows a simple pattern. The graph runs inside a client or node of that system. Each time a subscriber callback receives a message, it translates the message into MuFASA's minimal representation and passes it to a streaming Input node. Only this translation step is specific to the messaging system and must be known and implemented by the user. The Fusion Graph itself is never touched. Because node parameters are explicit, they can be exposed through the messaging system's own configuration, for example as ROS 2 node parameters.
