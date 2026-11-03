@@ -95,7 +95,7 @@ graph = Graph(
 graph.run()
 ```
 
-## Geo-spacial Detections
+## Geospatial Detections
 
 All information flowing within a Fusion Graph is of one of two fundamental data types,
 {class}`~mufasa.location.Location` and {class}`~mufasa.map.Map`, or any more specific one derived from them.
@@ -104,7 +104,7 @@ They all represent geo-referenced detections, optionally with a timestamp and ad
 Every edge adheres to a single data type that is determined by the nodes it connects.
 Each {class}`~mufasa.node.Node` specifies the set of types it accepts via its {attr}`~mufasa.node.Node._input_types`
 and the single one it produces via its {attr}`~mufasa.node.Node._output_type`.
-Only compatible nodes might be wired together.
+Only compatible nodes can be wired together.
 
 ## IO Boundary Layer
 

@@ -98,7 +98,6 @@ html_theme_options = {
         {"title": "Showcases", "url": "showcases/index"},
         {"title": "Catalog", "url": "catalog"},
         {"title": "API", "url": "api/index"},
-        {"title": "About", "url": "about"},
     ],
 }
 

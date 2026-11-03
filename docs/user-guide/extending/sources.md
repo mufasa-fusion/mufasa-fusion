@@ -67,7 +67,7 @@ class FeatureSendingRequestHandler(socketserver.BaseRequestHandler):
 import contextlib
 import threading
 
-ADDRESS = "localhost", 8000
+ADDRESS = "localhost", 8765
 
 # Allow reusing the same port immediately after server shutdown (for repeated calls)
 socketserver.ThreadingTCPServer.allow_reuse_address = True
@@ -110,7 +110,7 @@ Within the fusion code, you'd take it for granted that the system is up and runn
 (common-basics)=
 ## Integration Basics
 
-To use that demo sensor in fusion systems, we extend MUFASA with a custom {class}`~mufasa.io.inputs.base.InputNode` subclass.
+To use that demo sensor in fusion systems, we extend MuFASA with a custom {class}`~mufasa.io.inputs.base.InputNode` subclass.
 They are responsible for connecting to the data streams of external systems and for converting them to
 MuFASA's own data models. And since it is a live sensor -- and we want continuous updates to our outputs[^no_stream_out]
 -- we implement a streaming one derived from {class}`~mufasa.io.inputs.streaming.StreamingInputNode`.
@@ -147,7 +147,7 @@ Here's a quick checklist that applies to every input node:
   * For {class}`~mufasa.io.inputs.streaming.StreamingInputNode`s only!
 - * &#9745;
   * #5a
-  * Exports it's parameters in {func}`~mufasa.node.Node.get_config()`.
+  * Exports its parameters in {func}`~mufasa.node.Node.get_config()`.
   * 
 - * &#9744;
   * #5b
@@ -399,7 +399,7 @@ def push_cb(node: ObservationStreamingInput, props_default: dict, msg: str):
     if msg == "END":
         node.stop()
     else:
-        # Conversion logic and inges() inside callback
+        # Conversion logic and ingest() inside callback
         feature = json.loads(msg)
         geom = shape(feature["geometry"])
         props = props_default | feature.get("properties", {})
