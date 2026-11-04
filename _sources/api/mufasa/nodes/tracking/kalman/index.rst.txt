@@ -25,42 +25,6 @@ Module Contents
    Bases: :py:obj:`mufasa.node.Node`
 
 
-   Base class for all pipeline nodes.
-
-   Every concrete subclass must declare two class attributes::
-
-       class MyNode(Node):
-           _input_types = [Location]       # types this node accepts; [] for source nodes
-           _output_type = Observation      # type this node emits; None for sink nodes
-
-   Listing a parent type (e.g. ``Location``) automatically covers all
-   subclasses (e.g. ``Observation``) because wiring uses ``issubclass``.
-
-   Two methods must be implemented by every concrete subclass:
-
-   ``process(*args, **kwargs)``
-       Called by the framework to push data through the node. Use the
-       signature appropriate for this node's role — see the docstring on
-       :meth:`process` for the standard patterns.
-
-   ``get_config() -> dict``
-       Return all constructor arguments as a plain JSON-serializable dict
-       so the pipeline can be saved and reconstructed.
-
-   Two further methods have no-op defaults and should be overridden by nodes
-   that accumulate internal state across ``process()`` calls:
-
-   ``flush() -> None``
-       Called by the framework after all inputs are exhausted (end of
-       stream). Emit any observations or map snapshots remaining in an
-       internal buffer. Stateless nodes can leave this as the no-op default.
-
-   ``reset() -> None``
-       Called by the framework between pipeline runs. Clear all runtime
-       state so the pipeline can be re-run cleanly without constructing a
-       new instance. Stateless nodes can leave this as the no-op default.
-
-
    .. py:attribute:: buffer_s
       :value: 1.0
 

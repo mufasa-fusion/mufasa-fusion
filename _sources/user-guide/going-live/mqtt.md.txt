@@ -23,7 +23,7 @@ pip install paho-mqtt
 
 Since Paho offers a push client, the input node is similar to the one defined in {ref}`push-client`.
 The most notable difference is that we need to disconnect the client[{sup}`#D`](#mqtt-node)
-when we want to truly stop to receiving data or else it will stay subscribed to the topic forever.
+when we want to truly stop receiving data or else it will stay subscribed to the topic forever.
 
 ```{code-cell}
 ---
@@ -52,7 +52,7 @@ from typing import Callable
 from mufasa import Observation
 from mufasa.io.inputs import ObservationStreamingInput
 
-from paho.mqtt.client import Client, MQTTMessage
+from paho.mqtt import client as mqtt
 from paho.mqtt import subscribe
 
 DECODER = Callable[[bytes], Observation]
@@ -67,22 +67,33 @@ class MqttInput(ObservationStreamingInput):  #1  #2
         self.decode = decoder
 
     def items(self):  #4a
-        with bg_thread(subscribe.callback, self.paho_ingest_message, self.topic, 0, None, self.host, self.port):  #A
+        with bg_thread(
+            subscribe.callback,
+            self.paho_ingest_message,
+            self.topic,
+            0,
+            None,
+            self.host,
+            self.port,
+            "mqtt_input_" + self.topic,
+        ):  #A
             yield from super().items()  #B
 
-    def paho_ingest_message(self, client: Client, _, message: MQTTMessage):
-        msg = message.payload
-        if msg == b"END":  #C
+    def paho_ingest_message(self, client: mqtt.Client, _, msg: mqtt.MQTTMessage):
+        content = msg.payload
+        if content == b"END":  #C - Application-specific termination condition!
             self.stop()
             # Disconnect the client so that the subscriber thread finishes
             client.disconnect()  #D
         else:
-            self.ingest(self.decode(msg))  #3 #4b
+            self.ingest(self.decode(content))  #3 #4b
 ```
 
 Note that the message conversion is left out in the node above and delegated to a decoder function.
 This is because MQTT specifies the transport, but not the structure of the message payload --
-That is specific to your setup!
+That is specific to your setup! As a consequence, the node's config (that would need to include the decoder
+Python function) isn't JSON-serializable, and we don't add it to the {attr}`~mufasa.registry.NODE_REGISTRY`.
+
 In this example, we assume that the payload is a GeoJSON Feature and use the following decoder function:
 
 ```{code-cell}
@@ -110,10 +121,58 @@ def feat_to_obs(
 
 ## Publisher for Outputs
 
-:::{admonition} Coming Soon
-:class: admonition-todo
-The corresponding `MqttOutput` is currently under active development.
-:::
+The `MqttOutput` node publishes every {class}`~mufasa.location.Location` it gets via
+{func}`~mufasa.node.Node.process()`.
+This implementation initializes the MQTT client only when the first message is to be published.
+This allows us to construct and plot a graph without having the broker running already,
+but you could also do it in `__init__()`.
+The connection will be closed in {func}`~mufasa.io.outputs.base.OutputNode.save()` since it is called after all
+processing finished.
+
+The {class}`~mufasa.location.Location` encoder defaults to simply using its string representation,
+and we will stick to that in this example.
+
+```{code-cell}
+from mufasa import Location
+from mufasa.io.outputs import OutputNode
+
+ENCODER = Callable[[Location], str]
+
+
+class MqttOutput(OutputNode):
+    _input_types = {Location}
+
+    def __init__(self, host: str, port: int, topic: str, encoder: ENCODER = str):
+        super().__init__()
+        self.host = host
+        self.port = port
+        self.topic = topic
+        self.encode = encoder
+        self.client = None
+        self.msgs = set()
+
+    def process(self, loc: Location) -> None:
+        """Publishes the given location over MQTT"""
+        if self.client is None:
+            # Connect to the broker only here so it's part of graph.run()
+            self.client = mqtt.Client(
+                mqtt.CallbackAPIVersion.VERSION2, "mqtt_output_" + self.topic
+            )
+            self.client.connect(self.host, self.port)
+            self.client.loop_start()
+        self.msgs.add(self.client.publish(self.topic, self.encode(loc)))
+
+    def save(self) -> None:
+        """Disconnect from the MQTT broker"""
+        if self.client is not None:
+            for msg in self.msgs:
+                msg.wait_for_publish()
+            self.client.disconnect()
+            self.client.loop_stop()  # join thread
+
+    def get_config(self):
+        raise TypeError("Not JSON-serializable!")  # Due to encoder function
+```
 
 ## Running the Example
 
@@ -135,11 +194,6 @@ mystnb:
 ---
 import random
 
-from paho.mqtt import client as mqtt
-
-HOST = "localhost"
-PORT = 1883
-
 
 def sim_pub_mqtt(host: str, port: int, topic: str, file: str):
     """Publishes GeoJSON Features from a file over MQTT to simulate a server"""
@@ -150,12 +204,12 @@ def sim_pub_mqtt(host: str, port: int, topic: str, file: str):
 
     features = [json.dumps(f).encode() for f in geojson["features"]]
 
-    client = mqtt.Client(mqtt.CallbackAPIVersion.VERSION2)
+    client = mqtt.Client( mqtt.CallbackAPIVersion.VERSION2, "sim_pub_" + topic)
+    client.connect(host, port)
     client.loop_start()
     try:
-        client.connect(host, port)
-        time.sleep(2)
         try:
+            time.sleep(2)
             for feature in features:
                 client.publish(topic, feature)
                 time.sleep(.1 + .1 * random.random())
@@ -163,32 +217,48 @@ def sim_pub_mqtt(host: str, port: int, topic: str, file: str):
         finally:
             client.disconnect()
     finally:
-        client.loop_stop()
+        client.loop_stop()  # Join thread
 ```
 
+To see the results, we need a subscriber for the output topic:
+
+```{code-cell}
+---
+tags: [hide-cell]
+mystnb:
+    code_prompt_show: Subscriber to fusion results
+    code_prompt_hide: Subscriber to fusion results
+---
+def sniff_sub_cb(client: mqtt.Client, userdata, message: mqtt.MQTTMessage):
+    print("Topic", message.topic, "received message", message.payload)
+    userdata["count"] -= 1
+    if userdata["count"] == 0:
+        client.disconnect()
+```
 Define a Fusion Graph.
 
 ```{code-cell}
 from functools import partial
 
 from mufasa import Graph
-from mufasa.io.outputs import LocationOutput
+
+HOST = "localhost"
+PORT = 1883
 
 mqtt_a = MqttInput(HOST, PORT, "sensor/a", partial(feat_to_obs, track="A"))
 mqtt_b = MqttInput(HOST, PORT, "sensor/b", partial(feat_to_obs, track="B"))
-mqtt_out = LocationOutput()(mqtt_a, mqtt_b)
+mqtt_out = MqttOutput(HOST, PORT, "mufasa")(mqtt_a, mqtt_b)
 mqtt_graph = Graph([mqtt_a, mqtt_b], [mqtt_out])
 
 mqtt_graph.plot_graph()
 ```
 
 Finally, start the sensor simulation publishers for both [`sensor_a.geojson`](/_data/sensor_a.geojson)
-and [`sensor_b.geojson`](/_data/sensor_b.geojson) and run the graph.
+and [`sensor_b.geojson`](/_data/sensor_b.geojson) and the results sniffer, then run the graph.
 
 ```{code-cell}
 :tags: [remove-cell]
 import asyncio
-import logging
 from amqtt.broker import Broker
 
 _RUNNING = True
@@ -198,31 +268,30 @@ _BROKER_READY = threading.Event()
 async def _run_mqtt_broker() -> None:
     broker = Broker()
     await broker.start()
-    print("MQTT broker started")
+    print("MQTT broker started and running")
     _BROKER_READY.set()
     try:
         while _RUNNING:
             await asyncio.sleep(.5)
     finally:
-        print("MQTT broker shutdown")
+        print("MQTT broker shutdown requested")
         await broker.shutdown()
+        print("MQTT broker shutdown completed")
 
 
-logging.basicConfig(level=logging.FATAL)
 _broker_thread = threading.Thread(target=asyncio.run, args=(_run_mqtt_broker(),))
 _broker_thread.start()
 _BROKER_READY.wait()
 ```
 
 ```{code-cell}
-# Sensor threads for demo only!
+# Sensor and sniffer threads for demo only!
 with (
+    bg_thread(subscribe.callback, sniff_sub_cb, "mufasa", 0, {"count": 6}, HOST, PORT, "sniffer"),
     bg_thread(sim_pub_mqtt, HOST, PORT, "sensor/a", "sensor_a.geojson"),
     bg_thread(sim_pub_mqtt, HOST, PORT, "sensor/b", "sensor_b.geojson"),
 ):
     mqtt_graph.run()
-
-mqtt_out.result
 ```
 
 ```{code-cell}

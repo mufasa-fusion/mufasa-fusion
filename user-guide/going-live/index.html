@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
     <link rel="stylesheet" type="text/css" href="../../_static/css/shibuya-overwrite.css?v=16390e6e" />
-    <link rel="stylesheet" type="text/css" href="../../_static/css/mufasa.css?v=cc9ae112" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/mufasa.css?v=afb05a6e" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -210,7 +210,7 @@ The graph then doesn’t distinguish whether a message comes from a live sensor 
   <text class="mf-gl-node-text mf-gl-io" x="269.5" y="155"><tspan class="mf-gl-title">Input nodes</tspan><tspan x="269.5" dy="19">subscribe</tspan></text>
 
   <rect class="mf-gl-node mf-gl-proc" x="352" y="128" width="101" height="66" rx="6"/>
-  <text class="mf-gl-node-text mf-gl-proc" x="402.5" y="155"><tspan class="mf-gl-title">Processing</tspan><tspan x="402.5" dy="19">unchanged</tspan></text>
+  <text class="mf-gl-node-text mf-gl-proc" x="402.5" y="155"><tspan class="mf-gl-title" dy="9.5">Processing</tspan></text>
 
   <rect class="mf-gl-node mf-gl-io" x="488" y="128" width="95" height="66" rx="6"/>
   <text class="mf-gl-node-text mf-gl-io" x="535.5" y="155"><tspan class="mf-gl-title">Output nodes</tspan><tspan x="535.5" dy="19">publish</tspan></text>
@@ -234,7 +234,7 @@ The graph then doesn’t distinguish whether a message comes from a live sensor 
 MuFASA works on the <a class="reference internal" href="../design-principles.html"><span class="doc">detection level</span></a>. Input and Output nodes translate
 external data into <a class="reference internal" href="../../api/mufasa/location/index.html#mufasa.location.Location" title="mufasa.location.Location"><code class="xref py py-class docutils literal notranslate"><span class="pre">Location</span></code></a>s and <a class="reference internal" href="../../api/mufasa/map/index.html#mufasa.map.Map" title="mufasa.map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a>s and back.</p></li>
 <li><p><strong>Processing is event-driven.</strong>
-Every node updates its state as soon as it receives an observation. There’s no separate clock driving the graph,
+Every node updates its state as soon as it receives a detection. There’s no separate clock driving the graph,
 so the same graph runs against a recording during prototyping and against a live stream in operation.</p></li>
 </ul>
 <div class="admonition note">

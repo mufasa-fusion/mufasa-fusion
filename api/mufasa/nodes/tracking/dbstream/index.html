@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="../../../../../_static/copybutton.css?v=76b2166b" />
     <link media="print" rel="stylesheet" type="text/css" href="../../../../../_static/print.css?v=20ff2c19" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/css/shibuya-overwrite.css?v=16390e6e" />
-    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/mufasa.css?v=cc9ae112" />
+    <link rel="stylesheet" type="text/css" href="../../../../../_static/css/mufasa.css?v=afb05a6e" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -209,7 +209,7 @@ data-aria-dark="Switch to auto color mode">
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#mufasa.nodes.tracking.dbstream.DBSTREAMClusterer" title="mufasa.nodes.tracking.dbstream.DBSTREAMClusterer"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DBSTREAMClusterer</span></code></a></p></td>
-<td><p>Base class for all pipeline nodes.</p></td>
+<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -221,37 +221,6 @@ data-aria-dark="Switch to auto color mode">
 <dt class="sig sig-object py" id="mufasa.nodes.tracking.dbstream.DBSTREAMClusterer">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mufasa.nodes.tracking.dbstream.</span></span><span class="sig-name descname"><span class="pre">DBSTREAMClusterer</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout_s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">clustering_threshold</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">50.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fading_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.01</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cleanup_interval</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">intersection_factor</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.3</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimum_weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#mufasa.nodes.tracking.dbstream.DBSTREAMClusterer" title="Link to this definition">#</a></dt>
 <dd><p>Bases: <a class="reference internal" href="../../../node/index.html#mufasa.node.Node" title="mufasa.node.Node"><code class="xref py py-obj docutils literal notranslate"><span class="pre">mufasa.node.Node</span></code></a></p>
-<p>Base class for all pipeline nodes.</p>
-<p>Every concrete subclass must declare two class attributes:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="k">class</span><span class="w"> </span><span class="nc">MyNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
-</span><span data-line="2">    <span class="n">_input_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">Location</span><span class="p">]</span>       <span class="c1"># types this node accepts; [] for source nodes</span>
-</span><span data-line="3">    <span class="n">_output_type</span> <span class="o">=</span> <span class="n">Observation</span>      <span class="c1"># type this node emits; None for sink nodes</span>
-</span></pre></div>
-</div>
-<p>Listing a parent type (e.g. <code class="docutils literal notranslate"><span class="pre">Location</span></code>) automatically covers all
-subclasses (e.g. <code class="docutils literal notranslate"><span class="pre">Observation</span></code>) because wiring uses <code class="docutils literal notranslate"><span class="pre">issubclass</span></code>.</p>
-<p>Two methods must be implemented by every concrete subclass:</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">process(*args,</span> <span class="pre">**kwargs)</span></code></dt><dd><p>Called by the framework to push data through the node. Use the
-signature appropriate for this node’s role — see the docstring on
-<a class="reference internal" href="#mufasa.nodes.tracking.dbstream.DBSTREAMClusterer.process" title="mufasa.nodes.tracking.dbstream.DBSTREAMClusterer.process"><code class="xref py py-meth docutils literal notranslate"><span class="pre">process()</span></code></a> for the standard patterns.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">get_config()</span> <span class="pre">-&gt;</span> <span class="pre">dict</span></code></dt><dd><p>Return all constructor arguments as a plain JSON-serializable dict
-so the pipeline can be saved and reconstructed.</p>
-</dd>
-</dl>
-<p>Two further methods have no-op defaults and should be overridden by nodes
-that accumulate internal state across <code class="docutils literal notranslate"><span class="pre">process()</span></code> calls:</p>
-<dl class="simple">
-<dt><code class="docutils literal notranslate"><span class="pre">flush()</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></dt><dd><p>Called by the framework after all inputs are exhausted (end of
-stream). Emit any observations or map snapshots remaining in an
-internal buffer. Stateless nodes can leave this as the no-op default.</p>
-</dd>
-<dt><code class="docutils literal notranslate"><span class="pre">reset()</span> <span class="pre">-&gt;</span> <span class="pre">None</span></code></dt><dd><p>Called by the framework between pipeline runs. Clear all runtime
-state so the pipeline can be re-run cleanly without constructing a
-new instance. Stateless nodes can leave this as the no-op default.</p>
-</dd>
-</dl>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

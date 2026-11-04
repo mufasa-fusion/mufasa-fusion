@@ -21,9 +21,6 @@ Module Contents
    Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
 
 
-   Base for all pipeline input nodes. Has no predecessor inputs.
-
-
    .. py:property:: output_type
       :type: type
 
@@ -56,9 +53,6 @@ Module Contents
 .. py:class:: MapInput(data)
 
    Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
-
-
-   Base for all pipeline input nodes. Has no predecessor inputs.
 
 
    .. py:method:: items() -> list[mufasa.map.Map]

@@ -99,9 +99,6 @@ Module Contents
    Bases: :py:obj:`mufasa.io.outputs.base.OutputNode`
 
 
-   Base for all pipeline output nodes. Has no output type.
-
-
    .. py:attribute:: snapshot_interval_s
       :value: 5.0
 

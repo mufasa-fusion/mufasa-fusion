@@ -84,8 +84,7 @@ Module Contents
    Bases: :py:obj:`ValueError`
 
 
-   Inappropriate argument value (of correct type).
-
+   
    Initialize self.  See help(type(self)) for accurate signature.
 
 
