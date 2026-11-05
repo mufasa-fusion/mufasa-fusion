@@ -1,6 +1,7 @@
 # Contributing to MuFASA
 
 Thank you for your interest in MuFASA! This guide explains how contributions work.
+Everyone taking part in this project is expected to follow our [Code of Conduct](CODE_OF_CONDUCT.md).
 
 ## Every contribution starts with an issue
 
@@ -54,7 +55,7 @@ Before you ask for a review, please check:
 - [ ] Your branch is up to date with the target branch.
 
 **Code**
-- [ ] The test suite passes (`pytest`). CI runs it on Python 3.10 to 3.14.
+- [ ] The test suite passes (`pytest`).
 - [ ] New behaviour is covered by tests, and bug fixes come with a test that would have caught the bug.
 - [ ] All classes and functions have docstrings.
 
