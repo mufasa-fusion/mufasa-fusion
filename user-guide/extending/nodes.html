@@ -287,8 +287,12 @@ This one raises the confidence of every observation by a fixed factor:</p>
 <div class="cell_output docutils container">
 <div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 236 396" width="236" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg0-map-roll" viewBox="0 0 64 64">
 	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg0-unknown" viewBox="0 0 64 64">
-	<circle cx="32" cy="32" r="12" fill="currentColor"/>
+</symbol><symbol id="mfg0-observation-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<circle cx="32" cy="32" r="26"/>
+		<circle cx="32" cy="32" r="15"/>
+	</g>
+	<circle cx="32" cy="32" r="6" fill="currentColor"/>
 </symbol><symbol id="mfg0-location-marker" viewBox="0 0 64 64">
 	<g fill="none" stroke="currentColor" stroke-width="3">
 		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
@@ -296,12 +300,8 @@ This one raises the confidence of every observation by a fixed factor:</p>
 	</g>
 </symbol><symbol id="mfg0-map-fold" viewBox="0 0 64 64">
 	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg0-observation-marker" viewBox="0 0 64 64">
-	<g fill="none" stroke="currentColor" stroke-width="3">
-		<circle cx="32" cy="32" r="26"/>
-		<circle cx="32" cy="32" r="15"/>
-	</g>
-	<circle cx="32" cy="32" r="6" fill="currentColor"/>
+</symbol><symbol id="mfg0-unknown" viewBox="0 0 64 64">
+	<circle cx="32" cy="32" r="12" fill="currentColor"/>
 </symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsoninput_0" data-to="confidenceboost_0"><path d="M0.0 47.0 L0.0 98.0"/><circle cx="0.0" cy="47.0" r="3.5"/><circle cx="0.0" cy="98.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="confidenceboost_0" data-to="locationoutput_0"><path d="M0.0 192.0 L0.0 243.0"/><circle cx="0.0" cy="192.0" r="3.5"/><circle cx="0.0" cy="243.0" r="3.5"/></g><g class="mf-node mf-io" data-id="geojsoninput_0" tabindex="0" aria-label="GeoJsonInput"><path d="M-34.0 0.0 V-23.6 Q-34.0 -30.6 -27.0 -30.6 H27.0 Q34.0 -30.6 34.0 -23.6 V0.0 A34 34 0 0 1 -34.0 0.0 Z" class="mf-body"/><text x="0.0" y="5.5" text-anchor="middle" class="mf-code">GJI</text><text x="46.0" y="5.0" class="mf-name">GeoJsonInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="confidenceboost_0" tabindex="0" aria-label="ConfidenceBoost"><circle cx="0.0" cy="145.0" r="34" class="mf-body"/><text x="0.0" y="150.5" text-anchor="middle" class="mf-code">CB</text><text x="46.0" y="150.0" class="mf-name">ConfidenceBoost</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 111.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 179.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="locationoutput_0" tabindex="0" aria-label="LocationOutput"><path d="M34.0 290.0 V313.6 Q34.0 320.6 27.0 320.6 H-27.0 Q-34.0 320.6 -34.0 313.6 V290.0 A34 34 0 0 1 34.0 290.0 Z" class="mf-body"/><text x="0.0" y="295.5" text-anchor="middle" class="mf-code">LO</text><text x="46.0" y="295.0" class="mf-name">LocationOutput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 256.0)"><title>Location family: Location</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Location</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
 
 symbol [stroke-width] { stroke-width: 5; }
@@ -482,8 +482,12 @@ the first one, a large event right where our own patrol vehicle is parked, gets 
 <div class="cell_output docutils container">
 <div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 218 541" width="218" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg1-map-roll" viewBox="0 0 64 64">
 	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg1-unknown" viewBox="0 0 64 64">
-	<circle cx="32" cy="32" r="12" fill="currentColor"/>
+</symbol><symbol id="mfg1-observation-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<circle cx="32" cy="32" r="26"/>
+		<circle cx="32" cy="32" r="15"/>
+	</g>
+	<circle cx="32" cy="32" r="6" fill="currentColor"/>
 </symbol><symbol id="mfg1-location-marker" viewBox="0 0 64 64">
 	<g fill="none" stroke="currentColor" stroke-width="3">
 		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
@@ -491,12 +495,8 @@ the first one, a large event right where our own patrol vehicle is parked, gets 
 	</g>
 </symbol><symbol id="mfg1-map-fold" viewBox="0 0 64 64">
 	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg1-observation-marker" viewBox="0 0 64 64">
-	<g fill="none" stroke="currentColor" stroke-width="3">
-		<circle cx="32" cy="32" r="26"/>
-		<circle cx="32" cy="32" r="15"/>
-	</g>
-	<circle cx="32" cy="32" r="6" fill="currentColor"/>
+</symbol><symbol id="mfg1-unknown" viewBox="0 0 64 64">
+	<circle cx="32" cy="32" r="12" fill="currentColor"/>
 </symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="locationinput_0" data-to="pom_0"><path d="M0.0 47.0 L0.0 98.0"/><circle cx="0.0" cy="47.0" r="3.5"/><circle cx="0.0" cy="98.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="pom_0" data-to="comfortzone_0"><path d="M0.0 192.0 L0.0 243.0"/><circle cx="0.0" cy="192.0" r="3.5"/><circle cx="0.0" cy="243.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#470f51" data-from="comfortzone_0" data-to="mapoutput_0"><path d="M0.0 337.0 L0.0 388.0"/><circle cx="0.0" cy="337.0" r="3.5"/><circle cx="0.0" cy="388.0" r="3.5"/></g><g class="mf-node mf-io" data-id="locationinput_0" tabindex="0" aria-label="LocationInput"><path d="M-34.0 0.0 V-23.6 Q-34.0 -30.6 -27.0 -30.6 H27.0 Q34.0 -30.6 34.0 -23.6 V0.0 A34 34 0 0 1 -34.0 0.0 Z" class="mf-body"/><text x="0.0" y="5.5" text-anchor="middle" class="mf-code">LI</text><text x="46.0" y="5.0" class="mf-name">LocationInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="pom_0" tabindex="0" aria-label="POM"><circle cx="0.0" cy="145.0" r="34" class="mf-body"/><text x="0.0" y="150.5" text-anchor="middle" class="mf-code">POM</text><text x="46.0" y="150.0" class="mf-name">POM</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 111.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(0.0 179.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="comfortzone_0" tabindex="0" aria-label="ComfortZone"><circle cx="0.0" cy="290.0" r="34" class="mf-body"/><text x="0.0" y="295.5" text-anchor="middle" class="mf-code">CZ</text><text x="46.0" y="295.0" class="mf-name">ComfortZone</text><g class="mf-port" style="--mf-fam:#470f51" transform="translate(0.0 256.0)"><title>Map family: BayesianMap</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-map-roll" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">BayesianMap</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(0.0 324.0)"><title>Map family: Map</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Map</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="mapoutput_0" tabindex="0" aria-label="MapOutput"><path d="M34.0 435.0 V458.6 Q34.0 465.6 27.0 465.6 H-27.0 Q-34.0 465.6 -34.0 458.6 V435.0 A34 34 0 0 1 34.0 435.0 Z" class="mf-body"/><text x="0.0" y="440.5" text-anchor="middle" class="mf-code">MO</text><text x="46.0" y="440.0" class="mf-name">MapOutput</text><g class="mf-port" style="--mf-fam:#470f51" transform="translate(0.0 401.0)"><title>Map family: Map</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Map</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
 
 symbol [stroke-width] { stroke-width: 5; }
@@ -742,8 +742,12 @@ They have no output type. Locations arrive in the graph’s CRS, so
 <div class="cell_output docutils container">
 <div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 209 251" width="209" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg2-map-roll" viewBox="0 0 64 64">
 	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg2-unknown" viewBox="0 0 64 64">
-	<circle cx="32" cy="32" r="12" fill="currentColor"/>
+</symbol><symbol id="mfg2-observation-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<circle cx="32" cy="32" r="26"/>
+		<circle cx="32" cy="32" r="15"/>
+	</g>
+	<circle cx="32" cy="32" r="6" fill="currentColor"/>
 </symbol><symbol id="mfg2-location-marker" viewBox="0 0 64 64">
 	<g fill="none" stroke="currentColor" stroke-width="3">
 		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
@@ -751,12 +755,8 @@ They have no output type. Locations arrive in the graph’s CRS, so
 	</g>
 </symbol><symbol id="mfg2-map-fold" viewBox="0 0 64 64">
 	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg2-observation-marker" viewBox="0 0 64 64">
-	<g fill="none" stroke="currentColor" stroke-width="3">
-		<circle cx="32" cy="32" r="26"/>
-		<circle cx="32" cy="32" r="15"/>
-	</g>
-	<circle cx="32" cy="32" r="6" fill="currentColor"/>
+</symbol><symbol id="mfg2-unknown" viewBox="0 0 64 64">
+	<circle cx="32" cy="32" r="12" fill="currentColor"/>
 </symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="csvinput_0" data-to="alarmprinter_0"><path d="M0.0 47.0 L0.0 98.0"/><circle cx="0.0" cy="47.0" r="3.5"/><circle cx="0.0" cy="98.0" r="3.5"/></g><g class="mf-node mf-io" data-id="csvinput_0" tabindex="0" aria-label="CsvInput"><path d="M-34.0 0.0 V-23.6 Q-34.0 -30.6 -27.0 -30.6 H27.0 Q34.0 -30.6 34.0 -23.6 V0.0 A34 34 0 0 1 -34.0 0.0 Z" class="mf-body"/><text x="0.0" y="5.5" text-anchor="middle" class="mf-code">CI</text><text x="46.0" y="5.0" class="mf-name">CsvInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg2-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg2-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="alarmprinter_0" tabindex="0" aria-label="AlarmPrinter"><path d="M34.0 145.0 V168.6 Q34.0 175.6 27.0 175.6 H-27.0 Q-34.0 175.6 -34.0 168.6 V145.0 A34 34 0 0 1 34.0 145.0 Z" class="mf-body"/><text x="0.0" y="150.5" text-anchor="middle" class="mf-code">AP</text><text x="46.0" y="150.0" class="mf-name">AlarmPrinter</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 111.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg2-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg2-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
 
 symbol [stroke-width] { stroke-width: 5; }
@@ -879,8 +879,12 @@ register your node in the <a class="reference internal" href="../../api/mufasa/r
 <div class="cell_output docutils container">
 <div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 236 396" width="236" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg3-map-roll" viewBox="0 0 64 64">
 	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg3-unknown" viewBox="0 0 64 64">
-	<circle cx="32" cy="32" r="12" fill="currentColor"/>
+</symbol><symbol id="mfg3-observation-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<circle cx="32" cy="32" r="26"/>
+		<circle cx="32" cy="32" r="15"/>
+	</g>
+	<circle cx="32" cy="32" r="6" fill="currentColor"/>
 </symbol><symbol id="mfg3-location-marker" viewBox="0 0 64 64">
 	<g fill="none" stroke="currentColor" stroke-width="3">
 		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
@@ -888,12 +892,8 @@ register your node in the <a class="reference internal" href="../../api/mufasa/r
 	</g>
 </symbol><symbol id="mfg3-map-fold" viewBox="0 0 64 64">
 	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg3-observation-marker" viewBox="0 0 64 64">
-	<g fill="none" stroke="currentColor" stroke-width="3">
-		<circle cx="32" cy="32" r="26"/>
-		<circle cx="32" cy="32" r="15"/>
-	</g>
-	<circle cx="32" cy="32" r="6" fill="currentColor"/>
+</symbol><symbol id="mfg3-unknown" viewBox="0 0 64 64">
+	<circle cx="32" cy="32" r="12" fill="currentColor"/>
 </symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsoninput_0" data-to="confidenceboost_0"><path d="M0.0 47.0 L0.0 98.0"/><circle cx="0.0" cy="47.0" r="3.5"/><circle cx="0.0" cy="98.0" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="confidenceboost_0" data-to="locationoutput_0"><path d="M0.0 192.0 L0.0 243.0"/><circle cx="0.0" cy="192.0" r="3.5"/><circle cx="0.0" cy="243.0" r="3.5"/></g><g class="mf-node mf-io" data-id="geojsoninput_0" tabindex="0" aria-label="GeoJsonInput"><path d="M-34.0 0.0 V-23.6 Q-34.0 -30.6 -27.0 -30.6 H27.0 Q34.0 -30.6 34.0 -23.6 V0.0 A34 34 0 0 1 -34.0 0.0 Z" class="mf-body"/><text x="0.0" y="5.5" text-anchor="middle" class="mf-code">GJI</text><text x="46.0" y="5.0" class="mf-name">GeoJsonInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg3-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg3-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-proc" data-id="confidenceboost_0" tabindex="0" aria-label="ConfidenceBoost"><circle cx="0.0" cy="145.0" r="34" class="mf-body"/><text x="0.0" y="150.5" text-anchor="middle" class="mf-code">CB</text><text x="46.0" y="150.0" class="mf-name">ConfidenceBoost</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 111.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg3-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg3-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 179.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg3-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg3-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="locationoutput_0" tabindex="0" aria-label="LocationOutput"><path d="M34.0 290.0 V313.6 Q34.0 320.6 27.0 320.6 H-27.0 Q-34.0 320.6 -34.0 313.6 V290.0 A34 34 0 0 1 34.0 290.0 Z" class="mf-body"/><text x="0.0" y="295.5" text-anchor="middle" class="mf-code">LO</text><text x="46.0" y="295.0" class="mf-name">LocationOutput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 256.0)"><title>Location family: Location</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg3-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Location</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg3-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
 
 symbol [stroke-width] { stroke-width: 5; }

@@ -20,3 +20,18 @@ Submodules
    /api/mufasa/registry/index
 
 
+Attributes
+----------
+
+.. autoapisummary::
+
+   mufasa.__version__
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+   :value: '0.1.2'
+
+
