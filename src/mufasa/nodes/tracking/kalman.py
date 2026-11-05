@@ -92,7 +92,7 @@ class KalmanTracker(Node):
         except ImportError:
             raise ImportError(
                 "KalmanTracker requires stonesoup. "
-                "Install it with: pip install \"mufasa[tracking]\""
+                "Install it with: pip install \"mufasa-fusion[tracking]\""
             ) from None
 
         from stonesoup.dataassociator.neighbour import GNNWith2DAssignment

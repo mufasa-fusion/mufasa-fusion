@@ -1,6 +1,8 @@
 <div align="center">
-  <img src="docs/_static/img/logo/MuFASA_MuFASA.svg" alt="MuFASA" height="80" />
-  <img src="docs/_static/img/logo/AIT.svg" alt="AIT Austrian Institute of Technology" height="70" />
+  <img src="https://raw.githubusercontent.com/mufasa-fusion/mufasa-fusion/refs/heads/dev/docs/_static/img/logo/MuFASA_MuFASA.png"
+        alt="MuFASA" height="80" />
+  <img src="https://raw.githubusercontent.com/mufasa-fusion/mufasa-fusion/refs/heads/dev/docs/_static/img/logo/AIT.jpg"
+        alt="AIT Austrian Institute of Technology" height="60" />
 </div>
 
 # MuFASA — Multimodal Fusion Architecture for Sensor Applications
@@ -11,13 +13,26 @@ MuFASA is a framework for rapid prototyping of geospatial sensor fusion pipeline
 
 ## Installation
 
-To install mufasa-fusion, clone this repository and run one of the following commands in a shell with your active python environment:
+Run one of the following commands in a shell with your active python environment:
+
+Latest version on GitHub:
 
 ```bash
-pip install mufasa                      # core
-pip install "mufasa[tracking]"          # + KalmanTracker, DBSTREAMClusterer
-pip install "mufasa[vis]"               # + plot_map, animate_maps, plot_locations
-pip install "mufasa[tracking,vis]"      # everything
+pip install "mufasa-fusion @ git+https://github.com/mufasa-fusion/mufasa-fusion"
+```
+
+Latest release on PyPI:
+
+```bash
+pip install "mufasa-fusion"
+```
+
+Extra dependencies: 
+
+```
+mufasa-fusion[tracking]          # + KalmanTracker, DBSTREAMClusterer
+mufasa-fusion[vis]               # + plot_map, animate_maps, plot_locations
+mufasa-fusion[tracking,vis]      # everything
 ```
 
 Requires Python ≥ 3.10.
@@ -43,7 +58,7 @@ from mufasa.io.inputs.geojson import GeoJsonInput
 from mufasa.io.outputs.python_object import LocationOutput
 from mufasa.nodes.mapping import POM
 from mufasa.nodes.fusion import BayesianFusion
-from mufasa.nodes.detection import ConfidenceThreshold
+from mufasa.nodes.detection import Threshold
 
 # --- Define inputs ---
 track_a = GeoJsonInput(path="sensor_a.geojson")
@@ -53,7 +68,7 @@ track_b = GeoJsonInput(path="sensor_b.geojson")
 pom_a  = POM(decay_s=300)(track_a)
 pom_b  = POM(decay_s=300)(track_b)
 fused  = BayesianFusion()(pom_a, pom_b)
-alarms = ConfidenceThreshold(threshold=0.7)(fused)
+alarms = Threshold(threshold=0.7)(fused)
 out    = LocationOutput()(alarms)
 
 # --- Assemble and run ---

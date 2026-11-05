@@ -371,7 +371,7 @@ class TestKalmanTrackerConfigure:
         import unittest.mock
         tracker = KalmanTracker()
         with unittest.mock.patch.dict(sys.modules, {"stonesoup": None}):
-            with pytest.raises(ImportError, match="mufasa\\[tracking\\]"):
+            with pytest.raises(ImportError, match="mufasa-fusion\\[tracking\\]"):
                 tracker.configure(**spatial)
 
     def test_configure_succeeds_when_stonesoup_installed(self, spatial):

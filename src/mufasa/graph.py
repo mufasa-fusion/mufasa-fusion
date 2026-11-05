@@ -311,10 +311,12 @@ class Graph:
         self._queue: _queue_mod.SimpleQueue = _queue_mod.SimpleQueue()
         self._stop_sentinel = _STOP
         self._n_stops = len(self._stream_inputs)
+
         def _worker(inp):
             for item in inp.items():
                 self._queue.put((item, inp))
             self._queue.put((_STOP, None))
+
         for inp in self._stream_inputs:
             threading.Thread(target=_worker, args=(inp,), daemon=True).start()
 

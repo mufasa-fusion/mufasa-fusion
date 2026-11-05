@@ -1,0 +1,107 @@
+name: New node
+description: Propose a new input, processing or output node
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for proposing a new node! Please check the [node catalog](https://mufasa-fusion.org/catalog.html)
+        and the [open issues](https://github.com/mufasa-fusion/mufasa-fusion/issues) first to avoid duplicates.
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: What does the node do?
+      description: One or two sentences. This will become the node's entry in the catalog.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: node-type
+    attributes:
+      label: Node type
+      options:
+        - Input node (brings data into the Fusion Graph)
+        - Processing node (fuses, detects, tracks, …)
+        - Output node (passes results to external systems)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: input-types
+    attributes:
+      label: Input types
+      description: Which data types does the node accept? Leave empty for input nodes.
+      options:
+        - label: Location
+        - label: Observation
+        - label: Map
+        - label: BayesianMap
+
+  - type: dropdown
+    id: output-type
+    attributes:
+      label: Output type
+      description: Which data type does the node produce?
+      options:
+        - Location
+        - Observation
+        - Map
+        - BayesianMap
+        - None (output node)
+    validations:
+      required: true
+
+  - type: textarea
+    id: parameters
+    attributes:
+      label: Parameters
+      description: What would users configure? Name, meaning and default value, if known.
+      placeholder: |
+        radius: search radius in metres (default 50)
+        min_confidence: drop detections below this value (default 0.5)
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: Use case
+      description: Which sensor, data source or scenario needs this node? Please do not include sensitive data or real site coordinates.
+    validations:
+      required: true
+
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: New dependencies
+      description: Libraries the node would need that MuFASA does not use yet. Leave empty if there are none.
+
+  - type: dropdown
+    id: contribute
+    attributes:
+      label: Would you like to implement it yourself?
+      options:
+        - "Yes"
+        - "Maybe, with some guidance"
+        - "No"
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: definition-of-done
+    attributes:
+      label: Definition of done
+      description: |
+        Leave these unticked. They are ticked off during implementation and must all be complete
+        (or struck through as not applicable) before the pull request is merged.
+      options:
+        - label: "Interface: `_input_types` and `_output_type` declared as agreed in this issue"
+        - label: "Interface: `process()` implemented with the correct signature (processing and output nodes)"
+        - label: "Interface: `get_config()` returns all constructor arguments as a JSON-serialisable dict"
+        - label: "Interface: registered in `NODE_REGISTRY`, so graphs using it can be saved and loaded"
+        - label: "Interface: `configure()`, `reset()` and `flush()` overridden where needed"
+        - label: "Tests: unit tests for the node, including edge cases"
+        - label: "Tests: the node runs inside a small Fusion Graph"
+        - label: "Tests: save/load round trip (`Graph.to_config()` → `Graph.from_config()`)"
+        - label: "Docs: docstring explains what the node does, its parameters and its input/output types"
+        - label: "Docs: added to the node catalog (`docs/catalog.rst`) and the README's list of built-in nodes"
+        - label: "Dependencies: new libraries go into an optional extra, not the core install"

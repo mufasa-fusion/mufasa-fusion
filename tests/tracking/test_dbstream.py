@@ -306,7 +306,7 @@ class TestDBSTREAMClustererConfigure:
         import unittest.mock
         clusterer = DBSTREAMClusterer()
         with unittest.mock.patch.dict(sys.modules, {"river": None}):
-            with pytest.raises(ImportError, match="mufasa\\[tracking\\]"):
+            with pytest.raises(ImportError, match="mufasa-fusion\\[tracking\\]"):
                 clusterer.configure(**spatial)
 
     def test_configure_succeeds_when_river_installed(self, spatial):

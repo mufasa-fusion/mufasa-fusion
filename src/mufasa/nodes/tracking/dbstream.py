@@ -78,7 +78,7 @@ class DBSTREAMClusterer(Node):
         except ImportError:
             raise ImportError(
                 "DBSTREAMClusterer requires river. "
-                "Install it with: pip install \"mufasa[tracking]\""
+                "Install it with: pip install \"mufasa-fusion[tracking]\""
             )
 
         from river.cluster import DBSTREAM

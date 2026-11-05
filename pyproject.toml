@@ -1,12 +1,15 @@
 [build-system]
-requires = ["setuptools>=68", "wheel"]
+requires = ["setuptools>=77", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "mufasa"
-version = "0.1.0"
+name = "mufasa-fusion"
 description = "Multi-modal geospatial data fusion framework"
-license = { text = "Apache-2.0" }
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+dynamic = ["version"]
+
 requires-python = ">=3.10"
 dependencies = [
     "shapely",
@@ -29,7 +32,7 @@ vis = [
 dev = [
     "pytest",
     "pytest-cov",
-    "mufasa[tracking,vis]",
+    "mufasa-fusion[tracking,vis]",
 ]
 docs = [
     "sphinx",
@@ -41,6 +44,15 @@ docs = [
     "paho-mqtt",
     "amqtt",
 ]
+
+[project.urls]
+homepage = "https://mufasa-fusion.org"
+documentation = "https://mufasa-fusion.org"
+source = "https://github.com/mufasa-fusion/mufasa-fusion"
+issues = "https://github.com/mufasa-fusion/mufasa-fusion/issues"
+
+[tool.setuptools.dynamic]
+version = {attr = "mufasa.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
