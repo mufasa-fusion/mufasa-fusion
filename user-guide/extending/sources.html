@@ -2,7 +2,7 @@
 <html lang="en" data-accent-color="red" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Custom Data Sources - mufasa-fusion 0.1.0 documentation</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Going Live" href="../going-live/index.html" /><link rel="prev" title="Extending MuFASA" href="index.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Connecting Custom Data Sources - mufasa-fusion 0.1.0 documentation</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Going Live" href="../going-live/index.html" /><link rel="prev" title="Writing a Node" href="nodes.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
@@ -23,7 +23,7 @@
 }
 </style>
     
-  <meta property="og:type" content="website"/><meta property="og:title" content="Custom Data Sources"/>
+  <meta property="og:type" content="website"/><meta property="og:title" content="Connecting Custom Data Sources"/>
     <meta name="twitter:card" content="summary"/>
   </head>
 <body><div class="sy-head">
@@ -78,7 +78,8 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../concepts.html">Concepts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tips-and-tricks.html">Tips and Tricks</a></li>
 <li class="toctree-l2 current"><a class="reference internal" href="index.html">Extending MuFASA</a><ul class="current">
-<li class="toctree-l3 current"><a class="current reference internal" href="#">Custom Data Sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nodes.html">Writing a Node</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Connecting Custom Data Sources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../going-live/index.html">Going Live</a><ul>
@@ -136,10 +137,10 @@ data-aria-dark="Switch to auto color mode">
       <i class="i-lucide close"></i>
     </button>
     <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#for-recorded-sources">For Recorded Sources</a></li>
 <li><a class="reference internal" href="#simulating-a-live-sensor">Simulating a Live Sensor</a></li>
 <li><a class="reference internal" href="#integration-basics">Integration Basics</a></li>
 <li><a class="reference internal" href="#for-pull-clients">For Pull Clients</a></li>
-<li><a class="reference internal" href="#for-recorded-sources">For Recorded Sources</a></li>
 <li><a class="reference internal" href="#for-push-clients">For Push Clients</a></li>
 </ul>
 </div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
@@ -166,7 +167,7 @@ data-aria-dark="Switch to auto color mode">
         <span>/</span>
         <meta itemprop="position" content="3" />
       </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-        <strong itemprop="name">Custom Data Sources</strong>
+        <strong itemprop="name">Connecting Custom Data Sources</strong>
         <meta itemprop="position" content="4" />
       </li></ol>
     <div class="xl:hidden ml-1">
@@ -179,11 +180,47 @@ data-aria-dark="Switch to auto color mode">
 </div><div class="flex flex-col break-words justify-between">
       <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
   <article class="yue" role="main">
-          <section id="custom-data-sources">
-<h1>Custom Data Sources<a class="headerlink" href="#custom-data-sources" title="Link to this heading">#</a></h1>
-<p>This guide shows how to connect Fusion Graphs to not (yet) built-in data sources.
-It focuses on integrating external systems that stream live data and implementing new input nodes.
-Moreover, it covers extending MuFASA for recorded data and demonstrates common usage patterns around inputs.</p>
+          <section id="connecting-custom-data-sources">
+<h1>Connecting Custom Data Sources<a class="headerlink" href="#connecting-custom-data-sources" title="Link to this heading">#</a></h1>
+<p>This guide shows how to connect Fusion Graphs to data sources that MuFASA doesn’t support out of the box,
+with a focus on live data from sensors and other external systems.
+Which approach fits depends on where your data comes from:</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Your data comes from …</p></th>
+<th class="head"><p>Approach</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>a file or a list you already have in Python</p></td>
+<td><p>No new node: convert it and use a <a class="reference internal" href="../../api/mufasa/io/inputs/python_object/index.html#mufasa.io.inputs.python_object.LocationInput" title="mufasa.io.inputs.python_object.LocationInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationInput</span></code></a> or <a class="reference internal" href="../../api/mufasa/io/inputs/python_object/index.html#mufasa.io.inputs.python_object.MapInput" title="mufasa.io.inputs.python_object.MapInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapInput</span></code></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>a recorded format MuFASA doesn’t know</p></td>
+<td><p>An <a class="reference internal" href="../../api/mufasa/io/inputs/base/index.html#mufasa.io.inputs.base.InputNode" title="mufasa.io.inputs.base.InputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputNode</span></code></a> that returns all items at once, see <a class="reference internal" href="#recorded-sources"><span class="std std-ref">For Recorded Sources</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>a library you ask for the next message (pull client)</p></td>
+<td><p>A <a class="reference internal" href="../../api/mufasa/io/inputs/streaming/index.html#mufasa.io.inputs.streaming.StreamingInputNode" title="mufasa.io.inputs.streaming.StreamingInputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamingInputNode</span></code></a> whose <code class="docutils literal notranslate"><span class="pre">items()</span></code> yields the messages, see <a class="reference internal" href="#pull-client"><span class="std std-ref">For Pull Clients</span></a></p></td>
+</tr>
+<tr class="row-odd"><td><p>a library that calls you back with each message (push client)</p></td>
+<td><p>A <a class="reference internal" href="../../api/mufasa/io/inputs/streaming/index.html#mufasa.io.inputs.streaming.StreamingInputNode" title="mufasa.io.inputs.streaming.StreamingInputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamingInputNode</span></code></a> that <code class="docutils literal notranslate"><span class="pre">ingest()</span></code>s the messages, see <a class="reference internal" href="#push-client"><span class="std std-ref">For Push Clients</span></a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>For real messaging systems such as MQTT or ROS 2, see <a class="reference internal" href="../going-live/index.html"><span class="doc">Going Live</span></a>.</p>
+<section id="for-recorded-sources">
+<span id="recorded-sources"></span><h2>For Recorded Sources<a class="headerlink" href="#for-recorded-sources" title="Link to this heading">#</a></h2>
+<p>Recorded data is the simple case: subclass an <a class="reference internal" href="../../api/mufasa/io/inputs/base/index.html#mufasa.io.inputs.base.InputNode" title="mufasa.io.inputs.base.InputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputNode</span></code></a>
+(that is not a <a class="reference internal" href="../../api/mufasa/io/inputs/streaming/index.html#mufasa.io.inputs.streaming.StreamingInputNode" title="mufasa.io.inputs.streaming.StreamingInputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamingInputNode</span></code></a>)
+and return all your data at once from <a class="reference internal" href="../../api/mufasa/io/inputs/base/index.html#mufasa.io.inputs.base.InputNode.items" title="mufasa.io.inputs.base.InputNode.items"><code class="xref py py-func docutils literal notranslate"><span class="pre">items()</span></code></a>.
+<a class="reference internal" href="nodes.html#writing-input-nodes"><span class="std std-ref">CsvInput</span></a> in <a class="reference internal" href="nodes.html"><span class="doc">Writing a Node</span></a> shows a complete example that reads a CSV file.</p>
+<div class="hint admonition">
+<p class="admonition-title">You don’t need a new node!</p>
+<p>Just read and convert the data beforehand and pass it in via a
+<a class="reference internal" href="../../api/mufasa/io/inputs/python_object/index.html#mufasa.io.inputs.python_object.LocationInput" title="mufasa.io.inputs.python_object.LocationInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationInput</span></code></a> or <a class="reference internal" href="../../api/mufasa/io/inputs/python_object/index.html#mufasa.io.inputs.python_object.MapInput" title="mufasa.io.inputs.python_object.MapInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapInput</span></code></a> node.</p>
+</div>
+<p>The rest of this guide covers live data.</p>
 <div class="hint admonition">
 <p class="admonition-title">You don’t need a new node!</p>
 <p>Implementing a new node might just be overkill in some situations.
@@ -196,6 +233,7 @@ In the spirit of rapid prototyping, these boxes highlight how to use your custom
 <li><p>It makes your extensions explicit in the Fusion Graph and visible at a glance.</p></li>
 </ul>
 </div>
+</section>
 <section id="simulating-a-live-sensor">
 <h2>Simulating a Live Sensor<a class="headerlink" href="#simulating-a-live-sensor" title="Link to this heading">#</a></h2>
 <p>Throughout this guide, we simulate a live sensor by a TCP server that sends detections
@@ -467,15 +505,14 @@ output type, conversion and config logic and also register the node for later im
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">/tmp/ipykernel_173/3619763805.py:7: UserWarning: No CRS specified. Ensure all input data is already in a Cartesian coordinate system with units of metres (e.g. a UTM projection). Using geographic coordinates (WGS84 degrees) will produce incorrect distances and unexpected behaviour.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">/tmp/ipykernel_200/3619763805.py:7: UserWarning: No CRS specified. Ensure all input data is already in a Cartesian coordinate system with units of metres (e.g. a UTM projection). Using geographic coordinates (WGS84 degrees) will produce incorrect distances and unexpected behaviour.
 </span><span data-line="2">  pull_graph = Graph([pull_a, pull_b], [pull_out])
 </span></pre></div>
 </div>
-<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 451 251" width="451" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg0-location-marker" viewBox="0 0 64 64">
-	<g fill="none" stroke="currentColor" stroke-width="3">
-		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
-		<circle cx="32" cy="22" r="9"/>
-	</g>
+<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 451 251" width="451" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg0-map-roll" viewBox="0 0 64 64">
+	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg0-map-fold" viewBox="0 0 64 64">
+	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
 </symbol><symbol id="mfg0-observation-marker" viewBox="0 0 64 64">
 	<g fill="none" stroke="currentColor" stroke-width="3">
 		<circle cx="32" cy="32" r="26"/>
@@ -484,10 +521,11 @@ output type, conversion and config logic and also register the node for later im
 	<circle cx="32" cy="32" r="6" fill="currentColor"/>
 </symbol><symbol id="mfg0-unknown" viewBox="0 0 64 64">
 	<circle cx="32" cy="32" r="12" fill="currentColor"/>
-</symbol><symbol id="mfg0-map-roll" viewBox="0 0 64 64">
-	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg0-map-fold" viewBox="0 0 64 64">
-	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg0-location-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
+		<circle cx="32" cy="22" r="9"/>
+	</g>
 </symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsonobservationpullinput_0" data-to="locationoutput_0"><path d="M0.0 47.0 L0.0 62.5 Q0.0 72.5 10.0 72.5 L73.5 72.5 Q83.5 72.5 83.5 82.5 L83.5 99.7"/><circle cx="0.0" cy="47.0" r="3.5"/><circle cx="83.5" cy="99.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsonobservationpullinput_1" data-to="locationoutput_0"><path d="M180.0 47.0 L180.0 62.5 Q180.0 72.5 170.0 72.5 L106.5 72.5 Q96.5 72.5 96.5 82.5 L96.5 99.7"/><circle cx="180.0" cy="47.0" r="3.5"/><circle cx="96.5" cy="99.7" r="3.5"/></g><g class="mf-node mf-io" data-id="geojsonobservationpullinput_0" tabindex="0" aria-label="GeoJsonObservationPullInput"><path d="M-34.0 0.0 V-23.6 Q-34.0 -30.6 -27.0 -30.6 H27.0 Q34.0 -30.6 34.0 -23.6 V0.0 A34 34 0 0 1 -34.0 0.0 Z" class="mf-body"/><text x="0.0" y="5.5" text-anchor="middle" class="mf-code">GJO</text><text x="46.0" y="5.0" class="mf-name">GeoJsonObservationPullInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="geojsonobservationpullinput_1" tabindex="0" aria-label="GeoJsonObservationPullInput"><path d="M146.0 0.0 V-23.6 Q146.0 -30.6 153.0 -30.6 H207.0 Q214.0 -30.6 214.0 -23.6 V0.0 A34 34 0 0 1 146.0 0.0 Z" class="mf-body"/><text x="180.0" y="5.5" text-anchor="middle" class="mf-code">GJO</text><text x="226.0" y="5.0" class="mf-name">GeoJsonObservationPullInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(180.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="locationoutput_0" tabindex="0" aria-label="LocationOutput"><path d="M124.0 145.0 V168.6 Q124.0 175.6 117.0 175.6 H63.0 Q56.0 175.6 56.0 168.6 V145.0 A34 34 0 0 1 124.0 145.0 Z" class="mf-body"/><text x="90.0" y="150.5" text-anchor="middle" class="mf-code">LO</text><text x="136.0" y="150.0" class="mf-name">LocationOutput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(90.0 111.0)"><title>Location family: Location</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Location</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
 
 symbol [stroke-width] { stroke-width: 5; }
@@ -575,28 +613,15 @@ symbol [stroke-width] { stroke-width: 5; }
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=5.709619140000086, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
-</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=5.711810980000109, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
-</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=6.7646531600000515, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=7.215759879999979, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=7.925669159999984, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372),
-</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=8.368058519999977, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=5.963772749999947, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
+</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=5.965888209999974, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
+</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=7.252349189999876, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=7.778986919999937, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=8.274335339999936, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372),
+</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=9.491467769999957, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372)]
 </span></pre></div>
 </div>
 </div>
-</div>
-</section>
-<section id="for-recorded-sources">
-<h2>For Recorded Sources<a class="headerlink" href="#for-recorded-sources" title="Link to this heading">#</a></h2>
-<p>Implementing a dedicated input node for recorded data is similar to one <a class="reference internal" href="#pull-client"><span class="std std-ref">For Pull Clients</span></a> with these two exceptions:</p>
-<ul class="simple">
-<li><p>Subclass an <a class="reference internal" href="../../api/mufasa/io/inputs/base/index.html#mufasa.io.inputs.base.InputNode" title="mufasa.io.inputs.base.InputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">InputNode</span></code></a> (that is not a <a class="reference internal" href="../../api/mufasa/io/inputs/streaming/index.html#mufasa.io.inputs.streaming.StreamingInputNode" title="mufasa.io.inputs.streaming.StreamingInputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamingInputNode</span></code></a>, too).</p></li>
-<li><p>Overwrite <a class="reference internal" href="../../api/mufasa/io/inputs/streaming/index.html#mufasa.io.inputs.streaming.StreamingInputNode.items" title="mufasa.io.inputs.streaming.StreamingInputNode.items"><code class="xref py py-func docutils literal notranslate"><span class="pre">items()</span></code></a> to return a collection of (or yield) your data at once.</p></li>
-</ul>
-<div class="hint admonition">
-<p class="admonition-title">You don’t need a new node!</p>
-<p>Just read and convert the data beforehand and pass it in via a
-<a class="reference internal" href="../../api/mufasa/io/inputs/python_object/index.html#mufasa.io.inputs.python_object.LocationInput" title="mufasa.io.inputs.python_object.LocationInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationInput</span></code></a> or <a class="reference internal" href="../../api/mufasa/io/inputs/python_object/index.html#mufasa.io.inputs.python_object.MapInput" title="mufasa.io.inputs.python_object.MapInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapInput</span></code></a> node.</p>
 </div>
 </section>
 <section id="for-push-clients">
@@ -693,15 +718,14 @@ output type, conversion and config logic and also register the node for imports<
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">/tmp/ipykernel_173/892259989.py:4: UserWarning: No CRS specified. Ensure all input data is already in a Cartesian coordinate system with units of metres (e.g. a UTM projection). Using geographic coordinates (WGS84 degrees) will produce incorrect distances and unexpected behaviour.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">/tmp/ipykernel_200/892259989.py:4: UserWarning: No CRS specified. Ensure all input data is already in a Cartesian coordinate system with units of metres (e.g. a UTM projection). Using geographic coordinates (WGS84 degrees) will produce incorrect distances and unexpected behaviour.
 </span><span data-line="2">  push_graph = Graph([push_a, push_b], [push_out])
 </span></pre></div>
 </div>
-<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 451 251" width="451" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg1-location-marker" viewBox="0 0 64 64">
-	<g fill="none" stroke="currentColor" stroke-width="3">
-		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
-		<circle cx="32" cy="22" r="9"/>
-	</g>
+<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 451 251" width="451" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg1-map-roll" viewBox="0 0 64 64">
+	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg1-map-fold" viewBox="0 0 64 64">
+	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
 </symbol><symbol id="mfg1-observation-marker" viewBox="0 0 64 64">
 	<g fill="none" stroke="currentColor" stroke-width="3">
 		<circle cx="32" cy="32" r="26"/>
@@ -710,10 +734,11 @@ output type, conversion and config logic and also register the node for imports<
 	<circle cx="32" cy="32" r="6" fill="currentColor"/>
 </symbol><symbol id="mfg1-unknown" viewBox="0 0 64 64">
 	<circle cx="32" cy="32" r="12" fill="currentColor"/>
-</symbol><symbol id="mfg1-map-roll" viewBox="0 0 64 64">
-	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
-</symbol><symbol id="mfg1-map-fold" viewBox="0 0 64 64">
-	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg1-location-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
+		<circle cx="32" cy="22" r="9"/>
+	</g>
 </symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsonobservationpushinput_0" data-to="locationoutput_0"><path d="M0.0 47.0 L0.0 62.5 Q0.0 72.5 10.0 72.5 L73.5 72.5 Q83.5 72.5 83.5 82.5 L83.5 99.7"/><circle cx="0.0" cy="47.0" r="3.5"/><circle cx="83.5" cy="99.7" r="3.5"/></g><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsonobservationpushinput_1" data-to="locationoutput_0"><path d="M180.0 47.0 L180.0 62.5 Q180.0 72.5 170.0 72.5 L106.5 72.5 Q96.5 72.5 96.5 82.5 L96.5 99.7"/><circle cx="180.0" cy="47.0" r="3.5"/><circle cx="96.5" cy="99.7" r="3.5"/></g><g class="mf-node mf-io" data-id="geojsonobservationpushinput_0" tabindex="0" aria-label="GeoJsonObservationPushInput"><path d="M-34.0 0.0 V-23.6 Q-34.0 -30.6 -27.0 -30.6 H27.0 Q34.0 -30.6 34.0 -23.6 V0.0 A34 34 0 0 1 -34.0 0.0 Z" class="mf-body"/><text x="0.0" y="5.5" text-anchor="middle" class="mf-code">GJO</text><text x="46.0" y="5.0" class="mf-name">GeoJsonObservationPushInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="geojsonobservationpushinput_1" tabindex="0" aria-label="GeoJsonObservationPushInput"><path d="M146.0 0.0 V-23.6 Q146.0 -30.6 153.0 -30.6 H207.0 Q214.0 -30.6 214.0 -23.6 V0.0 A34 34 0 0 1 146.0 0.0 Z" class="mf-body"/><text x="180.0" y="5.5" text-anchor="middle" class="mf-code">GJO</text><text x="226.0" y="5.0" class="mf-name">GeoJsonObservationPushInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(180.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="locationoutput_0" tabindex="0" aria-label="LocationOutput"><path d="M124.0 145.0 V168.6 Q124.0 175.6 117.0 175.6 H63.0 Q56.0 175.6 56.0 168.6 V145.0 A34 34 0 0 1 124.0 145.0 Z" class="mf-body"/><text x="90.0" y="150.5" text-anchor="middle" class="mf-code">LO</text><text x="136.0" y="150.0" class="mf-name">LocationOutput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(90.0 111.0)"><title>Location family: Location</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Location</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
 
 symbol [stroke-width] { stroke-width: 5; }
@@ -801,12 +826,12 @@ symbol [stroke-width] { stroke-width: 5; }
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=15.983313629999998, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
-</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=15.98414395000006, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
-</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=17.222381690000077, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=17.646555550000045, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=19.106859500000013, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372),
-</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=19.455347199999977, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=16.31827721999997, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
+</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=16.320094929999982, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
+</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=17.538579699999985, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=18.01213568999998, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=18.773436019999963, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372),
+</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=19.652031199999982, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372)]
 </span></pre></div>
 </div>
 </div>
@@ -858,16 +883,16 @@ and make it call <a class="reference internal" href="../../api/mufasa/io/inputs/
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">/tmp/ipykernel_173/3389171579.py:7: UserWarning: No CRS specified. Ensure all input data is already in a Cartesian coordinate system with units of metres (e.g. a UTM projection). Using geographic coordinates (WGS84 degrees) will produce incorrect distances and unexpected behaviour.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">/tmp/ipykernel_200/3389171579.py:7: UserWarning: No CRS specified. Ensure all input data is already in a Cartesian coordinate system with units of metres (e.g. a UTM projection). Using geographic coordinates (WGS84 degrees) will produce incorrect distances and unexpected behaviour.
 </span><span data-line="2">  alt_graph = Graph([alt_a, alt_b], [alt_out])
 </span></pre></div>
 </div>
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=26.08494536000009, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
-</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=26.084058349999992, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
-</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=27.33830594000011, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=27.415476400000074, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
-</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=28.44224187000009, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372),
-</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=28.848319510000096, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372)]
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=21.433814619999936, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.9433776719597745),
+</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=21.436896609999962, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.9433776719597745),
+</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=22.60748578999994, properties={&#39;track&#39;: &#39;A&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="4"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=23.078623339999922, properties={&#39;track&#39;: &#39;B&#39;, &#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="5"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=24.177852569999914, properties={&#39;track&#39;: &#39;B&#39;}, confidence=0.7896239763630372),
+</span><span data-line="6"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=24.576590119999935, properties={&#39;track&#39;: &#39;A&#39;}, confidence=0.7896239763630372)]
 </span></pre></div>
 </div>
 </div>
@@ -894,10 +919,10 @@ and make it call <a class="reference internal" href="../../api/mufasa/io/inputs/
   </svg>
   <span>Back to top</span>
 </button><div class="navigation flex print:hidden"><div class="navigation-prev">
-    <a href="index.html">
+    <a href="nodes.html">
       <i class="i-lucide chevron-left"></i>
       <div class="page-info">
-        <span>Previous</span><div class="title">Extending MuFASA</div></div>
+        <span>Previous</span><div class="title">Writing a Node</div></div>
     </a>
   </div><div class="navigation-next">
     <a href="../going-live/index.html">

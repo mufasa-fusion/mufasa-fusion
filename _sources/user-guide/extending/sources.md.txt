@@ -8,11 +8,36 @@ import os.path
 os.chdir(os.path.join("..", "..", "_data"))
 ```
 
-# Custom Data Sources
+# Connecting Custom Data Sources
 
-This guide shows how to connect Fusion Graphs to not (yet) built-in data sources.
-It focuses on integrating external systems that stream live data and implementing new input nodes.
-Moreover, it covers extending MuFASA for recorded data and demonstrates common usage patterns around inputs.
+This guide shows how to connect Fusion Graphs to data sources that MuFASA doesn't support out of the box,
+with a focus on live data from sensors and other external systems.
+Which approach fits depends on where your data comes from:
+
+| Your data comes from … | Approach |
+|---|---|
+| a file or a list you already have in Python | No new node: convert it and use a {class}`~mufasa.io.inputs.python_object.LocationInput` or {class}`~mufasa.io.inputs.python_object.MapInput` |
+| a recorded format MuFASA doesn't know | An {class}`~mufasa.io.inputs.base.InputNode` that returns all items at once, see {ref}`recorded-sources` |
+| a library you ask for the next message (pull client) | A {class}`~mufasa.io.inputs.streaming.StreamingInputNode` whose `items()` yields the messages, see {ref}`pull-client` |
+| a library that calls you back with each message (push client) | A {class}`~mufasa.io.inputs.streaming.StreamingInputNode` that `ingest()`s the messages, see {ref}`push-client` |
+
+For real messaging systems such as MQTT or ROS 2, see {doc}`../going-live/index`.
+
+(recorded-sources)=
+## For Recorded Sources
+
+Recorded data is the simple case: subclass an {class}`~mufasa.io.inputs.base.InputNode`
+(that is not a {class}`~mufasa.io.inputs.streaming.StreamingInputNode`)
+and return all your data at once from {func}`~mufasa.io.inputs.base.InputNode.items`.
+{ref}`writing-input-nodes` in {doc}`nodes` shows a complete example that reads a CSV file.
+
+:::{admonition} You don't need a new node!
+:class: hint
+Just read and convert the data beforehand and pass it in via a
+{class}`~mufasa.io.inputs.python_object.LocationInput` or {class}`~mufasa.io.inputs.python_object.MapInput` node.
+:::
+
+The rest of this guide covers live data.
 
 :::{admonition} You don't need a new node!
 :class: hint
@@ -275,19 +300,6 @@ with server_thread(ADDRESS, FeatureSendingRequestHandler):  # Demo only!
 
 pull_out.result
 ```
-
-## For Recorded Sources
-
-Implementing a dedicated input node for recorded data is similar to one {ref}`pull-client` with these two exceptions:
-
-- Subclass an {class}`~mufasa.io.inputs.base.InputNode` (that is not a {class}`~mufasa.io.inputs.streaming.StreamingInputNode`, too).
-- Overwrite {func}`~mufasa.io.inputs.streaming.StreamingInputNode.items()` to return a collection of (or yield) your data at once.
-
-:::{admonition} You don't need a new node!
-:class: hint
-Just read and convert the data beforehand and pass it in via a
-{class}`~mufasa.io.inputs.python_object.LocationInput` or {class}`~mufasa.io.inputs.python_object.MapInput` node.
-:::
 
 (push-client)=
 ## For Push Clients

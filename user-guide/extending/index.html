@@ -2,7 +2,7 @@
 <html lang="en" data-accent-color="red" data-content_root="../../">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Extending MuFASA - mufasa-fusion 0.1.0 documentation</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Custom Data Sources" href="sources.html" /><link rel="prev" title="Tips and Tricks" href="../tips-and-tricks.html" /><script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Extending MuFASA - mufasa-fusion 0.1.0 documentation</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Writing a Node" href="nodes.html" /><link rel="prev" title="Tips and Tricks" href="../tips-and-tricks.html" /><script>
     function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
     setColorMode(localStorage._theme||"auto");
   </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
@@ -78,7 +78,8 @@ data-aria-dark="Switch to auto color mode">
 <li class="toctree-l2"><a class="reference internal" href="../concepts.html">Concepts</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../tips-and-tricks.html">Tips and Tricks</a></li>
 <li class="toctree-l2 current"><a class="current reference internal" href="#">Extending MuFASA</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="sources.html">Custom Data Sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nodes.html">Writing a Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sources.html">Connecting Custom Data Sources</a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../going-live/index.html">Going Live</a><ul>
@@ -175,18 +176,23 @@ data-aria-dark="Switch to auto color mode">
 <li><p>Connect to more data formats and external systems</p></li>
 <li><p>Include other processing algorithms</p></li>
 </ul>
-<p>Both is achieved by implementing your own subclass of <a class="reference internal" href="../../api/mufasa/node/index.html#mufasa.node.Node" title="mufasa.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a> and optionally also a data type.
-The details are explained in the following guides:</p>
+<p>Both are achieved by implementing your own subclass of <a class="reference internal" href="../../api/mufasa/node/index.html#mufasa.node.Node" title="mufasa.node.Node"><code class="xref py py-class docutils literal notranslate"><span class="pre">Node</span></code></a>.
+Before you do, check whether you need a new node at all: often a few lines of preparation code
+and a built-in node achieve the same, which is in the spirit of rapid prototyping.
+A dedicated node pays off when you want to reuse or share it, or save and load graphs that use it.</p>
+<dl class="simple myst">
+<dt><a class="reference internal" href="nodes.html"><span class="std std-doc">Writing a Node</span></a></dt><dd><p>The basics of every node, shown with small examples for processing Locations and Maps, input and output nodes,
+and saving and loading graphs.</p>
+</dd>
+<dt><a class="reference internal" href="sources.html"><span class="std std-doc">Connecting Custom Data Sources</span></a></dt><dd><p>Which approach fits your data source, and how to write input nodes for live data from pull and push clients.</p>
+</dd>
+</dl>
 <div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="sources.html">Custom Data Sources</a></li>
-</ul>
 </div>
 <div class="admonition-todo admonition">
 <p class="admonition-title">Coming Soon</p>
-<p>Guides for custom processing and output nodes as well as new data models.</p>
-<p>For now, consult <a class="reference internal" href="sources.html"><span class="doc">Custom Data Sources</span></a>, MuFASA’s README and source code<a class="footnote-reference brackets" href="#repo" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>,
-and existing pull requests<a class="footnote-reference brackets" href="#soda-citron" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> for inspiration.</p>
+<p>Guides for new data models.</p>
+<p>For now, consult MuFASA’s source code<a class="footnote-reference brackets" href="#repo" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and existing pull requests<a class="footnote-reference brackets" href="#soda-citron" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> for inspiration.</p>
 </div>
 </section>
 <hr class="footnotes docutils" />
@@ -214,10 +220,10 @@ and existing pull requests<a class="footnote-reference brackets" href="#soda-cit
         <span>Previous</span><div class="title">Tips and Tricks</div></div>
     </a>
   </div><div class="navigation-next">
-    <a href="sources.html">
+    <a href="nodes.html">
       <div class="page-info">
         <span>Next</span>
-        <div class="title">Custom Data Sources</div>
+        <div class="title">Writing a Node</div>
       </div>
       <i class="i-lucide chevron-right"></i>
     </a>
