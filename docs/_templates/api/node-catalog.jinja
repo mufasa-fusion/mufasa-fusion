@@ -1,0 +1,9 @@
+.. rst-class:: mufasa-node-catalog
+
+{% for obj, (input, output) in zip(objs, ctx.node_data, fillvalue=("", "")) %}
+- {{ input }} {{ ctx.in_header_suffix }} → {{ output }} {{ ctx.out_header_suffix }}
+
+  :class:`~{{ obj.id }}`
+
+  {{ obj.summary }}
+{% endfor %}

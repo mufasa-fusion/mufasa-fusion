@@ -8,6 +8,7 @@ __all__ = [
     "InputNode",
     "StreamingInputNode",
     "LocationStreamingInput",
+    "ObservationStreamingInput",
     "MapStreamingInput",
     "GeoJsonInput",
     "GeoTiffInput",

@@ -166,6 +166,10 @@ class Node(ABC):
     def get_config(self) -> dict:
         """Return all constructor arguments as a plain JSON-serializable dict.
 
-        Used by ``Graph.to_config()`` to serialise the pipeline. Every key
-        must be a string; every value must be JSON-serializable.
+        Requires that the dict is JSON-serializable and that the node is reconstructed
+        when passing the dict as kwargs to its constructor like so::
+
+            SomeNode(**some_node.get_config())
+
+        Used by :func:`Graph.to_config() <mufasa.graph.Graph.to_config>` to serialize the pipeline.
         """

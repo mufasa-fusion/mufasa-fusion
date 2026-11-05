@@ -38,6 +38,7 @@ class Threshold(Node):
     """
 
     _input_types = [Map]  # broadest valid default; tightened at wiring time
+    _output_type = Location  # broadest valid default; resolved at wiring time
 
     def __init__(
         self,

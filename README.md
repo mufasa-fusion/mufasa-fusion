@@ -1,7 +1,7 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/mufasa-fusion/mufasa-fusion/refs/heads/dev/docs/assets/MuFASA_logo.png"
+  <img src="https://raw.githubusercontent.com/mufasa-fusion/mufasa-fusion/refs/heads/dev/docs/_static/img/logo/MuFASA_MuFASA.png"
         alt="MuFASA" height="80" />
-  <img src="https://raw.githubusercontent.com/mufasa-fusion/mufasa-fusion/refs/heads/dev/docs/assets/ait_logo.jpg"
+  <img src="https://raw.githubusercontent.com/mufasa-fusion/mufasa-fusion/refs/heads/dev/docs/_static/img/logo/AIT.jpg"
         alt="AIT Austrian Institute of Technology" height="60" />
 </div>
 

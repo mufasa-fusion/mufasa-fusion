@@ -34,6 +34,16 @@ dev = [
     "pytest-cov",
     "mufasa-fusion[tracking,vis]",
 ]
+docs = [
+    "sphinx",
+    "sphinx-autoapi",
+    "shibuya",
+    "myst-nb",
+    "sphinx-copybutton",
+    # For examples
+    "paho-mqtt",
+    "amqtt",
+]
 
 [project.urls]
 homepage = "https://mufasa-fusion.org"
@@ -46,6 +56,9 @@ version = {attr = "mufasa.__version__"}
 
 [tool.setuptools.packages.find]
 where = ["src"]
+
+[tool.setuptools.package-data]
+"mufasa.graph_svg" = ["*.css", "*.js", "icons/*.svg"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
