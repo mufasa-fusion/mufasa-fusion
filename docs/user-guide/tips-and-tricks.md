@@ -142,6 +142,7 @@ for data with different timestamps.
 Fix the map tiles issue!
 :::
 
+(geopandas-integration)=
 ## GeoPandas Integration
 
 MuFASA integrates nicely with Pandas[^Pandas] and GeoPandas[^GeoPandas].
