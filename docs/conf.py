@@ -1,9 +1,12 @@
+import json
 import os.path
 import sys
 from itertools import zip_longest
 
 from autoapi import _astroid_utils
 from jinja2 import Environment
+
+import mufasa
 
 sys.path.append(os.path.join(os.path.dirname(__file__), "_extensions"))  # Makes custom extensions importable
 
@@ -22,7 +25,7 @@ _astroid_utils.get_class_docstring = lambda node: node.doc_node.value if node.do
 project = 'mufasa-fusion'
 copyright = '2026, Michael Hubner, Kilian Wohlleben, Jan Nausner, Julia Pöschl'
 author = 'Michael Hubner, Kilian Wohlleben, Jan Nausner, Julia Pöschl'
-release = '0.1.0'
+release = mufasa.__version__  # Single source of truth: the package version
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -90,6 +93,9 @@ html_css_files = [
     "css/shibuya-overwrite.css",
     "css/mufasa.css",
 ]
+html_js_files = [
+    "js/versions.js",
+]
 html_logo = "_static/img/logo/MuFASA_MuFASA.svg"
 html_theme_options = {
     "accent_color": "red",
@@ -106,11 +112,14 @@ html_theme_options = {
     ],
 }
 
-# Version dropdown in the header. Placeholder with a single entry until versioned builds are deployed
-# (one folder per release on GitHub Pages, with the list read from a shared versions.json).
+# Version dropdown in the header. Each release is deployed to its own folder (see deploy-docs.yml),
+# the root always shows the latest release. _static/versions.json lists all of them: add an entry per release.
+# The list is written into the pages at build time; _static/js/versions.js reloads it from the site root,
+# so docs of older releases also show newer versions.
+with open(os.path.join(os.path.dirname(__file__), "_static", "versions.json"), encoding="utf-8") as _f:
+    _versions = json.load(_f)
+
 html_context = {
     "current_version": release,
-    "versions": [
-        (release, "https://mufasa-fusion.github.io/mufasa-fusion/"),
-    ],
+    "versions": [(v["version"], v["url"]) for v in _versions],
 }
