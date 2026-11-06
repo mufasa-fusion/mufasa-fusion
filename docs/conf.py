@@ -1,4 +1,3 @@
-import json
 import os.path
 import sys
 from itertools import zip_longest
@@ -113,13 +112,12 @@ html_theme_options = {
 }
 
 # Version dropdown in the header. Each release is deployed to its own folder (see deploy-docs.yml),
-# the root always shows the latest release. _static/versions.json lists all of them: add an entry per release.
-# The list is written into the pages at build time; _static/js/versions.js reloads it from the site root,
+# The list is written into the pages at build time; _static/js/versions.js reloads it from latest,
 # so docs of older releases also show newer versions.
-with open(os.path.join(os.path.dirname(__file__), "_static", "versions.json"), encoding="utf-8") as _f:
-    _versions = json.load(_f)
+with open(os.path.join("_static", "versions.txt")) as f:
+    versions = [v.strip() for v in f]
 
 html_context = {
     "current_version": release,
-    "versions": [(v["version"], v["url"]) for v in _versions],
+    "versions": ({"latest": "/latest/"} | {v: f"/v{v}/" for v in versions}).items(),
 }
