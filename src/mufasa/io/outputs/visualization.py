@@ -34,9 +34,17 @@ def _apply_latlon_ticks(ax, crs) -> None:
     ax.set_yticklabels([f"{lat:.4f}°" for lat in lats])
 
 
-def _add_basemap(ax, crs) -> None:
+# Basemap styles, as contextily provider names. OpenStreetMap's own tile server blocks requests like these.
+BASEMAPS = {
+    "streets": "Esri.WorldGrayCanvas",
+    "satellite": "Esri.WorldImagery",
+}
+
+
+def _add_basemap(ax, crs, style: bool | str = True) -> None:
     import contextily as ctx
-    ctx.add_basemap(ax, crs=_crs_to_string(crs), source=ctx.providers.OpenStreetMap.Mapnik)
+    name = BASEMAPS["streets" if style is True else style]
+    ctx.add_basemap(ax, crs=_crs_to_string(crs), source=ctx.providers.query_name(name))
 
 
 _REDUCTIONS = {
@@ -58,7 +66,7 @@ def _plot_map(
     vmax: float | None = None,
     colorbar: bool = True,
     title: str | None = None,
-    basemap: bool = False,
+    basemap: bool | str = False,
     latlon_labels: bool = False,
 ) -> None:
     import matplotlib.pyplot as plt
@@ -81,7 +89,7 @@ def _plot_map(
         aspect="equal", alpha=0.6 if basemap else 1.0, zorder=1,
     )
     if basemap:
-        _add_basemap(ax, ref.crs)
+        _add_basemap(ax, ref.crs, basemap)
     if colorbar:
         ax.figure.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
     if title is None:
@@ -100,7 +108,7 @@ def _animate_maps(
     *,
     cmap: str = "viridis",
     interval_ms: int = 300,
-    basemap: bool = False,
+    basemap: bool | str = False,
     latlon_labels: bool = False,
 ):
     import matplotlib.pyplot as plt
@@ -121,7 +129,7 @@ def _animate_maps(
     fig.colorbar(im, ax=ax, fraction=0.046, pad=0.04)
     title_obj = ax.set_title("")
     if basemap:
-        _add_basemap(ax, maps[0].crs)
+        _add_basemap(ax, maps[0].crs, basemap)
     if latlon_labels:
         _apply_latlon_ticks(ax, maps[0].crs)
 
@@ -144,7 +152,7 @@ def _plot_locations(
     color: str = "crimson",
     markersize: float = 6,
     title: str | None = None,
-    basemap: bool = False,
+    basemap: bool | str = False,
     latlon_labels: bool = False,
 ) -> None:
     import matplotlib.pyplot as plt
@@ -164,7 +172,7 @@ def _plot_locations(
             ax.set_xlim(bbox.min_x, bbox.max_x)
             ax.set_ylim(bbox.min_y, bbox.max_y)
     if basemap and crs is not None:
-        _add_basemap(ax, crs)
+        _add_basemap(ax, crs, basemap)
     if latlon_labels and crs is not None:
         _apply_latlon_ticks(ax, crs)
     if title:
@@ -180,7 +188,7 @@ def _animate_locations(
     color: str = "crimson",
     markersize: float = 6,
     interval_ms: int = 300,
-    basemap: bool = False,
+    basemap: bool | str = False,
     latlon_labels: bool = False,
 ):
     import matplotlib.pyplot as plt
@@ -205,7 +213,7 @@ def _animate_locations(
     ax.set_xlim(xlim)
     ax.set_ylim(ylim)
     if basemap and crs is not None:
-        _add_basemap(ax, crs)
+        _add_basemap(ax, crs, basemap)
     if latlon_labels and crs is not None:
         _apply_latlon_ticks(ax, crs)
     title_obj = ax.set_title("")
@@ -276,7 +284,9 @@ class Visualization(OutputNode):
 
     Both ``show()`` and ``animate()`` default to ``basemap=True`` and
     ``latlon_labels=True`` and fix the axis extent to the pipeline bounding
-    box.  Pass ``basemap=False`` to suppress tile fetching (e.g. in tests).
+    box.  ``basemap`` also takes a style name from ``BASEMAPS`` (``"streets"``,
+    the default, or ``"satellite"``).  Pass ``basemap=False`` to suppress tile
+    fetching (e.g. in tests).
     """
 
     _input_types = [Map, Location]
@@ -391,7 +401,7 @@ class Visualization(OutputNode):
         start:         float | None = None,
         end:           float | None = None,
         reduction:     str          = "last",
-        basemap:       bool         = True,
+        basemap:       bool | str = True,
         latlon_labels: bool         = True,
         **kwargs,
     ) -> None:
@@ -419,7 +429,7 @@ class Visualization(OutputNode):
         start:         float | None = None,
         end:           float | None = None,
         speed:         float        = 1.0,
-        basemap:       bool         = True,
+        basemap:       bool | str = True,
         latlon_labels: bool         = True,
         **kwargs,
     ):

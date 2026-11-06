@@ -4,13 +4,13 @@ from mufasa.io.outputs.base import OutputNode
 
 
 class LocationOutput(OutputNode):
-
-    _input_types = [Location]
-    _output_type = None
-    """Collects Observations or Locations in memory.
+    """Collects Observations or Locations in a list.
 
     Results are accessible via the .result property after the pipeline runs.
     """
+
+    _input_types = [Location]
+    _output_type = None
 
     def __init__(self) -> None:
         super().__init__()

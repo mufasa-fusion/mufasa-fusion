@@ -2,8 +2,8 @@ name: PyPI Release
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - "v*"  # Publish to PyPI only for release tags, e.g. v0.2.0 (tag on main)
 
 jobs:
   build:

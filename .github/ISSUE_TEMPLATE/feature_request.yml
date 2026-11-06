@@ -1,0 +1,43 @@
+name: Feature request
+description: Suggest an improvement that is not a new node
+labels: ["enhancement", "needs-triage"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for your idea! Please check the [open issues](https://github.com/mufasa-fusion/mufasa-fusion/issues) first to avoid duplicates.
+
+        Proposing a new node? Please use the **New node** template instead.
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      description: Describe your use case. What are you trying to do, and what is missing or difficult today?
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed solution
+      description: How do you imagine it could work? A rough idea or a code sketch is enough.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you have considered
+      description: Workarounds or other approaches, if any.
+
+  - type: dropdown
+    id: contribute
+    attributes:
+      label: Would you like to implement it yourself?
+      options:
+        - "Yes"
+        - "Maybe, with some guidance"
+        - "No"
+    validations:
+      required: true

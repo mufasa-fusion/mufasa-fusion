@@ -1,0 +1,452 @@
+:root.dark .mf-light-only,
+:root.light .mf-dark-only,
+.mf-hidden-title > :first-child {
+    display: none;
+}
+
+img.mufasa-shape-icon {
+    height: 1em;
+    max-width: unset;
+    vertical-align: sub;
+}
+
+a[title="mufasa.location.Location"], a[title="mufasa.location.Observation"],
+a[title="mufasa.map.Map"], a[title="mufasa.map.BayesianMap"] {
+    /* Prevents separating symbol from text */
+    display: inline-block;
+
+    &::before {
+        content: "";
+        display: inline-block;
+        vertical-align: sub;
+        height: 1em;
+        width: 1em;
+        margin-inline-end: .3em;
+        background-size: contain;
+    }
+}
+em.sig-param, span.sig-return-typehint {
+    a[title="mufasa.location.Location"], a[title="mufasa.location.Observation"],
+    a[title="mufasa.map.Map"], a[title="mufasa.map.BayesianMap"] {
+        display: inline;
+    }
+}
+
+a[title="mufasa.location.Location"]::before {
+    background-image: url("../../_images/location-marker.svg");
+}
+
+a[title="mufasa.location.Observation"]::before {
+    background-image: url("../../_images/observation-marker.svg");
+}
+
+a[title="mufasa.map.Map"]::before {
+    background-image: url("../../_images/map-fold.svg");
+}
+
+a[title="mufasa.map.BayesianMap"]::before {
+    background-image: url("../../_images/map-roll.svg");
+}
+
+a > sup:only-child {
+    /* Code notes = fake footnotes */
+    font-size: .65rem;
+}
+
+ul.mufasa-node-catalog {
+    gap: .5em;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+
+    list-style-type: none;
+    margin-left: 0;
+
+    &.twos {
+        grid-auto-flow: column;
+        grid-template-rows: repeat(2, auto);
+        grid-template-columns: unset;
+    }
+
+    & > li {
+        /* same style as tables in alabaster */
+        padding: 0.25em 0.7em;
+        border: 1px solid #888;
+        -moz-box-shadow: 2px 2px 4px #EEE;
+        -webkit-box-shadow: 2px 2px 4px #EEE;
+        box-shadow: 2px 2px 4px #EEE;
+
+        transition-duration: 800ms;
+    }
+
+    & > li:hover {
+        background-color: #eee;
+    }
+
+    &:not(.twos) > li > :first-child {
+        text-align: right;
+    }
+}
+
+:root .yue .mf-float {
+    float: right;
+    margin: 0 0 1em 2em;
+
+    & :only-child {
+        margin: 0;
+        padding: 0;
+    }
+}
+
+.yue .mf-float ~ section, .yue .mf-float ~ section section {
+    clear: none;
+}
+
+.mf-fit-check, .mf-doc-paths {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16em, 1fr));
+    gap: 1em;
+
+    & > div {
+        padding: 0.25em 1em;
+        border: 1px solid var(--gray-a6, #888);
+        border-radius: 6px;
+    }
+}
+
+.mf-fit-check ul {
+    padding-left: 1.5em;
+}
+
+.mf-fit-check > .mf-fit-yes {
+    border-left: 4px solid var(--ait-torquise);
+    background-color: color-mix(in srgb, var(--ait-torquise) 8%, transparent);
+
+    & strong { color: var(--ait-torquise-text); }
+    & li::marker {
+        content: "✓  ";
+        color: var(--ait-torquise-text);
+    }
+}
+
+/* Docs paths: one AIT color per card */
+.mf-doc-paths > div {
+    --mf-card-color: var(--ait-red);
+    border-top: 4px solid var(--mf-card-color);
+    transition: background-color 300ms;
+
+    & strong { color: var(--mf-card-color); }
+    &:hover { background-color: color-mix(in srgb, var(--mf-card-color) 6%, transparent); }
+
+    &:nth-child(2) { --mf-card-color: var(--ait-torquise-text); }
+    &:nth-child(3) { --mf-card-color: var(--ait-violet); }
+}
+
+.mf-side-by-side {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    > * { flex: auto; /* Stretch to fit */ }
+
+    &.cell { gap: 1em; }
+    > *, > .cell_output > * {
+        margin-block: 0;
+        padding-block: 0;
+    }
+    > .cell_output {
+        padding-left: 0;
+    }
+}
+
+/* ---- Design principles page (user-guide/design-principles.md) ---- */
+
+/* One color per role, shared by the diagram, the code example and the legend */
+:root {
+    --mf-c-io: var(--ait-torquise-text);
+    --mf-c-proc: var(--ait-red);
+    --mf-c-graph: var(--ait-violet);
+}
+
+/* Where MuFASA sits: sensors -> [Fusion Graph: in -> processing -> out] -> decision support */
+.mf-stack {
+    display: flex;
+    align-items: center;
+    gap: 1.5em;
+    font-size: 0.9em;
+    text-align: center;
+
+    & p { margin: 0.3em 0; }
+}
+
+.mf-stack-outer {
+    flex: 1 1 0;
+    padding: 0.25em 0.75em;
+    border: 1px dashed var(--ait-grey);
+    border-radius: 6px;
+    color: var(--gray-11);
+}
+
+.mf-stack-graph {
+    position: relative;
+    flex: 3 1 0;
+    display: flex;
+    align-items: stretch;
+    gap: 1.5em;
+    padding: 1.5em 1em 1em;
+    border: 2px solid var(--mf-c-graph);
+    border-radius: 10px;
+
+    &::before {
+        content: "Fusion Graph";
+        position: absolute;
+        top: -0.75em;
+        left: 1em;
+        padding: 0 0.4em;
+        background-color: var(--sy-c-background, white);
+        color: var(--mf-c-graph);
+        font-weight: 600;
+    }
+
+    & > div {
+        flex: 1 1 0;
+        padding: 0.25em 0.75em;
+        border-radius: 6px;
+        border: 2px solid var(--mf-c-role);
+        background-color: color-mix(in srgb, var(--mf-c-role) 7%, transparent);
+
+        & strong { color: var(--mf-c-role); }
+    }
+}
+
+.mf-stack-io { --mf-c-role: var(--mf-c-io); }
+.mf-stack-proc { --mf-c-role: var(--mf-c-proc); }
+
+/* Arrows between neighbouring boxes */
+.mf-stack > div, .mf-stack-graph > div {
+    position: relative;
+}
+
+.mf-stack > div:not(:last-child)::after,
+.mf-stack-graph > div:not(:last-child)::after {
+    content: "→";
+    font-size: 1.6em;
+    line-height: 1;
+    position: absolute;
+    right: -0.95em;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ait-grey);
+}
+
+@media (max-width: 767px) {
+    .mf-stack, .mf-stack-graph { flex-direction: column; }
+
+    .mf-stack > div:not(:last-child)::after,
+    .mf-stack-graph > div:not(:last-child)::after {
+        content: "↓";
+        right: 50%;
+        top: auto;
+        bottom: -1.4em;
+        transform: translateX(50%);
+    }
+}
+
+/* Example code: tint lines by role. Line numbers refer to the code block in user-guide/design-principles.md */
+.mf-annotated .highlight [data-line] {
+    display: block;
+    margin: 0 -1em;
+    padding: 0 1em;
+}
+
+.mf-annotated .highlight :is([data-line="6"], [data-line="7"], [data-line="8"], [data-line="9"],
+                             [data-line="17"], [data-line="18"]) {
+    --mf-c-role: var(--mf-c-io);
+}
+
+.mf-annotated .highlight :is([data-line="11"], [data-line="12"], [data-line="13"], [data-line="14"],
+                             [data-line="15"]) {
+    --mf-c-role: var(--mf-c-proc);
+}
+
+.mf-annotated .highlight :is([data-line="20"], [data-line="21"], [data-line="22"]) {
+    --mf-c-role: var(--mf-c-graph);
+}
+
+.mf-annotated .highlight [data-line] {
+    background-color: color-mix(in srgb, var(--mf-c-role, transparent) 8%, transparent);
+    box-shadow: inset 3px 0 var(--mf-c-role, transparent);
+}
+
+
+/* Legend below the example */
+.mf-principles-legend {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+    gap: 1em;
+
+    & > div {
+        padding: 0.25em 1em;
+        border-left: 4px solid var(--mf-c-role);
+
+        & strong { color: var(--mf-c-role); }
+        & p { margin: 0.4em 0; }
+    }
+}
+
+.mf-legend-io { --mf-c-role: var(--mf-c-io); }
+.mf-legend-proc { --mf-c-role: var(--mf-c-proc); }
+.mf-legend-graph { --mf-c-role: var(--mf-c-graph); }
+
+/* ---- Showcases ---- */
+
+/* One card per row: picture on the left, title, tags, one sentence and platform/sensors on the right */
+.mf-showcase-cards > div {
+    margin-block: 1em;
+    display: grid;
+    grid-template-columns: 12em 1fr;
+    column-gap: 1.25em;
+    align-content: start;
+    padding: 0.75em 1em;
+    border: 1px solid var(--gray-a6, #888);
+    border-left: 4px solid var(--ait-grey);
+    border-radius: 6px;
+
+    & > * { grid-column: 2; }
+    & p { margin: 0.25em 0; }
+    & > p:first-of-type { margin-top: 0.25em; font-size: 1.1em; }
+
+    /* The picture fills the height of the text rows, so both edges line up; on narrow screens it moves on top */
+    > img, &:not(:has(> img))::before {
+        grid-column: 1;
+        grid-row: 1 / span 4;
+        align-self: stretch;
+        width: 100%;
+        height: 100%;
+        min-height: 8em;
+        object-fit: cover;
+        border-radius: 4px;
+
+        &.mf-card-image-left { object-position: 15% center; }  /* For pictures whose subject is on the left */
+    }
+
+}
+
+@media (max-width: 40em) {
+    .mf-showcase-cards > div { grid-template-columns: 1fr; }
+    .mf-showcase-cards > div > * { grid-column: 1; }
+}
+
+/* Stand-in until a showcase has its picture */
+.mf-showcase-cards > div:not(:has(> img))::before {
+    content: "Comming Soon";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--gray-3, #eee);
+    border: 1px dashed var(--gray-8, #aaa);
+    color: var(--gray-11, #666);
+    font-size: 0.85em;
+}
+
+/* Status badge: field-tested (turquoise) or in simulation (grey) */
+.mf-status-tested, .mf-status-simulation {
+    display: inline-block;
+    padding: 0.1em 0.6em;
+    border-radius: 1em;
+    font-size: 0.8em;
+    font-weight: 600;
+    color: white;
+
+    &.mf-status-tested { background-color: var(--ait-torquise-text); }
+    &.mf-status-simulation { background-color: var(--ait-grey); }
+}
+
+/* Key characteristics of a showcase, in small muted text */
+.mf-showcase-cards > div > p:last-child {
+    display: inline-block;
+    font-size: 0.85em;
+    line-height: 1.4;
+    color: var(--gray-11);
+}
+
+/* Use-case tag: outlined pill, so it reads as a label rather than a status */
+.mf-tag {
+    display: inline-block;
+    padding: 0.05em 0.6em;
+    border: 1px solid var(--ait-grey);
+    border-radius: 1em;
+    font-size: 0.85em;
+    color: var(--gray-12);
+}
+
+/* ---- Footer: AIT logo right of the social icons ---- */
+
+.mf-foot-right {
+    gap: 1.5rem;
+    margin-top: .75rem;
+}
+
+@media (min-width: 768px) {
+    .mf-foot-right {
+        margin-top: 0;
+    }
+}
+
+.mf-foot-logo img {
+    height: 2.5rem;
+    width: auto;
+}
+
+
+/* ---- Going Live page (going-live/index.md) ---- */
+
+/* Inline SVG figure: themed through the shared role colors */
+.mf-golive {
+    margin: 1.5em 0;
+
+    & svg {
+        display: block;
+        width: 100%;
+        height: auto;
+        font-family: inherit;
+        font-size: 13px;
+    }
+
+    & text { text-anchor: middle; fill: currentColor; }
+    & .mf-gl-title { font-weight: 600; }
+}
+
+/* Frame labels sit on the frame's top border, masked by a background-colored halo */
+.mf-golive .mf-gl-label {
+    text-anchor: start;
+    dominant-baseline: middle;
+    font-weight: 600;
+    paint-order: stroke;
+    stroke: var(--sy-c-background, white);
+    stroke-width: 8px;
+}
+
+.mf-gl-system { fill: none; stroke: var(--ait-grey); stroke-width: 1.5; stroke-dasharray: 6 4; }
+.mf-golive .mf-gl-label-system { fill: var(--gray-11); }
+
+.mf-gl-app { fill: color-mix(in srgb, var(--ait-grey) 6%, transparent); stroke: var(--ait-grey); stroke-width: 1.5; }
+.mf-golive .mf-gl-label-app { fill: var(--gray-11); }
+
+.mf-gl-graph { fill: var(--sy-c-background, white); stroke: var(--mf-c-graph); stroke-width: 2; }
+.mf-golive .mf-gl-label-graph { fill: var(--mf-c-graph); }
+
+.mf-gl-ext { fill: none; stroke: var(--ait-grey); stroke-width: 1; stroke-dasharray: 4 3; }
+.mf-golive .mf-gl-ext-text { fill: var(--gray-11); }
+
+.mf-gl-node { stroke-width: 2; }
+rect.mf-gl-io { stroke: var(--mf-c-io); fill: color-mix(in srgb, var(--mf-c-io) 7%, transparent); }
+rect.mf-gl-proc { stroke: var(--mf-c-proc); fill: color-mix(in srgb, var(--mf-c-proc) 7%, transparent); }
+.mf-golive text.mf-gl-io .mf-gl-title { fill: var(--mf-c-io); }
+.mf-golive text.mf-gl-proc .mf-gl-title { fill: var(--mf-c-proc); }
+
+.mf-gl-edge { fill: none; stroke: var(--ait-grey); stroke-width: 1.5; }
+.mf-gl-arrowhead { fill: var(--ait-grey); }
+
+/* The recording is an alternative source on the same topics */
+.mf-golive .mf-gl-rec { opacity: 0.6; }
+path.mf-gl-rec { stroke-dasharray: 5 4; }
