@@ -24,13 +24,3 @@ nodes
 sources
 ```
 
-:::{admonition} Coming Soon
-:class: admonition-todo
-Guides for new data models.
-
-For now, consult MuFASA's source code[^repo] and existing pull requests[^soda-citron] for inspiration.
-:::
-
-[^repo]: MuFASA's repository on GitHub, <https://github.com/mufasa-fusion/mufasa-fusion>
-[^soda-citron]: SODA-CitrON Pull Request, MuFASA's repository on GitHub,
-<https://github.com/mufasa-fusion/mufasa-fusion/pull/4>
