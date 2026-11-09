@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="red" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Going Live - mufasa-fusion 0.2.0 documentation</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="MQTT" href="mqtt.html" /><link rel="prev" title="Connecting Custom Data Sources" href="../extending/sources.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"light");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/shibuya-overwrite.css?v=5d2de755" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/mufasa.css?v=afb05a6e" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="Going Live"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      <img class="light-logo" src="../../_static/img/logo/MuFASA_MuFASA.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/img/logo/MuFASA_MuFASA_weiss.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <strong>mufasa-fusion</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"><ul><li class="link"><a href="../../getting-started.html">Getting started</a></li><li class="link"><a href="../index.html">User guide</a></li><li class="link"><a href="../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../catalog.html">Catalog</a></li><li class="link"><a href="../../api/index.html">API</a></li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">0.2.0</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="/latest/">latest</a></li><li><a href="/v0.2.0/">0.2.0</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/mufasa-fusion/mufasa-fusion" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><ul class="current">
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design-principles.html">Design principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tips-and-tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extending/index.html">Extending MuFASA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extending/nodes.html">Writing a Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/sources.html">Connecting Custom Data Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Going Live</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="mqtt.html">MQTT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ros2.html">ROS 2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../showcases/index.html">Showcases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../showcases/border-security.html">Maritime border security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../showcases/railway-security.html">Railway security</a></li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../catalog.html">Node Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/mufasa/index.html">mufasa</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/graph/index.html">mufasa.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/graph_svg/index.html">mufasa.graph_svg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/graph_svg/draw/index.html">mufasa.graph_svg.draw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/graph_svg/families/index.html">mufasa.graph_svg.families</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/graph_svg/layout/index.html">mufasa.graph_svg.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/graph_svg/spec/index.html">mufasa.graph_svg.spec</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/io/index.html">mufasa.io</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/io/inputs/index.html">mufasa.io.inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/io/outputs/index.html">mufasa.io.outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/location/index.html">mufasa.location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/map/index.html">mufasa.map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/node/index.html">mufasa.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/nodes/index.html">mufasa.nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/nodes/detection/index.html">mufasa.nodes.detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/nodes/fusion/index.html">mufasa.nodes.fusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/nodes/mapping/index.html">mufasa.nodes.mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/nodes/tracking/index.html">mufasa.nodes.tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/nodes/util/index.html">mufasa.nodes.util</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/registry/index.html">mufasa.registry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#why-swapping-the-i-o-is-all-it-takes">Why swapping the I/O is all it takes</a></li>
+<li><a class="reference internal" href="#publish-subscribe-architecture">Publish-subscribe architecture</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">mufasa-fusion</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">User Guide</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Going Live</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="going-live">
+<h1>Going Live<a class="headerlink" href="#going-live" title="Link to this heading">#</a></h1>
+<p>A Fusion Graph that is developed on recorded data runs on live data with the same fusion logic.
+The recommended way to go live is to embed MuFASA in your messaging system. Install <code class="docutils literal notranslate"><span class="pre">mufasa-fusion</span></code>
+in the application that talks to your MQTT broker, Kafka cluster or ROS 2 network, and run the graph there.
+The graph then doesn’t distinguish whether a message comes from a live sensor or from a replayed recording, such as a rosbag.</p>
+<figure class="mf-golive">
+<svg viewBox="0 0 760 290" role="img"
+     aria-label="A messaging system contains live sensors and a replayed recording, both publishing to the same topics. Your application, with mufasa-fusion installed, runs the Fusion Graph: Input nodes subscribe, Processing nodes fuse, Output nodes publish to decision support.">
+  <defs>
+    <marker id="mf-gl-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path class="mf-gl-arrowhead" d="M0,0 L10,5 L0,10 z"/>
+    </marker>
+  </defs>
+
+  <!-- Messaging system -->
+  <rect class="mf-gl-system" x="4" y="14" width="752" height="270" rx="10"/>
+  <text class="mf-gl-label mf-gl-label-system" x="20" y="14">Messaging system · MQTT, Kafka, ROS 2, …</text>
+
+  <!-- Publishers -->
+  <rect class="mf-gl-ext" x="20" y="62" width="135" height="60" rx="6"/>
+  <text class="mf-gl-ext-text" x="87.5" y="87"><tspan class="mf-gl-title">Sensors</tspan><tspan x="87.5" dy="19">live</tspan></text>
+
+  <rect class="mf-gl-ext mf-gl-rec" x="20" y="186" width="135" height="60" rx="6"/>
+  <text class="mf-gl-ext-text mf-gl-rec" x="87.5" y="211"><tspan class="mf-gl-title">Recording</tspan><tspan x="87.5" dy="19">offline</tspan></text>
+
+  <!-- Your application -->
+  <rect class="mf-gl-app" x="190" y="44" width="425" height="222" rx="10"/>
+  <text class="mf-gl-label mf-gl-label-app" x="204" y="44">Your application · pip install mufasa-fusion</text>
+
+  <!-- Fusion Graph -->
+  <rect class="mf-gl-graph" x="206" y="84" width="393" height="164" rx="10"/>
+  <text class="mf-gl-label mf-gl-label-graph" x="220" y="84">Fusion Graph</text>
+
+  <rect class="mf-gl-node mf-gl-io" x="222" y="128" width="95" height="66" rx="6"/>
+  <text class="mf-gl-node-text mf-gl-io" x="269.5" y="155"><tspan class="mf-gl-title">Input nodes</tspan><tspan x="269.5" dy="19">subscribe</tspan></text>
+
+  <rect class="mf-gl-node mf-gl-proc" x="352" y="128" width="101" height="66" rx="6"/>
+  <text class="mf-gl-node-text mf-gl-proc" x="402.5" y="155"><tspan class="mf-gl-title" dy="9.5">Processing</tspan></text>
+
+  <rect class="mf-gl-node mf-gl-io" x="488" y="128" width="95" height="66" rx="6"/>
+  <text class="mf-gl-node-text mf-gl-io" x="535.5" y="155"><tspan class="mf-gl-title">Output nodes</tspan><tspan x="535.5" dy="19">publish</tspan></text>
+
+  <!-- Subscribers -->
+  <rect class="mf-gl-ext" x="644" y="128" width="100" height="66" rx="6"/>
+  <text class="mf-gl-ext-text" x="694" y="155"><tspan class="mf-gl-title">Decision</tspan><tspan x="694" dy="19">support</tspan></text>
+
+  <!-- Arrows: each ends exactly on the left edge of its target -->
+  <path class="mf-gl-edge" d="M155,92 C190,92 190,150 222,150" marker-end="url(#mf-gl-arrow)"/>
+  <path class="mf-gl-edge mf-gl-rec" d="M155,216 C190,216 190,172 222,172" marker-end="url(#mf-gl-arrow)"/>
+  <path class="mf-gl-edge" d="M317,161 H352" marker-end="url(#mf-gl-arrow)"/>
+  <path class="mf-gl-edge" d="M453,161 H488" marker-end="url(#mf-gl-arrow)"/>
+  <path class="mf-gl-edge" d="M583,161 H644" marker-end="url(#mf-gl-arrow)"/>
+</svg>
+</figure><section id="why-swapping-the-i-o-is-all-it-takes">
+<h2>Why swapping the I/O is all it takes<a class="headerlink" href="#why-swapping-the-i-o-is-all-it-takes" title="Link to this heading">#</a></h2>
+<p>Two design decisions make the transition from recorded to live data a matter of the Input and Output nodes:</p>
+<ul class="simple">
+<li><p><strong>The I/O boundary is the only interface to the outside world.</strong>
+MuFASA works on the <a class="reference internal" href="../design-principles.html"><span class="doc">detection level</span></a>. Input and Output nodes translate
+external data into <a class="reference internal" href="../../api/mufasa/location/index.html#mufasa.location.Location" title="mufasa.location.Location"><code class="xref py py-class docutils literal notranslate"><span class="pre">Location</span></code></a>s and <a class="reference internal" href="../../api/mufasa/map/index.html#mufasa.map.Map" title="mufasa.map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a>s and back.</p></li>
+<li><p><strong>Processing is event-driven.</strong>
+Every node updates its state as soon as it receives a detection. There’s no separate clock driving the graph,
+so the same graph runs against a recording during prototyping and against a live stream in operation.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Swapping the I/O nodes is all it takes <em>at the implementation level</em>. A live deployment still differs from an offline one. Recorded data is clean and ordered by construction, live data isn’t. MuFASA doesn’t close that gap by architecture alone, but it helps you work through it. The same quick iteration and inspection that help with prototyping help you understand what a live deployment surfaces, and act on it quickly.</p>
+</div>
+</section>
+<section id="publish-subscribe-architecture">
+<h2>Publish-subscribe architecture<a class="headerlink" href="#publish-subscribe-architecture" title="Link to this heading">#</a></h2>
+<p>Embedding MuFASA in a messaging system follows a simple pattern. The graph runs inside a client or node of that system. Each time a subscriber callback receives a message, it translates the message into MuFASA’s minimal representation and passes it to a streaming Input node. Only this translation step is specific to the messaging system and must be known and implemented by the user. The Fusion Graph itself is never touched. Because node parameters are explicit, they can be exposed through the messaging system’s own configuration, for example as ROS 2 node parameters.</p>
+<p>MuFASA is primarily used in, but not limited to, publisher-subscriber architectures in live systems. Sensors publish their detections on topics. A Fusion Graph subscribes to those topics with its Input nodes and publishes its results with its Output nodes. Decision support, such as an alarm dashboard, subscribes to the results.</p>
+<p>The following guides show the transition for two messaging systems:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="mqtt.html">MQTT</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ros2.html">ROS 2</a></li>
+</ul>
+</div>
+</section>
+</section>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="../extending/sources.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Connecting Custom Data Sources</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="mqtt.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">MQTT</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Michael Hubner, Kilian Wohlleben, Jan Nausner, Julia Pöschl</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="mf-foot-right flex items-center">
+        <div class="sy-foot-socials">
+  <a href="https://github.com/mufasa-fusion/mufasa-fusion" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+        <a class="mf-foot-logo" href="https://www.ait.ac.at" aria-label="AIT Austrian Institute of Technology">
+          <img class="mf-light-only" src="../../_static/img/logo/AIT.svg" alt="AIT Austrian Institute of Technology">
+          <img class="mf-dark-only" src="../../_static/img/logo/AIT_weiss.svg" alt="AIT Austrian Institute of Technology">
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/js/versions.js?v=f52e4ae6"></script></body>
+</html>

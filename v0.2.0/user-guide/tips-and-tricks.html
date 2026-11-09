@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="red" data-content_root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Tips and Tricks - mufasa-fusion 0.2.0 documentation</title><link rel="index" title="Index" href="../genindex.html" /><link rel="search" title="Search" href="../search.html" /><link rel="next" title="Extending MuFASA" href="extending/index.html" /><link rel="prev" title="Concepts" href="concepts.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"light");
+  </script><link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/shibuya-overwrite.css?v=5d2de755" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/mufasa.css?v=afb05a6e" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="Tips and Tricks"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../index.html">
+      <img class="light-logo" src="../_static/img/logo/MuFASA_MuFASA.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <img class="dark-logo" src="../_static/img/logo/MuFASA_MuFASA_weiss.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <strong>mufasa-fusion</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"><ul><li class="link"><a href="../getting-started.html">Getting started</a></li><li class="link"><a href="index.html">User guide</a></li><li class="link"><a href="../showcases/index.html">Showcases</a></li><li class="link"><a href="../catalog.html">Catalog</a></li><li class="link"><a href="../api/index.html">API</a></li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">0.2.0</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="/latest/">latest</a></li><li><a href="/v0.2.0/">0.2.0</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/mufasa-fusion/mufasa-fusion" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><ul class="current">
+<li class="toctree-l1 _expand"><a class="reference internal" href="../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="design-principles.html">Design principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="concepts.html">Concepts</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="extending/index.html">Extending MuFASA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="extending/nodes.html">Writing a Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="extending/sources.html">Connecting Custom Data Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="going-live/index.html">Going Live</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="going-live/mqtt.html">MQTT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="going-live/ros2.html">ROS 2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../showcases/index.html">Showcases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../showcases/border-security.html">Maritime border security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../showcases/railway-security.html">Railway security</a></li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../catalog.html">Node Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../api/mufasa/index.html">mufasa</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/graph/index.html">mufasa.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/graph_svg/index.html">mufasa.graph_svg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/draw/index.html">mufasa.graph_svg.draw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/families/index.html">mufasa.graph_svg.families</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/layout/index.html">mufasa.graph_svg.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/graph_svg/spec/index.html">mufasa.graph_svg.spec</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/io/index.html">mufasa.io</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/io/inputs/index.html">mufasa.io.inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/io/outputs/index.html">mufasa.io.outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/location/index.html">mufasa.location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/map/index.html">mufasa.map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/node/index.html">mufasa.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/nodes/index.html">mufasa.nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/detection/index.html">mufasa.nodes.detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/fusion/index.html">mufasa.nodes.fusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/mapping/index.html">mufasa.nodes.mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/tracking/index.html">mufasa.nodes.tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../api/mufasa/nodes/util/index.html">mufasa.nodes.util</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../api/mufasa/registry/index.html">mufasa.registry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#data-inspection">Data Inspection</a><ul>
+<li><a class="reference internal" href="#input">Input</a></li>
+<li><a class="reference internal" href="#infer-bounding-box">Infer Bounding Box</a></li>
+<li><a class="reference internal" href="#output">Output</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#visualization">Visualization</a></li>
+<li><a class="reference internal" href="#geopandas-integration">GeoPandas Integration</a><ul>
+<li><a class="reference internal" href="#convert-to-dataframes">Convert to <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s</a></li>
+<li><a class="reference internal" href="#bounding-boxes">Bounding Boxes</a></li>
+<li><a class="reference internal" href="#visualizations">Visualizations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#json-serialization">JSON Serialization</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">mufasa-fusion</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">User Guide</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">Tips and Tricks</strong>
+        <meta itemprop="position" content="3" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="tips-and-tricks">
+<h1>Tips and Tricks<a class="headerlink" href="#tips-and-tricks" title="Link to this heading">#</a></h1>
+<section id="data-inspection">
+<h2>Data Inspection<a class="headerlink" href="#data-inspection" title="Link to this heading">#</a></h2>
+<p>The most basic Fusion Graph possible doesn’t do any processing at all.
+It consists of one input node and one output node only.
+Here, we will use such a graph to inspect its data flow.</p>
+<section id="input">
+<h3>Input<a class="headerlink" href="#input" title="Link to this heading">#</a></h3>
+<p>With recorded data sources, you can leverage their input nodes
+to inspect the data loaded into MuFASA’s internal representation:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.inputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">GeoJsonInput</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">src</span> <span class="o">=</span> <span class="n">GeoJsonInput</span><span class="p">(</span><span class="s2">&quot;sensor_b.geojson&quot;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">src</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=0.0, properties={}, confidence=0.9433776719597745),
+</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=0.0, properties={&#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=0.0, properties={}, confidence=0.7896239763630372)]
+</span></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="infer-bounding-box">
+<h3>Infer Bounding Box<a class="headerlink" href="#infer-bounding-box" title="Link to this heading">#</a></h3>
+<p>This allows you to infer the bounding box from your input data:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa</span><span class="w"> </span><span class="kn">import</span> <span class="n">BoundingBox</span>
+</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">shapely</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="n">src_bounds</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">shapely</span><span class="o">.</span><span class="n">bounds</span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">geometry</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">src</span><span class="o">.</span><span class="n">items</span><span class="p">()])</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="n">min_x</span> <span class="o">=</span> <span class="n">src_bounds</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</span><span data-line="8"><span class="n">min_y</span> <span class="o">=</span> <span class="n">src_bounds</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</span><span data-line="9"><span class="n">max_x</span> <span class="o">=</span> <span class="n">src_bounds</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</span><span data-line="10"><span class="n">max_y</span> <span class="o">=</span> <span class="n">src_bounds</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</span><span data-line="11"><span class="n">x_tol</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_x</span> <span class="o">-</span> <span class="n">min_x</span><span class="p">)</span> <span class="o">*</span> <span class="mf">.1</span>
+</span><span data-line="12"><span class="n">y_tol</span> <span class="o">=</span> <span class="p">(</span><span class="n">max_y</span> <span class="o">-</span> <span class="n">min_y</span><span class="p">)</span> <span class="o">*</span> <span class="mf">.1</span>
+</span><span data-line="13">
+</span><span data-line="14"><span class="n">bbox</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span>
+</span><span data-line="15">    <span class="n">min_x</span> <span class="o">-</span> <span class="n">x_tol</span><span class="p">,</span>
+</span><span data-line="16">    <span class="n">min_y</span> <span class="o">-</span> <span class="n">y_tol</span><span class="p">,</span>
+</span><span data-line="17">    <span class="n">max_x</span> <span class="o">+</span> <span class="n">x_tol</span><span class="p">,</span>
+</span><span data-line="18">    <span class="n">max_y</span> <span class="o">+</span> <span class="n">y_tol</span><span class="p">,</span>
+</span><span data-line="19"><span class="p">)</span>
+</span><span data-line="20"><span class="n">bbox</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">BoundingBox(min_x=16.426595536135327, min_y=48.26828757800471, max_x=16.427171820581485, max_y=48.269740871163776)
+</span></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="output">
+<h3>Output<a class="headerlink" href="#output" title="Link to this heading">#</a></h3>
+<p>Use a <a class="reference internal" href="../api/mufasa/io/outputs/python_object/index.html#mufasa.io.outputs.python_object.LocationOutput" title="mufasa.io.outputs.python_object.LocationOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">LocationOutput</span></code></a> node
+(or its <a class="reference internal" href="../api/mufasa/io/outputs/python_object/index.html#mufasa.io.outputs.python_object.MapOutput" title="mufasa.io.outputs.python_object.MapOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">MapOutput</span></code></a> equivalent)
+to collect the data output by its predecessors into a Python list.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.outputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">LocationOutput</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">out</span> <span class="o">=</span> <span class="n">LocationOutput</span><span class="p">()(</span><span class="n">src</span><span class="p">)</span>
+</span><span data-line="4">
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+</span><span data-line="6"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">_suggest_utm_crs</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span>
+</span><span data-line="9">    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">src</span><span class="p">],</span>
+</span><span data-line="10">    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">out</span><span class="p">],</span>
+</span><span data-line="11">    <span class="n">bbox</span><span class="o">=</span><span class="n">bbox</span><span class="p">,</span>
+</span><span data-line="12">    <span class="n">resolution</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span><span data-line="13">    <span class="n">crs</span><span class="o">=</span><span class="n">_suggest_utm_crs</span><span class="p">(</span><span class="n">bbox</span><span class="p">),</span>
+</span><span data-line="14"><span class="p">)</span>
+</span><span data-line="15">
+</span><span data-line="16"><span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</span><span data-line="17"><span class="n">out</span><span class="o">.</span><span class="n">result</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">[Observation(geometry=&lt;POINT (16.427 48.268)&gt;, timestamp=0.0, properties={}, confidence=0.9433776719597745),
+</span><span data-line="2"> Observation(geometry=&lt;POINT (16.427 48.269)&gt;, timestamp=0.0, properties={&#39;headquarters&#39;: True}, confidence=0.5543464775591364),
+</span><span data-line="3"> Observation(geometry=&lt;POINT (16.427 48.27)&gt;, timestamp=0.0, properties={}, confidence=0.7896239763630372)]
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>Here, this verifies that all input data had been passed on.</p>
+</section>
+</section>
+<section id="visualization">
+<h2>Visualization<a class="headerlink" href="#visualization" title="Link to this heading">#</a></h2>
+<p>MuFASA provides two built-in visualizations: one for plotting fusion architectures
+and the other for showing data on a map.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This requires MuFASA to be installed with <code class="docutils literal notranslate"><span class="pre">vis</span></code> extra dependencies.</p>
+</div>
+<p>Redefine the <a class="reference internal" href="../api/mufasa/io/inputs/geojson/index.html#mufasa.io.inputs.geojson.GeoJsonInput" title="mufasa.io.inputs.geojson.GeoJsonInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">GeoJsonInput</span></code></a> node from above
+and connect it to a <a class="reference internal" href="../api/mufasa/io/outputs/visualization/index.html#mufasa.io.outputs.visualization.Visualization" title="mufasa.io.outputs.visualization.Visualization"><code class="xref py py-class docutils literal notranslate"><span class="pre">Visualization</span></code></a> node.
+The input from the previous section is already connected in a Fusion Graph and unfortunately can’t be reused.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.outputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Visualization</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">src</span> <span class="o">=</span> <span class="n">GeoJsonInput</span><span class="p">(</span><span class="s2">&quot;sensor_b.geojson&quot;</span><span class="p">)</span>
+</span><span data-line="4"><span class="n">vis</span> <span class="o">=</span> <span class="n">Visualization</span><span class="p">()(</span><span class="n">src</span><span class="p">)</span>
+</span><span data-line="5">
+</span><span data-line="6"><span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span>
+</span><span data-line="7">    <span class="n">inputs</span><span class="o">=</span><span class="p">[</span><span class="n">src</span><span class="p">],</span>
+</span><span data-line="8">    <span class="n">outputs</span><span class="o">=</span><span class="p">[</span><span class="n">vis</span><span class="p">],</span>
+</span><span data-line="9">    <span class="n">bbox</span><span class="o">=</span><span class="n">bbox</span><span class="p">,</span>
+</span><span data-line="10">    <span class="n">resolution</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+</span><span data-line="11">    <span class="n">crs</span><span class="o">=</span><span class="n">_suggest_utm_crs</span><span class="p">(</span><span class="n">bbox</span><span class="p">),</span>
+</span><span data-line="12"><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>Note that we need to set a <code class="docutils literal notranslate"><span class="pre">bbox</span></code> and <code class="docutils literal notranslate"><span class="pre">resolution</span></code> this time
+– although the graph isn’t processing any <a class="reference internal" href="../api/mufasa/map/index.html#mufasa.map.Map" title="mufasa.map.Map"><code class="xref py py-class docutils literal notranslate"><span class="pre">Map</span></code></a>.
+This is due to the fact that the Visualisation node also accepts Maps as input.
+This bounding box will also bound the visualization.
+The CRS is optional, but it will enhance the visualization with map tiles.</p>
+<p>You can now visually inspect the graph structure:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">graph</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 218 251" width="218" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg0-map-fold" viewBox="0 0 64 64">
+	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg0-unknown" viewBox="0 0 64 64">
+	<circle cx="32" cy="32" r="12" fill="currentColor"/>
+</symbol><symbol id="mfg0-observation-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<circle cx="32" cy="32" r="26"/>
+		<circle cx="32" cy="32" r="15"/>
+	</g>
+	<circle cx="32" cy="32" r="6" fill="currentColor"/>
+</symbol><symbol id="mfg0-map-roll" viewBox="0 0 64 64">
+	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg0-location-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
+		<circle cx="32" cy="22" r="9"/>
+	</g>
+</symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsoninput_0" data-to="visualization_0"><path d="M0.0 47.0 L0.0 68.2 Q0.0 72.5 -4.2 72.5 L-4.2 72.5 Q-8.5 72.5 -8.5 76.8 L-8.5 103.2"/><circle cx="0.0" cy="47.0" r="3.5"/><circle cx="-8.5" cy="103.2" r="3.5"/></g><g class="mf-node mf-io" data-id="geojsoninput_0" tabindex="0" aria-label="GeoJsonInput"><path d="M-34.0 0.0 V-23.6 Q-34.0 -30.6 -27.0 -30.6 H27.0 Q34.0 -30.6 34.0 -23.6 V0.0 A34 34 0 0 1 -34.0 0.0 Z" class="mf-body"/><text x="0.0" y="5.5" text-anchor="middle" class="mf-code">GJI</text><text x="46.0" y="5.0" class="mf-name">GeoJsonInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="visualization_0" tabindex="0" aria-label="Visualization"><path d="M34.0 145.0 V168.6 Q34.0 175.6 27.0 175.6 H-27.0 Q-34.0 175.6 -34.0 168.6 V145.0 A34 34 0 0 1 34.0 145.0 Z" class="mf-body"/><text x="0.0" y="150.5" text-anchor="middle" class="mf-code">VI</text><text x="46.0" y="150.0" class="mf-name">Visualization</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(-15.0 114.5)"><title>Location family: Location</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Location</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(15.0 114.5)"><title>Map family: Map</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Map</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg0-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
+
+symbol [stroke-width] { stroke-width: 5; }
+
+.mf-fg { font-family: inherit; overflow: visible; --mf-ink: #2f3439; }
+.mf-fg text { fill: var(--mf-ink); }
+.mf-fg .mf-node { outline: none; }
+
+/* Nodes: Input/Output nodes white with a dark outline, processing nodes grey */
+.mf-fg .mf-body { fill: white; stroke: var(--mf-ink); stroke-width: 2.5; filter: drop-shadow(0 3px 5px rgb(0 0 0 / 0.15)); }
+.mf-fg .mf-proc .mf-body { fill: #e9ecee; stroke: #b9c0c5; stroke-width: 1.5; }
+.mf-fg .mf-code { font-size: 16px; font-weight: 700; }
+
+/* Full name, hidden until the node is hovered or focused, then slides out to the right */
+.mf-fg .mf-name {
+    font-size: 15px; font-weight: 600; opacity: 0; transform: translateX(-24px); pointer-events: none;
+    paint-order: stroke; stroke: white; stroke-width: 5px; stroke-linejoin: round;
+    transition: opacity 200ms ease, transform 250ms ease;
+}
+.mf-fg .mf-node:is(:hover, :focus) .mf-name { opacity: 1; transform: none; }
+
+/* Edges in the color of the data family they carry */
+.mf-fg .mf-edge path { fill: none; stroke: var(--mf-fam); stroke-width: 2.5; }
+.mf-fg .mf-edge circle { fill: var(--mf-fam); }
+
+/* Ports; hovering one slides out a second badge with the concrete data type */
+.mf-fg .mf-port { color: var(--mf-fam); cursor: help; }
+.mf-fg .mf-port-bg { fill: white; stroke: var(--mf-fam); stroke-width: 2; }
+.mf-fg .mf-sub { opacity: 0; transition: transform 250ms ease, opacity 250ms ease; }
+.mf-fg .mf-port:is(:hover, :focus-within) .mf-sub { opacity: 1; transform: translateX(26px); }
+.mf-fg .mf-sub-label {
+    font-size: 11px; font-weight: 600; fill: var(--mf-fam);
+    paint-order: stroke; stroke: white; stroke-width: 4px;
+}
+
+/* Set by graph.js: fade out everything not connected to the hovered node */
+.mf-fg :is(.mf-node, .mf-edge) { transition: opacity 200ms; }
+.mf-fg.is-focused :is(.mf-node, .mf-edge):not(.is-related) { opacity: 0.25; }
+</style><script><![CDATA[// Fusion Graph SVGs (class mf-fg): fade out everything not connected to the hovered or focused node.
+// Safe to load more than once: each graph is set up only once.
+(() => {
+  function setUp(svg) {
+    svg.dataset.mfReady = "true";
+    const edges = [...svg.querySelectorAll(".mf-edge")];
+    const clear = () => {
+      svg.classList.remove("is-focused");
+      svg.querySelectorAll(".is-related").forEach(el => el.classList.remove("is-related"));
+    };
+    svg.querySelectorAll(".mf-node").forEach(node => {
+      const focus = () => {
+        clear();
+        svg.classList.add("is-focused");
+        node.classList.add("is-related");
+        for (const edge of edges) {
+          const { from, to } = edge.dataset;
+          if (from !== node.dataset.id && to !== node.dataset.id) continue;
+          edge.classList.add("is-related");
+          const other = from === node.dataset.id ? to : from;
+          svg.querySelector(`.mf-node[data-id="${other}"]`).classList.add("is-related");
+        }
+      };
+      node.addEventListener("mouseenter", focus);
+      node.addEventListener("focus", focus);
+      node.addEventListener("mouseleave", clear);
+      node.addEventListener("blur", clear);
+    });
+  }
+
+  const setUpAll = () => document.querySelectorAll("svg.mf-fg:not([data-mf-ready])").forEach(setUp);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setUpAll);
+  } else {
+    setUpAll();
+  }
+})();
+]]></script></svg></div></div>
+</div>
+<p>And finally, after running the fusion, <a class="reference internal" href="../api/mufasa/io/outputs/visualization/index.html#mufasa.io.outputs.visualization.Visualization.show" title="mufasa.io.outputs.visualization.Visualization.show"><code class="xref py py-func docutils literal notranslate"><span class="pre">show()</span></code></a>
+the latest snapshot of data fed to the visualization node over its first input (thus the index <code class="docutils literal notranslate"><span class="pre">0</span></code>):</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>
+</span><span data-line="2"><span class="n">vis</span><span class="o">.</span><span class="n">show</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">/usr/local/lib/python3.13/site-packages/contextily/tile.py:680: UserWarning: The inferred zoom level of 19 is not valid for the current tile provider (valid zooms: 0 - 16).
+</span><span data-line="2">  warnings.warn(msg)
+</span></pre></div>
+</div>
+<img alt="../_images/ad55dea57c30ae5e9b5c713b1bfa6b6881436dfe0ce907ae76699f9d3813aa6f.png" src="../_images/ad55dea57c30ae5e9b5c713b1bfa6b6881436dfe0ce907ae76699f9d3813aa6f.png" />
+</div>
+</div>
+<p>There’s also an <a class="reference internal" href="../api/mufasa/io/outputs/visualization/index.html#mufasa.io.outputs.visualization.Visualization.animate" title="mufasa.io.outputs.visualization.Visualization.animate"><code class="xref py py-func docutils literal notranslate"><span class="pre">animate()</span></code></a> method
+for data with different timestamps.</p>
+</section>
+<section id="geopandas-integration">
+<span id="id3"></span><h2>GeoPandas Integration<a class="headerlink" href="#geopandas-integration" title="Link to this heading">#</a></h2>
+<p>MuFASA integrates nicely with Pandas<a class="footnote-reference brackets" href="#pandas" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> and GeoPandas<a class="footnote-reference brackets" href="#geopandas" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>.
+In fact, GeoPandas is used in the Visualization node behind the scenes.
+Here are some tips and tricks on how to utilize (Geo)Pandas with MuFASA.</p>
+<div class="tip admonition">
+<p class="admonition-title">Installation</p>
+<p>If you haven’t installed MuFASA with <code class="docutils literal notranslate"><span class="pre">vis</span></code> extra dependencies, then you need to install GeoPandas separately:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">pip<span class="w"> </span>install<span class="w"> </span>geopandas
+</span></pre></div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">geopandas</span>
+</span></pre></div>
+</div>
+</div>
+</div>
+<section id="convert-to-dataframes">
+<h3>Convert to <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s<a class="headerlink" href="#convert-to-dataframes" title="Link to this heading">#</a></h3>
+<p>Pandas and GeoPandas are capable of loading lists of Python Dataclasses into their <code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>s.
+Thus, they understand MuFASA’s <a class="reference internal" href="../api/mufasa/location/index.html#mufasa.location.Location" title="mufasa.location.Location"><code class="xref py py-class docutils literal notranslate"><span class="pre">Location</span></code></a>s.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">src_df</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">src</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</span><span data-line="2"><span class="n">src_df</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>timestamp</th>
+      <th>properties</th>
+      <th>confidence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POINT (16.42664 48.26841)</td>
+      <td>0.0</td>
+      <td>{}</td>
+      <td>0.943378</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POINT (16.42684 48.26916)</td>
+      <td>0.0</td>
+      <td>{'headquarters': True}</td>
+      <td>0.554346</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POINT (16.42712 48.26962)</td>
+      <td>0.0</td>
+      <td>{}</td>
+      <td>0.789624</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">out_df</span> <span class="o">=</span> <span class="n">geopandas</span><span class="o">.</span><span class="n">GeoDataFrame</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">result</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">out_df</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>timestamp</th>
+      <th>properties</th>
+      <th>confidence</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POINT (16.42664 48.26841)</td>
+      <td>0.0</td>
+      <td>{}</td>
+      <td>0.943378</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POINT (16.42684 48.26916)</td>
+      <td>0.0</td>
+      <td>{'headquarters': True}</td>
+      <td>0.554346</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POINT (16.42712 48.26962)</td>
+      <td>0.0</td>
+      <td>{}</td>
+      <td>0.789624</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You might also want to unwrap the properties into separate columns:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span data-line="2"><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span>
+</span><span data-line="3">
+</span><span data-line="4"><span class="n">src_props_df</span> <span class="o">=</span> <span class="n">src_df</span><span class="p">[</span><span class="s2">&quot;properties&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">pandas</span><span class="o">.</span><span class="n">Series</span><span class="p">)</span>
+</span><span data-line="5"><span class="n">src_total_df</span> <span class="o">=</span> <span class="n">pandas</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">src_df</span><span class="p">,</span> <span class="n">src_props_df</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="s2">&quot;columns&quot;</span><span class="p">)</span>
+</span><span data-line="6"><span class="n">src_total_df</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>timestamp</th>
+      <th>properties</th>
+      <th>confidence</th>
+      <th>headquarters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POINT (16.42664 48.26841)</td>
+      <td>0.0</td>
+      <td>{}</td>
+      <td>0.943378</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POINT (16.42684 48.26916)</td>
+      <td>0.0</td>
+      <td>{'headquarters': True}</td>
+      <td>0.554346</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POINT (16.42712 48.26962)</td>
+      <td>0.0</td>
+      <td>{}</td>
+      <td>0.789624</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="bounding-boxes">
+<h3>Bounding Boxes<a class="headerlink" href="#bounding-boxes" title="Link to this heading">#</a></h3>
+<p>Tired of defining them manually?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">bounds</span> <span class="o">=</span> <span class="n">src_df</span><span class="o">.</span><span class="n">bounds</span>
+</span><span data-line="2"><span class="n">bbox</span> <span class="o">=</span> <span class="n">BoundingBox</span><span class="p">(</span>
+</span><span data-line="3">    <span class="n">bounds</span><span class="o">.</span><span class="n">minx</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+</span><span data-line="4">    <span class="n">bounds</span><span class="o">.</span><span class="n">miny</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+</span><span data-line="5">    <span class="n">bounds</span><span class="o">.</span><span class="n">maxx</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+</span><span data-line="6">    <span class="n">bounds</span><span class="o">.</span><span class="n">maxy</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">(),</span>
+</span><span data-line="7"><span class="p">)</span>
+</span><span data-line="8"><span class="n">bbox</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">BoundingBox(min_x=16.426643559839174, min_y=48.268408685767966, max_x=16.427123796877638, max_y=48.26961976340052)
+</span></pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="visualizations">
+<h3>Visualizations<a class="headerlink" href="#visualizations" title="Link to this heading">#</a></h3>
+<p>To get more customization options, you can create plots via GeoPandas manually.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># Fill missing values so we have something to show</span>
+</span><span data-line="2"><span class="n">src_total_df</span><span class="o">.</span><span class="n">fillna</span><span class="p">({</span><span class="s2">&quot;confidence&quot;</span><span class="p">:</span> <span class="mf">.25</span><span class="p">,</span> <span class="s2">&quot;headquarters&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span data-line="3"><span class="n">src_total_df</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>geometry</th>
+      <th>timestamp</th>
+      <th>properties</th>
+      <th>confidence</th>
+      <th>headquarters</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>POINT (16.42664 48.26841)</td>
+      <td>0.0</td>
+      <td>{}</td>
+      <td>0.943378</td>
+      <td>False</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>POINT (16.42684 48.26916)</td>
+      <td>0.0</td>
+      <td>{'headquarters': True}</td>
+      <td>0.554346</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>POINT (16.42712 48.26962)</td>
+      <td>0.0</td>
+      <td>{}</td>
+      <td>0.789624</td>
+      <td>False</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">src_total_df</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="s2">&quot;headquarters&quot;</span><span class="p">,</span> <span class="n">markersize</span><span class="o">=</span><span class="mi">100</span><span class="o">*</span><span class="n">src_total_df</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">],</span> <span class="n">legend</span><span class="o">=</span><span class="kc">True</span><span class="p">);</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0c70c773d033d094d49b9dce2c9a22428e4ebcd84da6ab58ba350ee6f2fad2c7.png" src="../_images/0c70c773d033d094d49b9dce2c9a22428e4ebcd84da6ab58ba350ee6f2fad2c7.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">src_total_df</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">column</span><span class="o">=</span><span class="s2">&quot;confidence&quot;</span><span class="p">,</span> <span class="n">by</span><span class="o">=</span><span class="s2">&quot;headquarters&quot;</span><span class="p">);</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02a29f6df81dc540e51ae5802ccbb999f2e26b46c7a8c33556f3533a1b0f895c.png" src="../_images/02a29f6df81dc540e51ae5802ccbb999f2e26b46c7a8c33556f3533a1b0f895c.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="json-serialization">
+<span id="dict-config"></span><h2>JSON Serialization<a class="headerlink" href="#json-serialization" title="Link to this heading">#</a></h2>
+<p>You might have noticed <a class="reference internal" href="../api/mufasa/node/index.html#mufasa.node.Node.get_config" title="mufasa.node.Node.get_config"><code class="xref py py-func docutils literal notranslate"><span class="pre">Node.get_config()</span></code></a>.
+It simply returns a node’s parametrization to a JSON-serializable dict.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">src</span><span class="o">.</span><span class="n">get_config</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">{&#39;path&#39;: &#39;sensor_b.geojson&#39;}
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>There’s also <a class="reference internal" href="../api/mufasa/graph/index.html#mufasa.graph.Graph.to_config" title="mufasa.graph.Graph.to_config"><code class="xref py py-func docutils literal notranslate"><span class="pre">Graph.to_config()</span></code></a> to export an entire Fusion Graph.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">conf</span> <span class="o">=</span> <span class="n">graph</span><span class="o">.</span><span class="n">to_config</span><span class="p">()</span>
+</span><span data-line="2"><span class="n">conf</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">{&#39;spatial&#39;: {&#39;crs&#39;: &#39;EPSG:32633&#39;,
+</span><span data-line="2">  &#39;bbox&#39;: [16.426595536135327,
+</span><span data-line="3">   48.26828757800471,
+</span><span data-line="4">   16.427171820581485,
+</span><span data-line="5">   48.269740871163776],
+</span><span data-line="6">  &#39;resolution&#39;: [1, 1]},
+</span><span data-line="7"> &#39;inputs&#39;: [&#39;geojsoninput_0&#39;],
+</span><span data-line="8"> &#39;outputs&#39;: [&#39;visualization_0&#39;],
+</span><span data-line="9"> &#39;nodes&#39;: [{&#39;type&#39;: &#39;GeoJsonInput&#39;,
+</span><span data-line="10">   &#39;name&#39;: &#39;geojsoninput_0&#39;,
+</span><span data-line="11">   &#39;path&#39;: &#39;sensor_b.geojson&#39;},
+</span><span data-line="12">  {&#39;type&#39;: &#39;Visualization&#39;,
+</span><span data-line="13">   &#39;name&#39;: &#39;visualization_0&#39;,
+</span><span data-line="14">   &#39;inputs&#39;: [&#39;geojsoninput_0&#39;],
+</span><span data-line="15">   &#39;snapshot_interval_s&#39;: 5.0}]}
+</span></pre></div>
+</div>
+</div>
+</div>
+<p>Reconstruct it later with <a class="reference internal" href="../api/mufasa/graph/index.html#mufasa.graph.Graph.from_config" title="mufasa.graph.Graph.from_config"><code class="xref py py-func docutils literal notranslate"><span class="pre">Graph.from_config()</span></code></a>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="n">new_graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="o">.</span><span class="n">from_config</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+</span><span data-line="2"><span class="n">new_graph</span><span class="o">.</span><span class="n">plot_graph</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><svg xmlns="http://www.w3.org/2000/svg" class="mf-fg" viewBox="-47 -53 218 251" width="218" style="max-width: 100%; height: auto" role="img" aria-label="Fusion Graph"><defs><symbol id="mfg1-map-fold" viewBox="0 0 64 64">
+	<path d="m39.726 62.401-0.0703-46.845m-17.662-13.953-0.05273 45.645m-18.845-42.083 0.1686 45.123 18.677-3.039 17.785 15.153 20.693-3.5611 0.48108-46.653-21.245 3.3693-17.662-13.953z" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg1-unknown" viewBox="0 0 64 64">
+	<circle cx="32" cy="32" r="12" fill="currentColor"/>
+</symbol><symbol id="mfg1-observation-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<circle cx="32" cy="32" r="26"/>
+		<circle cx="32" cy="32" r="15"/>
+	</g>
+	<circle cx="32" cy="32" r="6" fill="currentColor"/>
+</symbol><symbol id="mfg1-map-roll" viewBox="0 0 64 64">
+	<path d="m13.031 52.396c4.1138-1.0983 11.183 0.348 18.44 5.7439 9.815 7.2979 24.012 4.3595 26.849-0.97562l3.0704-48.522m-58.78-2.712 2.1132 48.264c0.00943 4.3589 3.8904 4.8885 8.1846 4.7724l-0.1084-48.147c-5.5273-0.043419-10.127-1.5986-10.192-4.9836-0.034512-1.7908 3.539-3.5302 8.8186-4.1165 6.423-0.71337 12.764 0.051784 18.811 5.1898 6.3057 5.358 13.513 5.8366 21.005 5.2167 4.1941-0.34709 10.008-1.285 10.147-3.5037 0.14975-2.3957-5.1331-5.2513-12.479-3.4439l0.06957 6.918" fill="none" stroke="currentColor" stroke-width="3"/>
+</symbol><symbol id="mfg1-location-marker" viewBox="0 0 64 64">
+	<g fill="none" stroke="currentColor" stroke-width="3">
+		<path d="m32 1.5007c-6.1943-0.046613-12.284 2.9422-16.08 7.8491-4.5626 5.7442-5.9347 14.28-2.124 20.777 6.0395 10.322 12.142 20.61 18.205 30.92 0 0 12.164-20.598 18.204-30.92 3.8108-6.4965 2.4386-15.032-2.124-20.777-3.7957-4.9069-9.8857-7.8957-16.08-7.8491"/>
+		<circle cx="32" cy="22" r="9"/>
+	</g>
+</symbol></defs><g class="mf-edge" style="--mf-fam:#31b7bc" data-from="geojsoninput_0" data-to="visualization_0"><path d="M0.0 47.0 L0.0 68.2 Q0.0 72.5 -4.2 72.5 L-4.2 72.5 Q-8.5 72.5 -8.5 76.8 L-8.5 103.2"/><circle cx="0.0" cy="47.0" r="3.5"/><circle cx="-8.5" cy="103.2" r="3.5"/></g><g class="mf-node mf-io" data-id="geojsoninput_0" tabindex="0" aria-label="GeoJsonInput"><path d="M-34.0 0.0 V-23.6 Q-34.0 -30.6 -27.0 -30.6 H27.0 Q34.0 -30.6 34.0 -23.6 V0.0 A34 34 0 0 1 -34.0 0.0 Z" class="mf-body"/><text x="0.0" y="5.5" text-anchor="middle" class="mf-code">GJI</text><text x="46.0" y="5.0" class="mf-name">GeoJsonInput</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(0.0 34.0)"><title>Location family: Observation</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-observation-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Observation</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><g class="mf-node mf-io" data-id="visualization_0" tabindex="0" aria-label="Visualization"><path d="M34.0 145.0 V168.6 Q34.0 175.6 27.0 175.6 H-27.0 Q-34.0 175.6 -34.0 168.6 V145.0 A34 34 0 0 1 34.0 145.0 Z" class="mf-body"/><text x="0.0" y="150.5" text-anchor="middle" class="mf-code">VI</text><text x="46.0" y="150.0" class="mf-name">Visualization</text><g class="mf-port" style="--mf-fam:#31b7bc" transform="translate(-15.0 114.5)"><title>Location family: Location</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Location</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-location-marker" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g><g class="mf-port" style="--mf-fam:#470f51" transform="translate(15.0 114.5)"><title>Map family: Map</title><g class="mf-sub"><circle r="13" class="mf-port-bg"/><use href="#mfg1-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/><text x="18" y="4" class="mf-sub-label">Map</text></g><circle r="13" class="mf-port-bg"/><use href="#mfg1-map-fold" x="-7.5" y="-7.5" width="14.9" height="14.9"/></g></g><style>/* Styles of Fusion Graph SVGs (class mf-fg). Family colors are set per element as --mf-fam. */
+
+symbol [stroke-width] { stroke-width: 5; }
+
+.mf-fg { font-family: inherit; overflow: visible; --mf-ink: #2f3439; }
+.mf-fg text { fill: var(--mf-ink); }
+.mf-fg .mf-node { outline: none; }
+
+/* Nodes: Input/Output nodes white with a dark outline, processing nodes grey */
+.mf-fg .mf-body { fill: white; stroke: var(--mf-ink); stroke-width: 2.5; filter: drop-shadow(0 3px 5px rgb(0 0 0 / 0.15)); }
+.mf-fg .mf-proc .mf-body { fill: #e9ecee; stroke: #b9c0c5; stroke-width: 1.5; }
+.mf-fg .mf-code { font-size: 16px; font-weight: 700; }
+
+/* Full name, hidden until the node is hovered or focused, then slides out to the right */
+.mf-fg .mf-name {
+    font-size: 15px; font-weight: 600; opacity: 0; transform: translateX(-24px); pointer-events: none;
+    paint-order: stroke; stroke: white; stroke-width: 5px; stroke-linejoin: round;
+    transition: opacity 200ms ease, transform 250ms ease;
+}
+.mf-fg .mf-node:is(:hover, :focus) .mf-name { opacity: 1; transform: none; }
+
+/* Edges in the color of the data family they carry */
+.mf-fg .mf-edge path { fill: none; stroke: var(--mf-fam); stroke-width: 2.5; }
+.mf-fg .mf-edge circle { fill: var(--mf-fam); }
+
+/* Ports; hovering one slides out a second badge with the concrete data type */
+.mf-fg .mf-port { color: var(--mf-fam); cursor: help; }
+.mf-fg .mf-port-bg { fill: white; stroke: var(--mf-fam); stroke-width: 2; }
+.mf-fg .mf-sub { opacity: 0; transition: transform 250ms ease, opacity 250ms ease; }
+.mf-fg .mf-port:is(:hover, :focus-within) .mf-sub { opacity: 1; transform: translateX(26px); }
+.mf-fg .mf-sub-label {
+    font-size: 11px; font-weight: 600; fill: var(--mf-fam);
+    paint-order: stroke; stroke: white; stroke-width: 4px;
+}
+
+/* Set by graph.js: fade out everything not connected to the hovered node */
+.mf-fg :is(.mf-node, .mf-edge) { transition: opacity 200ms; }
+.mf-fg.is-focused :is(.mf-node, .mf-edge):not(.is-related) { opacity: 0.25; }
+</style><script><![CDATA[// Fusion Graph SVGs (class mf-fg): fade out everything not connected to the hovered or focused node.
+// Safe to load more than once: each graph is set up only once.
+(() => {
+  function setUp(svg) {
+    svg.dataset.mfReady = "true";
+    const edges = [...svg.querySelectorAll(".mf-edge")];
+    const clear = () => {
+      svg.classList.remove("is-focused");
+      svg.querySelectorAll(".is-related").forEach(el => el.classList.remove("is-related"));
+    };
+    svg.querySelectorAll(".mf-node").forEach(node => {
+      const focus = () => {
+        clear();
+        svg.classList.add("is-focused");
+        node.classList.add("is-related");
+        for (const edge of edges) {
+          const { from, to } = edge.dataset;
+          if (from !== node.dataset.id && to !== node.dataset.id) continue;
+          edge.classList.add("is-related");
+          const other = from === node.dataset.id ? to : from;
+          svg.querySelector(`.mf-node[data-id="${other}"]`).classList.add("is-related");
+        }
+      };
+      node.addEventListener("mouseenter", focus);
+      node.addEventListener("focus", focus);
+      node.addEventListener("mouseleave", clear);
+      node.addEventListener("blur", clear);
+    });
+  }
+
+  const setUpAll = () => document.querySelectorAll("svg.mf-fg:not([data-mf-ready])").forEach(setUp);
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setUpAll);
+  } else {
+    setUpAll();
+  }
+})();
+]]></script></svg></div></div>
+</div>
+<p>For loading to work, every node used needs to be registered with the <a class="reference internal" href="../api/mufasa/registry/index.html#mufasa.registry.NODE_REGISTRY" title="mufasa.registry.NODE_REGISTRY"><code class="xref py py-attr docutils literal notranslate"><span class="pre">NODE_REGISTRY</span></code></a>.
+Keep that (and overwriting <a class="reference internal" href="../api/mufasa/node/index.html#mufasa.node.Node.get_config" title="mufasa.node.Node.get_config"><code class="xref py py-func docutils literal notranslate"><span class="pre">mufasa.node.Node.get_config()</span></code></a>) in mind when extending MuFASA with new nodes!</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">NODE_REGISTRY</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="n">NODE_REGISTRY</span>
+</span></pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span><span data-line="1">{&#39;POM&#39;: mufasa.nodes.mapping.pom.POM,
+</span><span data-line="2"> &#39;StaticMap&#39;: mufasa.nodes.mapping.static.StaticMap,
+</span><span data-line="3"> &#39;BayesianFusion&#39;: mufasa.nodes.fusion.map_fusion.BayesianFusion,
+</span><span data-line="4"> &#39;LogicalAnd&#39;: mufasa.nodes.fusion.map_fusion.LogicalAnd,
+</span><span data-line="5"> &#39;LogicalOr&#39;: mufasa.nodes.fusion.map_fusion.LogicalOr,
+</span><span data-line="6"> &#39;Threshold&#39;: mufasa.nodes.detection.threshold.Threshold,
+</span><span data-line="7"> &#39;ObservationFilter&#39;: mufasa.nodes.util.filter.ObservationFilter,
+</span><span data-line="8"> &#39;KalmanTracker&#39;: mufasa.nodes.tracking.kalman.KalmanTracker,
+</span><span data-line="9"> &#39;DBSTREAMClusterer&#39;: mufasa.nodes.tracking.dbstream.DBSTREAMClusterer,
+</span><span data-line="10"> &#39;GeoJsonInput&#39;: mufasa.io.inputs.geojson.GeoJsonInput,
+</span><span data-line="11"> &#39;GeoTiffInput&#39;: mufasa.io.inputs.geotiff.GeoTiffInput,
+</span><span data-line="12"> &#39;GeoJsonOutput&#39;: mufasa.io.outputs.geojson.GeoJsonOutput,
+</span><span data-line="13"> &#39;GeoTiffOutput&#39;: mufasa.io.outputs.geotiff.GeoTiffOutput,
+</span><span data-line="14"> &#39;LocationOutput&#39;: mufasa.io.outputs.python_object.LocationOutput,
+</span><span data-line="15"> &#39;MapOutput&#39;: mufasa.io.outputs.python_object.MapOutput,
+</span><span data-line="16"> &#39;Visualization&#39;: mufasa.io.outputs.visualization.Visualization}
+</span></pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="pandas" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">1</a><span class="fn-bracket">]</span></span>
+<p>Pandas, see <a class="reference external" href="https://pandas.pydata.org">https://pandas.pydata.org</a></p>
+</aside>
+<aside class="footnote brackets" id="geopandas" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">2</a><span class="fn-bracket">]</span></span>
+<p>GeoPandas, see <a class="reference external" href="https://geopandas.org">https://geopandas.org</a></p>
+</aside>
+</aside>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="concepts.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">Concepts</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="extending/index.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Extending MuFASA</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Michael Hubner, Kilian Wohlleben, Jan Nausner, Julia Pöschl</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="mf-foot-right flex items-center">
+        <div class="sy-foot-socials">
+  <a href="https://github.com/mufasa-fusion/mufasa-fusion" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+        <a class="mf-foot-logo" href="https://www.ait.ac.at" aria-label="AIT Austrian Institute of Technology">
+          <img class="mf-light-only" src="../_static/img/logo/AIT.svg" alt="AIT Austrian Institute of Technology">
+          <img class="mf-dark-only" src="../_static/img/logo/AIT_weiss.svg" alt="AIT Austrian Institute of Technology">
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+      <script src="../_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=f281be69"></script>
+      <script src="../_static/shibuya.js?v=50760d75"></script>
+      <script src="../_static/js/versions.js?v=f52e4ae6"></script></body>
+</html>

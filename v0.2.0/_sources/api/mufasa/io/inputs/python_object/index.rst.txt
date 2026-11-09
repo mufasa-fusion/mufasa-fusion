@@ -1,0 +1,79 @@
+mufasa.io.inputs.python_object
+==============================
+
+.. py:module:: mufasa.io.inputs.python_object
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.inputs.python_object.LocationInput
+   mufasa.io.inputs.python_object.MapInput
+
+
+Module Contents
+---------------
+
+.. py:class:: LocationInput(data)
+
+   Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
+
+
+   .. py:property:: output_type
+      :type: type
+
+
+      Type this node emits. Derived from ``_output_type``.
+
+
+   .. py:method:: items() -> list[mufasa.location.Location]
+
+      Return items from this input in temporal order.
+
+      File-based nodes return a sorted list. Streaming nodes return a
+      blocking generator that yields as items arrive via ingest().
+
+
+
+   .. py:method:: get_config() -> dict
+
+      Return all constructor arguments as a plain JSON-serializable dict.
+
+      Requires that the dict is JSON-serializable and that the node is reconstructed
+      when passing the dict as kwargs to its constructor like so::
+
+          SomeNode(**some_node.get_config())
+
+      Used by :func:`Graph.to_config() <mufasa.graph.Graph.to_config>` to serialize the pipeline.
+
+
+
+.. py:class:: MapInput(data)
+
+   Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
+
+
+   .. py:method:: items() -> list[mufasa.map.Map]
+
+      Return items from this input in temporal order.
+
+      File-based nodes return a sorted list. Streaming nodes return a
+      blocking generator that yields as items arrive via ingest().
+
+
+
+   .. py:method:: get_config() -> dict
+
+      Return all constructor arguments as a plain JSON-serializable dict.
+
+      Requires that the dict is JSON-serializable and that the node is reconstructed
+      when passing the dict as kwargs to its constructor like so::
+
+          SomeNode(**some_node.get_config())
+
+      Used by :func:`Graph.to_config() <mufasa.graph.Graph.to_config>` to serialize the pipeline.
+
+
+

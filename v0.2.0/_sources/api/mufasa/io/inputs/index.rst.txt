@@ -1,0 +1,19 @@
+mufasa.io.inputs
+================
+
+.. py:module:: mufasa.io.inputs
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /api/mufasa/io/inputs/base/index
+   /api/mufasa/io/inputs/geojson/index
+   /api/mufasa/io/inputs/geotiff/index
+   /api/mufasa/io/inputs/python_object/index
+   /api/mufasa/io/inputs/streaming/index
+
+

@@ -1,0 +1,44 @@
+mufasa.io.outputs.base
+======================
+
+.. py:module:: mufasa.io.outputs.base
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.outputs.base.OutputNode
+
+
+Module Contents
+---------------
+
+.. py:class:: OutputNode
+
+   Bases: :py:obj:`mufasa.node.Node`
+
+
+   Base for all pipeline output nodes. Has no output type.
+
+
+   .. py:method:: configure(crs, bbox, resolution) -> None
+
+      Receive spatial configuration from the Graph at construction time.
+
+      Override in nodes that need crs/bbox/resolution to initialise
+      internal state (e.g. POM creates its map here). Default is a no-op.
+
+
+
+   .. py:method:: save() -> None
+
+      Persist any buffered output to its destination.
+
+      No-op by default.  Subclasses that buffer results (GeoJsonOutput,
+      GeoTiffOutput, etc.) override this to flush to disk.  Called by
+      Graph.run() after all inputs have been processed.
+
+
+

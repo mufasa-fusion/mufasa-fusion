@@ -1,0 +1,37 @@
+mufasa
+======
+
+.. py:module:: mufasa
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /api/mufasa/graph/index
+   /api/mufasa/graph_svg/index
+   /api/mufasa/io/index
+   /api/mufasa/location/index
+   /api/mufasa/map/index
+   /api/mufasa/node/index
+   /api/mufasa/nodes/index
+   /api/mufasa/registry/index
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   mufasa.__version__
+
+
+Package Contents
+----------------
+
+.. py:data:: __version__
+   :value: '0.2.0'
+
+

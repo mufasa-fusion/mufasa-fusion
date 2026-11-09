@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en" data-accent-color="red" data-content_root="../../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ROS 2 - mufasa-fusion 0.2.0 documentation</title><link rel="index" title="Index" href="../../genindex.html" /><link rel="search" title="Search" href="../../search.html" /><link rel="next" title="Showcases" href="../../showcases/index.html" /><link rel="prev" title="MQTT" href="mqtt.html" /><script>
+    function setColorMode(t){let e=document.documentElement;e.setAttribute("data-color-mode",t);let a=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,s=t;"auto"===t&&(s=a?"dark":"light"),"light"===s?(e.classList.remove("dark"),e.classList.add("light")):(e.classList.remove("light"),e.classList.add("dark"))}
+    setColorMode(localStorage._theme||"light");
+  </script><link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=e1a1ceaf" />
+    <link rel="stylesheet" type="text/css" href="../../_static/shibuya.css?v=2ceb65ce" />
+    <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.11b39860a7a0cbfd473a3ad8a317855267ff0bd372690045ca344a6b62be495e.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
+    <link media="print" rel="stylesheet" type="text/css" href="../../_static/print.css?v=20ff2c19" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/shibuya-overwrite.css?v=5d2de755" />
+    <link rel="stylesheet" type="text/css" href="../../_static/css/mufasa.css?v=afb05a6e" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --sy-f-text: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+  --sy-f-heading: "Inter", var(--sy-f-sys), var(--sy-f-cjk), sans-serif;
+}
+</style>
+    
+  <meta property="og:type" content="website"/><meta property="og:title" content="ROS 2"/>
+    <meta name="twitter:card" content="summary"/>
+  </head>
+<body><div class="sy-head">
+  <div class="sy-head-blur"></div>
+  <div class="sy-head-inner sy-container mx-auto">
+    <a class="sy-head-brand" href="../../index.html">
+      <img class="light-logo" src="../../_static/img/logo/MuFASA_MuFASA.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <img class="dark-logo" src="../../_static/img/logo/MuFASA_MuFASA_weiss.svg" alt="mufasa-fusion" height="28" loading="lazy" />
+      <strong>mufasa-fusion</strong>
+    </a>
+    <div class="sy-head-nav" id="head-nav">
+      <nav class="sy-head-links"><ul><li class="link"><a href="../../getting-started.html">Getting started</a></li><li class="link"><a href="../index.html">User guide</a></li><li class="link"><a href="../../showcases/index.html">Showcases</a></li><li class="link"><a href="../../catalog.html">Catalog</a></li><li class="link"><a href="../../api/index.html">API</a></li></ul></nav>
+      <div class="sy-head-extra flex items-center print:hidden"><form class="searchbox flex items-center" action="../../search.html" method="get">
+  <input type="text" name="q" placeholder="Search" />
+  <kbd>/</kbd>
+</form><div class="nav-versions">
+    <button type="button" aria-label="Versions">
+      <span class="md:hidden">Versions</span>
+      <span class="hidden md:inline">0.2.0</span>
+      <i class="i-lucide chevron-down"></i>
+    </button>
+    <div class="nav-versions-choices"><ul><li><a href="/latest/">latest</a></li><li><a href="/v0.2.0/">0.2.0</a></li></ul></div>
+  </div><div class="sy-head-socials">
+  <a href="https://github.com/mufasa-fusion/mufasa-fusion" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div></div>
+    </div>
+    <div class="sy-head-actions flex items-center shrink-0 print:hidden"><button class="md:hidden flex items-center js-menu" aria-label="Menu" type="button" aria-controls="head-nav" aria-expanded="false">
+        <div class="hamburger">
+          <span class="hamburger_1"></span>
+          <span class="hamburger_2"></span>
+          <span class="hamburger_3"></span>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="sy-page sy-container flex mx-auto">
+  <aside id="lside" class="sy-lside md:w-72 md:shrink-0 print:hidden">
+    <div class="sy-lside-inner md:sticky">
+      <div class="sy-scrollbar p-6">
+        <div class="globaltoc" data-expand-depth="1"><ul class="current">
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../getting-started.html">Getting started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">User Guide</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../design-principles.html">Design principles</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts.html">Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tips-and-tricks.html">Tips and Tricks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../extending/index.html">Extending MuFASA</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../extending/nodes.html">Writing a Node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../extending/sources.html">Connecting Custom Data Sources</a></li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Going Live</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="mqtt.html">MQTT</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ROS 2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../showcases/index.html">Showcases</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../showcases/border-security.html">Maritime border security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../showcases/railway-security.html">Railway security</a></li>
+</ul>
+</li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../catalog.html">Node Catalog</a></li>
+<li class="toctree-l1 _expand"><a class="reference internal" href="../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../api/mufasa/index.html">mufasa</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/graph/index.html">mufasa.graph</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/graph_svg/index.html">mufasa.graph_svg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/graph_svg/draw/index.html">mufasa.graph_svg.draw</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/graph_svg/families/index.html">mufasa.graph_svg.families</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/graph_svg/layout/index.html">mufasa.graph_svg.layout</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/graph_svg/spec/index.html">mufasa.graph_svg.spec</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/io/index.html">mufasa.io</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/io/inputs/index.html">mufasa.io.inputs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/io/outputs/index.html">mufasa.io.outputs</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/location/index.html">mufasa.location</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/map/index.html">mufasa.map</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/node/index.html">mufasa.node</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/nodes/index.html">mufasa.nodes</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/nodes/detection/index.html">mufasa.nodes.detection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/nodes/fusion/index.html">mufasa.nodes.fusion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/nodes/mapping/index.html">mufasa.nodes.mapping</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/nodes/tracking/index.html">mufasa.nodes.tracking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../api/mufasa/nodes/util/index.html">mufasa.nodes.util</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../api/mufasa/registry/index.html">mufasa.registry</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="lside-overlay js-menu" role="button" aria-label="Close left sidebar" aria-controls="lside" aria-expanded="false"></div>
+  <aside id="rside" class="sy-rside pb-3 w-64 shrink-0 order-last">
+    <button class="rside-close js-menu xl:hidden" aria-label="Close Table of Contents" type="button" aria-controls="rside" aria-expanded="false">
+      <i class="i-lucide close"></i>
+    </button>
+    <div class="sy-scrollbar sy-rside-inner px-6 xl:top-16 xl:sticky xl:pl-0 pt-6 pb-4"><div class="localtoc"><h3>On this page</h3><ul>
+<li><a class="reference internal" href="#running-the-example">Running the Example</a></li>
+</ul>
+</div><div id="ethical-ad-placement" data-ea-publisher="readthedocs"></div></div>
+  </aside>
+  <div class="rside-overlay js-menu" role="button" aria-label="Close Table of Contents" aria-controls="rside" aria-expanded="false"></div>
+  <main class="sy-main w-full max-sm:max-w-full print:pt-6">
+<div class="sy-breadcrumbs" role="navigation">
+  <div class="sy-breadcrumbs-inner flex items-center">
+    <div class="md:hidden mr-3">
+      <button class="js-menu" aria-label="Menu" type="button" aria-controls="lside" aria-expanded="false">
+        <i class="i-lucide menu"></i>
+      </button>
+    </div>
+    <ol class="flex-1" itemscope itemtype="https://schema.org/BreadcrumbList"><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../../index.html"><span itemprop="name">mufasa-fusion</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="1" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="../index.html"><span itemprop="name">User Guide</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="2" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <a itemprop="item" href="index.html"><span itemprop="name">Going Live</span></a>
+        <span>/</span>
+        <meta itemprop="position" content="3" />
+      </li><li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+        <strong itemprop="name">ROS 2</strong>
+        <meta itemprop="position" content="4" />
+      </li></ol>
+    <div class="xl:hidden ml-1">
+      <button class="js-menu" aria-label="Show table of contents" type="button" aria-controls="rside"
+        aria-expanded="false">
+        <i class="i-lucide outdent"></i>
+      </button>
+    </div>
+  </div>
+</div><div class="flex flex-col break-words justify-between">
+      <div class="relative min-w-0 max-w-6xl px-6 pb-6 pt-8 xl:px-12">
+  <article class="yue" role="main">
+          <section id="ros-2">
+<h1>ROS 2<a class="headerlink" href="#ros-2" title="Link to this heading">#</a></h1>
+<p>Robots and autonomous systems commonly exchange sensor data via ROS 2<a class="footnote-reference brackets" href="#ros2" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> topics.
+Its Python client library rclpy<a class="footnote-reference brackets" href="#rclpy" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> is a push client, too, but it differs from Paho in one important aspect:
+the ROS <em>executor</em> owns the event loop (<code class="docutils literal notranslate"><span class="pre">rclpy.spin()</span></code>) and calls your subscription callbacks.
+And in ROS, everything is a node that is started with <code class="docutils literal notranslate"><span class="pre">ros2</span> <span class="pre">run</span></code>, configured with parameters and wired up in launch files.</p>
+<p>So instead of hiding the client inside a MuFASA input node, we turn things around:
+a ROS node hosts the Fusion Graph. This is the <a class="reference internal" href="../extending/sources.html#push-alt"><span class="std std-ref">alternative to a dedicated input node</span></a>,
+applied to both ends of the graph:</p>
+<ul class="simple">
+<li><p>Subscription callbacks convert messages and <a class="reference internal" href="../../api/mufasa/io/inputs/streaming/index.html#mufasa.io.inputs.streaming.StreamingInputNode.ingest" title="mufasa.io.inputs.streaming.StreamingInputNode.ingest"><code class="xref py py-func docutils literal notranslate"><span class="pre">ingest()</span></code></a>
+them into plain <a class="reference internal" href="../../api/mufasa/io/inputs/streaming/index.html#mufasa.io.inputs.streaming.ObservationStreamingInput" title="mufasa.io.inputs.streaming.ObservationStreamingInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">ObservationStreamingInput</span></code></a> nodes, one per topic.</p></li>
+<li><p>A <a class="reference internal" href="../../api/mufasa/io/outputs/streaming/index.html#mufasa.io.outputs.streaming.StreamingOutputNode" title="mufasa.io.outputs.streaming.StreamingOutputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamingOutputNode</span></code></a> publishes each result to an output topic.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The examples in this section are not executed when building this documentation, because rclpy can’t be installed with pip.
+Run them in a ROS 2 environment as described in <a class="reference internal" href="#ros-run"><span class="std std-ref">Running the Example</span></a>.</p>
+</div>
+<p>To keep the focus on the integration, messages are GeoJSON Features again, sent as <code class="docutils literal notranslate"><span class="pre">std_msgs/String</span></code>.
+Real-world systems use typed messages instead, for example <code class="docutils literal notranslate"><span class="pre">sensor_msgs/NavSatFix</span></code> for positions,
+or custom ones for detections. Their conversion goes in the same places.</p>
+<p>The script is split into parts, each marked by a heading:</p>
+<ul class="simple">
+<li><p><strong>Fusion Graph</strong>: the actual MuFASA integration. <code class="docutils literal notranslate"><span class="pre">build_graph()</span></code> creates one streaming input per topic
+and a <a class="reference internal" href="../../api/mufasa/io/outputs/streaming/index.html#mufasa.io.outputs.streaming.StreamingOutputNode" title="mufasa.io.outputs.streaming.StreamingOutputNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">StreamingOutputNode</span></code></a> that hands each result to a callback.
+This is where you would add your fusion nodes.</p></li>
+<li><p><strong>Message conversion</strong>: translates between ROS messages and MuFASA’s data models.</p></li>
+<li><p><strong>ROS node</strong>: the wrapper around the graph. Subscription callbacks ingest converted messages
+and the output callback publishes the results.
+Since <code class="docutils literal notranslate"><span class="pre">rclpy.spin()</span></code> blocks the main thread, the graph runs on a thread of its own.</p></li>
+</ul>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># fusion_node.py</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span data-line="4"><span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
+</span><span data-line="5"><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+</span><span data-line="6">
+</span><span data-line="7"><span class="kn">from</span><span class="w"> </span><span class="nn">pyproj</span><span class="w"> </span><span class="kn">import</span> <span class="n">Transformer</span>
+</span><span data-line="8"><span class="kn">import</span><span class="w"> </span><span class="nn">rclpy</span>
+</span><span data-line="9"><span class="kn">from</span><span class="w"> </span><span class="nn">rclpy.executors</span><span class="w"> </span><span class="kn">import</span> <span class="n">ExternalShutdownException</span>
+</span><span data-line="10"><span class="kn">from</span><span class="w"> </span><span class="nn">rclpy.node</span><span class="w"> </span><span class="kn">import</span> <span class="n">Node</span>
+</span><span data-line="11"><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.geometry</span><span class="w"> </span><span class="kn">import</span> <span class="n">mapping</span><span class="p">,</span> <span class="n">shape</span>
+</span><span data-line="12"><span class="kn">from</span><span class="w"> </span><span class="nn">shapely.ops</span><span class="w"> </span><span class="kn">import</span> <span class="n">transform</span>
+</span><span data-line="13"><span class="kn">from</span><span class="w"> </span><span class="nn">std_msgs.msg</span><span class="w"> </span><span class="kn">import</span> <span class="n">String</span>
+</span><span data-line="14">
+</span><span data-line="15"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa</span><span class="w"> </span><span class="kn">import</span> <span class="n">Graph</span>
+</span><span data-line="16"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.inputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">ObservationStreamingInput</span>
+</span><span data-line="17"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.io.outputs</span><span class="w"> </span><span class="kn">import</span> <span class="n">StreamingOutputNode</span>
+</span><span data-line="18"><span class="kn">from</span><span class="w"> </span><span class="nn">mufasa.location</span><span class="w"> </span><span class="kn">import</span> <span class="n">Location</span><span class="p">,</span> <span class="n">Observation</span>
+</span><span data-line="19">
+</span><span data-line="20"><span class="n">END_MSG</span> <span class="o">=</span> <span class="s2">&quot;END&quot;</span>  <span class="c1"># Demo only! Marks the end of a simulated sensor&#39;s data</span>
+</span><span data-line="21">
+</span><span data-line="22">
+</span><span data-line="23"><span class="c1"># --- Fusion Graph -------------------------------------------------------------</span>
+</span><span data-line="24"><span class="c1"># The actual MuFASA integration. Everything below connects it to ROS.</span>
+</span><span data-line="25">
+</span><span data-line="26"><span class="k">def</span><span class="w"> </span><span class="nf">build_graph</span><span class="p">(</span><span class="n">topics</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">crs</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">on_output</span><span class="p">):</span>
+</span><span data-line="27"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Builds a Fusion Graph with one streaming input per topic, passing results to on_output&quot;&quot;&quot;</span>
+</span><span data-line="28">    <span class="n">inputs</span> <span class="o">=</span> <span class="p">{</span><span class="n">topic</span><span class="p">:</span> <span class="n">ObservationStreamingInput</span><span class="p">()</span> <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">topics</span><span class="p">}</span>
+</span><span data-line="29">    <span class="c1"># Add fusion nodes between the inputs and the output here</span>
+</span><span data-line="30">    <span class="n">out</span> <span class="o">=</span> <span class="n">StreamingOutputNode</span><span class="p">(</span><span class="n">on_output</span><span class="p">)(</span><span class="o">*</span><span class="n">inputs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</span><span data-line="31">    <span class="n">graph</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">inputs</span><span class="o">.</span><span class="n">values</span><span class="p">()),</span> <span class="p">[</span><span class="n">out</span><span class="p">],</span> <span class="n">crs</span><span class="o">=</span><span class="n">crs</span><span class="p">)</span>
+</span><span data-line="32">    <span class="k">return</span> <span class="n">graph</span><span class="p">,</span> <span class="n">inputs</span>
+</span><span data-line="33">
+</span><span data-line="34">
+</span><span data-line="35"><span class="c1"># --- Message conversion -------------------------------------------------------</span>
+</span><span data-line="36">
+</span><span data-line="37"><span class="k">def</span><span class="w"> </span><span class="nf">message_to_observation</span><span class="p">(</span><span class="n">msg</span><span class="p">:</span> <span class="n">String</span><span class="p">,</span> <span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">arrival_time</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Observation</span><span class="p">:</span>
+</span><span data-line="38"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts a GeoJSON Feature message to a MuFASA Observation&quot;&quot;&quot;</span>
+</span><span data-line="39">    <span class="n">feature</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+</span><span data-line="40">    <span class="n">props</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;topic&quot;</span><span class="p">:</span> <span class="n">topic</span><span class="p">}</span> <span class="o">|</span> <span class="n">feature</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;properties&quot;</span><span class="p">,</span> <span class="p">{})</span>
+</span><span data-line="41">    <span class="c1"># std_msgs/String has no header with a timestamp, so fall back to the arrival time</span>
+</span><span data-line="42">    <span class="n">ts</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;timestamp&quot;</span><span class="p">,</span> <span class="n">arrival_time</span><span class="p">)</span>
+</span><span data-line="43">    <span class="n">conf</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;confidence&quot;</span><span class="p">,</span> <span class="n">Observation</span><span class="o">.</span><span class="n">confidence</span><span class="p">)</span>
+</span><span data-line="44">    <span class="k">return</span> <span class="n">Observation</span><span class="p">(</span><span class="n">shape</span><span class="p">(</span><span class="n">feature</span><span class="p">[</span><span class="s2">&quot;geometry&quot;</span><span class="p">]),</span> <span class="n">ts</span><span class="p">,</span> <span class="n">props</span><span class="p">,</span> <span class="n">conf</span><span class="p">)</span>
+</span><span data-line="45">
+</span><span data-line="46">
+</span><span data-line="47"><span class="k">def</span><span class="w"> </span><span class="nf">location_to_message</span><span class="p">(</span><span class="n">location</span><span class="p">:</span> <span class="n">Location</span><span class="p">,</span> <span class="n">to_wgs84</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">String</span><span class="p">:</span>
+</span><span data-line="48"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Converts a MuFASA result to a GeoJSON Feature message in WGS84&quot;&quot;&quot;</span>
+</span><span data-line="49">    <span class="n">props</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">location</span><span class="o">.</span><span class="n">timestamp</span><span class="p">,</span> <span class="o">**</span><span class="n">location</span><span class="o">.</span><span class="n">properties</span><span class="p">}</span>
+</span><span data-line="50">    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="n">Observation</span><span class="p">):</span>
+</span><span data-line="51">        <span class="n">props</span><span class="p">[</span><span class="s2">&quot;confidence&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">location</span><span class="o">.</span><span class="n">confidence</span>
+</span><span data-line="52">    <span class="c1"># The graph computes in its own CRS and doesn&#39;t project results back</span>
+</span><span data-line="53">    <span class="n">geometry</span> <span class="o">=</span> <span class="n">mapping</span><span class="p">(</span><span class="n">transform</span><span class="p">(</span><span class="n">to_wgs84</span><span class="p">,</span> <span class="n">location</span><span class="o">.</span><span class="n">geometry</span><span class="p">))</span>
+</span><span data-line="54">    <span class="k">return</span> <span class="n">String</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span><span class="s2">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;Feature&quot;</span><span class="p">,</span> <span class="s2">&quot;geometry&quot;</span><span class="p">:</span> <span class="n">geometry</span><span class="p">,</span> <span class="s2">&quot;properties&quot;</span><span class="p">:</span> <span class="n">props</span><span class="p">}))</span>
+</span><span data-line="55">
+</span><span data-line="56">
+</span><span data-line="57"><span class="c1"># --- ROS node -----------------------------------------------------------------</span>
+</span><span data-line="58">
+</span><span data-line="59"><span class="k">class</span><span class="w"> </span><span class="nc">FusionNode</span><span class="p">(</span><span class="n">Node</span><span class="p">):</span>
+</span><span data-line="60"><span class="w">    </span><span class="sd">&quot;&quot;&quot;ROS 2 node that feeds topics into a Fusion Graph and publishes its results&quot;&quot;&quot;</span>
+</span><span data-line="61">
+</span><span data-line="62">    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="63">        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="s2">&quot;mufasa_fusion&quot;</span><span class="p">)</span>
+</span><span data-line="64">
+</span><span data-line="65">        <span class="c1"># Parameters, can be overridden with `--ros-args -p &lt;name&gt;:=&lt;value&gt;`</span>
+</span><span data-line="66">        <span class="n">input_topics</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">declare_parameter</span><span class="p">(</span>
+</span><span data-line="67">            <span class="s2">&quot;input_topics&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;/mufasa/sensor/a&quot;</span><span class="p">,</span> <span class="s2">&quot;/mufasa/sensor/b&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">value</span>
+</span><span data-line="68">        <span class="n">output_topic</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">declare_parameter</span><span class="p">(</span><span class="s2">&quot;output_topic&quot;</span><span class="p">,</span> <span class="s2">&quot;/mufasa/fused&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+</span><span data-line="69">        <span class="n">crs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">declare_parameter</span><span class="p">(</span><span class="s2">&quot;crs&quot;</span><span class="p">,</span> <span class="s2">&quot;EPSG:32633&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>  <span class="c1"># UTM zone of the demo data</span>
+</span><span data-line="70">
+</span><span data-line="71">        <span class="c1"># Output: create the publisher before the graph can produce any results</span>
+</span><span data-line="72">        <span class="bp">self</span><span class="o">.</span><span class="n">publisher</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">output_topic</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+</span><span data-line="73">        <span class="bp">self</span><span class="o">.</span><span class="n">to_wgs84</span> <span class="o">=</span> <span class="n">Transformer</span><span class="o">.</span><span class="n">from_crs</span><span class="p">(</span><span class="n">crs</span><span class="p">,</span> <span class="s2">&quot;EPSG:4326&quot;</span><span class="p">,</span> <span class="n">always_xy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">transform</span>
+</span><span data-line="74">
+</span><span data-line="75">        <span class="c1"># Fusion: the graph calls publish_result() with each result</span>
+</span><span data-line="76">        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span> <span class="o">=</span> <span class="n">build_graph</span><span class="p">(</span><span class="n">input_topics</span><span class="p">,</span> <span class="n">crs</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">publish_result</span><span class="p">)</span>
+</span><span data-line="77">
+</span><span data-line="78">        <span class="c1"># Inputs: one subscription per topic, each feeding its own graph input</span>
+</span><span data-line="79">        <span class="k">for</span> <span class="n">topic</span><span class="p">,</span> <span class="n">graph_input</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">inputs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span data-line="80">            <span class="bp">self</span><span class="o">.</span><span class="n">create_subscription</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">partial</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_message</span><span class="p">,</span> <span class="n">graph_input</span><span class="p">,</span> <span class="n">topic</span><span class="p">),</span> <span class="mi">10</span><span class="p">)</span>
+</span><span data-line="81">
+</span><span data-line="82">        <span class="c1"># rclpy.spin() blocks the main thread, so the graph runs on its own thread</span>
+</span><span data-line="83">        <span class="bp">self</span><span class="o">.</span><span class="n">graph_thread</span> <span class="o">=</span> <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">run_graph</span><span class="p">)</span>
+</span><span data-line="84">        <span class="bp">self</span><span class="o">.</span><span class="n">graph_thread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+</span><span data-line="85">
+</span><span data-line="86">    <span class="k">def</span><span class="w"> </span><span class="nf">on_message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">graph_input</span><span class="p">:</span> <span class="n">ObservationStreamingInput</span><span class="p">,</span> <span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">msg</span><span class="p">:</span> <span class="n">String</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="87"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Subscription callback: passes each message on to the graph&quot;&quot;&quot;</span>
+</span><span data-line="88">        <span class="k">if</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="n">END_MSG</span><span class="p">:</span>
+</span><span data-line="89">            <span class="n">graph_input</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</span><span data-line="90">            <span class="k">return</span>
+</span><span data-line="91">        <span class="k">try</span><span class="p">:</span>
+</span><span data-line="92">            <span class="n">arrival_time</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_clock</span><span class="p">()</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">nanoseconds</span> <span class="o">/</span> <span class="mf">1e9</span>
+</span><span data-line="93">            <span class="n">graph_input</span><span class="o">.</span><span class="n">ingest</span><span class="p">(</span><span class="n">message_to_observation</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="n">arrival_time</span><span class="p">))</span>
+</span><span data-line="94">        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+</span><span data-line="95">            <span class="c1"># Drop malformed messages instead of crashing the node</span>
+</span><span data-line="96">            <span class="bp">self</span><span class="o">.</span><span class="n">get_logger</span><span class="p">()</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Dropping message on </span><span class="si">{</span><span class="n">topic</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span><span data-line="97">
+</span><span data-line="98">    <span class="k">def</span><span class="w"> </span><span class="nf">publish_result</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">location</span><span class="p">:</span> <span class="n">Location</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="99"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Output callback: publishes each fusion result&quot;&quot;&quot;</span>
+</span><span data-line="100">        <span class="bp">self</span><span class="o">.</span><span class="n">publisher</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">location_to_message</span><span class="p">(</span><span class="n">location</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">to_wgs84</span><span class="p">))</span>
+</span><span data-line="101">
+</span><span data-line="102">    <span class="k">def</span><span class="w"> </span><span class="nf">run_graph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="103">        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">run</span><span class="p">()</span>  <span class="c1"># Returns once all inputs have stopped</span>
+</span><span data-line="104">        <span class="n">rclpy</span><span class="o">.</span><span class="n">try_shutdown</span><span class="p">()</span>  <span class="c1"># Demo only! Stop spinning once all inputs have ended</span>
+</span><span data-line="105">
+</span><span data-line="106">    <span class="k">def</span><span class="w"> </span><span class="nf">destroy_node</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span data-line="107"><span class="w">        </span><span class="sd">&quot;&quot;&quot;Stops the graph and waits for its thread before ROS tears down the node&quot;&quot;&quot;</span>
+</span><span data-line="108">        <span class="bp">self</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+</span><span data-line="109">        <span class="bp">self</span><span class="o">.</span><span class="n">graph_thread</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span><span data-line="110">        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+</span><span data-line="111">
+</span><span data-line="112">
+</span><span data-line="113"><span class="c1"># --- Entry point --------------------------------------------------------------</span>
+</span><span data-line="114">
+</span><span data-line="115"><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span data-line="116">    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</span><span data-line="117">    <span class="n">node</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span data-line="118">    <span class="k">try</span><span class="p">:</span>
+</span><span data-line="119">        <span class="n">node</span> <span class="o">=</span> <span class="n">FusionNode</span><span class="p">()</span>
+</span><span data-line="120">        <span class="n">rclpy</span><span class="o">.</span><span class="n">spin</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>  <span class="c1"># Runs the subscription callbacks until shutdown</span>
+</span><span data-line="121">    <span class="k">except</span> <span class="p">(</span><span class="ne">KeyboardInterrupt</span><span class="p">,</span> <span class="n">ExternalShutdownException</span><span class="p">):</span>
+</span><span data-line="122">        <span class="k">pass</span>  <span class="c1"># Stopped with Ctrl+C, or by run_graph()</span>
+</span><span data-line="123">    <span class="k">finally</span><span class="p">:</span>
+</span><span data-line="124">        <span class="k">if</span> <span class="n">node</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span data-line="125">            <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+</span><span data-line="126">        <span class="n">rclpy</span><span class="o">.</span><span class="n">try_shutdown</span><span class="p">()</span>
+</span><span data-line="127">
+</span><span data-line="128">
+</span><span data-line="129"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span data-line="130">    <span class="n">main</span><span class="p">()</span>
+</span></pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The graph’s <code class="docutils literal notranslate"><span class="pre">crs</span></code> parameter sets the coordinate reference system that MuFASA computes in.
+The node uses a UTM zone by default, so distances are in metres.
+Input nodes project incoming WGS84 geometries into it, but output nodes don’t project results back.
+That’s why <code class="docutils literal notranslate"><span class="pre">location_to_message()</span></code> transforms them back to WGS84.</p>
+</div>
+<p>In this demo, the node shuts itself down once all inputs have received their end message.
+A real fusion node runs until it is stopped with <kbd class="kbd docutils literal notranslate">Ctrl</kbd>+<kbd class="kbd docutils literal notranslate">C</kbd> or by its launch system.
+Either way, <code class="docutils literal notranslate"><span class="pre">destroy_node()</span></code> stops the graph.</p>
+<section id="running-the-example">
+<span id="ros-run"></span><h2>Running the Example<a class="headerlink" href="#running-the-example" title="Link to this heading">#</a></h2>
+<p>To feed the fusion node with data, a minimal ROS node simulates a sensor.
+It publishes the features to every topic given on the command line.</p>
+<details class="admonition-sensor-simulation-ros-node admonition">
+<summary class="admonition-title">Sensor simulation ROS node</summary>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span data-line="1"><span class="c1"># sensor_sim.py</span>
+</span><span data-line="2">
+</span><span data-line="3"><span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+</span><span data-line="4"><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+</span><span data-line="5"><span class="kn">import</span><span class="w"> </span><span class="nn">sys</span>
+</span><span data-line="6"><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+</span><span data-line="7">
+</span><span data-line="8"><span class="kn">import</span><span class="w"> </span><span class="nn">rclpy</span>
+</span><span data-line="9"><span class="kn">from</span><span class="w"> </span><span class="nn">rclpy.node</span><span class="w"> </span><span class="kn">import</span> <span class="n">Node</span>
+</span><span data-line="10"><span class="kn">from</span><span class="w"> </span><span class="nn">std_msgs.msg</span><span class="w"> </span><span class="kn">import</span> <span class="n">String</span>
+</span><span data-line="11">
+</span><span data-line="12"><span class="n">END_MSG</span> <span class="o">=</span> <span class="s2">&quot;END&quot;</span>
+</span><span data-line="13">
+</span><span data-line="14">
+</span><span data-line="15"><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+</span><span data-line="16"><span class="w">    </span><span class="sd">&quot;&quot;&quot;Publishes GeoJSON Features to each topic given on the command line&quot;&quot;&quot;</span>
+</span><span data-line="17">    <span class="n">rclpy</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+</span><span data-line="18">    <span class="n">node</span> <span class="o">=</span> <span class="n">Node</span><span class="p">(</span><span class="s2">&quot;sensor_sim&quot;</span><span class="p">)</span>
+</span><span data-line="19">    <span class="n">publishers</span> <span class="o">=</span> <span class="p">[</span><span class="n">node</span><span class="o">.</span><span class="n">create_publisher</span><span class="p">(</span><span class="n">String</span><span class="p">,</span> <span class="n">topic</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="k">for</span> <span class="n">topic</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">:]]</span>
+</span><span data-line="20">
+</span><span data-line="21">    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;sensor_b.geojson&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">features_file</span><span class="p">:</span>
+</span><span data-line="22">        <span class="n">features</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">features_file</span><span class="p">)[</span><span class="s2">&quot;features&quot;</span><span class="p">]</span>
+</span><span data-line="23">
+</span><span data-line="24">    <span class="c1"># Wait for the fusion node to subscribe, or else the first messages get lost</span>
+</span><span data-line="25">    <span class="k">while</span> <span class="nb">any</span><span class="p">(</span><span class="n">pub</span><span class="o">.</span><span class="n">get_subscription_count</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">pub</span> <span class="ow">in</span> <span class="n">publishers</span><span class="p">):</span>
+</span><span data-line="26">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">.1</span><span class="p">)</span>
+</span><span data-line="27">
+</span><span data-line="28">    <span class="k">for</span> <span class="n">feature</span> <span class="ow">in</span> <span class="n">features</span><span class="p">:</span>
+</span><span data-line="29">        <span class="k">for</span> <span class="n">pub</span> <span class="ow">in</span> <span class="n">publishers</span><span class="p">:</span>
+</span><span data-line="30">            <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">feature</span><span class="p">)))</span>
+</span><span data-line="31">        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">.1</span> <span class="o">+</span> <span class="mf">.1</span> <span class="o">*</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">())</span>
+</span><span data-line="32">    <span class="k">for</span> <span class="n">pub</span> <span class="ow">in</span> <span class="n">publishers</span><span class="p">:</span>
+</span><span data-line="33">        <span class="n">pub</span><span class="o">.</span><span class="n">publish</span><span class="p">(</span><span class="n">String</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">END_MSG</span><span class="p">))</span>
+</span><span data-line="34">
+</span><span data-line="35">    <span class="n">node</span><span class="o">.</span><span class="n">destroy_node</span><span class="p">()</span>
+</span><span data-line="36">    <span class="n">rclpy</span><span class="o">.</span><span class="n">shutdown</span><span class="p">()</span>
+</span><span data-line="37">
+</span><span data-line="38">
+</span><span data-line="39"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+</span><span data-line="40">    <span class="n">main</span><span class="p">()</span>
+</span></pre></div>
+</div>
+</details>
+<p>The simplest way to get a ROS 2 environment is the official Docker image.
+Save <code class="docutils literal notranslate"><span class="pre">fusion_node.py</span></code> and <code class="docutils literal notranslate"><span class="pre">sensor_sim.py</span></code> to a folder together with <a class="reference download internal" download="" href="../../_downloads/da43f61d6f2584f5c8abab5cfc8261fc/sensor_b.geojson"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">sensor_b.geojson</span></code></span></a>,
+and start a container from the root of the MuFASA repository with that folder mounted:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">docker<span class="w"> </span>run<span class="w"> </span>-it<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>ros-mufasa<span class="w"> </span><span class="se">\</span>
+</span><span data-line="2"><span class="w">    </span>-v<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$PWD</span><span class="s2">&quot;</span>:/mufasa:ro<span class="w"> </span>-v<span class="w"> </span>/path/to/scripts:/work<span class="w"> </span>-w<span class="w"> </span>/work<span class="w"> </span><span class="se">\</span>
+</span><span data-line="3"><span class="w">    </span>ros:humble<span class="w"> </span>bash
+</span></pre></div>
+</div>
+<p>Inside the container, install MuFASA and start the fusion node:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">apt-get<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>python3-pip
+</span><span data-line="2"><span class="c1"># Ubuntu 22.04&#39;s pip is too old for MuFASA&#39;s pyproject.toml</span>
+</span><span data-line="3">pip<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</span><span data-line="4">cp<span class="w"> </span>-r<span class="w"> </span>/mufasa<span class="w"> </span>/tmp/mufasa<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pip<span class="w"> </span>install<span class="w"> </span>/tmp/mufasa
+</span><span data-line="5"><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+</span><span data-line="6">python3<span class="w"> </span>fusion_node.py
+</span></pre></div>
+</div>
+<p>In a second terminal, watch the fused results:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>ros-mufasa<span class="w"> </span>bash
+</span><span data-line="2"><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+</span><span data-line="3">ros2<span class="w"> </span>topic<span class="w"> </span><span class="nb">echo</span><span class="w"> </span>--full-length<span class="w"> </span>/mufasa/fused<span class="w"> </span>std_msgs/msg/String
+</span></pre></div>
+</div>
+<p>And in a third terminal, start the simulated sensor:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span data-line="1">docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-it<span class="w"> </span>ros-mufasa<span class="w"> </span>bash
+</span><span data-line="2"><span class="nb">source</span><span class="w"> </span>/opt/ros/humble/setup.bash
+</span><span data-line="3">python3<span class="w"> </span>sensor_sim.py<span class="w"> </span>/mufasa/sensor/a<span class="w"> </span>/mufasa/sensor/b
+</span></pre></div>
+</div>
+<p>The second terminal then shows each feature twice, once per input topic, for example:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span data-line="1">data: &#39;{&quot;type&quot;: &quot;Feature&quot;, &quot;geometry&quot;: {&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [16.426643559839174, 48.26840868576795]}, &quot;properties&quot;: {&quot;timestamp&quot;: 1793183493.4454303, &quot;topic&quot;: &quot;/mufasa/sensor/a&quot;, &quot;confidence&quot;: 0.9433776719597745}}&#39;
+</span><span data-line="2">---
+</span><span data-line="3">data: &#39;{&quot;type&quot;: &quot;Feature&quot;, &quot;geometry&quot;: {&quot;type&quot;: &quot;Point&quot;, &quot;coordinates&quot;: [16.426643559839174, 48.26840868576795]}, &quot;properties&quot;: {&quot;timestamp&quot;: 1793183493.4456568, &quot;topic&quot;: &quot;/mufasa/sensor/b&quot;, &quot;confidence&quot;: 0.9433776719597745}}&#39;
+</span><span data-line="4">---
+</span></pre></div>
+</div>
+<p>To reach nodes on other machines, the usual ROS networking applies:
+all participants need the same <code class="docutils literal notranslate"><span class="pre">ROS_DOMAIN_ID</span></code>, and in Docker you need to use <code class="docutils literal notranslate"><span class="pre">--network</span> <span class="pre">host</span></code>.
+If no messages arrive from a real sensor, check that its QoS<a class="footnote-reference brackets" href="#ros2-qos" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> settings match the subscription’s.
+Many sensor drivers publish with <em>best effort</em> reliability, while the example subscribes with ROS’s <em>reliable</em> default.</p>
+</section>
+</section>
+<hr class="footnotes docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="ros2" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>ROS 2 Documentation, <a class="reference external" href="https://docs.ros.org/en/humble/">https://docs.ros.org/en/humble/</a></p>
+</aside>
+<aside class="footnote brackets" id="rclpy" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>rclpy, ROS 2’s Python client library, <a class="reference external" href="https://docs.ros.org/en/humble/p/rclpy/">https://docs.ros.org/en/humble/p/rclpy/</a></p>
+</aside>
+<aside class="footnote brackets" id="ros2-qos" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>ROS 2 Quality of Service settings, <a class="reference external" href="https://docs.ros.org/en/humble/Concepts/Intermediate/About-Quality-of-Service-Settings.html">https://docs.ros.org/en/humble/Concepts/Intermediate/About-Quality-of-Service-Settings.html</a></p>
+</aside>
+</aside>
+
+        </article><button class="back-to-top" type="button">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+  </svg>
+  <span>Back to top</span>
+</button><div class="navigation flex print:hidden"><div class="navigation-prev">
+    <a href="mqtt.html">
+      <i class="i-lucide chevron-left"></i>
+      <div class="page-info">
+        <span>Previous</span><div class="title">MQTT</div></div>
+    </a>
+  </div><div class="navigation-next">
+    <a href="../../showcases/index.html">
+      <div class="page-info">
+        <span>Next</span>
+        <div class="title">Showcases</div>
+      </div>
+      <i class="i-lucide chevron-right"></i>
+    </a>
+  </div></div></div>
+    </div>
+  </main>
+</div>
+<footer class="sy-foot">
+  <div class="sy-foot-inner sy-container mx-auto">
+    <div class="sy-foot-reserved md:flex justify-between items-center">
+      <div class="sy-foot-copyright"><p>2026, Michael Hubner, Kilian Wohlleben, Jan Nausner, Julia Pöschl</p>
+  
+  <p>
+    Made with
+    
+    <a href="https://www.sphinx-doc.org/">Sphinx</a> and
+    
+    <a href="https://shibuya.lepture.com">Shibuya theme</a>.
+  </p>
+</div>
+      <div class="mf-foot-right flex items-center">
+        <div class="sy-foot-socials">
+  <a href="https://github.com/mufasa-fusion/mufasa-fusion" aria-label="GitHub">
+    <iconify-icon icon="simple-icons:github"></iconify-icon>
+  </a></div>
+        <a class="mf-foot-logo" href="https://www.ait.ac.at" aria-label="AIT Austrian Institute of Technology">
+          <img class="mf-light-only" src="../../_static/img/logo/AIT.svg" alt="AIT Austrian Institute of Technology">
+          <img class="mf-dark-only" src="../../_static/img/logo/AIT_weiss.svg" alt="AIT Austrian Institute of Technology">
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
+      <script src="../../_static/documentation_options.js?v=938c9ccc"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../../_static/copybutton.js?v=f281be69"></script>
+      <script src="../../_static/shibuya.js?v=50760d75"></script>
+      <script src="../../_static/js/versions.js?v=f52e4ae6"></script></body>
+</html>

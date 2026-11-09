@@ -1,0 +1,25 @@
+mufasa.registry
+===============
+
+.. py:module:: mufasa.registry
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   mufasa.registry.NODE_REGISTRY
+
+
+Module Contents
+---------------
+
+.. py:data:: NODE_REGISTRY
+   :type:  dict[str, type]
+
+   Maps node type names to their classes.
+
+   Used by :func:`Graph.from_config() <mufasa.graph.Graph.from_config>` to reconstruct nodes from a serialized config.
+   Register new node types here to make them deserializable.
+

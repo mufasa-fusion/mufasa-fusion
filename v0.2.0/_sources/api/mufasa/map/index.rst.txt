@@ -1,0 +1,100 @@
+mufasa.map
+==========
+
+.. py:module:: mufasa.map
+
+.. autoapi-nested-parse::
+
+   Data types for spatially distributed detections, i.e. over an area.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.map.BoundingBox
+   mufasa.map.Map
+   mufasa.map.BayesianMap
+
+
+Module Contents
+---------------
+
+.. py:class:: BoundingBox
+
+   Bases: :py:obj:`NamedTuple`
+
+
+   .. py:attribute:: min_x
+      :type:  float
+
+
+   .. py:attribute:: min_y
+      :type:  float
+
+
+   .. py:attribute:: max_x
+      :type:  float
+
+
+   .. py:attribute:: max_y
+      :type:  float
+
+
+.. py:class:: Map(data: numpy.ndarray, transform: rasterio.transform.Affine, crs: CRS | None = None, *, timestamp: float = 0.0)
+
+   Spatially distributed detection, rasterized to a geo-referenced :attr:`data` array, at some :attr:`timestamp`.
+   Geo-referencing via an affine :attr:`transformation` and a :attr:`crs`.
+
+
+   .. py:attribute:: data
+
+
+   .. py:attribute:: transform
+
+
+   .. py:attribute:: crs
+      :value: None
+
+
+
+   .. py:attribute:: timestamp
+      :value: 0.0
+
+
+
+   .. py:method:: from_bounds(bounds: BoundingBox, resolution: tuple[float, float], crs: str | CRS | None = None) -> Map
+      :classmethod:
+
+
+
+   .. py:property:: bbox
+      :type: BoundingBox
+
+
+
+   .. py:method:: copy() -> Map
+
+
+   .. py:method:: reproject(crs: str | CRS, bbox: BoundingBox, resolution: tuple[float, float]) -> Map
+
+
+.. py:class:: BayesianMap(data: numpy.ndarray, transform: rasterio.transform.Affine, crs: CRS | None = None, *, timestamp: float = 0.0)
+
+   Bases: :py:obj:`Map`
+
+
+   Map subtype that stores :attr:`data` in log-odds space.
+
+   Used by :mod:`Bayesian fusion nodes <mufasa.nodes.fusion.map_fusion>` to avoid repeated logit/expit round-trips.
+
+
+   .. py:property:: probabilities
+      :type: numpy.ndarray
+
+
+      Return a copy of the map data converted to probabilities in [0, 1].
+
+

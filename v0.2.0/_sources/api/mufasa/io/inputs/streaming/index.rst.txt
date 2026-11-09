@@ -1,0 +1,90 @@
+mufasa.io.inputs.streaming
+==========================
+
+.. py:module:: mufasa.io.inputs.streaming
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   mufasa.io.inputs.streaming.StreamingInputNode
+   mufasa.io.inputs.streaming.LocationStreamingInput
+   mufasa.io.inputs.streaming.ObservationStreamingInput
+   mufasa.io.inputs.streaming.MapStreamingInput
+
+
+Module Contents
+---------------
+
+.. py:class:: StreamingInputNode
+
+   Bases: :py:obj:`mufasa.io.inputs.base.InputNode`
+
+
+   Base for push-based streaming inputs.
+
+   External code (MQTT handler, socket listener, etc.) calls ingest() as
+   items arrive. MuFASA is not responsible for connection lifecycle.
+   Use LocationStreamingInput or MapStreamingInput directly.
+
+
+   .. py:method:: items()
+
+      Return items from this input in temporal order.
+
+      File-based nodes return a sorted list. Streaming nodes return a
+      blocking generator that yields as items arrive via ingest().
+
+
+
+   .. py:method:: ingest(item) -> None
+
+      Deliver one item into the pipeline.
+
+
+
+   .. py:method:: stop() -> None
+
+      Signal this input to stop yielding from items().
+
+
+
+   .. py:method:: get_config() -> dict
+
+      Return all constructor arguments as a plain JSON-serializable dict.
+
+      Requires that the dict is JSON-serializable and that the node is reconstructed
+      when passing the dict as kwargs to its constructor like so::
+
+          SomeNode(**some_node.get_config())
+
+      Used by :func:`Graph.to_config() <mufasa.graph.Graph.to_config>` to serialize the pipeline.
+
+
+
+.. py:class:: LocationStreamingInput
+
+   Bases: :py:obj:`StreamingInputNode`
+
+
+   Streaming input for Location objects.
+
+
+.. py:class:: ObservationStreamingInput
+
+   Bases: :py:obj:`StreamingInputNode`
+
+
+   Streaming input for Location objects.
+
+
+.. py:class:: MapStreamingInput
+
+   Bases: :py:obj:`StreamingInputNode`
+
+
+   Streaming input for Map objects.
+
+
