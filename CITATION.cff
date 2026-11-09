@@ -2,7 +2,9 @@ cff-version: 1.2.0
 title: "MuFASA: Multimodal Fusion Architecture for Sensor Applications"
 message: "If you use this software, please cite it as below."
 type: software
-license: Apache 2.0
+license: Apache-2.0
+version: 0.2.0
+date-released: "2026-11-06"
 repository-code: "https://github.com/mufasa-fusion/mufasa-fusion"
 authors:
   - family-names: Wohlleben

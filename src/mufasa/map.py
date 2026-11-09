@@ -1,4 +1,6 @@
-﻿from typing import NamedTuple
+﻿"""Data types for spatially distributed detections, i.e. over an area."""
+
+from typing import NamedTuple
 
 import numpy as np
 from rasterio.crs import CRS
@@ -15,6 +17,10 @@ class BoundingBox(NamedTuple):
 
 
 class Map:
+    """Spatially distributed detection, rasterized to a geo-referenced :attr:`data` array, at some :attr:`timestamp`.
+    Geo-referencing via an affine :attr:`transformation` and a :attr:`crs`.
+    """
+
     def __init__(
         self,
         data: np.ndarray,
@@ -84,12 +90,9 @@ class Map:
 
 
 class BayesianMap(Map):
-    """Map subtype produced by Bayesian nodes (POM, StaticMap).
+    """Map subtype that stores :attr:`data` in log-odds space.
 
-    ``data`` stores values in log-odds space. Use the ``probabilities``
-    property to obtain the equivalent values in [0, 1]. Fusion nodes
-    (BayesianFusion, LogicalAnd/Or) operate directly on ``data`` to avoid
-    repeated logit/expit round-trips.
+    Used by :mod:`Bayesian fusion nodes <mufasa.nodes.fusion.map_fusion>` to avoid repeated logit/expit round-trips.
     """
 
     @property

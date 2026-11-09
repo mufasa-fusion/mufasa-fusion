@@ -125,6 +125,13 @@ def _node_depths(nodes: list[Node]) -> dict:
 # ---------------------------------------------------------------------------
 
 class Graph:
+    """The Fusion Graph, binding all nodes reachable from its :attr:`inputs` to :attr:`outputs` together.
+
+    It is responsible for type compatibility checking and orchestrates the execution of the fusion system
+    via its :func:`run` method. It also distributes global configuration – :attr:`crs`,
+    :attr:`bounding box <bbox>` and map raster :attr:`resolution` – to every node.
+    """
+
     def __init__(
         self,
         inputs:     list[Node],
@@ -279,8 +286,6 @@ class Graph:
                 )
 
     def _configure_run(self) -> None:
-        import queue as _queue_mod
-        import threading
         from mufasa.io.inputs.streaming import StreamingInputNode
 
         file_inputs   = [n for n in self.inputs if not isinstance(n, StreamingInputNode)]
@@ -297,21 +302,28 @@ class Graph:
         if file_inputs:
             pairs = [(item, inp) for inp in file_inputs for item in inp.items()]
             self._file_items = sorted(pairs, key=lambda x: x[0].timestamp)
-        else:
-            _STOP = object()
-            self._queue: _queue_mod.SimpleQueue = _queue_mod.SimpleQueue()
-            self._stop_sentinel = _STOP
-            self._n_stops = len(stream_inputs)
-            def _worker(inp):
-                for item in inp.items():
-                    self._queue.put((item, inp))
-                self._queue.put((_STOP, None))
-            for inp in stream_inputs:
-                threading.Thread(target=_worker, args=(inp,), daemon=True).start()
+
+    def _configure_streaming_run(self):
+        import queue as _queue_mod
+        import threading
+
+        _STOP = object()
+        self._queue: _queue_mod.SimpleQueue = _queue_mod.SimpleQueue()
+        self._stop_sentinel = _STOP
+        self._n_stops = len(self._stream_inputs)
+
+        def _worker(inp):
+            for item in inp.items():
+                self._queue.put((item, inp))
+            self._queue.put((_STOP, None))
+
+        for inp in self._stream_inputs:
+            threading.Thread(target=_worker, args=(inp,), daemon=True).start()
 
     def run(self) -> None:
         try:
             if self._stream_inputs:
+                self._configure_streaming_run()
                 running = self._n_stops
                 while running:
                     item, inp = self._queue.get()
@@ -340,14 +352,13 @@ class Graph:
         """
         for node in self.nodes:
             node.reset()
-        self._configure_run()
 
     # ------------------------------------------------------------------
     # Serialization
     # ------------------------------------------------------------------
 
     def to_config(self) -> dict:
-        """Return the full pipeline as a plain serializable dict."""
+        """Return the full pipeline as a JSON-serializable dict."""
         serialized = []
         for node in self.nodes:
             node_cfg: dict = {"type": type(node).__name__, "name": node.name}
@@ -370,7 +381,7 @@ class Graph:
 
     @classmethod
     def from_config(cls, config: dict) -> "Graph":
-        """Reconstruct a Graph from a config dict produced by to_config()."""
+        """Reconstruct a Graph from a config dict produced by :func:`to_config`."""
         from mufasa.registry import NODE_REGISTRY
 
         spatial    = config.get("spatial", {})
@@ -464,88 +475,14 @@ class Graph:
         print("═" * W)
 
     def plot_graph(self):
-        """Render the pipeline DAG as a matplotlib figure.
+        """Render the pipeline as an interactive Fusion Graph.
 
-        Returns the Figure so the caller can display, save, or embed it.
-        Input nodes are green, output nodes are red, processing nodes are blue.
+        Ports on each node show the data types it accepts (top) and produces (bottom); hovering a node
+        shows its full name and connections, hovering a port its concrete data type.
+
+        Returns a :class:`~mufasa.graph_svg.FusionGraphSVG`, which displays itself in Jupyter notebooks
+        and can be written to an .svg file with ``save()``.
         """
-        import matplotlib.patches as mpatches
-        import matplotlib.pyplot as plt
-        from collections import defaultdict
+        from mufasa.graph_svg import FusionGraphSVG, render, spec_from_graph
 
-        nodes      = self.nodes
-        depths     = _node_depths(nodes)
-        input_set  = set(self.inputs)
-        output_set = set(self.outputs)
-
-        by_depth: dict = defaultdict(list)
-        for node in nodes:
-            by_depth[depths[node]].append(node)
-
-        sorted_layers = sorted(by_depth.keys())
-
-        def _bc(node, pos, neighbours):
-            vals = [pos[nb] for nb in neighbours if nb in pos]
-            return sum(vals) / len(vals) if vals else pos.get(node, 0.0)
-
-        for _ in range(4):
-            pos = {n: float(i) for d in sorted_layers for i, n in enumerate(by_depth[d])}
-            for d in sorted_layers:
-                by_depth[d].sort(key=lambda n: _bc(n, pos, n._predecessors))
-            pos = {n: float(i) for d in sorted_layers for i, n in enumerate(by_depth[d])}
-            for d in reversed(sorted_layers):
-                by_depth[d].sort(key=lambda n: _bc(n, pos, n._successors))
-
-        max_col = max(depths.values(), default=0)
-        max_row = max(len(g) for g in by_depth.values())
-
-        DX, DY = 3.0, 1.6
-        BOX_W  = 2.2
-        BOX_H  = 0.7
-
-        positions: dict = {}
-        for col, group in by_depth.items():
-            n = len(group)
-            for row, node in enumerate(group):
-                positions[node] = (col * DX, -(row - (n - 1) / 2) * DY)
-
-        fig, ax = plt.subplots(
-            figsize=(max(5, (max_col + 1) * DX + BOX_W),
-                     max(3, (max_row + 1) * DY))
-        )
-        ax.set_aspect("equal")
-        ax.axis("off")
-
-        for node in nodes:
-            x0, y0 = positions[node]
-            for real_succ in _real_successors(node):
-                if real_succ not in positions:
-                    continue
-                x1, y1 = positions[real_succ]
-                ax.annotate(
-                    "",
-                    xy=(x1 - BOX_W / 2, y1),
-                    xytext=(x0 + BOX_W / 2, y0),
-                    arrowprops=dict(arrowstyle="-|>", color="#555555", lw=1.2),
-                )
-
-        for node, (x, y) in positions.items():
-            fc = "#b7e4b7" if node in input_set else "#f4a8a8" if node in output_set else "#a8c4f4"
-            ax.add_patch(mpatches.FancyBboxPatch(
-                (x - BOX_W / 2, y - BOX_H / 2), BOX_W, BOX_H,
-                boxstyle="round,pad=0.05",
-                facecolor=fc, edgecolor="#333333", linewidth=1.0,
-            ))
-            ax.text(x, y, type(node).__name__, ha="center", va="center", fontsize=8)
-
-        ax.legend(
-            handles=[
-                mpatches.Patch(facecolor="#b7e4b7", edgecolor="#333333", label="Input"),
-                mpatches.Patch(facecolor="#a8c4f4", edgecolor="#333333", label="Processing"),
-                mpatches.Patch(facecolor="#f4a8a8", edgecolor="#333333", label="Output"),
-            ],
-            loc="upper right", fontsize=8,
-        )
-        ax.autoscale_view()
-        plt.tight_layout()
-        return fig
+        return FusionGraphSVG(render(spec_from_graph(self)))

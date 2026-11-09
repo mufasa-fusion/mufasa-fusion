@@ -1,0 +1,40 @@
+name: Deploy docs
+
+# Pushes to main update the latest subfolder,
+# release tags starting with v additionally freeze a copy in a version folder
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - "v*"
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Build HTML
+        uses: ammaraskar/sphinx-action@8.2.3
+        with:
+          docs-folder: docs
+      - name: Deploy latest docs
+        uses: peaceiris/actions-gh-pages@v4
+        if: "github.ref == 'refs/heads/main'"
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html
+          publish_branch: docs-build
+          destination_dir: latest
+      - name: Deploy release docs
+        uses: peaceiris/actions-gh-pages@v4
+        if: "startsWith(github.ref, 'refs/tags/v')"
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: docs/_build/html
+          publish_branch: docs-build
+          destination_dir: ${{ github.ref_name }}

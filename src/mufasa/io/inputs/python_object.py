@@ -12,6 +12,8 @@ class LocationInput(InputNode):
     contains Observations or Locations, they are returned sorted by timestamp.
     """
 
+    _output_type = Location  # broadest valid default; resolved from the data at construction
+
     def __init__(self, data) -> None:
         self._data: list[Location] = list(data)
         if not self._data:
