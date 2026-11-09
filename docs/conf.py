@@ -98,6 +98,7 @@ html_js_files = [
 html_logo = "_static/img/logo/MuFASA_MuFASA.svg"
 html_theme_options = {
     "accent_color": "red",
+    "color_mode": "light",  # Light only: the switch is hidden by _templates/components/theme-switch.html
     "light_logo": html_logo,
     "dark_logo": "_static/img/logo/MuFASA_MuFASA_weiss.svg",
     "globaltoc_expand_depth": 1,
@@ -119,5 +120,5 @@ with open(os.path.join("_static", "versions.txt")) as f:
 
 html_context = {
     "current_version": release,
-    "versions": ({"latest": "/latest/"} | {v: f"/v{v}/" for v in versions}).items(),
+    "versions": list(({"latest": "/latest/"} | {v: f"/v{v}/" for v in versions}).items()),  # list: must be picklable
 }
