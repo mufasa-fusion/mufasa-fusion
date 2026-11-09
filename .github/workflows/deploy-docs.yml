@@ -1,7 +1,7 @@
 name: Deploy docs
 
-# Pushes to main update the site root (latest release),
-# release tags (v0.2.0, …) additionally freeze a copy in a version folder (/v0.2.0/).
+# Pushes to main update the latest subfolder,
+# release tags starting with v additionally freeze a copy in a version folder
 on:
   push:
     branches:
@@ -22,16 +22,15 @@ jobs:
         uses: ammaraskar/sphinx-action@8.2.3
         with:
           docs-folder: docs
-      - name: Deploy latest (site root)
+      - name: Deploy latest docs
         uses: peaceiris/actions-gh-pages@v4
         if: "github.ref == 'refs/heads/main'"
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: docs/_build/html
           publish_branch: docs-build
-          keep_files: true  # Keeps the version folders
-          cname: mufasa-fusion.org  # Writes CNAME on every deploy; without it the custom domain is lost
-      - name: Deploy release version folder
+          destination_dir: latest
+      - name: Deploy release docs
         uses: peaceiris/actions-gh-pages@v4
         if: "startsWith(github.ref, 'refs/tags/v')"
         with:
@@ -39,4 +38,3 @@ jobs:
           publish_dir: docs/_build/html
           publish_branch: docs-build
           destination_dir: ${{ github.ref_name }}
-          keep_files: true  # Keeps the site root and the other version folders
