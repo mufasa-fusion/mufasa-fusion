@@ -7,299 +7,79 @@
 
 # MuFASA — Multimodal Fusion Architecture for Sensor Applications
 
-MuFASA is a framework for rapid prototyping of geospatial sensor fusion pipelines. You don't need deep knowledge of fusion methods or sensor modalities to get started — wire nodes together with Python, run them on recorded data or live streams, and swap components without touching the rest of the pipeline. 
+[![PyPI](https://img.shields.io/pypi/v/mufasa-fusion)](https://pypi.org/project/mufasa-fusion/)
+[![Python](https://img.shields.io/pypi/pyversions/mufasa-fusion)](https://pypi.org/project/mufasa-fusion/)
+[![Tests](https://github.com/mufasa-fusion/mufasa-fusion/actions/workflows/tests.yml/badge.svg)](https://github.com/mufasa-fusion/mufasa-fusion/actions/workflows/tests.yml)
+[![License](https://img.shields.io/github/license/mufasa-fusion/mufasa-fusion)](https://github.com/mufasa-fusion/mufasa-fusion/blob/main/LICENSE)
 
----
+**📖 [Documentation](https://mufasa-fusion.org)** ·
+[Getting Started](https://mufasa-fusion.org/latest/getting-started.html) ·
+[User Guide](https://mufasa-fusion.org/latest/user-guide/index.html) ·
+[API Reference](https://mufasa-fusion.org/latest/api/index.html) ·
+[Contributing](https://github.com/mufasa-fusion/mufasa-fusion/blob/main/CONTRIBUTING.md)
+
+MuFASA is a framework for rapid prototyping of geospatial sensor fusion pipelines. You don't need deep knowledge of fusion methods or sensor modalities to get started — wire nodes together with Python, run them on recorded data or live streams, and swap components without touching the rest of the pipeline.
 
 ## Installation
 
-Run one of the following commands in a shell with your active python environment:
-
-Latest version on GitHub:
-
 ```bash
-pip install "mufasa-fusion @ git+https://github.com/mufasa-fusion/mufasa-fusion"
+pip install mufasa-fusion
 ```
 
-Latest release on PyPI:
-
-```bash
-pip install "mufasa-fusion"
-```
-
-Extra dependencies: 
-
-```
-mufasa-fusion[tracking]          # + KalmanTracker, DBSTREAMClusterer
-mufasa-fusion[vis]               # + plot_map, animate_maps, plot_locations
-mufasa-fusion[tracking,vis]      # everything
-```
-
-Requires Python ≥ 3.10.
-
----
-
-## Core concepts
-
-| Concept | Description |
-|---------|-------------|
-| **Location** | A geospatial object: geometry, optional timestamp, and free-form properties. `Observation` extends `Location` with a `confidence` field and is the standard type for sensor detections. |
-| **Map** | A raster grid over a geographic area, backed by a NumPy array with a rasterio affine transform and CRS. |
-| **Node** | A processing unit that accepts Locations and/or Maps, transforms them, and passes results downstream. |
-| **Graph** | A validated DAG of nodes. Checks wiring at construction time and distributes spatial configuration to every node. |
-
----
+Requires Python ≥ 3.10. Optional extras, e.g. `pip install "mufasa-fusion[vis,tracking]"`:
+`vis` (visualization), `tracking` (tracking nodes), `dev` (tests) and `docs` (building the documentation).
+See the [Installation guide](https://mufasa-fusion.org/latest/user-guide/installation.html) for details.
 
 ## Quick start
 
 ```python
 from mufasa import BoundingBox, Graph
-from mufasa.io.inputs.geojson import GeoJsonInput
-from mufasa.io.outputs.python_object import LocationOutput
+from mufasa.io.inputs import GeoJsonInput
+from mufasa.io.outputs import LocationOutput
 from mufasa.nodes.mapping import POM
 from mufasa.nodes.fusion import BayesianFusion
 from mufasa.nodes.detection import Threshold
 
-# --- Define inputs ---
-track_a = GeoJsonInput(path="sensor_a.geojson")
-track_b = GeoJsonInput(path="sensor_b.geojson")
+# Inputs: one recorded data source per sensor
+sensor_a = GeoJsonInput("sensor_a.geojson")
+sensor_b = GeoJsonInput("sensor_b.geojson")
 
-# --- Build pipeline ---
-pom_a  = POM(decay_s=300)(track_a)
-pom_b  = POM(decay_s=300)(track_b)
+# Pipeline: occupancy maps per sensor, fused, then thresholded into alarms
+pom_a  = POM(decay_s=300)(sensor_a)
+pom_b  = POM(decay_s=300)(sensor_b)
 fused  = BayesianFusion()(pom_a, pom_b)
 alarms = Threshold(threshold=0.7)(fused)
 out    = LocationOutput()(alarms)
 
-# --- Assemble and run ---
 graph = Graph(
-    inputs=[track_a, track_b],
+    inputs=[sensor_a, sensor_b],
     outputs=[out],
     crs="EPSG:32633",
-    bbox=BoundingBox(14.0, 47.0, 14.2, 47.2),
-    resolution=(10.0, 10.0),
+    bbox=BoundingBox(16.4264, 48.2675, 16.4283, 48.2700),
+    resolution=(2.0, 2.0),
 )
 graph.run()
 
-detections = out.result  # list[Observation]
+out.result  # list of fused detections
 ```
 
-Changing a parameter between runs is a plain attribute assignment — no API needed:
+`graph.plot_graph()` shows the resulting Fusion Graph:
 
-```python
-# tighten the alarm threshold after inspection
-alarms.threshold = 0.85
-graph.run()
-```
+<p align="center">
+  <img src="https://raw.githubusercontent.com/mufasa-fusion/mufasa-fusion/refs/heads/main/docs/_static/img/quickstart-graph.svg"
+       alt="Fusion Graph of the quick start: two GeoJSON inputs feed one POM each, fused by BayesianFusion, thresholded and collected by a LocationOutput" height="320" />
+</p>
 
----
+Continue with [Getting Started](https://mufasa-fusion.org/latest/getting-started.html) for a runnable walkthrough.
 
-## Built-in nodes
+## Contributing
 
-### Mapping — `mufasa.nodes.mapping`
+Contributions are welcome. Every contribution starts with an issue — please read the [Contributing guide](https://github.com/mufasa-fusion/mufasa-fusion/blob/main/CONTRIBUTING.md) and our [Code of Conduct](https://github.com/mufasa-fusion/mufasa-fusion/blob/main/CODE_OF_CONDUCT.md). To report a vulnerability, see the [Security policy](https://github.com/mufasa-fusion/mufasa-fusion/blob/main/SECURITY.md).
 
-| Class | Input → Output | Description |
-|-------|----------------|-------------|
-| `POM` | `Observation → BayesianMap` | Probability Occupancy Map: Bayesian log-odds accumulation with exponential temporal decay. |
-| `StaticMap` | `→ BayesianMap` | Source node: loads a fixed prior from a GeoJSON file at startup and contributes to fusion without any runtime updates. |
+## Citation
 
-### Fusion — `mufasa.nodes.fusion`
+If you use MuFASA in your research, please cite it via the [CITATION.cff](https://github.com/mufasa-fusion/mufasa-fusion/blob/main/CITATION.cff) file (GitHub's "Cite this repository" button).
 
-| Class | Input → Output | Description |
-|-------|----------------|-------------|
-| `BayesianFusion` | `BayesianMap… → BayesianMap` | Sums log-odds across all inputs (assumes conditional independence). |
-| `LogicalAnd` | `BayesianMap… → BayesianMap` | Element-wise minimum in log-odds space. |
-| `LogicalOr` | `BayesianMap… → BayesianMap` | Element-wise maximum in log-odds space. |
+## License
 
-### Detection — `mufasa.nodes.detection`
-
-| Class | Input → Output | Description |
-|-------|----------------|-------------|
-| `Threshold` | `Map → Location` | Connected-component labelling on pixels at or above a value threshold; emits one `Location` per component with `mean_value` in properties. |
-| `ConfidenceThreshold` | `BayesianMap → Observation` | Like `Threshold` but operates on probabilities (0–1); emits one `Observation` per component with `confidence` = mean probability. |
-
-### Tracking — `mufasa.nodes.tracking`
-
-| Class | Input → Output | Description |
-|-------|----------------|-------------|
-| `KalmanTracker` | `Location → Observation` | Multi-target Kalman filter (Stone Soup backend); buffers observations into fixed-length windows before each predict–update cycle. |
-| `DBSTREAMClusterer` | `Location → Location` | Online density-based clustering (DBSTREAM via River); emits one `Location` per cluster centroid. |
-
-### Utility — `mufasa.nodes.util`
-
-| Class | Input → Output | Description |
-|-------|----------------|-------------|
-| `ObservationFilter` | `Observation → Observation` | Filters observations by confidence threshold, time window, and/or property regex patterns; all criteria are AND-combined. |
-
-### I/O — `mufasa.io`
-
-| Class | Role |
-|-------|------|
-| `GeoJsonInput` | Load Locations or Observations from a GeoJSON file; emits `Observation` if a `confidence` column is present, `Location` otherwise. |
-| `GeoTiffInput` | Load a raster map from a GeoTIFF file. |
-| `GeoJsonOutput` | Write collected Locations/Observations to a GeoJSON file (reprojected to WGS84). |
-| `GeoTiffOutput` | Write map snapshots to GeoTIFF. |
-| `LocationOutput` | Collect Locations/Observations in memory (`output.result`). |
-| `MapOutput` | Collect periodic map snapshots in memory. |
-| `Visualization` | Debug output that collects both Map snapshots and Locations; inspect with `viz.show(index)` or animate with `viz.animate(index)` after the run. |
-
----
-
-## How to write a new node
-
-Every node subclasses `Node` and declares three things: what types it accepts, what type it emits, and how to serialise its constructor arguments.
-
-### Observation-to-observation node
-
-The simplest pattern: receive one `Observation`, push one (or more) downstream.
-
-```python
-from mufasa.node import Node
-from mufasa.location import Observation
-
-class ConfidenceBoost(Node):
-    """Multiplies every observation's confidence by a fixed factor."""
-
-    _input_types = [Observation]   # accepts Observation (and any subclass)
-    _output_type = Observation     # emits Observation
-
-    def __init__(self, factor: float = 1.2) -> None:
-        super().__init__()
-        self.factor = factor
-
-    def process(self, obs: Observation) -> None:
-        boosted = Observation(
-            geometry=obs.geometry,
-            timestamp=obs.timestamp,
-            confidence=min(obs.confidence * self.factor, 1.0),
-        )
-        for successor in self._successors:
-            successor.process(boosted)
-
-    def get_config(self) -> dict:
-        return {"factor": self.factor}
-```
-
-### Map-consuming node
-
-Map nodes are called with no arguments — they read from `self._predecessors[n].map` and call `self._trigger_successors()` when done.
-
-```python
-from mufasa.node import Node
-from mufasa.map import Map
-import numpy as np
-
-class MapClipper(Node):
-    """Clips all map values to a maximum."""
-
-    _input_types = [Map]
-    _output_type = Map
-
-    def __init__(self, cap: float = 0.9) -> None:
-        super().__init__()
-        self.cap = cap
-        self._map: Map | None = None
-
-    def configure(self, crs, bbox, resolution) -> None:
-        # Called by Graph at construction time; initialise spatial state here.
-        self._map = Map.from_bounds(bbox, resolution, crs)
-
-    def process(self) -> None:
-        src = self._predecessors[0].map
-        np.clip(src.data, a_min=None, a_max=self.cap, out=self._map.data)
-        self._map.timestamp = src.timestamp
-        self._trigger_successors()
-
-    @property
-    def map(self) -> Map:
-        return self._map
-
-    def reset(self) -> None:
-        if self._map is not None:
-            self._map.data[:] = 0.0
-
-    def get_config(self) -> dict:
-        return {"cap": self.cap}
-```
-
-### Stateful node (buffering + end-of-stream flush)
-
-Override `flush()` and `reset()` when your node accumulates data across calls. `flush()` is called by the framework after all inputs are exhausted; `reset()` is called between pipeline runs.
-
-```python
-from mufasa.node import Node
-from mufasa.location import Observation
-
-class BatchEmitter(Node):
-    """Holds observations until a batch of `n` is ready, then emits them all."""
-
-    _input_types = [Observation]
-    _output_type = Observation
-
-    def __init__(self, n: int = 10) -> None:
-        super().__init__()
-        self.n = n
-        self._buffer: list[Observation] = []
-
-    def process(self, obs: Observation) -> None:
-        self._buffer.append(obs)
-        if len(self._buffer) >= self.n:
-            self._flush()
-
-    def flush(self) -> None:
-        """Called by the framework at end of stream."""
-        if self._buffer:
-            self._flush()
-
-    def reset(self) -> None:
-        self._buffer.clear()
-
-    def _flush(self) -> None:
-        for obs in self._buffer:
-            for successor in self._successors:
-                successor.process(obs)
-        self._buffer.clear()
-
-    def get_config(self) -> dict:
-        return {"n": self.n}
-```
-
-### Register for save/load
-
-To make a node serialisable via `Graph.to_config()` / `Graph.from_config()`, add one line to [src/registry.py](src/registry.py):
-
-```python
-from mypackage.nodes import ConfidenceBoost
-
-NODE_REGISTRY["ConfidenceBoost"] = ConfidenceBoost
-```
-
-The key must match `type(node).__name__` exactly.
-
-### Checklist
-
-| | Requirement |
-|---|---|
-| ☐ | `_input_types` declared (`[]` for input nodes) |
-| ☐ | `_output_type` declared (`None` for output nodes) |
-| ☐ | `process()` implemented with the correct signature |
-| ☐ | `get_config()` returns all constructor arguments as a JSON-serialisable dict (optional)|
-| ☐ | `configure()` overridden if spatial setup is needed (optional)|
-| ☐ | `reset()` overridden if the node holds runtime state (optional)|
-| ☐ | `flush()` overridden if the node buffers data across calls (optional)|
-| ☐ | Registered in `NODE_REGISTRY` if serialisation is needed (optional)|
-
----
-
-## Development
-
-```bash
-# install with dev dependencies
-pip install -e ".[dev]"
-
-# run the test suite
-pytest
-
-# run with coverage
-pytest --cov=mufasa
-```
+MuFASA is developed by the [AIT Austrian Institute of Technology](https://www.ait.ac.at) and licensed under the [Apache License 2.0](https://github.com/mufasa-fusion/mufasa-fusion/blob/main/LICENSE).

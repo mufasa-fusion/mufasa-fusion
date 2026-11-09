@@ -1,0 +1,10 @@
+{%- extends "!layout.html" -%}
+{#- Light only (see color_mode in conf.py and _templates/components/theme-switch.html).
+    Shibuya applies a mode stored in localStorage before falling back to color_mode, so visitors who once
+    picked dark or auto with the former switch would stay dark. Clear that choice and force light mode.
+    Runs in <head> right after Shibuya's own script, before the page renders. Delete this file together
+    with theme-switch.html to bring the switch back. -#}
+{%- block extrahead -%}
+  {{ super() }}
+  <script>try { localStorage.removeItem("_theme"); } catch (e) {} setColorMode("light");</script>
+{%- endblock -%}

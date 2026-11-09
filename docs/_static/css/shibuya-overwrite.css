@@ -47,6 +47,16 @@ html[data-accent-color="red"] {
   --code-block-highlight: var(--gray-a3);
 }
 
+/* Sync myst-nb code blocks' color theme with shibuya theme */
+:is(html, body)[data-color-mode="dark"] {
+	--light: ;
+	--dark: initial;
+}
+:is(html, body)[data-color-mode="light"] {
+	--dark: ;
+	--light: initial;
+}
+
 .globaltoc a:focus, .localtoc a:focus {
   /* Mimic hover behaviour */
   color: var(--sy-c-link-hover);
