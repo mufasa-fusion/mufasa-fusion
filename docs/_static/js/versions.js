@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const list = document.querySelector(".nav-versions-choices ul");
   if (!list) return;
   try {
-    const response = await fetch("/latest/_static/versions.txt", { cache: "no-cache" });
+    const response = await fetch("/latest/_static/versions.txt");
     if (!response.ok) {
         console.log("Failed to fetch newest versions:", response)
         return;
